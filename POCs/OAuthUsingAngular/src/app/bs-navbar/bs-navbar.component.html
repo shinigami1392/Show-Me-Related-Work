@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" routerLink="/">Show-Me</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/shopping-cart">Home Screen</a>
+      </li>
+      <li *ngIf="!(auth.user$ | async)" class="nav-item">
+        <a class="nav-link" routerLink="/login">Login</a>
+      </li>
+      <li ngbDropdown *ngIf="auth.user$ | async as user" class="nav-item dropdown">
+        <a ngbDropdownToggle class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false">{{ user.displayName }}</a>
+        <div ngbDropdownMenu class="dropdown-menu" aria-labelledby="dropdown01">
+          <a class="dropdown-item" routerLink="/my/orders">My View</a>
+          <a class="dropdown-item" routerLink="admin/orders">Manage Papers</a>
+          <a class="dropdown-item" routerLink="admin/products">Mangae Users</a>
+          <a class="dropdown-item" (click) = "logout()">Log Out</a>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+</nav>
