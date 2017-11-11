@@ -26,4 +26,4 @@ relationsSchema.virtual('url').get(function(){
 	return '/catalog/relation/' + this._id;
 });
 
-module.exports = mongoose.model('DomainModel', relationsSchema);
+module.exports = mongoose.model('RelationModel', relationsSchema);
