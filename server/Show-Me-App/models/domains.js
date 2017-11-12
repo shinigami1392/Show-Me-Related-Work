@@ -3,7 +3,7 @@ var PaperModel = require('./papers.js');
 var Schema = mongoose.Schema;
 
 var domainssSchema = new Schema({
-	paperName : {type: String, required: true, max:100},
+	domainName : {type: String, required: true, max:100},
 	papers : [{type: Schema.ObjectId, ref:'PaperModel'}]
 });
 
