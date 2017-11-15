@@ -1,4 +1,4 @@
-var mongoose = require('mongoose');
+	var mongoose = require('mongoose');
 var PaperModel = require('./papers.js');
 var UserModel = require('./users.js');
 var Schema = mongoose.Schema;

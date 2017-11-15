@@ -77,5 +77,13 @@ exports.createModels = function(){
 	// 		});
 	// 	});
 	// }
+	// for(var i=0; i<15; i++){
+	// 	var userDetail = {userId:'user'+i.toString(), first_name:'First'+i.toString(), last_name:'Last'+i.toString(), email:'akhairna@asu.edu'};
+	// 	var user = new UserModel(userDetail);
+	// 	user.save(function(err){
+	// 		if(err) console.log(err);
+	// 		else console.log('saved successfully '+i.toString());
+	// 	})
+	// }
 	console.log('Database connection successful!');
 }
