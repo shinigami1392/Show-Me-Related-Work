@@ -87,8 +87,8 @@ exports.findRelationFromId = function(relationId, userId, res){
 					result['upvotedByUser'] = false;
 					result['downvotedByUser'] = false;
 
-					if(relation.upvotes.indexOf(user.userId) > 0) result['upvotedByUser'] = true;
-					else if(relation.downvotes.indexOf(user.userId) > 0) result['downvotedByUser'] = true;
+					if(relation.upvotes.indexOf(user._id) >= 0) result['upvotedByUser'] = true;
+					else if(relation.downvotes.indexOf(user._id) > 0) result['downvotedByUser'] = true;
 					res.send(result);
 				}
 				else invalidInput('Invalid User', res);
@@ -97,5 +97,107 @@ exports.findRelationFromId = function(relationId, userId, res){
 	});
 }
 
+exports.addUpvotes = function(relationId, userId, res){
+	if(!relationId) invalidInput('Please enter relationId', res);
+	if(!userId) invalidInput('Please enter user', res);
 
+	var query = RelationModel.findOne({_id:relationId});
+	var userQuery = UserModel.findOne({userId: userId});
+
+	query.exec(function(err, relation){
+		if(err) sendInternalServerError(res);
+		else if(relation){
+			userQuery.exec(function(err, user){
+				if(err) sendInternalServerError(res);
+				else if(user){
+					if(relation.upvotes.indexOf(user._id) == -1)
+						relation.upvotes.push(user._id);
+					relation.save(function(err){
+						if(err) sendInternalServerError(res);
+						else res.send({'updated':true});
+					});
+				}
+				else invalidInput('Invalid User', res);
+			});
+		}
+	});
+}
+
+exports.removeUpvotes = function(relationId, userId, res){
+	if(!relationId) invalidInput('Please enter relationId', res);
+	if(!userId) invalidInput('Please enter user', res);
+
+	var query = RelationModel.findOne({_id:relationId});
+	var userQuery = UserModel.findOne({userId: userId});
+
+	query.exec(function(err, relation){
+		if(err) sendInternalServerError(res);
+		else if(relation){
+			userQuery.exec(function(err, user){
+				if(err) sendInternalServerError(res);
+				else if(user){
+					if(relation.upvotes.indexOf(user._id) != -1)
+						relation.upvotes.splice(relation.upvotes.indexOf(user._id),1);
+					relation.save(function(err){
+						if(err) sendInternalServerError(res);
+						else res.send({'updated':true});
+					});
+				}
+				else invalidInput('Invalid User', res);
+			});
+		}
+	});
+}
+
+exports.addDownvotes = function(relationId, userId, res){
+	if(!relationId) invalidInput('Please enter relationId', res);
+	if(!userId) invalidInput('Please enter user', res);
+
+	var query = RelationModel.findOne({_id:relationId});
+	var userQuery = UserModel.findOne({userId: userId});
+
+	query.exec(function(err, relation){
+		if(err) sendInternalServerError(res);
+		else if(relation){
+			userQuery.exec(function(err, user){
+				if(err) sendInternalServerError(res);
+				else if(user){
+					if(relation.upvotes.indexOf(user._id) == -1)
+						relation.downvotes.push(user._id);
+					relation.save(function(err){
+						if(err) sendInternalServerError(res);
+						else res.send({'updated':true});
+					});
+				}
+				else invalidInput('Invalid User', res);
+			});
+		}
+	});
+}
+
+exports.removeDownvotes = function(relationId, userId, res){
+	if(!relationId) invalidInput('Please enter relationId', res);
+	if(!userId) invalidInput('Please enter user', res);
+
+	var query = RelationModel.findOne({_id:relationId});
+	var userQuery = UserModel.findOne({userId: userId});
+
+	query.exec(function(err, relation){
+		if(err) sendInternalServerError(res);
+		else if(relation){
+			userQuery.exec(function(err, user){
+				if(err) sendInternalServerError(res);
+				else if(user){
+					if(relation.downvotes.indexOf(user._id) != -1)
+						relation.downvotes.splice(relation.downvotes.indexOf(user._id),1);
+					relation.save(function(err){
+						if(err) sendInternalServerError(res);
+						else res.send({'updated':true});
+					});
+				}
+				else invalidInput('Invalid User', res);
+			});
+		}
+	});
+}
 
