@@ -1,0 +1,217 @@
+1) Fetch research categories
+================================
+GET <URL>/categories 
+
+Response Data:
+----------------
+{
+	categories: [
+	{ id: ,
+	  name: ,
+	  count:
+	}, ...
+	]
+}
+
+Response Field Description:
+------------------------
+id: Category Id
+name: Category name e.g. Software Engineering
+Count: Number of papers belonging to the given category
+
+
+2) Fetch all papers belonging to a category
+=============================================
+
+GET <URL>/papers?category = xyz 
+
+Response Data:
+----------------
+{
+  papers: [
+  {
+    id: ,
+	name: ,
+	author: ["abc", "def"],
+	year: ,
+	url: ,
+	no_of_citations:
+  },
+  
+  ...
+  
+  ]
+  
+}
+
+Response Field Description:
+----------------------------
+id: Paper Id
+name: Paper Title
+author: Author name(s)
+year: Year of publication
+url: URL where the paper is hosted / URL where paper information can be found
+no_of_citations: Number of papers that cite/refer this paper [Count of incoming links to the paper node]
+
+3) Fetch information about paper and its relations (incoming and outgoing references)
+=========================================================================================
+
+GET <URL>/paper?paper_id =
+
+Response:
+---------
+{ 	id: ,
+	name: ,
+	author:["abc", "def"],
+	year: ,
+	url:,
+	incoming_relations : [
+	  {
+	    id :
+	    source_id:,
+		source_name:,
+		weight:
+	  },
+	  
+	  ...
+	
+	],
+	outgoing_relations : [
+	  {
+	    id :
+	    destination_id:,
+		destination_name:,
+		weight:
+	  },
+	  
+	  ...
+	
+	]
+}
+
+Response Field Description:
+---------------------------
+id: Paper Id
+name: Paper Title
+author: Author name(s)
+year: Year of publication
+url: URL where the paper is hosted / URL where paper information can be found
+
+incoming_relations: A collection of citations/references made of this paper
+id: Relation id
+source_id: Id of the paper that cites/refers this paper
+source_name: Name of the paper that cites/refers this paper
+weight: Number of votes received for this relation
+
+outgoing_relations: A collection of citations/references made by this paper
+id: Relation id
+destination_id: Id of the paper that is cited/refered by this paper
+destination_name: Name of the paper that is cited/refered by this paper
+weight: Number of votes received for this relation
+
+
+
+4) Fetch information about paper relation
+===============================================
+GET <URL>/paper-reference?relation_id =
+
+Response:
+----------
+{
+  id:
+  source_id:
+  source_name:
+  destination_id:
+  destination_name:
+  weight:
+  comments: [
+    {
+	  id:
+	  user_name:,
+	  timestamp:,
+	  text:
+	},
+	
+	...
+  
+  ]
+}
+
+
+Response Field Description:
+----------------------------
+id: Relation id
+source_id: Id of the paper that cites/refers (another paper)
+source_name: Name of the paper that cites/refers (another paper)
+destination_id: Id of the paper that is cited/refered (by another paper)
+destination_name: Name of the paper that is cited/refered (by another paper)
+weight: Number of votes received for this relation
+comments: Comments received for this relation
+    id: Comment Id
+	user_name: User_Name of the person providing the comment
+	timestamp: Timestamp when the comment was provided
+	text: Comment Text
+	
+
+5) Provide vote
+==================
+
+POST <URL>/vote
+
+Request Body:
+--------------
+{
+  relation_id:
+  vote:      // 1 or -1
+  user_name:
+}
+
+Request Field Description:
+---------------------------
+relation_id: Id of the relation
+vote: 1: Upvote, -1: Undo Upvote
+
+Response
+---------
+{
+  relation_id:
+  weight:    // updated after vote 
+}
+
+Response Field Description:
+---------------------------
+relation_id: Id of the relation
+weight: Revised weight of the relation after the vote/ undo of vote
+
+6) Add Comment
+----------------
+
+POST <URL>/comment
+Request Body:
+-------------
+{ relation_id: ,
+  user_name:,
+  text:
+}
+
+Request Field Description:
+---------------------------
+relation_id: Id of the relation
+user_name: User_Name of the person providing the comment
+text: Comment Text
+
+Response:
+---------
+{
+   id:
+   text:
+   user_name:
+   timestamp:
+}
+
+Response Field Description:
+----------------------------
+id: Comment Id
+text: Comment Text
+user_name: User_Name of the person providing the comment
+timestamp: Timestamp when the comment was persisted
