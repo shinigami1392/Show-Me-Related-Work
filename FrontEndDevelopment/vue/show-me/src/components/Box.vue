@@ -1,24 +1,17 @@
 <template>
 
-
   <div class="card">
     <div class="card-header">
-      <p><slot></slot></p>
-    </div>
-    <div class="card-body">
-
+      <h4>{{boxHeaderProp}}</h4>
     </div>
   </div>
-
-
 
 </template>
 
 
 <script>
   export default {
-
-
+      props: ['boxHeaderProp'],
   };
 </script>
 

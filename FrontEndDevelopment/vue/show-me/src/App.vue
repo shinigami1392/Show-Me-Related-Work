@@ -1,23 +1,20 @@
 <template>
   <div id="app">
-    <message>Hello there</message>
-    <message>Hello there</message>
-    <message>Hello there</message>
-    <Box>Hola</Box>
+    <app-message>Hello there</app-message>
+    <app-message>Hello there</app-message>
+    <app-message>{{ boxHeader}}</app-message>
+    <app-box v-bind:boxHeaderProp = "boxHeader" style="width: 20rem;"></app-box>
+    <p>Hols rew</p>
+
   </div>
 </template>
 
 <script>
-
-  import Message from './components/Message.vue'
-  import Box from './components/Box.vue'
-
   export default {
     name: 'app',
-    components: { Message , Box },
     data () {
       return {
-
+          boxHeader: 'HOLA BOX'
       }
     }
   }
