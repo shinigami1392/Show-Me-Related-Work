@@ -2,6 +2,7 @@ var UserModel = require('./models/users.js');
 var PaperModel = require('./models/papers.js');
 var DomainModel = require('./models/domains.js');
 var RelationModel = require('./models/relations.js');
+var GraphNodeModel = require('./models/graphNode.js');
 
 var exports = module.exports = {};
 
@@ -199,5 +200,22 @@ exports.removeDownvotes = function(relationId, userId, res){
 			});
 		}
 	});
+}
+
+exports.getGraphNode = function(paperId, res);{
+	var driver = GraphNodeModel.getDriver();
+	var session = driver.session();
+	var resultPromise = session.run('MATCH (:ResearchPaper {Title:'+paperId+'})'<-- '(paper) return paper');
+	var resultSet = [];
+	resultPromise.then(result => {
+		session.close();
+		console.log('result.records.length');
+		for (var i = 0; i< result.records.length; i++){
+			resultSet.push(result.records[i].get(0));
+		}
+		res.send({'papers':resultSet});
+	});
+
+	driver.close();
 }
 
