@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <app-message>Hello there</app-message>
-    <app-message>Hello there</app-message>
-    <app-message>{{ boxHeader}}</app-message>
-    <app-box v-bind:boxHeaderProp = "boxHeader" style="width: 20rem;"></app-box>
-    <p>Hols rew</p>
+    <app-message>Navigation Bar will be here</app-message>
+
+    <app-box v-bind:boxHeaderProp = "listBoxHeader" style="width: 20rem;"></app-box>
+    <app-listbox style="width: 20rem;"></app-listbox>
+  
 
   </div>
 </template>
@@ -14,7 +14,7 @@
     name: 'app',
     data () {
       return {
-          boxHeader: 'HOLA BOX'
+          listBoxHeader: 'List of Papers'
       }
     }
   }

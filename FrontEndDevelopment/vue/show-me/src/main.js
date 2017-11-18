@@ -2,9 +2,11 @@ import Vue from 'vue'
 import App from './App.vue'
 import Message from './components/Message.vue'
 import Box from './components/Box.vue'
+import ListBox from './components/ListBox.vue'
 
 Vue.component('app-box', Box );
-Vue.component('app-message', Message );
+Vue.component('app-listbox', ListBox );
+Vue.component('app-message', Message);
 
 new Vue({
   el: '#app',
