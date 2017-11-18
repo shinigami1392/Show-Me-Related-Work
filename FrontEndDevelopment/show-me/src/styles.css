@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+
+body, html, #main, .container-fluid {
+    height: 100%;
+}
+.info-box{
+    padding: .2rem .2rem
+}
+.comment{
+    padding: .2rem .2rem ;  
+}
+#cy {
+    height: 170px;
+    display: block;
+}

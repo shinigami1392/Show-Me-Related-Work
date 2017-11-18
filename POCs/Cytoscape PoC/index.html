@@ -1,0 +1,127 @@
+<html>
+<head>
+ <style type="text/css">
+     #cy {
+        width: 500px;
+        height: 500px;
+        display: block;
+    }
+ </style>   
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.2.4/cytoscape.js"></script>
+ 
+</head>
+<body>
+  <div id='cy'>
+  </div> 
+    
+
+  <script type="text/javascript">
+    var cy = cytoscape({
+
+        container: document.getElementById('cy'), // container to render in
+        elements: [ // list of graph elements to start with
+            { // node a
+                data: { id: 'a' }
+            },
+            { // node b
+                data: { id: 'b' }
+            },
+            { // node c
+                data: { id: 'c' }
+            },
+            { // node d
+                data: { id: 'd' }
+            },
+            { // node e
+                data: { id: 'e' }
+            },
+            { // edge ab
+                data: { id: 'ab', source: 'a', target: 'b' }
+            },
+            { // edge bc
+                data: { id: 'bc', source: 'b', target: 'c' }
+            },
+            { // edge db
+                data: { id: 'db', source: 'd', target: 'b' }
+            },
+            { // edge ce
+                data: { id: 'ce', source: 'c', target: 'e' }
+            }
+        ],
+
+        style: [ // the stylesheet for the graph
+            {
+                selector: 'node',
+                style: {
+                    'background-color': '#ff0000',
+                    'label': 'data(id)'
+                }
+            },
+            {
+                selector: 'edge',
+                style: {
+                    'width': 1,
+                    'line-color': '#ff0000',
+                    'curve-style': 'bezier',
+                    'target-arrow-color': '#ff0000',
+                    'target-arrow-shape': 'triangle'
+                }
+            }
+        ],
+        layout: {
+            name: 'circle'//,
+            //rows: 2
+        }
+    });
+    //console.log("Elements: "+JSON.stringify(cy.elements().jsons()));
+
+    cy.on('tap', 'node', function (evt) {
+        // console.log("Position: "+JSON.stringify(evt.position));
+        //console.log("Rendered Position: "+JSON.stringify(evt.renderedPosition));
+         //console.log(evt);
+       
+        var selectedNodeId = evt.target.id();
+        console.log('Node Id: '+selectedNodeId);
+        var selectedNode = cy.getElementById(selectedNodeId);
+        //console.log(selectedNode.data());
+       // console.log("Degree: "+selectedNode.degree());
+        //console.log("Grabbed: "+selectedNode.grabbed());
+        //console.log(selectedNode.neighborhood().data());
+        //console.log(selectedNode.openNeighborhood().data());
+        //console.log(selectedNode.closedNeighborhood().data());
+        //console.log(selectedNode.successors().data());
+        /*console.log("Incomers: ");
+         selectedNode.incomers(function(e){
+            if(e.isNode()){
+                console.log(e.data());
+            }
+        }); */
+       /*console.log("Outgoers: ")
+         selectedNode.outgoers(function(e){
+            if(e.isNode()){
+                console.log(e.data());    
+            }
+        }); */
+        console.log("Neighboring Nodes: ");
+        
+        //selectedNode.neighborhood(function(e){
+             //console.log(e.isEdge());
+        //     if(e.isNode()){
+        //      console.log(e.id());    
+        //     }            
+        //});
+       var graphNodes = cy.nodes();
+       var  resultNodes = graphNodes.difference(selectedNode.neighborhood());
+    });
+    cy.on('tap', 'edge', function (evt) {
+        // console.log("Position: "+JSON.stringify(evt.position));
+        //console.log("Rendered Position: "+JSON.stringify(evt.renderedPosition));
+         //console.log(evt);
+         var selectedEdgeId = evt.target.id();
+         console.log('Edge Id: '+selectedEdgeId);
+         var selectedEdge = cy.getElementById(selectedEdgeId);
+         console.log(selectedEdge.data());
+    });
+ </script>
+</body>
+</html
