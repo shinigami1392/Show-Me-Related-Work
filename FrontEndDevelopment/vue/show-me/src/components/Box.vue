@@ -1,9 +1,12 @@
 <template>
 
   <div class="card">
-    <div class="card-header">
-      <h4>{{boxHeaderProp}}</h4>
+    <div class="card-header card-outline-info">
+        {{boxHeaderProp}}
     </div>
+    <div class="card-block">
+         <slot></slot>
+     </div> 
   </div>
 
 </template>

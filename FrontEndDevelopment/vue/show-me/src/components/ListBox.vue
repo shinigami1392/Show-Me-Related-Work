@@ -1,18 +1,10 @@
 <template>
-  <div>
-  <ul class="list-group" v-if="catagories && catagories.length">
-    <li v-for="catagory in catagories" class="list-group-item">
-      <a href="#">{{ catagory.name }}</a>
-      <span class="badge badge-primary badge-pill">{{ catagory.count }}</span>
+  <ul class="list-group" v-if="categories && categories.length">
+    <li v-for="category in categories" class="list-group-item">
+      <a href="#"> {{ category.name }} </a>
+      <span class="badge badge-primary badge-pill">{{ category.count }}</span>
     </li>
   </ul>
-
-  <ul v-if="errors && errors.length">
-    <li v-for="error in errors">
-      {{error.message}}
-    </li>
-  </ul>
-  </div>
 </template>
 
 <script>
@@ -22,7 +14,8 @@ function getPaperCatagories(vm) {
   axios
     .get(`http://localhost:8000/`)
     .then(response => {
-      vm.catagories = response.data.categories;
+      vm.categories = response.data.categories;
+      console.log("cl: "+vm.categories.length);
     })
     .catch(err => {
       vm.errors.push(err);
@@ -32,7 +25,7 @@ function getPaperCatagories(vm) {
 export default {
   data() {
     return {
-      catagories: [],
+      categories: [],
       errors: []
     };
   },

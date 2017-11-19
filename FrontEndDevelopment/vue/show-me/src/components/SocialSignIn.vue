@@ -1,0 +1,32 @@
+<template>
+    
+        <form class="form-inline">
+                <div class="form-group">
+                        <button class="btn btn-outline-info btn-sm mr-sm-2" type="submit">
+                                <i class="fa fa-facebook" aria-hidden="true"></i> Login with Facebook
+                        </button>
+                </div>
+                <div class="form-group">
+                        <button class="btn btn-outline-danger btn-github btn-sm mr-sm-2" type="submit">
+                                <i class="fa fa-github" aria-hidden="true"></i> Login with GitHub
+                        </button>
+                </div> 
+                <div class="form-group">
+                        <button class="btn btn-outline-primary btn-sm mr-sm-2" type="submit">
+                                <i class="fa fa-linkedin" aria-hidden="true"></i> Login with Linkedin
+                        </button>
+                </div>     
+        </form>
+    
+</template>
+
+<script>
+export default {
+
+
+};
+</script>
+
+<style>
+
+</style>
