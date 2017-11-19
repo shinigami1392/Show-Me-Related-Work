@@ -3,12 +3,9 @@ import App from './App.vue'
 import Message from './components/Message.vue'
 import Box from './components/Box.vue'
 import ListBox from './components/ListBox.vue'
-<<<<<<< Updated upstream
 import NavigationBar from './components/NavigationBar.vue'
-=======
 import SocialSignIn from './components/SocialSignIn.vue'
 import Logo from './components/Logo.vue'
->>>>>>> Stashed changes
 
 Vue.component('app-box', Box );
 Vue.component('app-listbox', ListBox );

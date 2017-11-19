@@ -1,5 +1,5 @@
 <template>
-    
+    <div>
         <form class="form-inline">
                 <div class="form-group">
                         <button class="btn btn-outline-info btn-sm mr-sm-2" type="submit">
@@ -17,7 +17,7 @@
                         </button>
                 </div>     
         </form>
-    
+    </div>
 </template>
 
 <script>
