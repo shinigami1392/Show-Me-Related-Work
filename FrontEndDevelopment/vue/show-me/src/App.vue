@@ -13,18 +13,26 @@
             <div class="container-fluid">
                 <div class="row content" style="height:50%;">
                     <div class="col-md-3">
-                        <app-box v-bind:boxHeaderProp = "listBoxHeader">
+                        <app-box v-bind:boxHeaderProp = "researchAreasBoxHeader">
                               <app-listbox></app-listbox>
                         </app-box>
                     </div>
                     <div class="col-md-9">
+                        <app-box v-bind:boxHeaderProp = "researchPaperAndRelationsBoxHeader">
+                            
+                        </app-box>
                     </div>
                 </div> 
                 <div class="row" style="height:20%;">
                         <div class="col-md-3">
-
+                            <app-box v-bind:boxHeaderProp = "infoBoxHeader">
+                            
+                            </app-box>
                         </div>
                         <div class="col-md-9">
+                            <app-box v-bind:boxHeaderProp = "userFeedbackBoxHeader">
+                            
+                            </app-box>
                         </div>
                 </div> 
             </div>
@@ -37,7 +45,10 @@
     name: 'app',
     data () {
       return {
-          listBoxHeader: 'Research Areas'
+          researchAreasBoxHeader: 'Research Areas',
+          researchPaperAndRelationsBoxHeader: 'Research Papers and References',
+          infoBoxHeader: 'Info Box',
+          userFeedbackBoxHeader: 'Comment and Vote'
       }
     }
   }
