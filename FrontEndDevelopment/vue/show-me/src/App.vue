@@ -1,9 +1,12 @@
 <template>
   <div id="app">
-    <app-message>Navigation Bar will be here</app-message>
-
+    <div><app-navbar></app-navbar></div>
+    
+  <div>
     <app-box v-bind:boxHeaderProp = "listBoxHeader" style="width: 20rem;"></app-box>
     <app-listbox style="width: 20rem;"></app-listbox>
+  </div>
+
   
 
   </div>

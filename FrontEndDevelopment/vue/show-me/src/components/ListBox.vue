@@ -1,8 +1,8 @@
 <template>
   <div>
   <ul class="list-group" v-if="catagories && catagories.length">
-    <li v-for="catagory in catagories" class="list-group-item justify-content-between">
-      {{ catagory.name }}
+    <li v-for="catagory in catagories" class="list-group-item">
+      <a href="#">{{ catagory.name }}</a>
       <span class="badge badge-primary badge-pill">{{ catagory.count }}</span>
     </li>
   </ul>
