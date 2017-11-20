@@ -1,7 +1,7 @@
 <template>
   <ul class="list-group" v-if="categories && categories.length">
     <li v-for="category in categories" class="list-group-item">
-      <a href="#"> {{ category.name }} </a>
+      <router-link :to="`/papers/${category.id}`">{{ category.name }}</router-link>
       <span class="badge badge-primary badge-pill">{{ category.count }}</span>
     </li>
   </ul>
@@ -26,11 +26,13 @@ export default {
   data() {
     return {
       categories: [],
-      errors: []
+      errors: [],
+      isLinkClicked: 'false'
     };
   },
 
-  methods: {},
+  methods: {
+  },
 
   created() {
     getPaperCatagories(this);

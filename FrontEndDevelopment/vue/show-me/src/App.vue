@@ -19,7 +19,7 @@
                     </div>
                     <div class="col-md-9">
                         <app-box v-bind:boxHeaderProp = "researchPaperAndRelationsBoxHeader">
-                            
+                        <router-view></router-view>   
                         </app-box>
                     </div>
                 </div> 
