@@ -1,7 +1,7 @@
 <template>
 
 <div>
-<span>Paper id is : {{$route.params.paperId}}</span>
+<span>Catagory id is : {{$route.params.catId}}</span>
 <table class="table">
   <thead>
     <tr>
@@ -14,7 +14,7 @@
   </thead>
   <tbody>
    <tr v-for="paper in papers">
-        <td>{{ paper.name }}</td>
+        <td><router-link :to="`/graph/paper/${paper.id}`">{{  paper.name }}</router-link></td>
         <td>{{ paper.author }}</td>
         <td>{{ paper.year }}</td>
         <td>{{ paper.url }}</td>
@@ -34,9 +34,9 @@
 import axios from "axios";
 
 function getPapersFromId(vm){
-    let paperId = vm.$route.params.paperId
+    let catId = vm.$route.params.catId
     axios
-    .get(`http://localhost:8000/`+paperId)
+    .get(`http://localhost:8000/`+catId)
     .then(response => {
       vm.papers = response.data.categories;
     })
@@ -53,7 +53,7 @@ export default {
 
   data() {
     return {
-      paperId : this.$route.params.paperId,
+      catId : this.$route.params.catId,
       errors : [],
       papers: [
         {
@@ -94,14 +94,14 @@ export default {
 
   watch:{
       '$route'(to,from){
-        //   alert(to.params.paperId);
+        //   alert(to.params.catId);
       }
   },
 
   methods: { },
 
   created(){
-      //alert(this.$route.params.paperId);
+      //alert(this.$route.params.catId);
       //getPapersFromId(this);
   }
   

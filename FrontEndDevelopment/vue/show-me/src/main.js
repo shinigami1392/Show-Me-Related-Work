@@ -8,6 +8,7 @@ import NavigationBar from './components/NavigationBar.vue'
 import SocialSignIn from './components/SocialSignIn.vue'
 import Logo from './components/Logo.vue'
 import PapersTable from './components/PapersTable.vue'
+import PaperInfoBox from './components/PaperInfoBox.vue'
 
 Vue.use(VueRouter);
 
@@ -18,9 +19,13 @@ Vue.component('app-message', Message);
 Vue.component('app-social-sign-in', SocialSignIn);
 Vue.component('app-logo',Logo);
 Vue.component('app-table',PapersTable);
+Vue.component('app-paper-infobox',PaperInfoBox);
 
 
-const routes = [{ path:'/papers/:paperId',component:PapersTable}];
+const routes = [
+  { path:'/papers/:catId',component:PapersTable},
+  { path:'/graph/paper/:paperid',component:PaperInfoBox}
+  ];
 
 const router = new VueRouter({
   routes: routes,

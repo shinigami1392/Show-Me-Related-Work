@@ -1,11 +1,8 @@
 <template>
   <div id="app">
      <!-- Fixed navbar -->
-    <div id="navigation" class="navbar navbar-default ">
-      <div class="container">
-                <app-logo></app-logo>
-                <app-social-sign-in></app-social-sign-in>
-      </div>
+    <div>
+            <app-navbar></app-navbar>
     </div>    
 
     <!--  Main -->        
@@ -19,14 +16,14 @@
                     </div>
                     <div class="col-md-9">
                         <app-box v-bind:boxHeaderProp = "researchPaperAndRelationsBoxHeader">
-                        <router-view></router-view>   
+                            <router-view></router-view>   
                         </app-box>
                     </div>
                 </div> 
                 <div class="row" style="height:20%;">
                         <div class="col-md-3">
                             <app-box v-bind:boxHeaderProp = "infoBoxHeader">
-                            
+                                <router-view></router-view>
                             </app-box>
                         </div>
                         <div class="col-md-9">

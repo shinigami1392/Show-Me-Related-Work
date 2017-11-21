@@ -1,4 +1,5 @@
 <template>
+
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
 
   <a class="navbar-brand" href="#">Show-ME</a>
@@ -14,6 +15,8 @@
         <button class="btn btn-outline-success" type="button">Login With Google</button>
     </form>
 </nav>
+
+
 </template>
 
 <script>
