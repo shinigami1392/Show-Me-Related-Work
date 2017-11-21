@@ -1,7 +1,7 @@
 <template>
   <ul class="list-group" v-if="categories && categories.length">
     <li v-for="category in categories" class="list-group-item">
-      <router-link :to="`/papers/${category.id}`">{{ category.name }}</router-link>
+      <router-link :to="{ name:'allPapers',params:{areaid:category.id}}">{{ category.name }}</router-link>  
       <span class="badge badge-primary badge-pill">{{ category.count }}</span>
     </li>
   </ul>

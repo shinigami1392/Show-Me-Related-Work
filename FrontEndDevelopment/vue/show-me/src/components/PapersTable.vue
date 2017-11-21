@@ -1,7 +1,7 @@
 <template>
 
 <div>
-<span>Catagory id is : {{$route.params.catId}}</span>
+<span>Catagory id is : {{$route.params.areaid}}</span>
 <table class="table">
   <thead>
     <tr>
@@ -14,7 +14,7 @@
   </thead>
   <tbody>
    <tr v-for="paper in papers">
-        <td><router-link :to="`/graph/paper/${paper.id}`">{{  paper.name }}</router-link></td>
+        <td><router-link :to="{ name:'paperInfo', params:{ areaid:$route.params.areaid, paperid:paper.id }}">{{  paper.name }}</router-link></td>
         <td>{{ paper.author }}</td>
         <td>{{ paper.year }}</td>
         <td>{{ paper.url }}</td>
@@ -23,7 +23,7 @@
   </tbody>
 </table>
  
-
+<router-view></router-view>
 
 </div>
 
@@ -34,9 +34,9 @@
 import axios from "axios";
 
 function getPapersFromId(vm){
-    let catId = vm.$route.params.catId
+    let areaid = vm.$route.params.areaid
     axios
-    .get(`http://localhost:8000/`+catId)
+    .get(`http://localhost:8000/`+areaid)
     .then(response => {
       vm.papers = response.data.categories;
     })
@@ -53,7 +53,7 @@ export default {
 
   data() {
     return {
-      catId : this.$route.params.catId,
+      areaid : this.$route.params.areaid,
       errors : [],
       papers: [
         {
@@ -94,6 +94,7 @@ export default {
 
   watch:{
       '$route'(to,from){
+        this.areaid = to.params.areaid;
         //   alert(to.params.catId);
       }
   },

@@ -16,14 +16,14 @@
                     </div>
                     <div class="col-md-9">
                         <app-box v-bind:boxHeaderProp = "researchPaperAndRelationsBoxHeader">
-                            <router-view></router-view>   
+                            <router-view name="table-box"></router-view>   
                         </app-box>
                     </div>
                 </div> 
                 <div class="row" style="height:20%;">
                         <div class="col-md-3">
                             <app-box v-bind:boxHeaderProp = "infoBoxHeader">
-                                <router-view></router-view>
+                                <router-view name="info-box"></router-view>
                             </app-box>
                         </div>
                         <div class="col-md-9">
