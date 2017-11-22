@@ -1,7 +1,19 @@
-import PapersTable from './components/PapersTable.vue'
-import PaperInfoBox from './components/PaperInfoBox.vue'
+
 import ListBox from './components/ListBox.vue'
 import NavigationBar from './components/NavigationBar.vue'
+
+const PapersTable = resolve =>{
+    require.ensure(['./components/PapersTable.vue'],()=>{
+        resolve(require('./components/PapersTable.vue'));
+    });  
+};
+const PaperInfoBox = resolve =>{
+    require.ensure(['./components/PaperInfoBox.vue'],()=>{
+        resolve(require('./components/PaperInfoBox.vue'));
+    });  
+};
+
+
 
 export const routes = [
     {

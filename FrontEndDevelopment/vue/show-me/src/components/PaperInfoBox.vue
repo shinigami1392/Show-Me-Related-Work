@@ -99,6 +99,7 @@ export default {
   methods: {},
   watch:{
       '$route'(to,from){
+          this.paperInfo.id = to.params.paperid;
         //   alert(to.params.paperid);
       }
   },

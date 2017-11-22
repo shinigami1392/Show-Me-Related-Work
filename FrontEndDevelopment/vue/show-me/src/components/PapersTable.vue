@@ -66,27 +66,27 @@ export default {
         },
         {
           id: 2,
-          name: "ABC",
-          author: ["abc", "def"],
-          year: 2001,
-          url: `http://abc.com`,
-          no_of_citations: 7
+          name: "xyz",
+          author: ["abc", "xyz"],
+          year: 4566,
+          url: `http://xyz.com`,
+          no_of_citations: 37
         },
         {
           id: 3,
-          name: "ABC",
-          author: ["abc", "def"],
-          year: 2001,
-          url: `http://abc.com`,
-          no_of_citations: 7
+          name: "xcv",
+          author: ["xcv", "def"],
+          year: 8547,
+          url: `http://xcv.com`,
+          no_of_citations: 76
         },
         {
           id: 4,
-          name: "ABC",
-          author: ["abc", "def"],
-          year: 2001,
-          url: `http://abc.com`,
-          no_of_citations: 7
+          name: "qwe",
+          author: ["abc", "qwe"],
+          year: 8665,
+          url: `http://qwe.com`,
+          no_of_citations: 137
         }
       ]
     };
