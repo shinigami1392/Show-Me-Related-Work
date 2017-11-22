@@ -1,15 +1,16 @@
 <template>
 
 <div>
+<app-box v-bind:boxHeaderProp = "researchPaperAndRelationsBoxHeader">
 <span>Catagory id is : {{$route.params.areaid}}</span>
 <table class="table">
   <thead>
-    <tr>
+    <tr  class="h6">
       <th>Name</th>
       <th>Authors</th>
       <th>Year</th>
       <th>URL</th>
-      <th>CitaTions</th>
+      <th>Citations</th>
     </tr>
   </thead>
   <tbody>
@@ -17,14 +18,14 @@
         <td><router-link :to="{ name:'paperInfo', params:{ areaid:$route.params.areaid, paperid:paper.id }}">{{  paper.name }}</router-link></td>
         <td>{{ paper.author }}</td>
         <td>{{ paper.year }}</td>
-        <td>{{ paper.url }}</td>
+        <td><a href='${paper.url}'>{{ paper.url }}</a></td>
         <td>{{ paper.no_of_citations }}</td>
     </tr>
   </tbody>
 </table>
  
 <router-view></router-view>
-
+</app-box>
 </div>
 
 </template>
@@ -53,6 +54,7 @@ export default {
 
   data() {
     return {
+      researchPaperAndRelationsBoxHeader: "Research Papers and References",
       areaid : this.$route.params.areaid,
       errors : [],
       papers: [

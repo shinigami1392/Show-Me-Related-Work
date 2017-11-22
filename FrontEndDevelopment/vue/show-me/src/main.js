@@ -10,7 +10,8 @@ import Logo from './components/Logo.vue'
 import PapersTable from './components/PapersTable.vue'
 import PaperInfoBox from './components/PaperInfoBox.vue'
 
-import { routes } from './routes'
+import { routes } from './routes';
+import { store } from './store/store';
 
 Vue.use(VueRouter);
 
@@ -32,6 +33,7 @@ const router = new VueRouter({
 
 new Vue({
   el: '#app',
+  store:store,
   router:router,
   render: h => h(App)
 })

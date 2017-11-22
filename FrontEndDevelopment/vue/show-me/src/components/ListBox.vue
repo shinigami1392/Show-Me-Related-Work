@@ -1,10 +1,12 @@
 <template>
+<app-box v-bind:boxHeaderProp = "researchAreasBoxHeader">
   <ul class="list-group" v-if="categories && categories.length">
     <li v-for="category in categories" class="list-group-item">
       <router-link :to="{ name:'allPapers',params:{areaid:category.id}}">{{ category.name }}</router-link>  
       <span class="badge badge-primary badge-pill">{{ category.count }}</span>
     </li>
   </ul>
+</app-box>
 </template>
 
 <script>
@@ -25,6 +27,7 @@ function getPaperCatagories(vm) {
 export default {
   data() {
     return {
+      researchAreasBoxHeader: "Research Areas",
       categories: [],
       errors: []
     };

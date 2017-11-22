@@ -1,7 +1,7 @@
 <template>
 
   <div class="card">
-    <div class="card-header card-outline-info">
+    <div class="card-header card-outline-info h6">
         {{boxHeaderProp}}
     </div>
     <div class="card-block">
