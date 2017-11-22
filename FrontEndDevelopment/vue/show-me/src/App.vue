@@ -11,19 +11,23 @@
                 <div class="row content" style="height:50%;">
                     <div class="col-md-3">
                         <app-box v-bind:boxHeaderProp = "researchAreasBoxHeader">
-                              <app-listbox></app-listbox>
+                             <router-view name="area-box"></router-view>
                         </app-box>
                     </div>
                     <div class="col-md-9">
                         <app-box v-bind:boxHeaderProp = "researchPaperAndRelationsBoxHeader">
-                            <router-view name="table-box"></router-view>   
+                            <transition name="slide" mode="out-in">
+                                <router-view name="table-box"></router-view>   
+                            </transition>
                         </app-box>
                     </div>
                 </div> 
                 <div class="row" style="height:20%;">
                         <div class="col-md-3">
                             <app-box v-bind:boxHeaderProp = "infoBoxHeader">
-                                <router-view name="info-box"></router-view>
+                                <transition name="slide" mode="out-in">
+                                    <router-view name="info-box"></router-view>
+                                </transition>
                             </app-box>
                         </div>
                         <div class="col-md-9">
@@ -51,6 +55,43 @@
   }
 </script>
 
-<style>
 
+
+
+
+
+
+<style>
+.slide-leave-active {
+        transition: opacity 0.2s ease;
+        opacity: 0;
+        animation: slide-out 0.2s ease-out forwards;
+    }
+
+    .slide-leave {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .slide-enter-active {
+        animation: slide-in 0.2s ease-out forwards;
+    }
+
+    @keyframes slide-out {
+        0% {
+            transform: translateY(0);
+        }
+        100% {
+            transform: translateY(-30px);
+        }
+    }
+
+    @keyframes slide-in {
+        0% {
+            transform: translateY(-30px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
 </style>
