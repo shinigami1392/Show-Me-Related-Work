@@ -23,8 +23,6 @@
     </tr>
   </tbody>
 </table>
- 
-<router-view></router-view>
 </app-box>
 </div>
 
