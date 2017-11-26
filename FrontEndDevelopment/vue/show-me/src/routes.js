@@ -2,6 +2,7 @@ import ListBox from './components/ListBox.vue'
 import NavigationBar from './components/NavigationBar.vue'
 import NetworkGraph from './components/NetworkGraph.vue'
 import Feedback from './components/Feedback.vue'
+import LinkInfoBox from './components/LinkInfoBox.vue'
 
 //Lazy routing
 const PapersTable = resolve => {
@@ -59,12 +60,21 @@ export const routes = [{
     components: {
       'area-box': ListBox,
       'table-box': NetworkGraph,
-      'info-box': PaperInfoBox,
-      'feedback-box':Feedback
+      'info-box': PaperInfoBox
     },
     name: 'paperInfo',
     meta: { adminOnly: false }
 
+  },
+  {
+    path: '/areas/:areaid/paper/:paperid/links/:linkid',
+    components: {
+      'area-box': ListBox,
+      'table-box': NetworkGraph,
+      'link-info-box': LinkInfoBox,
+      'feedback-box':Feedback
+    },
+    name: 'linkInfo'
   },
   {
     path: '*',

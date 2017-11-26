@@ -8,24 +8,25 @@
     <!--  Main -->        
     <div id="main">
             <div class="container-fluid" style="height:700px">
-                <div class="row content" style="height:55%;">
-                    <div class="col-md-3" style="height:inherit;">
+                <div class="row content" style="height:60%;">
+                    <div class="col-md-3 mb-3">
                              <router-view name="area-box"></router-view>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-9 mb-3">
                             <transition name="slide" mode="out-in">
                                 <router-view name="table-box"></router-view>   
                             </transition>
                     </div>
                 </div> 
                
-                <div class="row" style="height:20%;">
-                        <div class="col-md-3">
+                <div class="row" style="height:20%; ">
+                        <div class="col-md-3 mb-3">
                                 <transition name="slide" mode="out-in">
                                     <router-view name="info-box"></router-view>
+                                    <router-view name="link-info-box"></router-view>
                                 </transition>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-9 mb-3">
                             <!--<app-box v-bind:boxHeaderProp = "userFeedbackBoxHeader">
                             </app-box> -->
                             <transition name="slide" mode="out-in">

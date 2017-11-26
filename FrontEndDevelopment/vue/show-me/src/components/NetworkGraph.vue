@@ -1,7 +1,15 @@
 <template>
-    <app-box v-bind:boxHeaderProp = "graphBoxHeader">
+    <app-box v-bind:boxHeaderProp = "graphBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle">
         <div id = "details">
         </div>
+        <div id ="legend" style="flex-grow: 1;">
+            <div class='legend-title'>Node Label and Name</div>
+            <div>
+                <ul id="legend_elements_list"  v-if="graphLegendElements && graphLegendElements.length">
+                    <li v-for="graphElement in graphLegendElements" ><span>{{ graphElement.id }}</span> <span>{{ graphElement.name }}</span></li>
+                </ul>
+            </div>
+        </div>    
     </app-box>    
 </template>
 
@@ -13,7 +21,11 @@ function fetchPaperInfo(vm, paperInfo){
 var nodes = [];
 var edges = [];
 var elements = [];
+var legend_elements = [];
+
 nodes.push({data:{id:paperInfo.id}});
+legend_elements.push({id:paperInfo.id, name:paperInfo.name});
+
 for(var i = 0; i < paperInfo.incoming_relations.length ; i++){
     var nodeObj = { 
         data:{id:''}
@@ -24,6 +36,7 @@ for(var i = 0; i < paperInfo.incoming_relations.length ; i++){
     }
     
     nodeObj.data.id = paperInfo.incoming_relations[i].source_id;
+    legend_elements.push({id:paperInfo.incoming_relations[i].source_id, name:paperInfo.incoming_relations[i].source_name});
     edgeObj.data.id = paperInfo.incoming_relations[i].id;
     edgeObj.data.source = paperInfo.incoming_relations[i].source_id;
     nodes.push(nodeObj);
@@ -40,6 +53,8 @@ for(var i = 0; i < paperInfo.outgoing_relations.length ; i++){
     }
     
     nodeObj.data.id = paperInfo.outgoing_relations[i].destination_id;
+    legend_elements.push({id:paperInfo.outgoing_relations[i].destination_id, name:paperInfo.outgoing_relations[i].destination_name});
+
     edgeObj.data.id = paperInfo.outgoing_relations[i].id;
     edgeObj.data.target = paperInfo.outgoing_relations[i].destination_id;
     nodes.push(nodeObj);
@@ -59,7 +74,11 @@ function plotGraph(vm, paperInfo){
     var nodes = [];
     var edges = [];
     var graph_elements = [];
+    var legend_elements = [];
+
     nodes.push({data:{id:paperInfo.id}});
+    legend_elements.push({id:paperInfo.id, name:paperInfo.name});
+
     for(var i = 0; i < paperInfo.incoming_relations.length ; i++){
         var nodeObj = { 
             data:{id:''}
@@ -70,6 +89,8 @@ function plotGraph(vm, paperInfo){
         }
     
         nodeObj.data.id = paperInfo.incoming_relations[i].source_id;
+        legend_elements.push({id:paperInfo.incoming_relations[i].source_id, name:paperInfo.incoming_relations[i].source_name});
+        
         edgeObj.data.id = paperInfo.incoming_relations[i].id;
         edgeObj.data.source = paperInfo.incoming_relations[i].source_id;
         nodes.push(nodeObj);
@@ -86,6 +107,8 @@ function plotGraph(vm, paperInfo){
         }
     
         nodeObj.data.id = paperInfo.outgoing_relations[i].destination_id;
+        legend_elements.push({id:paperInfo.outgoing_relations[i].destination_id, name:paperInfo.outgoing_relations[i].destination_name});
+
         edgeObj.data.id = paperInfo.outgoing_relations[i].id;
         edgeObj.data.target = paperInfo.outgoing_relations[i].destination_id;
         nodes.push(nodeObj);
@@ -98,6 +121,8 @@ function plotGraph(vm, paperInfo){
     graph_elements.push.apply(graph_elements, edges);
     console.log(JSON.stringify(graph_elements));
     console.log("Inside plotGraph");
+
+    vm.graphLegendElements = legend_elements;
     var cy = cytoscape({
             container: document.getElementById('details'), // container to render in
             elements:graph_elements,
@@ -139,11 +164,16 @@ export default {
         return {
             graphBoxHeader: "Network Graph",
             graphElements:[],
-            text:''
+            graphLegendElements:[]
         }
+    },
+    created() {
+        this.cardStyle = "height:100%";
+        this.cardBlockStyle = "display:flex";
     },
     mounted() {
         //console.log(this.$route.matched[0].props.text);
+        
         console.log("Component Route: ");
         console.log(this.$route)
         var paperInfo = this.$route.matched[0].props.paperInfo;
@@ -151,6 +181,7 @@ export default {
         console.log(this.$router);
         var router = this.$router;
         var route = this.$route;
+
         //console.log(this.$route.matched[0].props);
         //fetchPaperInfo(this, paperInfo);
         var cy = plotGraph(this, paperInfo);
@@ -174,6 +205,12 @@ export default {
             cy.getElementById(selectedNodeId).style( 'width', '30px' );
             //cy.getElementById(selectedNodeId).style('cursor','default');
          });
+
+          cy.on('tap', 'edge', function (evt) {
+            var selectedEdgeId = evt.target.id();
+            console.log('Edge Id: '+selectedEdgeId);
+            router.replace('/areas/'+route.params.areaid+'/paper/'+route.params.paperid+'/links/'+selectedEdgeId);
+         });
     }
   
 };
@@ -184,7 +221,14 @@ export default {
 <style>
    #details {
       
-        height: 300px;
+        height: 350px;
+        width: 600px;
         display: block;
-    }
+  }
+ #legend{
+     border: 1px solid #999
+ }
+ #legend_elements_list{
+     list-style: none;
+ }
 </style>

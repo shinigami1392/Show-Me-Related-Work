@@ -1,10 +1,10 @@
 <template>
 
-  <div class="card" style="height:90%;">
+  <div class="card" v-bind:style="cardStyle">
     <div class="card-header card-outline-info h6">
         {{boxHeaderProp}}
     </div>
-    <div class="card-block">
+    <div class="card-block" v-bind:style="cardBlockStyle">
          <slot></slot>
      </div> 
   </div>
@@ -14,7 +14,7 @@
 
 <script>
   export default {
-      props: ['boxHeaderProp'],
+      props: ['boxHeaderProp', 'cardStyle','cardBlockStyle']
   };
 </script>
 
