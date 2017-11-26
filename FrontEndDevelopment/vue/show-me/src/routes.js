@@ -1,6 +1,7 @@
 import ListBox from './components/ListBox.vue'
 import NavigationBar from './components/NavigationBar.vue'
 import NetworkGraph from './components/NetworkGraph.vue'
+import Feedback from './components/Feedback.vue'
 
 //Lazy routing
 const PapersTable = resolve => {
@@ -17,14 +18,18 @@ const PaperInfoBox = resolve => {
 function fetchPaperInfo () {
   console.log("Inside fetchPaperInfo");
   return {
-    paperInfo: {"id":"p1","name":"paper_a","author":["abc","def"],"year":1993,"url":"http://abc.com","incoming_relations":[{"id":"e13","source_id":"p3","source_name":"pqr","weight":32},{"id":"e12","source_id":"p2","source_name":"xyz","weight":45}],"outgoing_relations":[{"id":"e14","destination_id":"p4","destination_name":"mno","weight":65},{"id":"e15","destination_id":"p5","destination_name":"good","weight":87}]}
+    paperInfo: {"id":"1","name":"paper_a","author":["abc","def"],"year":1993,"url":"http://abc.com","incoming_relations":[{"id":"e13","source_id":"3","source_name":"pqr","weight":32},{"id":"e12","source_id":"2","source_name":"xyz","weight":45}],"outgoing_relations":[{"id":"e14","destination_id":"4","destination_name":"mno","weight":65},{"id":"e15","destination_id":"5","destination_name":"good","weight":87}]}
   }
 }
-var paperInfo = {};
- var test = function (){
-  console.log("Test: "+JSON.stringify(paperInfo));
-  return {};
+
+function testRoute(to, from){
+   console.log("Route: ");
+   console.log(to);
+   return {query:'a'};
 }
+
+
+var paperInfo = {};
 export const routes = [{
     path: '/',
     name: 'home',
@@ -45,17 +50,20 @@ export const routes = [{
     path: '/areas/:areaid/paper/:paperid',
     beforeEnter: (to, from, next) => {
       console.log("Inside paperInfo: ");
-      paperInfo = fetchPaperInfo();
-      test();
-      next()
+      //paperInfo = fetchPaperInfo();
+      //console.log(to);
+      //to.matched[0].props = paperInfo;
+      //test();
+      next();
     },
     components: {
       'area-box': ListBox,
       'table-box': NetworkGraph,
-      'info-box': PaperInfoBox
+      'info-box': PaperInfoBox,
+      'feedback-box':Feedback
     },
     name: 'paperInfo',
-    props:  test()
+    meta: { adminOnly: false }
 
   },
   {

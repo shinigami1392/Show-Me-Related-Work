@@ -1,6 +1,6 @@
 <template>
 <app-box v-bind:boxHeaderProp = "researchAreasBoxHeader">
-  <ul class="list-group" v-if="categories && categories.length">
+  <ul class="list-group" v-if="categories && categories.length" style="height:20%">
     <li v-for="category in categories" class="list-group-item">
       <router-link :to="{ name:'allPapers',params:{areaid:category.id}}">{{ category.name }}</router-link>  
       <span class="badge badge-primary badge-pill">{{ category.count }}</span>

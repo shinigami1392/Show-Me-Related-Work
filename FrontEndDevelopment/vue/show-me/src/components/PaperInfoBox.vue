@@ -33,7 +33,7 @@
 
 <script>
 import axios from "axios";
-
+/*
 function getPaperInfo(vm) {
   axios
     .get(`http://localhost:8000/`)
@@ -44,48 +44,14 @@ function getPaperInfo(vm) {
     .catch(err => {
       vm.errors.push(err);
     });
-}
+}*/
 
 export default {
   data() {
     return {
       infoBoxHeader: "Paper Information",
       errors: [],
-      paperInfo: {
-        id: "p1",
-        name: "paper_a",
-        author: ["abc", "def"],
-        year: 1993,
-        url: `http://abc.com`,
-        incoming_relations: [
-          {
-            id: "e13",
-            source_id: "p3",
-            source_name: "pqr",
-            weight: 32
-          },
-          {
-            id: "e12",
-            source_id: "p2",
-            source_name: "xyz",
-            weight: 45
-          }
-        ],
-        outgoing_relations: [
-          {
-            id: "e14",
-            destination_id: "p4",
-            destination_name: "mno",
-            weight: 65
-          },
-          {
-            id: "e15",
-            destination_id: "p5",
-            destination_name: "good",
-            weight: 87
-          }
-        ]
-      }
+      paperInfo: {}
     };
   },
 
@@ -96,9 +62,9 @@ export default {
       //   alert(to.params.paperid);
     }
   },
-  created() {
-    //alert(this.$route.params.paperid);
-    //getPaperInfo(this);
+  mounted() {
+    console.log("PaperInfoBox mounted");
+    this.paperInfo = this.$route.matched[0].props.paperInfo;
   }
 };
 </script>

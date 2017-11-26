@@ -1,6 +1,6 @@
 <template>
 
-  <div class="card">
+  <div class="card" style="height:90%;">
     <div class="card-header card-outline-info h6">
         {{boxHeaderProp}}
     </div>
