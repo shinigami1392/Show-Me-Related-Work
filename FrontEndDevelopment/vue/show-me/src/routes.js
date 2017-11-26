@@ -1,5 +1,6 @@
 import ListBox from './components/ListBox.vue'
 import NavigationBar from './components/NavigationBar.vue'
+import LinkInfoBox from './components/LinkInfoBox.vue'
 
 //Lazy routing
 const PapersTable = resolve => {
@@ -39,6 +40,14 @@ export const routes = [{
       'info-box': PaperInfoBox
     },
     name: 'paperInfo'
+  },
+  {
+    path: '/links/:linkid',
+    components: {
+      'area-box': ListBox,
+      'link-info-box': LinkInfoBox
+    },
+    name: 'linkInfo'
   },
   {
     path: '*',

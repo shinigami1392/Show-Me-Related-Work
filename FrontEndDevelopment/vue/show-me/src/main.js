@@ -9,6 +9,7 @@ import SocialSignIn from './components/SocialSignIn.vue'
 import Logo from './components/Logo.vue'
 import PapersTable from './components/PapersTable.vue'
 import PaperInfoBox from './components/PaperInfoBox.vue'
+import LinkInfoBox from './components/LinkInfoBox.vue'
 
 import { routes } from './routes';
 import { store } from './store/store';
@@ -23,6 +24,7 @@ Vue.component('app-social-sign-in', SocialSignIn);
 Vue.component('app-logo',Logo);
 Vue.component('app-table',PapersTable);
 Vue.component('app-paper-infobox',PaperInfoBox);
+Vue.component('app-link-infobox',LinkInfoBox);
 
 
 const router = new VueRouter({

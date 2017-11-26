@@ -22,6 +22,7 @@
                         <div class="col-md-3">
                                 <transition name="slide" mode="out-in">
                                     <router-view name="info-box"></router-view>
+                                    <router-view name="link-info-box"></router-view>
                                 </transition>
                         </div>
                         <div class="col-md-9">
