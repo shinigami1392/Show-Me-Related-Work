@@ -1,5 +1,7 @@
-var model = require('model.js');
+var model = require('./models.js');
 
-function getDriver() {
+var exports = module.exports = {};
+exports.getDriver = function() {
 	return model.createNeo4jModel();
 }
+

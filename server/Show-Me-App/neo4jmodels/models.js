@@ -5,6 +5,8 @@ var graphNodeModel = require('./graphNode.js');
 
 var neo4j = require('neo4j-driver').v1;
 
+var exports = module.exports = {};
+
 var connectToNeo4j = function() {
 	var url = config.neo4jURL;
 	var username = config.neo4jUsername;
@@ -13,6 +15,6 @@ var connectToNeo4j = function() {
 	return driver;
 }
 
-function createNeo4jModel(){
+exports.createNeo4jModel = function(){
 	return connectToNeo4j();
 }

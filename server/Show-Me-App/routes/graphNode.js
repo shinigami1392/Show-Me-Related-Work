@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
-var apis = require('../apis.js');
+var apis = require('../api.js');
 
-router.get('/graphNode/:id', function() {
+router.get('/graphNode/:id', function(req, res, next) {
 	var paperId = req.params.id;
-	apis.getGraphNode(paperId, res);
+	console.log("ID = " + paperId);
+	apis.getGraph(paperId,res);
 });
 
 module.exports = router;

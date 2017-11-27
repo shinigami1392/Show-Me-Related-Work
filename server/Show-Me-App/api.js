@@ -2,9 +2,11 @@ var UserModel = require('./models/users.js');
 var PaperModel = require('./models/papers.js');
 var DomainModel = require('./models/domains.js');
 var RelationModel = require('./models/relations.js');
-var GraphNodeModel = require('./models/graphNode.js');
+var GraphNodeModel = require('./neo4jmodels/graphNode.js');
+var resultSet = [];
 
 var exports = module.exports = {};
+
 
 var sendInternalServerError = function(err, res){
 	res.status(501).send(err);
@@ -202,20 +204,26 @@ exports.removeDownvotes = function(relationId, userId, res){
 	});
 }
 
-exports.getGraphNode = function(paperId, res);{
+exports.getGraph = function(paperId, res){
+	var response = {};
+	getGraphNode(paperId);
+	console.log("Res:" + resultSet);
+}
+
+var getGraphNode = function(paperId){
 	var driver = GraphNodeModel.getDriver();
 	var session = driver.session();
-	var resultPromise = session.run('MATCH (:ResearchPaper {Title:'+paperId+'})'<-- '(paper) return paper');
-	var resultSet = [];
+	var resultPromise = session.run('MATCH (p:ResearchPaper {Id:"'+paperId+'"}) return p');
+	resultSet = [];
 	resultPromise.then(result => {
 		session.close();
-		console.log('result.records.length');
+		//console.log('result.records.length');
 		for (var i = 0; i< result.records.length; i++){
+			//console.log(result.records[i].get(0));
 			resultSet.push(result.records[i].get(0));
 		}
-		res.send({'papers':resultSet});
+		driver.close();
 	});
-
-	driver.close();
+	//return resultSet;
 }
 
