@@ -1,0 +1,24 @@
+System Requirements:
+1) Python 3  
+	Can be downloaded from https://www.python.org/downloads/
+2) Argparse
+         Install using 'pip install argparse'
+3) openpyxl
+	Install using 'pip install openpyxl'
+
+File Requirements:
+
+1) Column ID and Reference ID must have numeric values (Not formula)
+2) Values in Reference ID must be comma separated
+3) If using different sheets for different domains, start naming the the ID from last ID of previous sheet.
+
+Steps to execute:
+
+1) Open command prompt
+2) Navigate to the directory where the app is stored
+3) python Load_data_to_Neo4J -wb 'path_of_your_excel' -st 'name_of_the_sheet'
+4) Default values are SER517_data.xlsx for excel and Sheet1 for sheet. if you have the same names, just execute python Load_data_to_Neo4J
+
+
+Output: 
+A text file named config.txt will be created which will have your onfigurations
