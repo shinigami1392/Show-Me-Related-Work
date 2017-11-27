@@ -1,20 +1,12 @@
 <template>
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+<div id="navigation" class="navbar navbar-default customNav">
 
-  <a class="navbar-brand" href="#">Show-ME</a>
-  <ul class="navbar-nav">
-    <li v-if="isLoggedIn" class="nav-item">
-        <a class="nav-link" href="#">Welcome {{userInfo.firstname}}</a>
-    </li>
-    <form class="form-inline" v-if="isLoggedIn">
-        <button class="btn btn-outline-success" type="button">Logout</button>
-    </form>
-  </ul>
-    <form class="form-inline" v-if="!isLoggedIn">
-        <button class="btn btn-outline-success" type="button">Login With Google</button>
-    </form>
-</nav>
+      <div class="navbar-header">
+         <!-- <a class="navbar-brand" href="#">SHOW ME</a>-->
+      </div>
+
+</div>  
 
 
 </template>
@@ -42,5 +34,10 @@ export default {
 </script>
 
 <style>
-
+.customNav {
+   background: -webkit-radial-gradient(circle, #fff, #fff);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
 </style>
