@@ -14,6 +14,10 @@
                     </div>
                     <div class="col-md-9 mb-3">
                             <transition name="slide" mode="out-in">
+                                <router-view name="animation-box"></router-view>   
+                            </transition>
+
+                            <transition name="slide" mode="out-in">
                                 <router-view name="table-box"></router-view>   
                             </transition>
                     </div>
@@ -57,6 +61,7 @@ export default {
 
 
 <style>
+
 .slide-leave-active {
   transition: opacity 0.2s ease;
   opacity: 0;
@@ -89,4 +94,7 @@ export default {
     transform: translateY(0);
   }
 }
+
+
+
 </style>

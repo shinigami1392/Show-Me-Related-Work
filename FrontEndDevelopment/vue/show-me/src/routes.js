@@ -3,6 +3,7 @@ import NavigationBar from './components/NavigationBar.vue'
 import NetworkGraph from './components/NetworkGraph.vue'
 import Feedback from './components/Feedback.vue'
 import LinkInfoBox from './components/LinkInfoBox.vue'
+import AnimatedBox from './components/AnimatedBox.vue'
 
 //Lazy routing
 const PapersTable = resolve => {
@@ -36,7 +37,8 @@ export const routes = [{
     name: 'home',
     components: {
       default: NavigationBar,
-      'area-box': ListBox
+      'area-box': ListBox,
+      'animation-box':AnimatedBox
     }
   },
   {
