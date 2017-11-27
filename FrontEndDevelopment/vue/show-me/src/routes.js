@@ -4,6 +4,7 @@ import NetworkGraph from './components/NetworkGraph.vue'
 import Feedback from './components/Feedback.vue'
 import LinkInfoBox from './components/LinkInfoBox.vue'
 import AnimatedBox from './components/AnimatedBox.vue'
+import PaginatedTable from './components/PaginatedTable.vue'
 
 //Lazy routing
 const PapersTable = resolve => {
@@ -46,7 +47,7 @@ export const routes = [{
     name: 'allPapers',
     components: {
       'area-box': ListBox,
-      'table-box': PapersTable
+      'table-box': PaginatedTable
     },
   },
   {

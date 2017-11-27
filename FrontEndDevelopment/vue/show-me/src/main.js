@@ -7,6 +7,8 @@ import NavigationBar from './components/NavigationBar.vue'
 import PapersTable from './components/PapersTable.vue'
 import PaperInfoBox from './components/PaperInfoBox.vue'
 import LinkInfoBox from './components/LinkInfoBox.vue'
+import PaginatedTable from './components/PaginatedTable.vue'
+import Grid from './components/Grid.vue'
 
 import { routes } from './routes';
 import { store } from './store/store';
@@ -19,6 +21,8 @@ Vue.component('app-navbar', NavigationBar );
 Vue.component('app-table',PapersTable);
 Vue.component('app-paper-infobox',PaperInfoBox);
 Vue.component('app-link-infobox',LinkInfoBox);
+Vue.component('app-paginated-table',PaginatedTable);
+Vue.component('grid',Grid);
 
 
 const router = new VueRouter({
