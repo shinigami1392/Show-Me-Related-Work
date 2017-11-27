@@ -15,59 +15,6 @@
 
 <script>
 
-function fetchPaperInfo(vm, paperInfo){
-
-//var paperInfo =  {"id":"p1","name":"paper_a","author":["abc","def"],"year":1993,"url":"http://abc.com","incoming_relations":[{"id":"e13","source_id":"p3","source_name":"pqr","weight":32},{"id":"e12","source_id":"p2","source_name":"xyz","weight":45}],"outgoing_relations":[{"id":"e14","destination_id":"p4","destination_name":"mno","weight":65},{"id":"e15","destination_id":"p5","destination_name":"good","weight":87}]};
-var nodes = [];
-var edges = [];
-var elements = [];
-var legend_elements = [];
-
-nodes.push({data:{id:paperInfo.id}});
-legend_elements.push({id:paperInfo.id, name:paperInfo.name});
-
-for(var i = 0; i < paperInfo.incoming_relations.length ; i++){
-    var nodeObj = { 
-        data:{id:''}
-    };
-
-    var edgeObj = {
-        data:{id:'',source:'',target: paperInfo.id}
-    }
-    
-    nodeObj.data.id = paperInfo.incoming_relations[i].source_id;
-    legend_elements.push({id:paperInfo.incoming_relations[i].source_id, name:paperInfo.incoming_relations[i].source_name});
-    edgeObj.data.id = paperInfo.incoming_relations[i].id;
-    edgeObj.data.source = paperInfo.incoming_relations[i].source_id;
-    nodes.push(nodeObj);
-    edges.push(edgeObj);
-}
-
-for(var i = 0; i < paperInfo.outgoing_relations.length ; i++){
-    var nodeObj = { 
-        data:{id:''}
-    };
-
-    var edgeObj = {
-        data:{id:'',source:paperInfo.id, target:''}
-    }
-    
-    nodeObj.data.id = paperInfo.outgoing_relations[i].destination_id;
-    legend_elements.push({id:paperInfo.outgoing_relations[i].destination_id, name:paperInfo.outgoing_relations[i].destination_name});
-
-    edgeObj.data.id = paperInfo.outgoing_relations[i].id;
-    edgeObj.data.target = paperInfo.outgoing_relations[i].destination_id;
-    nodes.push(nodeObj);
-    edges.push(edgeObj);
-}
-console.log(JSON.stringify(nodes));
-console.log(JSON.stringify(edges));
-
-elements.push.apply(elements, nodes);
-elements.push.apply(elements, edges);
-console.log(JSON.stringify(elements));
-vm.graphElements = elements;
-}
 
 function plotGraph(vm, paperInfo){
 
@@ -182,13 +129,10 @@ export default {
         var router = this.$router;
         var route = this.$route;
 
-        //console.log(this.$route.matched[0].props);
-        //fetchPaperInfo(this, paperInfo);
         var cy = plotGraph(this, paperInfo);
          cy.on('tap', 'node', function (evt) {
             var selectedNodeId = evt.target.id();
             console.log('Node Id: '+selectedNodeId);
-            //this.$route.router.go('/areas/'+this.$route.params.areaid+'/paper/'+selectedNodeId);
             router.replace('/areas/'+route.params.areaid+'/paper/'+selectedNodeId);
          });
           cy.on('mouseover', 'node', function (evt) {
