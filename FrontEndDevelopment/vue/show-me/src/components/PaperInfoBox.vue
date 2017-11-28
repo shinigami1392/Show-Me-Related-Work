@@ -1,7 +1,7 @@
 <template>
 
-<div>
- <app-box v-bind:boxHeaderProp = "infoBoxHeader">
+<div style="height:100%;">
+ <app-box v-bind:boxHeaderProp = "infoBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
  <span>Paper id is : {{$route.params.paperid}}</span>
  <table class="table">
     <tbody>
@@ -61,6 +61,11 @@ export default {
       this.paperInfo.id = to.params.paperid;
       //   alert(to.params.paperid);
     }
+  },
+  created() {
+        this.cardStyle = "height:100%";
+        this.cardBlockStyle = "height:80%;";
+        this.cardBlockContentStyle = "height:100%; overflow-y:auto;";
   },
   mounted() {
     console.log("PaperInfoBox mounted");

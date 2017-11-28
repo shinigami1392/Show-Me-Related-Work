@@ -1,7 +1,7 @@
 <template>
 
-<div>
- <app-box v-bind:boxHeaderProp = "infoBoxHeader">
+<div style="height:100%;">
+ <app-box v-bind:boxHeaderProp = "infoBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle"  v-bind:cardBlockContentStyle="cardBlockContentStyle">
  <span>Link id is : {{$route.params.linkid}}</span>
  <table class="table">
     <tbody>
@@ -28,18 +28,6 @@
 <script>
 import axios from "axios";
 
-function getPaperInfo(vm) {
-  axios
-    .get(`http://localhost:8000/`)
-    .then(response => {
-      vm.categories = response.data.categories;
-      console.log("cl: " + vm.categories.length);
-    })
-    .catch(err => {
-      vm.errors.push(err);
-    });
-}
-
 export default {
   data() {
     return {
@@ -53,12 +41,14 @@ export default {
   watch: {
     $route(to, from) {
       this.linkInfo.id = to.params.linkid;
-      //   alert(to.params.paperid);
     }
   },
+  created() {
+        this.cardStyle = "height:100%;";
+        this.cardBlockStyle = "height:80%;"
+        this.cardBlockContentStyle = "height:100%; overflow-y:auto; overflow-x: hidden"
+    },
   mounted() {
-    //alert(this.$route.params.paperid);
-    //getPaperInfo(this);
          this.linkInfo = this.$route.matched[0].props.linkInfo;
   }
 };

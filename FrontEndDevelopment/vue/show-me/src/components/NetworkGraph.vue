@@ -1,15 +1,52 @@
 <template>
-    <app-box v-bind:boxHeaderProp = "graphBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle">
-        <div id = "details">
+    <app-box v-bind:boxHeaderProp = "graphBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
+        <div class="container" style="height:100%;">
+        <div class="row" style="height:100%;">
+        <div class="col-md-8" style="height:100%;">
+        <div id = "details" style="height:100%;">
         </div>
-        <div id ="legend" style="flex-grow: 1;">
-            <div class='legend-title'>Node Label and Name</div>
-            <div>
-                <ul id="legend_elements_list"  v-if="graphLegendElements && graphLegendElements.length">
-                    <li v-for="graphElement in graphLegendElements" ><span>{{ graphElement.id }}</span> <span>{{ graphElement.name }}</span></li>
-                </ul>
+        </div>
+        
+        <div class="col-md-4" style="padding: 0px 0px;">
+            <!--<button class="btn btn-primary" type="button" v-on:click='isOpen = !isOpen' >
+                    View Legend
+            </button>
+            <br/>-->
+            <div style="height:100%; width:inherit;">
+                        <!--<table id ="legend" class="table table-condensed" style="height:100%;">
+                            <thead><tr><th>Paper Id</th><th>Paper Name</th></tr></thead>
+                            <tbody>
+                            <tr v-if="graphLegendElements && graphLegendElements.length" v-for="graphElement in graphLegendElements">
+                                <td class="small">{{ graphElement.id }}</td><td class="small">{{ graphElement.name }}</td>
+                            </tr>
+                            </tbody>       
+                        </table>-->
+                        <div class="legendTable" style="height:100%; width:inherit;">
+                             <div class="tblHead" style="width:inherit;">
+                                 <div class="tblRow" style="width:inherit;">
+                                    <div class="divCell">Paper Id </div>
+                                    <div class="divCell">Paper Name </div>
+                                 </div>
+                              </div>   
+                              <div class="tblBody" style="width:inherit;">
+                                  <div class="tblRow" style="width:inherit;">
+                                            <div class="divCell">1</div>
+                                            <div class="divCell">Paper 1</div>
+                                   </div>  
+                                     <div class="tblRow">
+                                            <div class="divCell">2</div>
+                                            <div class="divCell">Paper 2</div>
+                                   </div>  
+                                     <div class="tblRow">
+                                            <div class="divCell">3</div>
+                                            <div class="divCell">Paper 3</div>
+                                   </div>   
+                              </div>    
+                         </div>
             </div>
-        </div>    
+         </div> 
+         </div>
+        </div>        
     </app-box>    
 </template>
 
@@ -111,12 +148,14 @@ export default {
         return {
             graphBoxHeader: "Network Graph",
             graphElements:[],
-            graphLegendElements:[]
+            graphLegendElements:[],
+            isOpen:false
         }
     },
     created() {
         this.cardStyle = "height:100%";
-        this.cardBlockStyle = "display:flex";
+        this.cardBlockStyle = "height:90%;"
+        this.cardBlockContentStyle = "height:100%;"
     },
     mounted() {
         //console.log(this.$route.matched[0].props.text);
@@ -174,5 +213,24 @@ export default {
  }
  #legend_elements_list{
      list-style: none;
+ }
+ 
+ .legendTable{
+     display:  table;
+     border:1px solid  #666666;
+     width:auto;
+ }
+ .tblRow
+    {
+       display: table-row;
+       width: auto;
+       clear: both;
+       border:1px solid  #666666;
+    }
+
+ .divCell{
+     float:left;/*fix for  buggy browsers*/
+     display:table-column;
+     border:1px solid  #666666;
  }
 </style>
