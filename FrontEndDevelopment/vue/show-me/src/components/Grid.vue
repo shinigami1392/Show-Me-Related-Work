@@ -1,5 +1,6 @@
 <template>
-<div>
+<div style="height:100%;">
+  <div style="height:80%; overflow-y:auto;">
   <table class="table">
     <thead class="h6">
       <th>Name</th>
@@ -19,6 +20,7 @@
       </tr>
     </tbody>
   </table>
+  </div>
   <div id="page-navigation">
     <button type="button" class="btn btn-outline-dark btn-sm" @click="movePages(-1)">Back</button>
     <p>{{startRow / rowsPerPage + 1}} out of {{Math.ceil(data.length / rowsPerPage)}}</p>

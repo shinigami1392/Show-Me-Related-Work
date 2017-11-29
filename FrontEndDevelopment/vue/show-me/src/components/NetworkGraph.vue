@@ -12,16 +12,18 @@
                     View Legend
             </button>
             <br/>-->
-            <div style="height:100%; width:inherit;">
-                       <table id ="legend" class="table table-condensed" style="height:100%;">
-                            <thead><tr><th>Paper Id</th><th>Paper Name</th></tr></thead>
+            <div style="height:100%; width:inherit; overflow-y:auto;">
+                       <table id ="legend" class="table table-condensed">
+                            <thead><tr><th>Id</th><th>Title</th></tr></thead>
+                            
                             <tbody>
                             <tr v-if="graphLegendElements && graphLegendElements.length" v-for="graphElement in graphLegendElements">
                                 <td class="small">{{ graphElement.id }}</td><td class="small">{{ graphElement.name }}</td>
                             </tr>
-                            </tbody>       
-                        </table>
-                       <!-- <div class="legendTable" style="height:100%; width:inherit;">
+                            </tbody>     
+                     
+                        </table> 
+                       <!--<div class="legendTable" style="height:100%; width:inherit;">
                              <div class="tblHead" style="width:inherit;">
                                  <div class="tblRow" style="width:inherit;">
                                     <div class="divCell">Paper Id </div>
@@ -42,7 +44,7 @@
                                             <div class="divCell">Paper 3</div>
                                    </div>   
                               </div>    
-                         </div> -->
+                         </div>-->
             </div>
          </div> 
          </div>
@@ -60,7 +62,7 @@ function plotGraph(vm, paperInfo){
     var graph_elements = [];
     var legend_elements = [];
 
-    nodes.push({data:{id:paperInfo.id}});
+    nodes.push({data:{id: paperInfo.id}});
     legend_elements.push({id:paperInfo.id, name:paperInfo.name});
 
     for(var i = 0; i < paperInfo.incoming_relations.length ; i++){
@@ -73,9 +75,9 @@ function plotGraph(vm, paperInfo){
         }
     
         nodeObj.data.id = paperInfo.incoming_relations[i].source_id;
-        legend_elements.push({id:paperInfo.incoming_relations[i].source_id, name:paperInfo.incoming_relations[i].source_name});
+       legend_elements.push({id:paperInfo.incoming_relations[i].source_id, name:paperInfo.incoming_relations[i].source_name});
         
-        edgeObj.data.id = paperInfo.incoming_relations[i].id;
+        edgeObj.data.id = 'e'+paperInfo.incoming_relations[i].id;
         edgeObj.data.source = paperInfo.incoming_relations[i].source_id;
         nodes.push(nodeObj);
         edges.push(edgeObj);
@@ -87,13 +89,13 @@ function plotGraph(vm, paperInfo){
         };
 
         var edgeObj = {
-            data:{id:'',source:paperInfo.id, target:''}
+            data:{id:'',source: paperInfo.id, target:''}
         }
     
         nodeObj.data.id = paperInfo.outgoing_relations[i].destination_id;
         legend_elements.push({id:paperInfo.outgoing_relations[i].destination_id, name:paperInfo.outgoing_relations[i].destination_name});
 
-        edgeObj.data.id = paperInfo.outgoing_relations[i].id;
+        edgeObj.data.id = 'e'+paperInfo.outgoing_relations[i].id;
         edgeObj.data.target = paperInfo.outgoing_relations[i].destination_id;
         nodes.push(nodeObj);
         edges.push(edgeObj);
@@ -167,6 +169,8 @@ export default {
         console.log(this.$router);
         var router = this.$router;
         var route = this.$route;
+        console.log("Displaying Paper Info:");
+        console.log(paperInfo);
 
         var cy = plotGraph(this, paperInfo);
          cy.on('tap', 'node', function (evt) {
@@ -191,6 +195,7 @@ export default {
 
           cy.on('tap', 'edge', function (evt) {
             var selectedEdgeId = evt.target.id();
+            selectedEdgeId = selectedEdgeId.substr(1);
             console.log('Edge Id: '+selectedEdgeId);
             router.replace('/areas/'+route.params.areaid+'/paper/'+route.params.paperid+'/links/'+selectedEdgeId);
          });

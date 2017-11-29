@@ -30,9 +30,21 @@ const router = new VueRouter({
   mode:'history'
 });
 
-function fetchPaperInfo () {
+import axios from "axios";
+function fetchPaperInfo (paperid) {
  // console.log("Inside fetchPaperInfo");
-  return {"id":"1","name":"paper_a","author":["abc","def"],"year":1993,"url":"http://abc.com","incoming_relations":[{"id":"e13","source_id":"3","source_name":"pqr","weight":32},{"id":"e12","source_id":"2","source_name":"xyz","weight":45}],"outgoing_relations":[{"id":"e14","destination_id":"4","destination_name":"mno","weight":65},{"id":"e15","destination_id":"5","destination_name":"good","weight":87}]}
+  //return {"id":"1","name":"paper_a","author":["abc","def"],"year":1993,"url":"http://abc.com","incoming_relations":[{"id":"e13","source_id":"3","source_name":"pqr","weight":32},{"id":"e12","source_id":"2","source_name":"xyz","weight":45}],"outgoing_relations":[{"id":"e14","destination_id":"4","destination_name":"mno","weight":65},{"id":"e15","destination_id":"5","destination_name":"good","weight":87}]}
+  axios
+  .get(`http://localhost:8081/graphNode/graphNode/`+paperid)
+  .then(response => {
+    console.log("API Call");
+    console.log(response.data);
+    return response.data;
+  })
+  .catch(err => {
+    console.log(err);
+  });
+
 }
 
 function fetchLinkInfo(){
@@ -44,11 +56,27 @@ var paperInfo = '';
 router.beforeEach(function(to, from, next) {
   console.log("Before Each 1");
   if(to.name === 'paperInfo'){
-    console.log("Before Each 2");
-    paperInfo = fetchPaperInfo();
-    console.log("Props:")
-    console.log(to.matched[0].props);
-    to.matched[0].props.paperInfo = paperInfo;
+    console.log("Before Each 2: "+to.params.paperid);
+    //paperInfo = fetchPaperInfo(to.params.paperid);
+    axios
+    .get(`http://localhost:8081/graphNode/graphNode/`+to.params.paperid)
+    .then(response => {
+      console.log("API Call");
+      console.log(JSON.stringify(response.data));
+      paperInfo = response.data;
+      to.matched[0].props.paperInfo = paperInfo;
+      next();
+    })
+    .catch(err => {
+      console.log(err);
+      next();
+    });
+  
+    //console.log("Props:")
+    //console.log(to.matched[0].props);
+    //console.log("Data");
+    //console.log(paperInfo);
+    //to.matched[0].props.paperInfo = paperInfo;
   }
   else if(to.name === 'linkInfo'){
       if(paperInfo == ''){
@@ -57,7 +85,10 @@ router.beforeEach(function(to, from, next) {
       }
       var linkInfo = fetchLinkInfo();
       to.matched[0].props.linkInfo = linkInfo;
-     
+      next();
+  }
+  else{
+    next();
   }
        /* console.log(to);
         console.log(next);
@@ -70,7 +101,7 @@ router.beforeEach(function(to, from, next) {
           })
           
         }*/
-        next()
+        
 }.bind(Vue))
 
 new Vue({

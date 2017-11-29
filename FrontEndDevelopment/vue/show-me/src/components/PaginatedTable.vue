@@ -1,5 +1,5 @@
 <template>
-  <app-box v-bind:boxHeaderProp = "researchPaperAndRelationsBoxHeader">
+  <app-box v-bind:boxHeaderProp = "researchPapersBoxHeader"  v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
     <span>Catagory id is : {{$route.params.areaid}}</span>
     <grid :data="papers "  :move-pages="movePages" :start-row="startRow" :rows-per-page="rowsPerPage">
     </grid>
@@ -30,11 +30,16 @@ export default {
     return {    
       startRow: 0,
       rowsPerPage: 5,
-      researchPaperAndRelationsBoxHeader: "Research Papers and References",
-      papers: []
+      researchPapersBoxHeader: "Research Papers",
+      papers: [],
+      cardStyle : "height:100%;",
+      cardBlockStyle : "height:90%;",
+      cardBlockContentStyle: "height:100%;"
     };
   },
+  created() {
 
+  },
   methods: {
     movePages: function(amount) {
       let newStartRow = this.startRow + amount * this.rowsPerPage;

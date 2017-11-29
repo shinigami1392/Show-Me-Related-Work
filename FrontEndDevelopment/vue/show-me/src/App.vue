@@ -18,7 +18,7 @@
                             </transition>
 
                             <transition name="slide" mode="out-in">
-                                <router-view name="table-box"></router-view>   
+                                <router-view name="table-box" :key="$route.fullPath"></router-view>   
                             </transition>
                     </div>
                 </div> 
