@@ -54,7 +54,7 @@ exports.findPapersforDomain = function(id, res){
 			var papers = domain.papers;
 			var objects = [];
 			for(var i = 0; i < papers.length; i++){
-				var object = {'id': papers[i].paperId, 'title': papers[i].title, 'authors': papers[i].authors, 'date': papers[i].date};
+				var object = {'id': papers[i].paperId, 'title': papers[i].title, 'authors': papers[i].author, 'date': papers[i].date, 'url':papers[i].url};
 				objects.push(object);
 			}
 			res.send({'total': objects.length, 'papers': objects});
