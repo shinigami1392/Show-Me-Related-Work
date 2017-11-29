@@ -14,10 +14,11 @@ import axios from "axios";
 
 function getPaperCatagories(vm) {
   axios
-    .get(`http://localhost:8000/`)
+    //.get(`http://localhost:8000/`)
+    .get(`http://localhost:8081/domains/all`)
     .then(response => {
-      vm.categories = response.data.categories;
-      console.log("cl: "+vm.categories.length);
+      vm.categories = response.data.domains;
+      console.log("cl: "+vm.domains.length);
     })
     .catch(err => {
       vm.errors.push(err);
