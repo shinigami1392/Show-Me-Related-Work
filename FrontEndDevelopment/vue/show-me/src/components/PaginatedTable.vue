@@ -39,7 +39,7 @@ export default {
     movePages: function(amount) {
       let newStartRow = this.startRow + amount * this.rowsPerPage;
       console.log(newStartRow);
-      if (newStartRow >= 0 && newStartRow < this.gridData.length) {
+      if (newStartRow >= 0 && newStartRow < this.papers.length) {
         this.startRow = newStartRow;
       }
     },
