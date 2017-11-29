@@ -7,10 +7,10 @@ router.get('/all', function(req, res, next) {
 	apis.findAllDomains(res);
 });
 
-router.get('/:title', function(req, res, next){
-	var title = req.params.title;
-	console.log(title);
-	apis.findPapersforDomain(title, res);
+router.get('/:id', function(req, res, next){
+	var id = req.params.id;
+	console.log(id);
+	apis.findPapersforDomain(id, res);
 });
 
 module.exports = router;
