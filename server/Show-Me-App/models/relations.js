@@ -11,6 +11,7 @@ var commentsSchema = new Schema({
 var CommentModel = mongoose.model('CommentModel', commentsSchema);
 
 var relationsSchema = new Schema({
+	relationId: {type: String, required:true},
 	relationFrom : {type: Schema.ObjectId, ref:'PaperModel'},
 	relationTo : {type: Schema.ObjectId, ref:'PaperModel'},
 	upvotes : [{type: Schema.ObjectId, ref:'UserModel'}],

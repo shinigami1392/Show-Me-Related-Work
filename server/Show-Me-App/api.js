@@ -69,7 +69,7 @@ exports.findRelationFromId = function(relationId, userId, res){
 	if(!relationId) invalidInput('Please enter relationId', res);
 	if(!userId) invalidInput('Please enter user', res);
 
-	var query = RelationModel.findOne({_id:relationId});
+	var query = RelationModel.findOne({id:relationId});
 	var userQuery = UserModel.findOne({userId: userId});
 
 	query.exec(function(err, relation){
