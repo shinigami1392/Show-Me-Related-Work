@@ -36,7 +36,7 @@ exports.findAllDomains = function(res){
 		else if(domains){
 			obj = [];
 			for(var i = 0; i < domains.length; i++){
-				var domain = {'id': domains[i].id, 'name': domains[i].domainName, 'count': domains[i].papers.length};
+				var domain = {'name': domains[i].domainName, 'count': domains[i].papers.length};
 				obj.push(domain);
 			}
 			res.send({'found':true, 'domains':obj});
@@ -45,8 +45,8 @@ exports.findAllDomains = function(res){
 	}); 
 }
 
-exports.findPapersforDomain = function(id, res){
-	var query = DomainModel.findOne({id:id});
+exports.findPapersforDomain = function(title, res){
+	var query = DomainModel.findOne({domainName:title});
 	query.populate('papers');
 	query.exec(function(err, domain){
 		if(err) sendInternalServerError(res);
@@ -251,7 +251,7 @@ var getGraphNode = function(paperId, res){
 				data['source_name'] = result1.records[i].get(1).properties.Title;
 				data['source_id'] = result1.records[i].get(1).properties.Id;
 				data['weight'] = result1.records[i].get(0).properties.upvotes - result1.records[i].get(0).properties.downvotes;
-				resultSet['incoming_relations'].push(data);
+				resultSet['outgoing_relations'].push(data);
 				//resultSet.push(result.records[i].get(0));
 			}
 
@@ -261,17 +261,18 @@ var getGraphNode = function(paperId, res){
 			//var resultPromise2 = session.run('MATCH (p:ResearchPaper {Id:"'+paperId+'"}) return p');
 			var resultPromise2 = session.run('MATCH p=(p1:ResearchPaper)<-[r:HAS_REFERRED]-(p2:ResearchPaper) where p1.Id="'+ paperId + '"RETURN r, p2');
 		//var resultPromise1 = session1.run('MATCH p=(p1:ResearchPaper)-[r:HAS_REFERRED]->(p2:ResearchPaper) where p1.Id="'+ paperId + '"RETURN r');
-			resultPromise2.then(result2 => {
+			resultPromise2.then(function(result2){
 				session.close();
 				var objects = [];
 				//console.log('result.records.length');
 				for (var i = 0; i< result2.records.length; i++){
 					var data ={};
 				// console.log("nodes: "+result1.records[i].get(0).properties);
-				data['id'] = result1.records[i].get(0).properties.relId;
-				data['source_name'] = result1.records[i].get(1).properties.Title;
-				data['source_id'] = result1.records[i].get(1).properties.Id;
-				data['weight'] = result1.records[i].get(0).properties.upvotes - result1.records[i].get(0).properties.downvotes;
+				data['id'] = result2.records[i].get(0).properties.relId;
+				data['source_name'] = result2.records[i].get(1).properties.Title;
+				data['source_id'] = result2.records[i].get(1).properties.Id;
+				data['weight'] = result2.records[i].get(0).properties.upvotes - result2.records[i].get(0).properties.downvotes;
+				console.log("data: "+JSON.stringify(data));
 				resultSet['incoming_relations'].push(data);
 				}
 				driver.close();
