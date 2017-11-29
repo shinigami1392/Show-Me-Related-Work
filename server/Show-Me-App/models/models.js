@@ -25,16 +25,21 @@ var getRandom = function(max){
 
 exports.createModels = function(){
 	connectToMongo();
-	// userDetail = {userId:'abc', first_name:'Apoorv', last_name:'Khairnar', email:'akhairna@asu.edu'};
-	// var user = new UserModel(userDetail);
-	// user.save(function(err){
-	// 	if(err){
-	// 		console.log(err);
-	// 	}
-	// 	else{
-	// 		console.log('New user :' + user);
-	// 	}
-	// });
+	var papers = [];
+	PaperModel.find().select('_id').exec(function(err, domains){
+		console.log(domains);
+		object = [];
+		for(var i=0; i<domains.length; i++){
+			object.push(domains[i]._id);
+		}
+		domainsDetail = {domainName: 'Domain 1', papers:object, id: '1'};
+		var domain = new DomainModel(domainsDetail);
+		domain.save(function(err){
+			if(err) console.log(err);
+			else console.log('saved');
+		});
+	});
+	
 	// for(var i=0; i<50; i++){
 	// 	var paperDetail = {paperId:(i).toString(), title:"Paper "+(i).toString(), authors:["Apoorv Khairnar", "Pushkar Ladhe"], date:Date.now()};
 	// 	var paper = new PaperModel(paperDetail);
