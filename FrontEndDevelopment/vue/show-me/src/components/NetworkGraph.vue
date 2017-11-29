@@ -13,15 +13,15 @@
             </button>
             <br/>-->
             <div style="height:100%; width:inherit;">
-                        <!--<table id ="legend" class="table table-condensed" style="height:100%;">
+                       <table id ="legend" class="table table-condensed" style="height:100%;">
                             <thead><tr><th>Paper Id</th><th>Paper Name</th></tr></thead>
                             <tbody>
                             <tr v-if="graphLegendElements && graphLegendElements.length" v-for="graphElement in graphLegendElements">
                                 <td class="small">{{ graphElement.id }}</td><td class="small">{{ graphElement.name }}</td>
                             </tr>
                             </tbody>       
-                        </table>-->
-                        <div class="legendTable" style="height:100%; width:inherit;">
+                        </table>
+                       <!-- <div class="legendTable" style="height:100%; width:inherit;">
                              <div class="tblHead" style="width:inherit;">
                                  <div class="tblRow" style="width:inherit;">
                                     <div class="divCell">Paper Id </div>
@@ -42,7 +42,7 @@
                                             <div class="divCell">Paper 3</div>
                                    </div>   
                               </div>    
-                         </div>
+                         </div> -->
             </div>
          </div> 
          </div>
