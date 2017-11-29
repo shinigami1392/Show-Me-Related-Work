@@ -206,24 +206,79 @@ exports.removeDownvotes = function(relationId, userId, res){
 
 exports.getGraph = function(paperId, res){
 	var response = {};
-	getGraphNode(paperId);
-	console.log("Res:" + resultSet);
+	var node = getGraphNode(paperId, res);
+	console.log("Res:" + node);
 }
 
-var getGraphNode = function(paperId){
+var getGraphNode = function(paperId, res){
 	var driver = GraphNodeModel.getDriver();
 	var session = driver.session();
 	var resultPromise = session.run('MATCH (p:ResearchPaper {Id:"'+paperId+'"}) return p');
-	resultSet = [];
+	resultSet = {};
+	resultSet['incoming_relations'] = [];
+	resultSet['outgoing_relations'] = [];
 	resultPromise.then(result => {
 		session.close();
 		//console.log('result.records.length');
 		for (var i = 0; i< result.records.length; i++){
-			//console.log(result.records[i].get(0));
-			resultSet.push(result.records[i].get(0));
+			console.log("id: "+result.records[i].get(0).properties.Id);
+			//resultSet.push(result.records[i].get(0));
+			resultSet['id'] = result.records[i].get(0).properties.Id;
+			console.log("name: "+result.records[i].get(0).properties.Title);
+			resultSet['name'] = result.records[i].get(0).properties.Title;
+			console.log("author: "+result.records[i].get(0).properties.Author);
+			resultSet['author'] = result.records[i].get(0).properties.Author;
+			console.log("url: "+result.records[i].get(0).properties.Link);
+			resultSet['url'] = result.records[i].get(0).properties.Link;
+			console.log("Year: ");
+			resultSet['year'] = "";
 		}
+
 		driver.close();
+		driver = GraphNodeModel.getDriver();
+		session = driver.session();
+		console.log("result Set: "+ JSON.stringify(resultSet));
+		//MATCH p=(p1:ResearchPaper)-[r:HAS_REFERRED]->(p2:ResearchPaper) where p1.Id="1" RETURN r
+		//var resultPromise1 = session.run('MATCH (p:ResearchPaper {Id:"'+paperId+'"}) return p');
+		var resultPromise1 = session.run('MATCH p=(p1:ResearchPaper)-[r:HAS_REFERRED]->(p2:ResearchPaper) where p1.Id="'+ paperId + '"RETURN r, p2');
+		resultPromise1.then(result1 => {
+			session.close();
+			//console.log('result.records.length');
+			for (var i = 0; i< result1.records.length; i++){
+				var data ={};
+				// console.log("nodes: "+result1.records[i].get(0).properties);
+				data['id'] = result1.records[i].get(0).properties.relId;
+				data['source_name'] = result1.records[i].get(1).properties.Title;
+				data['source_id'] = result1.records[i].get(1).properties.Id;
+				data['weight'] = result1.records[i].get(0).properties.upvotes - result1.records[i].get(0).properties.downvotes;
+				resultSet['incoming_relations'].push(data);
+				//resultSet.push(result.records[i].get(0));
+			}
+
+			driver.close();
+			driver = GraphNodeModel.getDriver();
+			session = driver.session();
+			//var resultPromise2 = session.run('MATCH (p:ResearchPaper {Id:"'+paperId+'"}) return p');
+			var resultPromise2 = session.run('MATCH p=(p1:ResearchPaper)<-[r:HAS_REFERRED]-(p2:ResearchPaper) where p1.Id="'+ paperId + '"RETURN r, p2');
+		//var resultPromise1 = session1.run('MATCH p=(p1:ResearchPaper)-[r:HAS_REFERRED]->(p2:ResearchPaper) where p1.Id="'+ paperId + '"RETURN r');
+			resultPromise2.then(result2 => {
+				session.close();
+				var objects = [];
+				//console.log('result.records.length');
+				for (var i = 0; i< result2.records.length; i++){
+					var data ={};
+				// console.log("nodes: "+result1.records[i].get(0).properties);
+				data['id'] = result1.records[i].get(0).properties.relId;
+				data['source_name'] = result1.records[i].get(1).properties.Title;
+				data['source_id'] = result1.records[i].get(1).properties.Id;
+				data['weight'] = result1.records[i].get(0).properties.upvotes - result1.records[i].get(0).properties.downvotes;
+				resultSet['incoming_relations'].push(data);
+				}
+				driver.close();
+				res.send(resultSet);
+			});
+		});
+		
 	});
-	//return resultSet;
 }
 

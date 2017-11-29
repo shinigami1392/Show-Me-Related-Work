@@ -1,4 +1,4 @@
-var async = require('async');
+//var async = require('async');
 
 var config = require('../config.json');
 var graphNodeModel = require('./graphNode.js');
