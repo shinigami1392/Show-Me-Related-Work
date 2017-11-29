@@ -1,19 +1,21 @@
-	var mongoose = require('mongoose');
+var mongoose = require('mongoose');
 var PaperModel = require('./papers.js');
 var UserModel = require('./users.js');
 var Schema = mongoose.Schema;
 
 var commentsSchema = new Schema({
-	comment : {type: String, required:true},
-	commentBy : {type: Schema.ObjectId, ref:'UserModel'}
+	id: {type:String, required:true},
+	timestamp : {type: String, required:true},
+	text: {type: String, required:true},
+	user : {type: Schema.ObjectId, ref:'UserModel'}
 });
 
 var CommentModel = mongoose.model('CommentModel', commentsSchema);
 
 var relationsSchema = new Schema({
 	relationId: {type: String, required:true},
-	relationFrom : {type: Schema.ObjectId, ref:'PaperModel'},
-	relationTo : {type: Schema.ObjectId, ref:'PaperModel'},
+	relationFrom : {type: Schema.Types.ObjectId, ref:'PaperModel'},
+	relationTo : {type: Schema.Types.ObjectId, ref:'PaperModel'},
 	upvotes : [{type: Schema.ObjectId, ref:'UserModel'}],
 	downvotes : [{type: Schema.ObjectId, ref:'UserModel'}],
 	comments : [{type: Schema.ObjectId, ref:'CommentModel'}]

@@ -25,6 +25,25 @@ var getRandom = function(max){
 
 exports.createModels = function(){
 	connectToMongo();
+	
+		// console.log(data[i][0], data[i][1], data[i][2]);
+		// PaperModel.find({'paperId':'1'}).exec(function(err, from){
+		// 	if(err) console.log(err);
+		// 	if(!err){
+		// 	PaperModel.find({'paperId':'3'}).exec(function(err, to){
+		// 		if(!err){
+		// 		console.log(from[0].title);
+		// 		console.log(to[0].title);
+		// 		var some = new RelationModel({relationId: "2", relationFrom: from[0], relationTo:to[0], upvotes:[], downvotes:[], comments:[]});
+		// 		some.save(function(err){
+		// 			if(err) console.log('Err', err);
+		// 			else console.log('saved successfully');	
+		// 		})
+		// 	}
+		// 	});
+		// }
+		// });
+	
 	// var papers = [];
 	// PaperModel.find().select('_id').exec(function(err, domains){
 	// 	console.log(domains);
@@ -64,10 +83,10 @@ exports.createModels = function(){
 	// });
 	// DomainModel.find().populate({path:'papers', select:'title'}).exec(function(err, papers){console.log(JSON.stringify(papers))});
 	// for(var i = 0; i<1000; i++){
-	// 	var to = getRandom(50);
-	// 	var from = getRandom(50);
+	// 	var to = getRandom(40);
+	// 	var from = getRandom(40);
 	// 	while(to == from){
-	// 		from = getRandom(50);
+	// 		from = getRandom(40);
 	// 	}
 	// 	to = "Paper " + to.toString();
 	// 	from = "Paper " + from.toString();

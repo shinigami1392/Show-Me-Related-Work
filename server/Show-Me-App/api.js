@@ -71,21 +71,33 @@ exports.findRelationFromId = function(relationId, userId, res){
 
 	var query = RelationModel.findOne({relationId:relationId});
 	var userQuery = UserModel.findOne({userId: userId});
-
+	query.populate('relationFrom relationTo');
 	query.exec(function(err, relation){
-		if(err) sendInternalServerError(res);
+		if(err) sendInternalServerError(err, res);
 		else if(relation){
-			
 			userQuery.exec(function(err, user){
-				if(err) sendInternalServerError(res);
+				if(err) sendInternalServerError(err, res);
 				else if(user){
 					var result = {};
 					var object = {};
-					object['relationFrom'] = relation.relationFrom;
-					object['relationTo'] = relation.relationTo;
+					object['id'] = relation.relationId;
+					object['source_id'] = relation.relationFrom.paperId;
+					object['source_name'] = relation.relationFrom.title;
+					object['destination_id'] = relation.relationTo.paperId;
+					object['destination_name'] = relation.relationTo.title;
 					object['upvotes'] = relation.upvotes.length;
 					object['downvotes'] = relation.downvotes.length;
-					object['comments'] = relation.comments;					
+					object['comments'] = [];
+
+					for(var i=0; i<relation.comments.length; i++){
+						var obj = {};
+						obj['id'] = relation.comments[i].id;
+						obj['text'] = relation.comments[i].text;
+						obj['timestamp'] = relation.comments[i].timestamp;
+						obj['user_name'] = relation.comments[i].user.first_name + ' ' + relations.comments[i].user.last_name;
+						object['comments'].push(obj);
+					}
+									
 
 					result['relation'] = object;
 					result['upvotedByUser'] = false;
@@ -109,15 +121,15 @@ exports.addUpvotes = function(relationId, userId, res){
 	var userQuery = UserModel.findOne({userId: userId});
 
 	query.exec(function(err, relation){
-		if(err) sendInternalServerError(res);
+		if(err) sendInternalServerError(err, res);
 		else if(relation){
 			userQuery.exec(function(err, user){
-				if(err) sendInternalServerError(res);
+				if(err) sendInternalServerError(err, res);
 				else if(user){
 					if(relation.upvotes.indexOf(user._id) == -1)
 						relation.upvotes.push(user._id);
 					relation.save(function(err){
-						if(err) sendInternalServerError(res);
+						if(err) sendInternalServerError(err, res);
 						else res.send({'updated':true});
 					});
 				}
@@ -135,15 +147,15 @@ exports.removeUpvotes = function(relationId, userId, res){
 	var userQuery = UserModel.findOne({userId: userId});
 
 	query.exec(function(err, relation){
-		if(err) sendInternalServerError(res);
+		if(err) sendInternalServerError(err, res);
 		else if(relation){
 			userQuery.exec(function(err, user){
-				if(err) sendInternalServerError(res);
+				if(err) sendInternalServerError(err, res);
 				else if(user){
 					if(relation.upvotes.indexOf(user._id) != -1)
 						relation.upvotes.splice(relation.upvotes.indexOf(user._id),1);
 					relation.save(function(err){
-						if(err) sendInternalServerError(res);
+						if(err) sendInternalServerError(err, res);
 						else res.send({'updated':true});
 					});
 				}
@@ -161,15 +173,15 @@ exports.addDownvotes = function(relationId, userId, res){
 	var userQuery = UserModel.findOne({userId: userId});
 
 	query.exec(function(err, relation){
-		if(err) sendInternalServerError(res);
+		if(err) sendInternalServerError(err, res);
 		else if(relation){
 			userQuery.exec(function(err, user){
-				if(err) sendInternalServerError(res);
+				if(err) sendInternalServerError(err, res);
 				else if(user){
 					if(relation.upvotes.indexOf(user._id) == -1)
 						relation.downvotes.push(user._id);
 					relation.save(function(err){
-						if(err) sendInternalServerError(res);
+						if(err) sendInternalServerError(err, res);
 						else res.send({'updated':true});
 					});
 				}
@@ -187,15 +199,15 @@ exports.removeDownvotes = function(relationId, userId, res){
 	var userQuery = UserModel.findOne({userId: userId});
 
 	query.exec(function(err, relation){
-		if(err) sendInternalServerError(res);
+		if(err) sendInternalServerError(err, res);
 		else if(relation){
 			userQuery.exec(function(err, user){
-				if(err) sendInternalServerError(res);
+				if(err) sendInternalServerError(err, res);
 				else if(user){
 					if(relation.downvotes.indexOf(user._id) != -1)
 						relation.downvotes.splice(relation.downvotes.indexOf(user._id),1);
 					relation.save(function(err){
-						if(err) sendInternalServerError(res);
+						if(err) sendInternalServerError(err, res);
 						else res.send({'updated':true});
 					});
 				}
