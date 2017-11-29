@@ -9,10 +9,10 @@
     <div id="main">
             <div class="container-fluid" style="height:700px">
                 <div class="row content" style="height:60%;">
-                    <div class="col-md-3 mb-3">
+                    <div class="col-md-3" style="height:100%;">
                              <router-view name="area-box"></router-view>
                     </div>
-                    <div class="col-md-9 mb-3">
+                    <div class="col-md-9" style="height:100%;">
                             <transition name="slide" mode="out-in">
                                 <router-view name="animation-box"></router-view>   
                             </transition>
@@ -23,14 +23,14 @@
                     </div>
                 </div> 
                
-                <div class="row" style="height:20%; ">
-                        <div class="col-md-3 mb-3">
+                <div class="row" style="height:30%; margin-top:20px;">
+                        <div class="col-md-3" style="height:100%;">
                                 <transition name="slide" mode="out-in">
                                     <router-view name="info-box"></router-view>
                                     <router-view name="link-info-box"></router-view>
                                 </transition>
                         </div>
-                        <div class="col-md-9 mb-3">
+                        <div class="col-md-9" style="height:100%">
                             <!--<app-box v-bind:boxHeaderProp = "userFeedbackBoxHeader">
                             </app-box> -->
                             <transition name="slide" mode="out-in">

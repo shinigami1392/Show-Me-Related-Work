@@ -15,9 +15,9 @@
   </thead>
   <tbody>
    <tr v-for="paper in papers">
-        <td><router-link :to="{ name:'paperInfo', params:{ areaid:$route.params.areaid, paperid:paper.id }}">{{  paper.name }}</router-link></td>
-        <td>{{ paper.author }}</td>
-        <td>{{ paper.year }}</td>
+        <td><router-link :to="{ name:'paperInfo', params:{ areaid:$route.params.areaid, paperid:paper.id }}">{{  paper.title }}</router-link></td>
+        <td>{{ paper.authors }}</td>
+        <td>{{ paper.date }}</td>
         <td><a href='${paper.url}'>{{ paper.url }}</a></td>
         <td>{{ paper.no_of_citations }}</td>
     </tr>
@@ -35,9 +35,9 @@ import axios from "axios";
 function getPapersFromId(vm){
     let areaid = vm.$route.params.areaid
     axios
-    .get(`http://localhost:8000/`+areaid)
+    .get(`http://localhost:8081/domains/`+areaid)
     .then(response => {
-      vm.papers = response.data.categories;
+      vm.papers = response.data.papers;
     })
     .catch(err => {
       vm.errors.push(err);
@@ -55,40 +55,7 @@ export default {
       researchPaperAndRelationsBoxHeader: "Research Papers and References",
       areaid : this.$route.params.areaid,
       errors : [],
-      papers: [
-        {
-          id: 1,
-          name: "ABC",
-          author: ["abc", "def"],
-          year: 2001,
-          url: `http://abc.com`,
-          no_of_citations: 7
-        },
-        {
-          id: 2,
-          name: "xyz",
-          author: ["abc", "xyz"],
-          year: 4566,
-          url: `http://xyz.com`,
-          no_of_citations: 37
-        },
-        {
-          id: 3,
-          name: "xcv",
-          author: ["xcv", "def"],
-          year: 8547,
-          url: `http://xcv.com`,
-          no_of_citations: 76
-        },
-        {
-          id: 4,
-          name: "qwe",
-          author: ["abc", "qwe"],
-          year: 8665,
-          url: `http://qwe.com`,
-          no_of_citations: 137
-        }
-      ]
+      papers: []
     };
   },
 
@@ -103,7 +70,7 @@ export default {
 
   created(){
       //alert(this.$route.params.catId);
-      //getPapersFromId(this);
+      getPapersFromId(this);
   }
   
 };
