@@ -36,7 +36,7 @@ exports.findAllDomains = function(res){
 		else if(domains){
 			obj = [];
 			for(var i = 0; i < domains.length; i++){
-				var domain = {'name': domains[i].domainName, 'count': domains[i].papers.length};
+				var domain = {'id':domains[i].id ,'name': domains[i].domainName, 'count': domains[i].papers.length};
 				obj.push(domain);
 			}
 			res.send({'found':true, 'domains':obj});
@@ -45,8 +45,8 @@ exports.findAllDomains = function(res){
 	}); 
 }
 
-exports.findPapersforDomain = function(title, res){
-	var query = DomainModel.findOne({domainName:title});
+exports.findPapersforDomain = function(id, res){
+	var query = DomainModel.findOne({id:id});
 	query.populate('papers');
 	query.exec(function(err, domain){
 		if(err) sendInternalServerError(res);
