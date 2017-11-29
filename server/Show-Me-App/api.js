@@ -248,8 +248,8 @@ var getGraphNode = function(paperId, res){
 				var data ={};
 				// console.log("nodes: "+result1.records[i].get(0).properties);
 				data['id'] = result1.records[i].get(0).properties.relId;
-				data['source_name'] = result1.records[i].get(1).properties.Title;
-				data['source_id'] = result1.records[i].get(1).properties.Id;
+				data['destination_name'] = result1.records[i].get(1).properties.Title;
+				data['destination_id'] = result1.records[i].get(1).properties.Id;
 				data['weight'] = result1.records[i].get(0).properties.upvotes - result1.records[i].get(0).properties.downvotes;
 				resultSet['outgoing_relations'].push(data);
 				//resultSet.push(result.records[i].get(0));
