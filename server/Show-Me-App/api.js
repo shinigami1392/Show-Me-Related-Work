@@ -72,7 +72,8 @@ exports.findRelationFromId = function(relationId, userId, res){
 
 	var query = RelationModel.findOne({relationId:relationId});
 	var userQuery = UserModel.findOne({userId: userId});
-	query.populate('relationFrom relationTo comments');
+	query.populate('relationFrom relationTo');
+	query.populate('comments', 'text timestamp userName');
 	query.exec(function(err, relation){
 		if(err) sendInternalServerError(err, res);
 		else if(relation){
@@ -92,10 +93,9 @@ exports.findRelationFromId = function(relationId, userId, res){
 
 					for(var i=0; i<relation.comments.length; i++){
 						var obj = {};
-						obj['id'] = relation.comments[i].id;
 						obj['text'] = relation.comments[i].text;
 						obj['timestamp'] = relation.comments[i].timestamp;
-						obj['user_name'] = relation.comments[i].user.first_name + ' ' + relation.comments[i].user.last_name;
+						obj['user_name'] = relation.comments[i].userName;
 						object['comments'].push(obj);
 					}
 									
@@ -233,7 +233,7 @@ exports.addComments = function(relationId, text, userId, res){
 				if(err) sendInternalServerError(err, res);
 				else if(user){
 					//creating a new comment
-					var comment = new CommentModel({'user':user._id, 'text':text, 'timestamp':Date.now()});
+					var comment = new CommentModel({'user':user._id, 'text':text, 'timestamp':Date.now(), 'userName': user.name});
 					comment.save(function(err){
 						if(err) sendInternalServerError(err, res);
 						else{

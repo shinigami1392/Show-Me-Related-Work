@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 var commentsSchema = new Schema({
 	timestamp : {type: String, required:true},
 	text: {type: String, required:true},
+	userName: {type: String, required: true},
 	user : {type: Schema.ObjectId, ref:'UserModel'}
 });
 
