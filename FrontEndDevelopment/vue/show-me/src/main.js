@@ -47,12 +47,15 @@ function fetchPaperInfo (paperid) {
 
 }
 
-function fetchLinkInfo(){
-  return {"id":"e12","source_id":"p1","source_name":"paper 1","destination_id":"p2","destination_name":"paper 2","weight":32,"comments":[{"id":"cmt1","user_name":"lucifer","timestamp":"some time","text":"good relation, I am happy"}]}
-}
+
 
 
 var paperInfo = '';
+function setPaperInfoValue(value){
+  console.log("Inside Set Value: ")
+  paperInfo = value;
+}
+
 router.beforeEach(function(to, from, next) {
   console.log("Before Each 1");
   if(to.name === 'paperInfo'){
@@ -61,10 +64,11 @@ router.beforeEach(function(to, from, next) {
     axios
     .get(`http://localhost:8081/graphNode/graphNode/`+to.params.paperid)
     .then(response => {
-      console.log("API Call");
+      console.log("Paper API Call");
       console.log(JSON.stringify(response.data));
       paperInfo = response.data;
       to.matched[0].props.paperInfo = paperInfo;
+      setPaperInfoValue(paperInfo);
       next();
     })
     .catch(err => {
@@ -79,14 +83,58 @@ router.beforeEach(function(to, from, next) {
     //to.matched[0].props.paperInfo = paperInfo;
   }
   else if(to.name === 'linkInfo'){
-      if(paperInfo == ''){
-        paperInfo = fetchPaperInfo();
-        to.matched[0].props.paperInfo = paperInfo;
+      var fetchLinkInfo = function(){
+        axios
+        .get(`http://localhost:8081/relations/get?id=`+to.params.linkid+'&'+'user=user0')
+        .then(response => {
+          console.log("Link API Call");
+          to.matched[0].props.linkInfo = response.data;
+          console.log("Links")
+          console.log(response.data);
+          next();
+        })
+        .catch(err => {
+          console.log(err);
+          next();
+        });
       }
-      var linkInfo = fetchLinkInfo();
-      to.matched[0].props.linkInfo = linkInfo;
-      next();
-  }
+
+      if(paperInfo == ''){
+        console.log("PaperInfo Empty");
+        axios
+        .get(`http://localhost:8081/graphNode/graphNode/`+to.params.paperid)
+        .then(response => {
+          console.log("Paper API Call");
+          console.log(JSON.stringify(response.data));
+          paperInfo = response.data;
+          to.matched[0].props.paperInfo = paperInfo;
+          setPaperInfoValue(paperInfo);
+          fetchLinkInfo();
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      }
+      else{
+      console.log("Paper Not Empty");
+      to.matched[0].props.paperInfo = paperInfo;
+      fetchLinkInfo();
+      }
+     /* axios
+      .get(`http://localhost:8081/relations/get?id=`+to.params.linkid+'&'+'user=user0')
+      .then(response => {
+        console.log("Link API Call");
+        to.matched[0].props.linkInfo = response.data;
+        console.log("Links")
+        console.log(response.data);
+        next();
+      })
+      .catch(err => {
+        console.log(err);
+        next();
+      });*/
+    
+  } 
   else{
     next();
   }

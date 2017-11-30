@@ -7,15 +7,15 @@
     <tbody>
       <tr>
         <td>Source Paper</td>
-        <td>{{linkInfo.source_name}}</td>
+        <td>{{linkInfo.relation.source_name}}</td>
       </tr>
       <tr>
         <td>Destination Paper</td>
-        <td>{{linkInfo.destination_name}}</td>
+        <td>{{linkInfo.relation.destination_name}}</td>
       </tr>
       <tr>
         <td>Weight</td>
-        <td>{{linkInfo.weight}}</td>
+        <td>{{linkInfo.relation.upvotes}}</td>
       </tr>
     </tbody>
   </table>
@@ -47,9 +47,12 @@ export default {
         this.cardStyle = "height:100%;";
         this.cardBlockStyle = "height:80%;"
         this.cardBlockContentStyle = "height:100%; overflow-y:auto; overflow-x: hidden"
+        this.linkInfo = this.$route.matched[0].props.linkInfo;
     },
   mounted() {
-         this.linkInfo = this.$route.matched[0].props.linkInfo;
+        // this.linkInfo = this.$route.matched[0].props.linkInfo;
+         console.log("linkInfo Mounted");
+        // console.log(this.linkInfo.relation);
   }
 };
 </script>

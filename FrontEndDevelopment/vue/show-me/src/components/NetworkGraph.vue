@@ -184,6 +184,7 @@ export default {
             cy.getElementById(selectedNodeId).style( 'height', '40px' );
             cy.getElementById(selectedNodeId).style( 'width', '40px' );
             //cy.getElementById(selectedNodeId).style('cursor','pointer');
+            $('html,body').css('cursor', 'pointer');
          });
           cy.on('mouseout', 'node', function (evt) {
             var selectedNodeId = evt.target.id();
@@ -191,7 +192,17 @@ export default {
             cy.getElementById(selectedNodeId).style( 'height', '30px' );
             cy.getElementById(selectedNodeId).style( 'width', '30px' );
             //cy.getElementById(selectedNodeId).style('cursor','default');
+            $('html,body').css('cursor', 'default');
+
          });
+
+          cy.on('mouseover', 'edge', function (evt) {
+                $('html,body').css('cursor', 'pointer');
+          });
+
+          cy.on('mouseout', 'edge', function (evt) {
+                $('html,body').css('cursor', 'default');
+          });
 
           cy.on('tap', 'edge', function (evt) {
             var selectedEdgeId = evt.target.id();
