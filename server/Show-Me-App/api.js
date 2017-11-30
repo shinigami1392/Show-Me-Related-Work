@@ -2,6 +2,7 @@ var UserModel = require('./models/users.js');
 var PaperModel = require('./models/papers.js');
 var DomainModel = require('./models/domains.js');
 var RelationModel = require('./models/relations.js');
+var CommentModel = require('./models/comments.js');
 var GraphNodeModel = require('./neo4jmodels/graphNode.js');
 var resultSet = [];
 
@@ -117,7 +118,7 @@ exports.addUpvotes = function(relationId, userId, res){
 	if(!relationId) invalidInput('Please enter relationId', res);
 	if(!userId) invalidInput('Please enter user', res);
 
-	var query = RelationModel.findOne({_id:relationId});
+	var query = RelationModel.findOne({relationId:relationId});
 	var userQuery = UserModel.findOne({userId: userId});
 
 	query.exec(function(err, relation){
@@ -143,7 +144,7 @@ exports.removeUpvotes = function(relationId, userId, res){
 	if(!relationId) invalidInput('Please enter relationId', res);
 	if(!userId) invalidInput('Please enter user', res);
 
-	var query = RelationModel.findOne({_id:relationId});
+	var query = RelationModel.findOne({relationId:relationId});
 	var userQuery = UserModel.findOne({userId: userId});
 
 	query.exec(function(err, relation){
@@ -169,7 +170,7 @@ exports.addDownvotes = function(relationId, userId, res){
 	if(!relationId) invalidInput('Please enter relationId', res);
 	if(!userId) invalidInput('Please enter user', res);
 
-	var query = RelationModel.findOne({_id:relationId});
+	var query = RelationModel.findOne({relationId:relationId});
 	var userQuery = UserModel.findOne({userId: userId});
 
 	query.exec(function(err, relation){
@@ -214,6 +215,41 @@ exports.removeDownvotes = function(relationId, userId, res){
 				else invalidInput('Invalid User', res);
 			});
 		}
+	});
+}
+
+exports.addComments = function(relationId, text, userId, res){
+	if(!relationId) invalidInput('Please enter relationId', res);
+	if(!text) invalidInput('Please enter text', res);
+	if(!userId) invalidInput('Please provide user', res);
+
+	var query = RelationModel.findOne({relationId:relationId});
+	var userQuery = UserModel.findOne({userId: userId});
+
+	query.exec(function(err, relation){
+		if(err) sendInternalServerError(err, res);
+		else if(relation){
+			userQuery.exec(function(err, user){
+				if(err) sendInternalServerError(err, res);
+				else if(user){
+					//creating a new comment
+					var comment = new CommentModel({'user':user._id, 'text':text, 'timestamp':Date.now()});
+					comment.save(function(err){
+						if(err) sendInternalServerError(err, res);
+						else{
+							relation.comments.push(comment._id);
+							relation.save(function(err){
+								if(err) sendInternalServerError(err, res);
+								else res.send({'added':true});
+							});		
+						}
+					})
+					
+				}
+				else invalidInput('Invalid User', res);
+			});
+		}
+		else invalidInput('Invalid Relation', res);
 	});
 }
 
@@ -295,4 +331,5 @@ var getGraphNode = function(paperId, res){
 		
 	});
 }
+
 

@@ -35,4 +35,11 @@ router.put('/downvote/remove', function(req, res, next){
 	apis.removeDownvotes(relationId, user, res);
 });
 
+router.put('/comment/add', function(req, res, next){
+	var relationId = req.query.relationId;
+	var text = req.query.text;
+	var user_name = req.query.user_name;
+	apis.addComments(relationId, text, user_name, res);
+});
+
 module.exports = router;

@@ -1,16 +1,8 @@
 var mongoose = require('mongoose');
 var PaperModel = require('./papers.js');
 var UserModel = require('./users.js');
+var CommentModel = require('./comments.js');
 var Schema = mongoose.Schema;
-
-var commentsSchema = new Schema({
-	id: {type:String, required:true},
-	timestamp : {type: String, required:true},
-	text: {type: String, required:true},
-	user : {type: Schema.ObjectId, ref:'UserModel'}
-});
-
-var CommentModel = mongoose.model('CommentModel', commentsSchema);
 
 var relationsSchema = new Schema({
 	relationId: {type: String, required:true},
