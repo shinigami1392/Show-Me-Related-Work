@@ -72,7 +72,7 @@ exports.findRelationFromId = function(relationId, userId, res){
 
 	var query = RelationModel.findOne({relationId:relationId});
 	var userQuery = UserModel.findOne({userId: userId});
-	query.populate('relationFrom relationTo');
+	query.populate('relationFrom relationTo comments');
 	query.exec(function(err, relation){
 		if(err) sendInternalServerError(err, res);
 		else if(relation){
@@ -95,7 +95,7 @@ exports.findRelationFromId = function(relationId, userId, res){
 						obj['id'] = relation.comments[i].id;
 						obj['text'] = relation.comments[i].text;
 						obj['timestamp'] = relation.comments[i].timestamp;
-						obj['user_name'] = relation.comments[i].user.first_name + ' ' + relations.comments[i].user.last_name;
+						obj['user_name'] = relation.comments[i].user.first_name + ' ' + relation.comments[i].user.last_name;
 						object['comments'].push(obj);
 					}
 									
