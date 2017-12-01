@@ -1,18 +1,12 @@
 <template>
-  <div>
-  <ul class="list-group" v-if="catagories && catagories.length">
-    <li v-for="catagory in catagories" class="list-group-item justify-content-between">
-      {{ catagory.name }}
-      <span class="badge badge-primary badge-pill">{{ catagory.count }}</span>
-    </li>
-  </ul>
-
-  <ul v-if="errors && errors.length">
-    <li v-for="error in errors">
-      {{error.message}}
-    </li>
-  </ul>
-  </div>
+  <app-box v-bind:boxHeaderProp="researchAreasBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
+    <ul class="list-group" v-if="categories && categories.length" style="height:100%; overflow-y:auto; overflow-x:hidden;">
+      <li v-for="category in categories" class="list-group-item">
+        <router-link :to="{ name:'allPapers',params:{areaid:category.id}}">{{ category.name }}</router-link>
+        <span class="badge badge-primary badge-pill">{{ category.count }}</span>
+      </li>
+    </ul>
+  </app-box>
 </template>
 
 <script>
@@ -20,9 +14,9 @@ import axios from "axios";
 
 function getPaperCatagories(vm) {
   axios
-    .get(`http://localhost:8000/`)
+    .get(`http://localhost:8081/domains/all`)
     .then(response => {
-      vm.catagories = response.data.categories;
+      vm.categories = response.data.domains;
     })
     .catch(err => {
       vm.errors.push(err);
@@ -32,15 +26,20 @@ function getPaperCatagories(vm) {
 export default {
   data() {
     return {
-      catagories: [],
+      researchAreasBoxHeader: "Research Areas",
+      categories: [],
       errors: []
     };
   },
 
-  methods: {},
+  methods: {
+  },
 
   created() {
     getPaperCatagories(this);
+    this.cardStyle = "height:100%";
+    this.cardBlockStyle = "height:90%;"
+    this.cardBlockContentStyle = "height:100%;"
   }
 };
 </script>
