@@ -13,9 +13,9 @@
     <tbody>
       <tr v-for="paper in limitBy(data,rowsPerPage,startRow)">
         <td><router-link :to="{ name:'paperInfo', params:{ areaid:$route.params.areaid, paperid:paper.id }}">{{  paper.title }}</router-link></td>
-        <td>{{ paper.authors }}</td>
+        <td>{{ (paper.authors).toString().slice(0,-1) }}</td>
         <td>{{ paper.date }}</td>
-        <td><a href='${paper.url}'>{{ paper.url }}</a></td>
+        <td><a :href=paper.url>{{ paper.url }}</a></td>
         <td>{{ paper.no_of_citations }}</td>
       </tr>
     </tbody>

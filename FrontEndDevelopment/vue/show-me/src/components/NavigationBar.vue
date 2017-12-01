@@ -1,21 +1,18 @@
 <template>
+  <div id="navigation" class="navbar navbar-default customNav">
 
-<div id="navigation" class="navbar navbar-default customNav">
+    <div class="navbar-header">
+      <!-- <a class="navbar-brand" href="#">SHOW ME</a>-->
+    </div>
 
-      <div class="navbar-header">
-         <!-- <a class="navbar-brand" href="#">SHOW ME</a>-->
-      </div>
-
-</div>  
-
-
+  </div>
 </template>
 
 <script>
 import axios from "axios";
 
-function sendLoginRequest() {}
-function sendLogoutRequest() {}
+function sendLoginRequest() { }
+function sendLogoutRequest() { }
 
 export default {
   data() {
@@ -35,7 +32,7 @@ export default {
 
 <style>
 .customNav {
-   background: -webkit-radial-gradient(circle, #fff, #fff);
+  background: -webkit-radial-gradient(circle, #fff, #fff);
   display: flex;
   align-items: center;
   justify-content: space-around;

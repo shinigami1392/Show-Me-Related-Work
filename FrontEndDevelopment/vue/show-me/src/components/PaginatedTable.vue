@@ -1,20 +1,18 @@
 <template>
-  <app-box v-bind:boxHeaderProp = "researchPapersBoxHeader"  v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
-    <span>Catagory id is : {{$route.params.areaid}}</span>
-    <grid :data="papers "  :move-pages="movePages" :start-row="startRow" :rows-per-page="rowsPerPage">
+  <app-box v-bind:boxHeaderProp="researchPapersBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
+    <grid :data="papers " :move-pages="movePages" :start-row="startRow" :rows-per-page="rowsPerPage">
     </grid>
   </app-box>
-
 </template>
 
 <script>
 
 import axios from "axios";
 
-function getPapersFromId(vm){
-    let areaid = vm.$route.params.areaid
-    axios
-    .get(`http://localhost:8081/domains/`+areaid)
+function getPapersFromId(vm) {
+  let areaid = vm.$route.params.areaid
+  axios
+    .get(`http://localhost:8081/domains/` + areaid)
     .then(response => {
       vm.papers = response.data.papers;
     })
@@ -27,13 +25,13 @@ function getPapersFromId(vm){
 
 export default {
   data() {
-    return {    
+    return {
       startRow: 0,
       rowsPerPage: 5,
       researchPapersBoxHeader: "Research Papers",
       papers: [],
-      cardStyle : "height:100%;",
-      cardBlockStyle : "height:90%;",
+      cardStyle: "height:100%;",
+      cardBlockStyle: "height:90%;",
       cardBlockContentStyle: "height:100%;"
     };
   },
@@ -43,7 +41,6 @@ export default {
   methods: {
     movePages: function(amount) {
       let newStartRow = this.startRow + amount * this.rowsPerPage;
-      console.log(newStartRow);
       if (newStartRow >= 0 && newStartRow < this.papers.length) {
         this.startRow = newStartRow;
       }
@@ -52,15 +49,13 @@ export default {
       this.startRow = 0;
     }
   },
-  created(){
-      //alert(this.$route.params.catId);
-      getPapersFromId(this);
+  created() {
+    getPapersFromId(this);
   },
-  watch:{
-      '$route'(to,from){
-        this.areaid = to.params.areaid;
-        //   alert(to.params.catId);
-      }
+  watch: {
+    '$route'(to, from) {
+      this.areaid = to.params.areaid;
+    }
   }
 };
 </script>

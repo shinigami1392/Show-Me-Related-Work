@@ -2,20 +2,11 @@
     <app-box v-bind:boxHeaderProp="feedbackBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
         <div style="width:100%; height:70%">
             <ul class="list-group" style="height:100%; overflow-y:auto;">
-                <!-- <li>Good<hr/></li> 
-                          <li>Teekh Hain<hr/></li>
-                          <li>Bahut Acha Hain<hr/></li>    
-                          <li>Good<hr/></li>
-                          <li>Teekh Hain<hr/></li>
-                          <li>Bahut Acha Hain<hr/></li> -->
                 <li v-for="comment in comments">
                    <span style="color:green; font-weight:bold;"> {{comment.user_name}}</span> <span style="color:grey;">[{{ getTimeStamp(comment.timestamp) }}]</span>: {{comment.text}} <hr />
                 </li>
             </ul>
         </div>
-        <!--<div style="width:100%; height:34%">
-                         <textarea class="form-control" type="text" rows="1" placeholder="Your comments" style="width:100%; height:100%;"/>
-                    </div> -->
         <div style="width:100%; height:30%">
             <div style="width:70%; height:100%; margin-right:25px;float:left;">
                 <textarea v-model="user_comment" class="form-control" type="text" rows="10" style="height:95%;" placeholder="Your comments" />
@@ -51,8 +42,6 @@ export default {
     mounted() {
         var linkInfo = this.$route.matched[0].props.linkInfo;
         this.comments = linkInfo.relation.comments;
-        console.log("Mounted Feedback");
-        console.log(linkInfo);
         this.weight = linkInfo.upvotes;
     },
     computed:{
@@ -80,18 +69,13 @@ export default {
             }   
         },
         addComment: function() {
-            console.log("User Comment");
-            console.log(this.user_comment);
             axios
                 .put(`http://localhost:8081/relations/comment/add?relationId=` + this.$route.params.linkid + `&text=` + this.user_comment + `&user_name=user0`)
                 .then(response => {
-                    console.log("Completed PUT request");
                     axios
                         .get(`http://localhost:8081/relations/get?id=` + this.$route.params.linkid + `&user=user0`)
                         .then(response => {
                              this.comments =  response.data.relation.comments;
-                             console.log("After updating comments");
-                             console.log(this.comments);
                              this.user_comment='';
                         })
                         .catch(err => {

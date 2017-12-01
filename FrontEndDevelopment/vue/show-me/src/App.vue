@@ -1,45 +1,45 @@
 <template>
   <div id="app">
-     <!-- Fixed navbar -->
+    <!-- Fixed navbar -->
     <div>
-        <app-navbar></app-navbar>
-    </div>    
+      <app-navbar></app-navbar>
+    </div>
 
-    <!--  Main -->        
+    <!--  Main -->
     <div id="main">
-            <div class="container-fluid" style="height:700px">
-                <div class="row content" style="height:60%;">
-                    <div class="col-md-3" style="height:100%;">
-                             <router-view name="area-box"></router-view>
-                    </div>
-                    <div class="col-md-9" style="height:100%;">
-                            <transition name="slide" mode="out-in">
-                                <router-view name="animation-box"></router-view>   
-                            </transition>
+      <div class="container-fluid" style="height:700px">
+        <div class="row content" style="height:60%;">
+          <div class="col-md-3" style="height:100%;">
+            <router-view name="area-box"></router-view>
+          </div>
+          <div class="col-md-9" style="height:100%;">
+            <transition name="slide" mode="out-in">
+              <router-view name="animation-box"></router-view>
+            </transition>
 
-                            <transition name="slide" mode="out-in">
-                                <router-view name="table-box" :key="$route.fullPath"></router-view>   
-                            </transition>
-                    </div>
-                </div> 
-               
-                <div class="row" style="height:30%; margin-top:20px;">
-                        <div class="col-md-3" style="height:100%;">
-                                <transition name="slide" mode="out-in">
-                                    <router-view name="info-box" :key="$route.fullPath"></router-view>
-                                    <router-view name="link-info-box" :key="$route.fullPath"></router-view>
-                                </transition>
-                        </div>
-                        <div class="col-md-9" style="height:100%">
-                            <!--<app-box v-bind:boxHeaderProp = "userFeedbackBoxHeader">
-                            </app-box> -->
-                            <transition name="slide" mode="out-in">
-                                    <router-view name="feedback-box" :key="$route.fullPath"></router-view>
-                            </transition>
-                        </div>
-                </div> 
-            </div>
-    </div>  
+            <transition name="slide" mode="out-in">
+              <router-view name="table-box" :key="$route.fullPath"></router-view>
+            </transition>
+          </div>
+        </div>
+
+        <div class="row" style="height:30%; margin-top:20px;">
+          <div class="col-md-3" style="height:100%;">
+            <transition name="slide" mode="out-in">
+              <router-view name="info-box" :key="$route.fullPath"></router-view>
+              <router-view name="link-info-box" :key="$route.fullPath"></router-view>
+            </transition>
+          </div>
+          <div class="col-md-9" style="height:100%">
+            <!--<app-box v-bind:boxHeaderProp = "userFeedbackBoxHeader">
+                              </app-box> -->
+            <transition name="slide" mode="out-in">
+              <router-view name="feedback-box" :key="$route.fullPath"></router-view>
+            </transition>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -61,7 +61,6 @@ export default {
 
 
 <style>
-
 .slide-leave-active {
   transition: opacity 0.2s ease;
   opacity: 0;
@@ -94,7 +93,4 @@ export default {
     transform: translateY(0);
   }
 }
-
-
-
 </style>
