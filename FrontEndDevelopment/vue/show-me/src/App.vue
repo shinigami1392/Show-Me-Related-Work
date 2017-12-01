@@ -34,7 +34,7 @@
                             <!--<app-box v-bind:boxHeaderProp = "userFeedbackBoxHeader">
                             </app-box> -->
                             <transition name="slide" mode="out-in">
-                                    <router-view name="feedback-box"></router-view>
+                                    <router-view name="feedback-box" :key="$route.fullPath"></router-view>
                             </transition>
                         </div>
                 </div> 
