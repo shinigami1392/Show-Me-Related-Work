@@ -1,0 +1,109 @@
+CREATE (Paper1:ResearchPaper {Title:'Consistency-based search in feature selection', Author:'Manoranjan Dash', Domain:'Machine Learning / AI' , Link:'http://www.sciencedirect.com/science/article/pii/S0004370203000791' })
+CREATE (Paper2:ResearchPaper {Title:'Learning boolean concepts in the presence of many irrelevant features', Author:'H Almuallim, T.G Dietterich', Domain:'Machine Learning / AI', Link:'https://www.lri.fr/~pierres/donn%E9es/save/these/articles/almuallim94learning.pdf'})
+CREATE (Paper3:ResearchPaper {Title:'A formalism for relevance and its application in feature subset selection', Author:'D.A Bell, H Wang', Domain:'Machine Learning / AI', Link:'https://link.springer.com/article/10.1023/A:1007612503587' })
+CREATE (Paper4:ResearchPaper {Title:'Pattern recognition and reduction of dimensionality', Author:'M Ben-Bassat', Domain:'Machine Learning / AI', Link:'' })
+CREATE (Paper5:ResearchPaper {Title:'Selection of relevant features and examples in machine learning', Author:'A.L Blum, P Langley', Domain:'Machine Learning / AI', Link:'http://www.sciencedirect.com/science/article/pii/S0004370297000635'})
+CREATE (Paper6:ResearchPaper {Title:'Exploiting Symmetry properties in the Evaluation of Inductive Learning Algorithms: An Impirical Domain Independent Comparative study', Author:'H. Allumallium', Domain:'Machine Learning / AI', Link:'https://dl.acm.org/citation.cfm?id=891015#comments' })
+CREATE (Paper7:ResearchPaper {Title:'Myths and legends in learning classification rules', Author:'H. Allumallium', Domain:'Machine Learning / AI', Link:'https://www.aaai.org/Papers/AAAI/1990/AAAI90-110.pdf' })
+CREATE (Paper8:ResearchPaper {Title:'Feature selection for case-based classification of cloud types', Author:'Aha, D. W. & Bankert, R. L', Domain:'Machine Learning / AI', Link:'https://pdfs.semanticscholar.org/5fd2/6306560f8011ad8fbea9e723a4f78c7af282.pdf' })
+CREATE (Paper9:ResearchPaper {Title:'Relevant examples & relevant features: thoughts from computational learning theory', Author:'Blum, A.', Domain:'Machine Learning / AI', Link:'http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.318.7279&rep=rep1&type=pdf' })
+CREATE (Paper10:ResearchPaper {Title:'A study of instance-based algorithms for supervised learning tasks: mathematical, empirical and psychological evaluations', Author:'D. Aha', Domain:'Machine Learning / AI', Link:'http://sci2s.ugr.es/keel/pdf/algorithm/articulo/aha1991.pdf' })
+CREATE (Paper11:ResearchPaper {Title:'Learning with many irrelevant features', Author:'H. Almuallim, T.G. Dietterich', Domain:'Machine Learning / AI', Link:'https://www.semanticscholar.org/paper/Learning-with-Many-Irrelevant-Features-Almuallim-Dietterich/7008bc0709341ae19d260dbeda6b65a4c4467ee1?tab=references' })
+CREATE (Paper12:ResearchPaper {Title:'Dynamic relevance: vision-based focus of attention using artificial neural networks', Author:'S. Baluja, D. Pomerleau', Domain:'Machine Learning / AI', Link:'http://www.sciencedirect.com/science/article/pii/S0004370297000659' })
+CREATE (Paper13:ResearchPaper {Title:'Using decision trees to improve case-based learning', Author:'C. Cardie', Domain:'Machine Learning / AI', Link:'https://pdfs.semanticscholar.org/32a8/6f4c74d69fc9dc7d43a6b561d39d6bfa8292.pdf' })
+CREATE (Paper14:ResearchPaper {Title:'Extending the Valint learning model', Author:'Amsterdam J.', Domain:'Machine Learning / AI', Link:'' })
+CREATE (Paper15:ResearchPaper {Title:'Queries and concept learning', Author:'Anguin D', Domain:'Machine Learning / AI', Link:'https://link.springer.com/article/10.1023/A:1022821128753' })
+CREATE (Paper16:ResearchPaper {Title:'Learning Quickly When Irrelevant Attributes Abound: A New Linear-Threshold Algorithm', Author:'Nick Littlestone', Domain:'Machine Learning / AI', Link:'https://www.semanticscholar.org/paper/Learning-Quickly-When-Irrelevant-Attributes-Abound-Littlestone/181eb47e7c2a03ec0262ffe8efbac4fbc3578300' })
+CREATE (Paper17:ResearchPaper {Title:'Induction of Decision Trees', Author:'J. Ross Quinlan', Domain:'Machine Learning / AI', Link:'https://www.semanticscholar.org/paper/Induction-of-Decision-Trees-Quinlan/6b17827b6e2563f10b53b8b37c95f5af5415c556' })
+CREATE (Paper18:ResearchPaper {Title:'Learnability and the Vapnik-Chervonenkis dimension', Author:'Anselm Blumer, Andrzej Ehrenfeucht, David Haussler, Manfred K.', Domain:'Machine Learning / AI', Link:'https://www.semanticscholar.org/paper/Learnability-and-the-Vapnik-Chervonenkis-dimension-Blumer-Ehrenfeucht/e0b8fa3496283d4d808fba9ff62d5f024bcf23be' })
+CREATE (Paper19:ResearchPaper {Title:'Learning Efficient Classification Procedures and Their Application to Chess End Games', Author:'Ross Quinlan', Domain:'Machine Learning / AI', Link:'https://www.researchgate.net/publication/288987576_Learning_Efficient_Classification_Procedures_and_Their_Application_to_Chess_End_Games' })
+CREATE (Paper20:ResearchPaper {Title:'Knowledge Acquisition Via Incremental Conceptual Clustering', Author:'Doug Fisher', Domain:'Machine Learning / AI', Link:'https://www.researchgate.net/publication/263242423_Knowledge_Acquisition_Via_Incremental_Conceptual_Clustering' })
+CREATE (Paper21:ResearchPaper {Title:'Acquiring a Noun Classification from Predicate-Argument Structures', Author:'D. Hindle', Domain:'Machine Learning / AI', Link:'https://www.researchgate.net/publication/239365777_Acquiring_a_Noun_Classification_from_Predicate-Argument_Structures' })
+CREATE (Paper22:ResearchPaper {Title:'Model directed learning of production rules', Author:'Buchanan B.G, Mitchell T.M', Domain:'Machine Learning / AI', Link:'https://dl.acm.org/citation.cfm?id=892134' })
+CREATE (Paper23:ResearchPaper {Title:'An overview of Machine Learning', Author:'Buchanan B.G, Mitchell T.M', Domain:'Machine Learning / AI', Link:'https://link.springer.com/chapter/10.1007/978-3-662-12405-5_1' })
+CREATE (Paper24:ResearchPaper {Title:'Structured induction of plans and programs', Author:'Detcher R., Michie D.', Domain:'Machine Learning / AI', Link:'https://books.google.com/books/about/Structured_Induction_of_Plans_and_Progra.html?id=TlHbSAAACAAJ' })
+CREATE (Paper25:ResearchPaper {Title:'Pattern Classification and Scene Analysis', Author:'Duda, R. O. and Hart, P. E', Domain:'Machine Learning / AI', Link:'http://www.svms.org/classification/DuHS95.pdf' })
+CREATE (Paper26:ResearchPaper {Title:'An Introduction to MCMC for Machine Learning', Author:'Christophe AndrieuNando de FreitasArnaud DoucetMichael I. Jordan', Domain:'Machine Learning / AI', Link:'https://link.springer.com/content/pdf/10.1023%2FA%3A1020281327116.pdf' })
+CREATE (Paper27:ResearchPaper {Title:'Bayesian Analysis of Binary and Polychotomous Response Data', Author:'Albert, J., &; Chib, S. ', Domain:'Machine Learning / AI', Link:'http://www.tandfonline.com/doi/citedby/10.1080/01621459.1993.10476321?scroll=top&needAccess=true' })
+CREATE (Paper28:ResearchPaper {Title:'Using the latent correlations to measure the association between continuous and binary markers with repeated measurements', Author:'Dai Feng, Vladimir Svetnik', Domain:'Machine Learning / AI', Link:'http://www.tandfonline.com/doi/abs/10.1080/19466315.2017.1379432' })
+CREATE (Paper29:ResearchPaper {Title:'Model selection with missing covariates for policy considerations in fox enclosures', Author:'Andrew Hoegh, Ian Crandell, Scott Klopfer, Mike Fies.', Domain:'Machine Learning / AI', Link:'http://www.tandfonline.com/doi/ref/10.1080/02664763.2016.1259401?scroll=top' })
+CREATE (Paper30:ResearchPaper {Title:'Joint Bayesian model selection and estimation of noisy sinusoids via reversible jump MCMC ', Author:'Andrieu, C., &; Doucet, A.', Domain:'Machine Learning / AI', Link:'http://ieeexplore.ieee.org/abstract/document/790649/' })
+CREATE (Paper31:ResearchPaper {Title:'Convergence of simulated annealing using Foster-Lyapunov criteria', Author:'Andrieu, C., Breyer, L. A., &; Doucet', Domain:'Machine Learning / AI', Link:'https://www.cambridge.org/core/journals/journal-of-applied-probability/article/convergence-of-simulated-annealing-using-foster-lyapunov-criteria/ADBAF08B97A49F40F6789939E190E5BE' })
+CREATE (Paper32:ResearchPaper {Title:'Robust Full Bayesian Methods for Neural Networks', Author:'Andrieu, C., de Freitas, N., &; Doucet, A.', Domain:'Machine Learning / AI', Link:'http://papers.nips.cc/paper/1741-robust-full-bayesian-methods-for-neural-networks.pdf' })
+CREATE (Paper33:ResearchPaper {Title:'Markov chains for exploring posterior distributions. ', Author:'Luke Tierney', Domain:'Machine Learning / AI', Link:'https://projecteuclid.org/download/pdf_1/euclid.aos/1176325750' })
+CREATE (Paper34:ResearchPaper {Title:'Bayesian computation and stochastic systems', Author:'Besag, J., Green, P.J., Hidgon, D. & Mengersen, K. ', Domain:'Machine Learning / AI', Link:'https://projecteuclid.org/download/pdf_1/euclid.ss/1177010123' })
+CREATE (Paper35:ResearchPaper {Title:'Sampling and integration of near log-concave functions', Author:'David Applegate, Ravi Kannan', Domain:'Machine Learning / AI', Link:'https://dl.acm.org/citation.cfm?id=103439' })
+CREATE (Paper36:ResearchPaper {Title:'A random polynomial-time algorithm for approximating the volume of convex bodies', Author:'Martin Dyer, Alan Frieze, Ravi Kannan', Domain:'Machine Learning / AI', Link:'https://dl.acm.org/citation.cfm?id=103439' })
+CREATE (Paper37:ResearchPaper {Title:'Approximating Aggregate Queries about Web Pages via Random Walks', Author:'Bar-Yossef, Z., Berg, A., Chien, S., Fakcharoenphol, J., &; Weitz, D.', Domain:'Machine Learning / AI', Link:'http://nike.psu.edu/classes/ist501/latest/ref/random-walk-vldb-2000.pdf' })
+CREATE (Paper38:ResearchPaper {Title:'On the Markov Chain Simulation Method for Uniform Combinatorial Distributions and Simulated Annealing', Author:'D. Aldous.', Domain:'Machine Learning / AI', Link:'https://www.cambridge.org/core/journals/probability-in-the-engineering-and-informational-sciences/article/on-the-markov-chain-simulation-method-for-uniform-combinatorial-distributions-and-simulated-annealing/AA38B1E35EC5787F11BA9F7A6833FF49' })
+CREATE (Paper39:ResearchPaper {Title:'A Chernoff Bound for Random Walks on Expander Graphs', Author:'David Gillman', Domain:'Machine Learning / AI', Link:'http://epubs.siam.org/doi/abs/10.1137/S0097539794268765?journalCode=smjcat' })
+CREATE (Paper40:ResearchPaper {Title:'Cherno?-Hoe?ding Bounds for Markov Chains: Generalized and Simpli?ed', Author:'Kai-min Chung, Henry Lam, Zhenming Liu, Michael Mitzenmacher ', Domain:'Machine Learning / AI', Link:'https://arxiv.org/pdf/1201.0559.pdf' })
+CREATE (Paper41:ResearchPaper {Title:'SOME INEQUALITIES FOR REVERSIBLE MARKOV CHAINS', Author:'D. J. Aldous', Domain:'Machine Learning / AI', Link:'http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.399.6143&rep=rep1&type=pdf' })
+CREATE (Paper42:ResearchPaper {Title:'Improving random walk estimation accuracy with uniform restart', Author:'K. Avrachenkov, B. Ribeiro, and D. Towsley', Domain:'Machine Learning / AI', Link:'https://hal.inria.fr/inria-00520350/document' })
+CREATE (Paper43:ResearchPaper {Title:'Eigenvalue bounds on convergence to stationarity for nonreversible markov chains, with an application to the exclusion process', Author:'A. Fill', Domain:'Machine Learning / AI', Link:'http://www2.stat.duke.edu/~scs/Courses/Stat376/Papers/ConvergeRates/FillNonReversible.pdf' })
+CREATE (Paper44:ResearchPaper {Title:'Measurement and genderspeci?c analysis of user publishing characteristics on myspace', Author:'Gauvin, W., Ribeiro, B., Liu, B., Towsley, D., Wang, J', Domain:'Machine Learning / AI', Link:'https://pdfs.semanticscholar.org/4f7b/7ef5b5945c7baaca8332052163825af52877.pdf' })
+CREATE (Paper45:ResearchPaper {Title:'Hybrid search schemes for unstructured peer-to-peer networks', Author:'Gkantsidis, C., Mihail, M', Domain:'Machine Learning / AI', Link:'https://www.cc.gatech.edu/~mihail/HybridSearch.pdf' })
+CREATE (Paper46:ResearchPaper {Title:'Random walks in peer-to-peer networks: algorithms and evaluation', Author:'Gkantsidis, C., Mihail, M., Saberi, A', Domain:'Machine Learning / AI', Link:'https://www.cc.gatech.edu/~mihail/rwp2p04.pdf' })
+CREATE (Paper47:ResearchPaper {Title:'A Maximal Coupling for Markov Chains ', Author:'David Griffeath ', Domain:'Machine Learning / AI', Link:'https://link.springer.com/article/10.1007/BF00539434' })
+CREATE (Paper48:ResearchPaper {Title:'Search and Replication in Unstructured Peer-to-Peer Networks', Author:'Qin Lv, Pei Cao, Edith Cohen, Kai Li, Scott Shenker',Domain:'Machine Learning / AI', Link:'https://www.cs.cornell.edu/people/egs/cs6460-spring10/squareroot.pdf' })
+CREATE (Paper49:ResearchPaper {Title:'Random Walks with Lookahead in Power Law Random Graphs ', Author:'Milena Mihail, Amin Saberi, Prasad Tetali ', Domain:'Machine Learning / AI', Link:'https://www.cc.gatech.edu/~mihail/lookahead.pdf' })
+CREATE (Paper50:ResearchPaper {Title:'An approximate max-?ow min-cut theorem for uniform multicommodity ?ow problem with applications to approximation algorithms', Author:'F. T. Leighton and S. Rao', Domain:'Machine Learning / AI', Link:'http://www.dtic.mil/dtic/tr/fulltext/u2/a211908.pdf' })
+
+
+CREATE
+
+(Paper1)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper2),
+(Paper1)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper3),
+(Paper8)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper3),
+(Paper1)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper4),
+(Paper2)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper6),
+(Paper2)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper7),
+(Paper10)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper7),
+(Paper3)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper8),
+(Paper3)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper9),
+(Paper5)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper10),
+(Paper5)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper11),
+(Paper5)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper12),
+(Paper5)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper13),
+(Paper6)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper14),
+(Paper7)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper15),
+(Paper10)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper16),
+(Paper10)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper17),
+(Paper10)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper18),
+(Paper12)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper19),
+(Paper12)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper20),
+(Paper12)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper21),
+(Paper16)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper22),
+(Paper16)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper23),
+(Paper16)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper24),
+(Paper23)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper25),
+(Paper23)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper26),
+(Paper26)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper27),
+(Paper29)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper27),
+(Paper27)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper28),
+(Paper27)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper29),
+(Paper26)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper30),
+(Paper26)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper31),
+(Paper26)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper32),
+(Paper32)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper33),
+(Paper32)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper34),
+(Paper26)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper35),
+(Paper35)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper36),
+(Paper26)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper37),
+(Paper37)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper38),
+(Paper46)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper38),
+(Paper37)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper39),
+(Paper37)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper40),
+(Paper37)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper41),
+(Paper37)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper42),
+(Paper37)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper43),
+(Paper42)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper44),
+(Paper42)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper45),
+(Paper42)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper46),
+(Paper45)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper46),
+(Paper43)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper47),
+(Paper45)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper48),
+(Paper45)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper49),
+(Paper45)-[:HAS_REFERRED {Upvotes:3,Comments:['Highly recommended']}]->(Paper50)
+
+;
