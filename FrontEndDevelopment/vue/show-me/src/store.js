@@ -19,7 +19,12 @@ export const store = new Vuex.Store({
         ]
     },
     getters:{
-
+        userGetter: state => {
+            return state.users;
+        },
+        commentGetter: state => {
+            return state.comments;
+        }
     },
     mutations:{
 
