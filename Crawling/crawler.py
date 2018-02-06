@@ -46,8 +46,6 @@ class MyCrawler:
 		else:
 			r = requests.get(url, headers=headers)
 
-
-		# print r.status_code
 		content = r.content
 		if isJson:
 			content = json.loads(r.content)
@@ -65,12 +63,15 @@ class MyCrawler:
 
 	def extractPapers(self, content):
 		papers = content['records']
+		i = 0
 		for record in papers:
 			if record['articleNumber'] in self.PAPERS:
 				continue
 			else:
 				self.PAPERS.append(record['articleNumber'])
-			break
+			i += 1
+			# if i == 4:
+			# 	break
 
 	def getReferences(self, paperId):
 		url = self.rURL + paperId + '/references'
@@ -102,17 +103,39 @@ class MyCrawler:
 		return r
 
 
-	def extractPaperInfo(self):
+	def checkReferences(self, content, stream):
+		stream = stream.lower()
+
+		try:
+			keywords = content['keywords']
+
+			for keyword in keywords:
+				kwds = keyword['kwd']
+				
+				for kwd in kwds:
+					kwd = kwd.lower()
+					if kwd == stream:
+						return True
+		except:
+			pass
+		return False
+
+
+	def extractPaperInfo(self, stream):
 		i = 0
 
 		while i <  len(self.PAPERS):
-			print i
 			paperId = self.PAPERS[i]
+			print i, paperId
 			i += 1
 
 			url = 'http://ieeexplore.ieee.org/document/' + paperId + '/'
 			content = self.call(url, self.paperHeaders)
 			content = self.fetchDocumentContent(content)
+
+			#getting references
+			if not self.checkReferences(content, stream):
+				continue
 
 			try:
 				paperObject = {}
@@ -131,27 +154,25 @@ class MyCrawler:
 				
 				#getting references
 				paperObject['references'] = self.getReferences(paperObject['id'])
-				# print paperObject
+				
 				self.OBJECTS.append(paperObject)
 
 			except:
 				pass
 			
-		print i
 		print len(self.PAPERS)
 		print len(self.OBJECTS)
 
 		with open('response.json', 'wb') as p:
 			json.dump(self.OBJECTS, p)
-		# f.close()
 
 	def crawlStreams(self):
 		for stream in self.STREAMS:
 			for i in xrange(1, 10):
 				content = self.formURL(stream, i)
 				self.extractPapers(content)
+				self.extractPaperInfo(stream)
 				break
-			self.extractPaperInfo()
 
 def main():
 	print 'Hello World'
