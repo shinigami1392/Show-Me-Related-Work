@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+from mongoConnection import mongoClient
 import subprocess
 import json
 import subprocess
@@ -10,6 +11,7 @@ class MyCrawler:
 		self.STREAMS = ['Mechanical Engineering']
 		self.PAPERS = []
 		self.OBJECTS = []
+		self.databaseClient = mongoClient()
 		self.mURL = 'http://ieeexplore.ieee.org/rest/search'
 		self.rURL = 'http://ieeexplore.ieee.org/rest/document/'
 		self.paperHeaders = {
@@ -70,8 +72,8 @@ class MyCrawler:
 			else:
 				self.PAPERS.append(record['articleNumber'])
 			i += 1
-			# if i == 4:
-			# 	break
+			if i == 4:
+				break
 
 	def getReferences(self, paperId):
 		url = self.rURL + paperId + '/references'
@@ -106,6 +108,12 @@ class MyCrawler:
 	def checkReferences(self, content, stream):
 		stream = stream.lower()
 
+		#finding the title
+		title = self.decodeString(content['title']).lower()
+		if stream in title:
+			return True
+
+		#finding stream in keywords
 		try:
 			keywords = content['keywords']
 
@@ -123,7 +131,7 @@ class MyCrawler:
 
 	def extractPaperInfo(self, stream):
 		i = 0
-
+		paperCount = 0
 		while i <  len(self.PAPERS):
 			paperId = self.PAPERS[i]
 			print i, paperId
@@ -136,7 +144,6 @@ class MyCrawler:
 			#getting references
 			if not self.checkReferences(content, stream):
 				continue
-
 			try:
 				paperObject = {}
 				paperObject['id'] = content['articleNumber']
@@ -145,6 +152,7 @@ class MyCrawler:
 				paperObject['publicationTitle'] = content['publicationTitle']
 				paperObject['abstract'] = self.decodeString(content['abstract'])
 				paperObject['publicationYear'] = content['publicationYear']
+				paperObject['stream'] = stream
 				paperObject['link'] = 'http://ieeexplore.ieee.org/document/' + paperObject['id'] + '/'
 
 				#getting authors
@@ -154,17 +162,19 @@ class MyCrawler:
 				
 				#getting references
 				paperObject['references'] = self.getReferences(paperObject['id'])
+				paperCount += 1
 				
 				self.OBJECTS.append(paperObject)
 
-			except:
-				pass
-			
-		print len(self.PAPERS)
-		print len(self.OBJECTS)
+				if len(self.OBJECTS) == 10:
+					self.databaseClient.savePapers(self.OBJECTS)
+					self.OBJECTS = []
 
-		with open('response.json', 'wb') as p:
-			json.dump(self.OBJECTS, p)
+			except Exception as e:
+				print e.message
+			
+		if len(self.OBJECTS):
+			self.databaseClient.savePapers(self.OBJECTS)
 
 	def crawlStreams(self):
 		for stream in self.STREAMS:
@@ -177,6 +187,12 @@ class MyCrawler:
 def main():
 	print 'Hello World'
 	myCrawlObject = MyCrawler()
+	try:
+		myCrawlObject.databaseClient.createMongoClient()
+		myCrawlObject.crawlStreams()
+	except Exception as e:
+		print 'Error connecting to database', e.message
+
 	# content = myCrawlObject.call('http://ieeexplore.ieee.org/document/4321572/', self.paperHeaders)
 	# print type(content)
 	# from bs4 import BeautifulSoup
@@ -187,7 +203,6 @@ def main():
 	# # print j1
 	# r = json.loads(j1)
 	# print r['doi']
-	myCrawlObject.crawlStreams()
 
 
 if __name__ == '__main__':
