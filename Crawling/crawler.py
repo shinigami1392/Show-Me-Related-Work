@@ -143,6 +143,8 @@ class MyCrawler:
 
 			#getting references
 			if not self.checkReferences(content, stream):
+				self.PAPERS.remove(paperId)
+				i-=1
 				continue
 			try:
 				paperObject = {}
@@ -172,17 +174,24 @@ class MyCrawler:
 
 			except Exception as e:
 				print e.message
-			
+		
+		print len(self.OBJECTS), len(self.PAPERS)
 		if len(self.OBJECTS):
 			self.databaseClient.savePapers(self.OBJECTS)
 
 	def crawlStreams(self):
-		for stream in self.STREAMS:
+		for index, stream in enumerate(self.STREAMS):
 			for i in xrange(1, 10):
 				content = self.formURL(stream, i)
 				self.extractPapers(content)
 				self.extractPaperInfo(stream)
 				break
+			self.saveStream(index, stream)
+
+
+	def saveStream(self, index, stream):
+		streamObject = {'id':index, 'name':stream, 'papers':self.PAPERS}
+		self.databaseClient.saveDomain(streamObject)
 
 def main():
 	print 'Hello World'

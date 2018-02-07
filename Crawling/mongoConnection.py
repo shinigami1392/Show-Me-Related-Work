@@ -15,8 +15,10 @@ class mongoClient:
 		# print client
 		self.client = client
 
-	def addDomain(self, domain):
-		pass
+	def saveDomain(self, domain):
+		db = self.client[self.dbName]
+		result = db.domainmodels.insert_one(domain)
+
 
 	def savePapers(self, objects):
 		db = self.client[self.dbName]
