@@ -175,7 +175,6 @@ class MyCrawler:
 			except Exception as e:
 				print e.message
 		
-		print len(self.OBJECTS), len(self.PAPERS)
 		if len(self.OBJECTS):
 			self.databaseClient.savePapers(self.OBJECTS)
 
@@ -192,6 +191,7 @@ class MyCrawler:
 	def saveStream(self, index, stream):
 		streamObject = {'id':index, 'name':stream, 'papers':self.PAPERS}
 		self.databaseClient.saveDomain(streamObject)
+		self.PAPERS = []
 
 def main():
 	print 'Hello World'
