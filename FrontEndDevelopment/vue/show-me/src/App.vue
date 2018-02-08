@@ -2,7 +2,8 @@
   <div id="app">
     <!-- Fixed navbar -->
     <div>
-      <app-navbar></app-navbar>
+      <app-navbar>
+      </app-navbar>
     </div>
 
     <!--  Main -->
