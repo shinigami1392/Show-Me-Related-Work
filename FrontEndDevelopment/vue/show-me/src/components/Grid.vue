@@ -5,25 +5,21 @@
     <thead class="h6">
       <th>Name</th>
       <th>Authors</th>
-      <th>Year</th>
-      <th>URL</th>
-      <th>Citations</th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="paper in limitBy(data,rowsPerPage,startRow)">
         <td><router-link :to="{ name:'paperInfo', params:{ areaid:$route.params.areaid, paperid:paper.id }}">{{  paper.title }}</router-link></td>
         <td>{{ (paper.authors).toString().slice(0,-1) }}</td>
-        <td>{{ paper.date }}</td>
-        <td><a :href=paper.url>{{ paper.url }}</a></td>
-        <td>{{ paper.no_of_citations }}</td>
       </tr>
     </tbody>
   </table>
   </div>
   <div id="page-navigation">
     <button type="button" class="btn btn-outline-dark btn-sm" @click="movePages(-1)">Back</button>
-    <p>{{startRow / rowsPerPage + 1}} out of {{Math.ceil(data.length / rowsPerPage)}}</p>
+    <p id="paginator">
+      {{startRow / rowsPerPage + 1}} out of {{Math.ceil(data.length / rowsPerPage)}}
+    </p>
     <button type="button" class="btn btn-outline-dark btn-sm" @click="movePages(1)">Next</button>
   </div>
 </div>
@@ -57,6 +53,9 @@ export default {
     display: -webkit-flex; /* Safari */
     -webkit-align-items: center; /* Safari 7.0+ */
     align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
 }
 
 #page-navigation p {
@@ -64,5 +63,6 @@ export default {
   margin-left: 15px;
   margin-right: 15px;
 }
+
 
 </style>

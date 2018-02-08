@@ -23,7 +23,8 @@
 
 <style>
 .customBox{
-  background: -webkit-radial-gradient(circle, #fff, #CED0DE);
+  background: #343a40;
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: space-around;
