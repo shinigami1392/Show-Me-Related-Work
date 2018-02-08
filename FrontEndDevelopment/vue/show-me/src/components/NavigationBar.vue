@@ -5,10 +5,16 @@
         <button type="button" class="btn btn-default btn-sm">
           <span class="glyphicon glyphicon-home"></span> Login <i class="fab fa-github"></i>
         </button>
-        <button type="button" class="btn btn-default btn-sm">
-          <span class="glyphicon glyphicon-home"></span> Home <i class="fas fa-home"></i>
-        </button>
+        <a href="/">
+          <button type="button" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-home"></span> Home <i class="fas fa-home"></i>
+          </button>
+        </a>
       </div>
+    </div>
+    <div class="topnav" align="left">
+        <input type="text" placeholder="Search.." name="search">
+        <button type="submit"><i class="fa fa-search"></i></button>
     </div>
     <!--<div class="navbar-header">
       <a class="navbar-brand" href="#">SHOW ME</a>
@@ -47,6 +53,7 @@ export default {
   justify-content: space-around;
 }
 .header{
+      border-radius: 3px;
       width: 100%;
       height: 50px;
       background-color: #343a40;
@@ -61,6 +68,24 @@ export default {
 #login{
       padding-top: 10px;
       padding-right: 10px;
+      padding-left: 10px;
       text-align: right;
     }
+
+.topnav {
+  width: 100%;
+  padding-left: 3%;
+  float: left;
+  text-align: left;
+  padding-top: 5px;
+}
+
+
+
+.topnav input[type=text] {
+  font-size: 17px;
+  border: 1;
+  border-radius: 3px;
+}
+
 </style>
