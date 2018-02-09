@@ -40,6 +40,16 @@ def fetchData(page):
 		paperDoi = doi.a.get_text(strip=True)
 		print(paperDoi)
 		
+	for spandata in completeLink_soup.find_all('span', {"class": "title-text"}):
+		something = BeautifulSoup(str(spandata), "lxml")
+		paperTitle = something.span.get_text(strip=True)
+		print(paperTitle)
+	
+	for abstract in completeLink_soup.find_all('p', {"id": "d1e2432"}):
+		abstractData = BeautifulSoup(str(abstract), "lxml")
+		paperAbstract = abstractData.p.get_text(strip=True)
+		print(paperAbstract)
+	
 def main():
 	#Crawling document
 	page = crawl()
