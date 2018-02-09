@@ -1,0 +1,6 @@
+{
+	"mongoURL" : "mongodb://127.0.0.1/showMe",
+	"neo4jURL" : "bolt://localhost:7687",
+	"neo4jUsername" : "neo4j",
+	"neo4jPassword" : "neo4j123"
+}
