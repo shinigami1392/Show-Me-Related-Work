@@ -142,10 +142,10 @@ class MyCrawler:
 			content = self.fetchDocumentContent(content)
 
 			#getting references
-			if not self.checkReferences(content, stream):
-				self.PAPERS.remove(paperId)
-				i-=1
-				continue
+			# if not self.checkReferences(content, stream):
+			# 	self.PAPERS.remove(paperId)
+			# 	i-=1
+			# 	continue
 			try:
 				paperObject = {}
 				paperObject['id'] = content['articleNumber']
@@ -177,6 +177,7 @@ class MyCrawler:
 		
 		if len(self.OBJECTS):
 			self.databaseClient.savePapers(self.OBJECTS)
+			self.OBJECTS = []
 
 	def crawlStreams(self):
 		for index, stream in enumerate(self.STREAMS):
