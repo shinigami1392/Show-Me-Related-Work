@@ -24,10 +24,26 @@ def save(response):
 	with open('response.html', 'wb') as filename:
 		filename.write(response)
 
+def fetchData(page):
+	crawledData = []
+	completeLink = requests.get("https://www.sciencedirect.com" + links_list[0])
+	completeLink_data = completeLink.text
+
+	paperDoi = ""
+	paperTitle = ""
+	paperAbstract = ""
+
+	completeLink_soup = BeautifulSoup(completeLink_data, "lxml")
+
+	for spandata in completeLink_soup.find_all('a', {"class": "doi"}):
+		doi = BeautifulSoup(str(spandata), "lxml")
+		paperDoi = doi.a.get_text(strip=True)
+		print(paperDoi)
 		
 def main():
 	#Crawling document
 	page = crawl()
+	fetchData(page)
 	#saving the response into file
 	save(page)
 
