@@ -21,7 +21,7 @@ def crawl():
 	return page
 
 def save(response):
-	with open('response.html', 'wb') as filename:
+	with open('response.json', 'wb') as filename:
 		filename.write(response)
 
 def fetchData(page):
@@ -50,12 +50,14 @@ def fetchData(page):
 		paperAbstract = abstractData.p.get_text(strip=True)
 		print(paperAbstract)
 	
+	return {'doi':paperDoi, 'abstract':paperAbstract, 'title':paperTitle}
+	
 def main():
 	#Crawling document
 	page = crawl()
-	fetchData(page)
+	paperdata = fetchData(page)
 	#saving the response into file
-	save(page)
+	save(paperdata)
 
 
 if __name__ == '__main__':
