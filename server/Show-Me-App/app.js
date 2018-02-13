@@ -59,3 +59,7 @@ app.listen(8081);
 console.log('server listening on 8081');
 
 module.exports = app;
+
+exports.closeServer = function(){
+  server.close();
+};
