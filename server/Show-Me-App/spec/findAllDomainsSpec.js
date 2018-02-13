@@ -2,10 +2,10 @@ var request = require("request");
 var obj = require("../app.js")
 var url = "http://localhost:8081/domains/all"
 
-describe("Hello World Test", function(){
+describe("Find All Domains Test", function(){
     describe("GET /", function() {	  
 
-		it("returns Hello World", function(done) {
+		it("returns all domains data", function(done) {
 			request.get(url, function(error, response, body) {
 				//console.log(JSON.parse(body));
 				var parsed_body = JSON.parse(body);
