@@ -8,7 +8,7 @@ import requests
 class MyCrawler:
 	def __init__(self):
 		self.URL = "curl 'http://ieeexplore.ieee.org/rest/search' -H 'Host: ieeexplore.ieee.org' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:57.0) Gecko/20100101 Firefox/57.0' -H 'Accept: application/json, text/plain, */*' -H 'Accept-Language: en-US,en;q=0.5' --compressed -H 'Referer: http://ieeexplore.ieee.org/search/searchresult.jsp?newsearch=true&queryText=Mechanical%20Engineering' -H 'Content-Type: application/json;charset=utf-8' -H 'Cookie: WLSESSION=186802828.20480.0000; TS011813a0=012f350623c8c013ce6556768f9c89c407f8db32f8786967b3036418983e31b5af4bca05bc6186ccf8cbaaeca609b37719d1a291b5c1fa664cae4069cf1f86336bdca51a02e13b87e4754a55ba2864dcc1c482debb; JSESSIONID=9LxTgs_On01JY2sKffqSifM8MX--V8h5zGuF8llnp04lH4O2HdVP!-1925613294; ipCheck=129.219.8.220; ERIGHTS=OLrMFse41kmux2FFwpcvB15zX4yhE7sux2B4*ZUPWbox2BBxx0s5Mw1hmcilRAx3Dx3D-18x2dUkAzx2BQwRY0kVa0lgrsEC0Qx3Dx3DGsLICmpcsvFKicXlQXJVowx3Dx3D-gdpPDF74rjhVhbSezWo23Ax3Dx3D-hAF6CbSbyWBiTg9Gw04M9Ax3Dx3D; TS01d430e1=012f350623d0970c2b33ae816726a1e2bc789d18ca786967b3036418983e31b5af4bca05bc6186ccf8cbaaeca609b37719d1a291b5fe3762d84cd2f4cd830dc5e64bd8c01c736f6644caa015081b51eef2c85b7d8e08eb809a87c287648c9fcd088f33b568e1808f61745ce1ce0f6e086b351e5dca6936005072985d26860fd76136f6f696fd4daa6bb5b6d8683efc3baf76e952f1; visitstart=15:35; unicaID=kRGSliiGbxt-asboTcm; fp=8e414249fbfbee52c30cb6d0c5fbe37e; utag_main=v_id:01615382d856001dfb836744ddf301052002a00f00838$_sn:1$_ss:1$_st:1517526339479$ses_id:1517524539479%3Bexp-session$_pn:1%3Bexp-session$vapi_domain:ieee.org; s_fid=46998C7E5607A3B5-03789B92BDB36ACA; s_cc=true; ipList=129.219.8.220; TS01f64340=012f35062397e4ce56485137d940b240c2f2afa16b786967b3036418983e31b5af4bca05bc6186ccf8cbaaeca609b37719d1a291b5c1fa664cae4069cf1f86336bdca51a02925ba28d6123d03df64de1626174a1540d5bcc97d8a1ec437d8c87eb4b7d8c3d; cmTPSet=Y; CoreID6=27992855159615175245399&ci=52820000; 52820000_clogin=v=1&l=1517524539&e=1517526356230; __gads=ID=68e446c5a533cbad:T=1517524540:S=ALNI_MY28RR9o6C0Yqsl2TPKoir9xsoIgw; s_sq=ieeexplore.prod%3D%2526pid%253DXplore%252520Home%2526pidt%253D1%2526oid%253D%25250A%252509%252509%252509%252509%252509%252509%25250A%252509%252509%252509%252509%252509%2526oidt%253D3%2526ot%253DSUBMIT; seqId=4895' -H 'Connection: keep-alive' --data "
-		self.STREAMS = ['Mechanical Engineering']
+		self.STREAMS = ['Mechanical Engineering', 'Electrical Engineering', 'Electronics', 'Telecommunications', 'Civil Engineering', 'Computer Science']
 		self.PAPERS = []
 		self.OBJECTS = []
 		self.databaseClient = mongoClient()
@@ -70,10 +70,10 @@ class MyCrawler:
 			if record['articleNumber'] in self.PAPERS:
 				continue
 			else:
-				self.PAPERS.append(record['articleNumber'])
+				if len(self.PAPERS) < 20:
+					self.PAPERS.append(record['articleNumber'])
 			i += 1
-			if i == 4:
-				break
+
 
 	def getReferences(self, paperId):
 		url = self.rURL + paperId + '/references'
@@ -89,7 +89,8 @@ class MyCrawler:
 					if referenceId in self.PAPERS:
 						pass
 					else:
-						self.PAPERS.append(referenceId)
+						if len(self.PAPERS) < 20:
+							self.PAPERS.append(referenceId)
 				except:
 					pass
 		except:
@@ -132,6 +133,7 @@ class MyCrawler:
 	def extractPaperInfo(self, stream):
 		i = 0
 		paperCount = 0
+
 		while i <  len(self.PAPERS):
 			paperId = self.PAPERS[i]
 			print i, paperId
@@ -141,11 +143,6 @@ class MyCrawler:
 			content = self.call(url, self.paperHeaders)
 			content = self.fetchDocumentContent(content)
 
-			#getting references
-			# if not self.checkReferences(content, stream):
-			# 	self.PAPERS.remove(paperId)
-			# 	i-=1
-			# 	continue
 			try:
 				paperObject = {}
 				paperObject['id'] = content['articleNumber']
@@ -162,8 +159,12 @@ class MyCrawler:
 				for author in content['authors']:
 					paperObject['authors'].append(author['name'])
 				
-				#getting references
-				paperObject['references'] = self.getReferences(paperObject['id'])
+				references = self.getReferences(paperObject['id'])
+				referenceArray = {}
+				for reference in references:
+					refereneObject = {'id':reference, 'upvotes':[], 'downvotes':[], 'comments':[]}
+					referenceArray[reference] = refereneObject
+				paperObject['references'] = referenceArray
 				paperCount += 1
 				
 				self.OBJECTS.append(paperObject)
@@ -181,11 +182,11 @@ class MyCrawler:
 
 	def crawlStreams(self):
 		for index, stream in enumerate(self.STREAMS):
-			for i in xrange(1, 10):
+			for i in xrange(1, 2):
+				print 'Crawling papers for the stream: ' + stream
 				content = self.formURL(stream, i)
 				self.extractPapers(content)
-				self.extractPaperInfo(stream)
-				break
+			self.extractPaperInfo(stream)
 			self.saveStream(index, stream)
 
 
@@ -202,17 +203,6 @@ def main():
 		myCrawlObject.crawlStreams()
 	except Exception as e:
 		print 'Error connecting to database', e.message
-
-	# content = myCrawlObject.call('http://ieeexplore.ieee.org/document/4321572/', self.paperHeaders)
-	# print type(content)
-	# from bs4 import BeautifulSoup
-	# soup = BeautifulSoup(content, 'html.parser')
-	# data = soup.find_all('script')[27].string
-	# j1 = data.split('global.document.metadata=')[1].rsplit('};')[0]
-	# j1 += '}'
-	# # print j1
-	# r = json.loads(j1)
-	# print r['doi']
 
 
 if __name__ == '__main__':
