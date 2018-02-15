@@ -4,7 +4,7 @@
     <div class="card-header card-outline-info h6 customBox testBox">
         {{boxHeaderProp}}
     </div>
-  
+
     <div class="testBox">
         {{ boxHeader }}
     </div>
@@ -24,7 +24,7 @@
       
       data () {
         return {
-          boxHeader: 'This is a box component'
+          boxHeader: 'This is a box NOT component'
         }
       },
       props: ['boxHeaderProp', 'cardStyle','cardBlockStyle', 'cardBlockContentStyle']
