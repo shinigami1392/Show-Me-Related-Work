@@ -11,6 +11,7 @@ var users = require('./routes/users');
 var domains = require('./routes/domains');
 var relations = require('./routes/relations');
 var graphNode = require('./routes/graphNode');
+var search = require('./routes/search');
 
 var app = express();
 app.use(cors());
@@ -35,6 +36,7 @@ app.use('/users', users);
 app.use('/domains', domains);
 app.use('/relations', relations);
 app.use('/graphNode', graphNode);
+app.use('/search',search);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
