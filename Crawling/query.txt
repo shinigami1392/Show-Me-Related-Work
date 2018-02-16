@@ -1,0 +1,59 @@
+CREATE (Paper8248098:ResearchPaper {Title:'Simulation based manufacturing system improvement focusing on capacity and mrp decisions &#x2014; A practical case from mechanical engineering', Author: 'Andreas J. Peirleitner,Klaus Altendorfer,Thomas Felberbauer', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/8248098/'})
+CREATE (Paper7020066:ResearchPaper {Title:'Comparing the performance of two different customer order behaviors within the hierarchical production planning', Author: 'Thomas Felberbauer,Klaus Altendorfer', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/7020066/'})
+CREATE (Paper6465053:ResearchPaper {Title:'Using a scalable simulation model to evaluate the performance of production system segmentation in a combined MRP and kanban system', Author: 'Thomas Felberbauer,Klaus Altendorfer,Alexander H&#x00FC;bl', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/6465053/'})
+CREATE (Paper6147873:ResearchPaper {Title:'Flexible model for analyzing production systems with discrete event simulation', Author: 'Alexander H&#x00FC;bl,Klaus Altendorfer,Herbert Jodlbauer,Margaretha Gansterer,Richard F. Hartl', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/6147873/'})
+CREATE (Paper746008:ResearchPaper {Title:'Integrated Modeling and Analysis Generator Environment (IMAGE): a decision support tool', Author: 'D. Delen,P.C. Benjamin,M. Erraguntla', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/746008/'})
+CREATE (Paper977402:ResearchPaper {Title:'Database driven factory simulation: a proof-of-concept demonstrator', Author: 'L.G. Randell,G.S. Bolmsjo', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/977402/'})
+CREATE (Paper399838:ResearchPaper {Title:'Building simulation models without data', Author: 'W.J. Trybula', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/399838/'})
+CREATE (Paper731866:ResearchPaper {Title:'Design and development of a rapid data collection methodology', Author: 'K. Liyanage,T. Perera', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/731866/'})
+CREATE (Paper677036:ResearchPaper {Title:'Simulation as a decision-making tool for real-time control of flexible manufacturing systems', Author: 'J.S. Smith,B.A. Peters', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/677036/'})
+CREATE (Paper717475:ResearchPaper {Title:'Discrete event simulation for shop floor control', Author: 'J.S. Smith,R.A. Wysk,D.T. Sturrock,S.E. Ramaswamy,G.D. Smith,S.B. Joshi', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/717475/'})
+CREATE (Paper404723:ResearchPaper {Title:'Applying SEMI E10 guidelines to manufacturing', Author: 'W.J. Trybula,M. Pratt', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/404723/'})
+CREATE (Paper399839:ResearchPaper {Title:'Minimizing initialization bias in simulation output using a simple heuristic', Author: 'K.P. White,M.A. Minnox', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/399839/'})
+CREATE (Paper478862:ResearchPaper {Title:'Simulation as a planning and scheduling tool for flexible manufacturing systems', Author: 'G.R. Drake,J.S. Smith,B.A. Peters', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/478862/'})
+CREATE (Paper717225:ResearchPaper {Title:'Introduction to Arena', Author: 'M.J. Drevna,C.J. Kasales', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/717225/'})
+CREATE (Paper129582:ResearchPaper {Title:'Implementation issues using simulation for real-time scheduling, control, and monitoring', Author: 'C.M. Harmonosky', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/129582/'})
+CREATE (Paper718049:ResearchPaper {Title:'Introduction to Arena/sup TM/', Author: 'N. Collins,C.M. Watson', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/718049/'})
+CREATE (Paper717223:ResearchPaper {Title:'Introduction to SIMAN/Cinema', Author: 'D.M. Profozich,D.T. Sturrock', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/717223/'})
+CREATE (Paper718046:ResearchPaper {Title:'Introduction to Siman/cinema', Author: 'M.A. Glavach,D.T. Sturrock', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/718046/'})
+CREATE (Paper718025:ResearchPaper {Title:'Software for Simulation', Author: 'J. Banks', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/718025/'})
+CREATE (Paper185586:ResearchPaper {Title:'Selecting simulation software', Author: 'J. Banks', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/185586/'})
+CREATE (Paper185591:ResearchPaper {Title:'GPSS World: A brief preview', Author: 'S.W. Cox', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/185591/'})
+CREATE (Paper185594:ResearchPaper {Title:'NETWORK II.5, LANNET II.5 and COMNET II.5', Author: 'W.J. Garrison', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/185594/'})
+CREATE (Paper185595:ResearchPaper {Title:'Introduction to SIMFACTORY II.5', Author: 'J. Goble', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/185595/'})
+CREATE (Paper129510:ResearchPaper {Title:'A tutorial on WITNESS', Author: 'C. Murgiano', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/129510/'})
+CREATE (Paper129509:ResearchPaper {Title:'Modeling manufacturing systems using MANUPLAN and SIMSTARTER - A tutorial', Author: 'R. Suri,D. Derleth,M. Tomsicek', Domain: 'Mechanical',Link: 'http://ieeexplore.ieee.org/document/129509/'})
+
+
+CREATE
+(Paper8248098)-[:HAS_REFERRED]->(Paper7020066),
+(Paper8248098)-[:HAS_REFERRED]->(Paper6465053),
+(Paper7020066)-[:HAS_REFERRED]->(Paper6465053),
+(Paper6465053)-[:HAS_REFERRED]->(Paper6147873),
+(Paper6147873)-[:HAS_REFERRED]->(Paper746008),
+(Paper6147873)-[:HAS_REFERRED]->(Paper977402),
+(Paper6147873)-[:HAS_REFERRED]->(Paper399838),
+(Paper977402)-[:HAS_REFERRED]->(Paper746008),
+(Paper977402)-[:HAS_REFERRED]->(Paper731866),
+(Paper977402)-[:HAS_REFERRED]->(Paper677036),
+(Paper977402)-[:HAS_REFERRED]->(Paper717475),
+(Paper977402)-[:HAS_REFERRED]->(Paper399838),
+(Paper399838)-[:HAS_REFERRED]->(Paper404723),
+(Paper399838)-[:HAS_REFERRED]->(Paper399839),
+(Paper677036)-[:HAS_REFERRED]->(Paper478862),
+(Paper677036)-[:HAS_REFERRED]->(Paper717475),
+(Paper717475)-[:HAS_REFERRED]->(Paper717225),
+(Paper478862)-[:HAS_REFERRED]->(Paper129582),
+(Paper478862)-[:HAS_REFERRED]->(Paper717475),
+(Paper717225)-[:HAS_REFERRED]->(Paper718049),
+(Paper717225)-[:HAS_REFERRED]->(Paper717223),
+(Paper718049)-[:HAS_REFERRED]->(Paper718046),
+(Paper717223)-[:HAS_REFERRED]->(Paper718025),
+(Paper717223)-[:HAS_REFERRED]->(Paper717225),
+(Paper717223)-[:HAS_REFERRED]->(Paper717475),
+(Paper718046)-[:HAS_REFERRED]->(Paper185586),
+(Paper718025)-[:HAS_REFERRED]->(Paper185591),
+(Paper718025)-[:HAS_REFERRED]->(Paper185594),
+(Paper718025)-[:HAS_REFERRED]->(Paper185595),
+(Paper718025)-[:HAS_REFERRED]->(Paper129510),
+(Paper185586)-[:HAS_REFERRED]->(Paper129509);
