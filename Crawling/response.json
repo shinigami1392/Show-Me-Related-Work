@@ -1,0 +1,402 @@
+[
+	{
+		"publicationYear": "2017",
+		"doi": "10.1109/WSC.2017.8248098",
+		"title": "Simulation based manufacturing system improvement focusing on capacity and mrp decisions &#x2014; A practical case from mechanical engineering",
+		"abstract": "In this paper a practical case from an Austrian mechanical engineering company is presented. Simulation based manufacturing system improvement is applied to their component manufacturing plant. Based on the high number of items in the real case, a method for reduction of simulation model complexity applying item aggregation is developed in this paper. In the first improvement step, strategic capacity investment decisions are supported with the use of simulation. In the second step, a MRP planning parameter optimization is performed to improve service level and inventory. Additionally, the effect of capacity related decisions concerning setup time reduction and load-dependent outsourcing is evaluated. The results of this simulation study show that service level and inventory can be significantly improved by optimization of planning parameters and reduction of setup times. In addition, the study shows that load-dependent outsourcing is a viable alternative to capacity investment.",
+		"publicationTitle": "Simulation Conference (WSC), 2017 Winter",
+		"references": [
+			"7020066",
+			"6465053"
+		],
+		"authors": [
+			"Andreas J. Peirleitner",
+			"Klaus Altendorfer",
+			"Thomas Felberbauer"
+		],
+		"link": "http://ieeexplore.ieee.org/document/8248098/",
+		"id": "8248098"
+	},
+	{
+		"publicationYear": "2014",
+		"doi": "10.1109/WSC.2014.7020066",
+		"title": "Comparing the performance of two different customer order behaviors within the hierarchical production planning",
+		"abstract": "A hierarchical production planning structure enables manufacturing systems to handle customer disturbances with different measures on different planning levels. Two different kinds of customer order behavior can be observed and are as well discussed in literature. In the first, being forecast-evolution-behavior, customers provide a forecast quantity for a specific due date for a long horizon in advance and update their forecast quantities periodically. In the second, being customer-required-lead-time-behavior, customers demand stochastic order amounts with a customer-required-lead-time whereby the manufacturing company generates an aggregated forecast, e.g. for product groups. These required lead times are usually shorter than the forecast-evolution-horizon, but order quantities do not further change. For comparing the influence of both order behaviors on a hierarchical production planning system, a simulation study is performed in which logistic performance measures such as service-level, utilization, capacity-, inventory- and tardiness-costs are analyzed with respect to a normalized forecast quality measure.",
+		"publicationTitle": "Simulation Conference (WSC), 2014 Winter",
+		"references": [
+			"6465053"
+		],
+		"authors": [
+			"Thomas Felberbauer",
+			"Klaus Altendorfer"
+		],
+		"link": "http://ieeexplore.ieee.org/document/7020066/",
+		"id": "7020066"
+	},
+	{
+		"publicationYear": "2012",
+		"doi": "10.1109/WSC.2012.6465053",
+		"title": "Using a scalable simulation model to evaluate the performance of production system segmentation in a combined MRP and kanban system",
+		"abstract": "In this paper two different possible machine allocation policies are studied for a production system consisting of MRP and kanban controlled materials. Performance measures are inventory costs, backorder costs and service level. In policy one, the production system is segmented into one segment for MRP planned materials and one for kanban controlled materials. Policy two implements common machine groups for both kinds of materials. A scalable production planning simulation model is applied which is set up by parameterization of the respective database without any model implementation work. For high set-up times and low number of items, we find that whenever utilization of the production system is high, the production system segmentation policy is preferable. However, for medium and low utilization values common machine groups perform best in all scenarios. The scalable simulation model for different kinds of production systems contributes to further research in this field.",
+		"publicationTitle": "Simulation Conference (WSC), Proceedings of the 2012 Winter",
+		"references": [
+			"6147873"
+		],
+		"authors": [
+			"Thomas Felberbauer",
+			"Klaus Altendorfer",
+			"Alexander H&#x00FC;bl"
+		],
+		"link": "http://ieeexplore.ieee.org/document/6465053/",
+		"id": "6465053"
+	},
+	{
+		"publicationYear": "2011",
+		"doi": "10.1109/WSC.2011.6147873",
+		"title": "Flexible model for analyzing production systems with discrete event simulation",
+		"abstract": "This paper presents the structure of a flexible discrete event simulation model for analyzing production systems. Based on BOM and routing information a simulation model is generated to analyze a shop floor structure. Different modules are used for generating customer orders and production orders and handling the material flow until the customer is satisfied. The basic idea is that the modules are not connected directly together but the material flow is routed according the information defined in BOM and routing. The model can apply stochastic behavior for processing times, set up times, purchasing lead time, customer required lead time, customer required amount and segmentation from product group to final product. Conwip and MRPII including MPS are implemented as production planning and control methods. The simulation model can be used for analyzing complex production system structures to evaluate the logistical performance.",
+		"publicationTitle": "Simulation Conference (WSC), Proceedings of the 2011 Winter",
+		"references": [
+			"746008",
+			"977402",
+			"399838"
+		],
+		"authors": [
+			"Alexander H&#x00FC;bl",
+			"Klaus Altendorfer",
+			"Herbert Jodlbauer",
+			"Margaretha Gansterer",
+			"Richard F. Hartl"
+		],
+		"link": "http://ieeexplore.ieee.org/document/6147873/",
+		"id": "6147873"
+	},
+	{
+		"publicationYear": "1998",
+		"doi": "10.1109/WSC.1998.746008",
+		"title": "Integrated Modeling and Analysis Generator Environment (IMAGE): a decision support tool",
+		"abstract": "A truly integrated modeling and analysis environment, which facilitates multi-use and multi-tool models, is necessary for today's enterprises to meet the challenges of the competitive global marketplace. We present an ongoing research and software implementation effort that addresses these challenges by automatically generating simulation and optimization models using the multi-perspective information captured in an enterprise model set. We start by providing a detailed analysis of the major roadblocks to the broader use of enterprise modeling and analysis methods in industry today. We then define a solution methodology and our technical approach to addressing these roadblocks. A brief discussion of current activities and future research directions concludes the paper.",
+		"publicationTitle": "Simulation Conference Proceedings, 1998. Winter",
+		"references": [],
+		"authors": [
+			"D. Delen",
+			"P.C. Benjamin",
+			"M. Erraguntla"
+		],
+		"link": "http://ieeexplore.ieee.org/document/746008/",
+		"id": "746008"
+	},
+	{
+		"publicationYear": "2001",
+		"doi": "10.1109/WSC.2001.977402",
+		"title": "Database driven factory simulation: a proof-of-concept demonstrator",
+		"abstract": "The paper presents a database-based method to reduce the development time and project lead-time for large discrete-event simulation models of entire factories. The database used to automatically generate and drive the simulation model is a copy of the production planning database. A set of proof-of-concept tools and a database have been generated to verify the method and it has been shown that it is feasible to run a simulation using the production planning data as the only information source. The software developed is modular and designed to work in heterogeneous environments. The method is expected to reduce the modeling and maintenance effort considerably when modeling entire factories. The method will result in a holistic and fairly accurate assessment of performance measures for an entire factory.",
+		"publicationTitle": "Simulation Conference, 2001. Proceedings of the Winter",
+		"references": [
+			"746008",
+			"731866",
+			"677036",
+			"717475",
+			"399838"
+		],
+		"authors": [
+			"L.G. Randell",
+			"G.S. Bolmsjo"
+		],
+		"link": "http://ieeexplore.ieee.org/document/977402/",
+		"id": "977402"
+	},
+	{
+		"publicationYear": "1994",
+		"doi": "10.1109/ICSMC.1994.399838",
+		"title": "Building simulation models without data",
+		"abstract": "The development of simulation models is delayed when required data are unavailable. This paper presents an approach to developing fully functioning models without complete data. The final analysis of the model requires the acquisition of the data in most cases; however, the model development without data can shorten projects by an order of magnitude. A practical application of this approach is employed to demonstrate the concept.",
+		"publicationTitle": "Systems, Man, and Cybernetics, 1994. Humans, Information and Technology., 1994 IEEE International Conference on",
+		"references": [
+			"404723",
+			"399839"
+		],
+		"authors": [
+			"W.J. Trybula"
+		],
+		"link": "http://ieeexplore.ieee.org/document/399838/",
+		"id": "399838"
+	},
+	{
+		"publicationYear": "1998",
+		"doi": "10.1049/cp:19980654",
+		"title": "Design and development of a rapid data collection methodology",
+		"abstract": "This paper presents research work undertaken on input data modelling for the simulation of batch manufacturing systems. It describes the development of a data reference model using IDEFIX data modelling language and a step-by-step approach to identify and collect required data quickly. The purpose of this reference model is to describe the interaction between various data groups relating to items such as parts, resources and some aspects of system logic. This model has been developed and refined using data collected from real industrial situations. The model encapsulates the major entities (data groups) with their attributes and relationships. This model was then translated into a normalised relational database. Having developed the data model, a step-by-step approach was devised to support simulation practitioners. The reference model has been annotated with the sources of real data, so that practitioners could identify the most suitable source of data for their requirements.",
+		"publicationTitle": "Simulation '98. International Conference on (Conf. Publ. No. 457)",
+		"references": [],
+		"authors": [
+			"K. Liyanage",
+			"T. Perera"
+		],
+		"link": "http://ieeexplore.ieee.org/document/731866/",
+		"id": "731866"
+	},
+	{
+		"publicationYear": "1998",
+		"doi": "10.1109/ROBOT.1998.677036",
+		"title": "Simulation as a decision-making tool for real-time control of flexible manufacturing systems",
+		"abstract": "Describes the use of discrete event simulation as the decision-making component of a shop floor control system for flexible manufacturing systems (FMS). The control software is the critical component that determines the operational efficiency of an FMS and the decision-making component largely determines the overall flexibility of the system. A methodology for the development, maintenance, and operation of FMS based on this control system is presented and implementation experience in a full-scale FMS laboratory is provided.",
+		"publicationTitle": "Robotics and Automation, 1998. Proceedings. 1998 IEEE International Conference on",
+		"references": [
+			"478862",
+			"717475"
+		],
+		"authors": [
+			"J.S. Smith",
+			"B.A. Peters"
+		],
+		"link": "http://ieeexplore.ieee.org/document/677036/",
+		"id": "677036"
+	},
+	{
+		"publicationYear": "1994",
+		"doi": "10.1109/WSC.1994.717475",
+		"title": "Discrete event simulation for shop floor control",
+		"abstract": "The paper describes an application of discrete event simulation for shop floor control for a flexible manufacturing system. In this application, the simulation is used not only as an analysis and evaluation tool, but also as a \"task generator\" for the specification of shop floor control tasks. Using this approach, the effort applied to the development of the simulation is not duplicated in the development of the control system. Instead, the same control logic is used for the control system as was used for the simulation. Additionally, since the simulation implements the control, it provides very high fidelity performance predictions. Implementation experience in two flexible manufacturing laboratories is described. These implementations use a special feature of the Arena/SIMAN simulation language which allows Arena/SIMAN to interact directly with the shop floor control system through an interprocess communication mechanism. This feature is described in detail.",
+		"publicationTitle": "Simulation Conference Proceedings, 1994. Winter",
+		"references": [
+			"717225"
+		],
+		"authors": [
+			"J.S. Smith",
+			"R.A. Wysk",
+			"D.T. Sturrock",
+			"S.E. Ramaswamy",
+			"G.D. Smith",
+			"S.B. Joshi"
+		],
+		"link": "http://ieeexplore.ieee.org/document/717475/",
+		"id": "717475"
+	},
+	{
+		"publicationYear": "1994",
+		"doi": "10.1109/IEMT.1994.404723",
+		"title": "Applying SEMI E10 guidelines to manufacturing",
+		"abstract": "The semiconductor industry has been instrumental in developing a methodology for evaluating the application of information from equipment regarding its operating condition. The development of the SEMI E10 Guidelines provides a means for evaluating the operation of equipment. While the Guidelines were developed for the semiconductor industry, the E10 States can be applied to any phase of modeling. This paper reviews the definition of the various states and how the states can be used to better understand the equipment functions. This paper also presents a cohesive method of developing models that can be used to address various levels of details in the analysis effort.",
+		"publicationTitle": "Electronics Manufacturing Technology Symposium, 1994. Low-Cost Manufacturing Technologies for Tomorrow's Global Economy. Proceedings 1994 IEMT Symposium., Sixteenth IEEE/CPMT International",
+		"references": [],
+		"authors": [
+			"W.J. Trybula",
+			"M. Pratt"
+		],
+		"link": "http://ieeexplore.ieee.org/document/404723/",
+		"id": "404723"
+	},
+	{
+		"publicationYear": "1994",
+		"doi": "10.1109/ICSMC.1994.399839",
+		"title": "Minimizing initialization bias in simulation output using a simple heuristic",
+		"abstract": "We present a rule for determining the number of observations to delete from the beginning of an output sequence generated by a steady-state, discrete-event simulation. This rule is easy to implement and has strong intuitive appeal. Given a finite sequence with an arbitrary initial condition, the rule is also optimal, in the sense that it minimizes the width of the marginal confidence interval about the truncated sample mean. We illustrate the performance of the rule by applying it to output generated by multiple runs of four queueing simulations. Models and run conditions provide the test sequences for which truncation is contraindicated, test sequences exhibiting positive and negative initialization bias, and test sequences which are entirely transient. Results demonstrate that the rule is efficient, effective, and consistent with the conflicting objectives of mitigating initialization bias while preserving information.",
+		"publicationTitle": "Systems, Man, and Cybernetics, 1994. Humans, Information and Technology., 1994 IEEE International Conference on",
+		"references": [],
+		"authors": [
+			"K.P. White",
+			"M.A. Minnox"
+		],
+		"link": "http://ieeexplore.ieee.org/document/399839/",
+		"id": "399839"
+	},
+	{
+		"publicationYear": "1995",
+		"doi": "10.1109/WSC.1995.478862",
+		"title": "Simulation as a planning and scheduling tool for flexible manufacturing systems",
+		"abstract": "This paper describes a flexible simulation technique which facilitates automated experimentation of different scheduling rules. An enhanced version of Arena/SIMAN is used to develop an extremely high fidelity model of the manufacturing system. The decision making of an FMS is characterized and a framework for simulation-based scheduling and control is also introduced.",
+		"publicationTitle": "Simulation Conference Proceedings, 1995. Winter",
+		"references": [
+			"129582",
+			"717475"
+		],
+		"authors": [
+			"G.R. Drake",
+			"J.S. Smith",
+			"B.A. Peters"
+		],
+		"link": "http://ieeexplore.ieee.org/document/478862/",
+		"id": "478862"
+	},
+	{
+		"publicationYear": "1994",
+		"doi": "10.1109/WSC.1994.717225",
+		"title": "Introduction to Arena",
+		"abstract": "The paper presents an overview of Arena-an extendible modeling system that is built on SIMAN/Cinema. Arena provides a complete simulation environment that supports all basic steps in a simulation study. The Arena system includes integrated support for input data analysis, model building, interactive execution, animation, and output analysis. Arena is a graphical modeling/animation system that is based on concepts from object-oriented programming and hierarchical modeling. Arena allows the user to create new modeling modules from basic modeling primitives that consist of SIMAN blocks and elements. These modules can be tailored to a specific problem domain and placed into libraries called templates. These application-focused templates in areas such as transportation, business process reengineering, high speed manufacturing, health care and many more bring simulation technology much closer to a large class of potential users.",
+		"publicationTitle": "Simulation Conference Proceedings, 1994. Winter",
+		"references": [
+			"718049",
+			"717223"
+		],
+		"authors": [
+			"M.J. Drevna",
+			"C.J. Kasales"
+		],
+		"link": "http://ieeexplore.ieee.org/document/717225/",
+		"id": "717225"
+	},
+	{
+		"publicationYear": "1990",
+		"doi": "10.1109/WSC.1990.129582",
+		"title": "Implementation issues using simulation for real-time scheduling, control, and monitoring",
+		"abstract": "Some of the most significant implementation issues of using simulation for real-time scheduling and control decision-making in a computer-integrated manufacturing system are presented. The issues discussed include modeling structure, interfacing to the physical system, saving system status for evaluating alternatives, and recovery at decision points. The discussion is based on experience working with an existing discrete event simulation language applied as a real-time decision tool in a laboratory setting as well as on interchanges with other industrial experts working in this area.",
+		"publicationTitle": "Simulation Conference, 1990. Proceedings., Winter",
+		"references": [],
+		"authors": [
+			"C.M. Harmonosky"
+		],
+		"link": "http://ieeexplore.ieee.org/document/129582/",
+		"id": "129582"
+	},
+	{
+		"publicationYear": "1993",
+		"doi": "10.1109/WSC.1993.718049",
+		"title": "Introduction to Arena/sup TM/",
+		"abstract": "This paper presents an overview of Arena--an extendible modeling system that is built on SIMAN/Cinema. A key idea behind Arena is the concept of tailorability to a specific application domain through the use of a template.",
+		"publicationTitle": "Simulation Conference Proceedings, 1993. Winter",
+		"references": [
+			"718046"
+		],
+		"authors": [
+			"N. Collins",
+			"C.M. Watson"
+		],
+		"link": "http://ieeexplore.ieee.org/document/718049/",
+		"id": "718049"
+	},
+	{
+		"publicationYear": "1994",
+		"doi": "10.1109/WSC.1994.717223",
+		"title": "Introduction to SIMAN/Cinema",
+		"abstract": "SIMAN/Cinema V is a general-purpose simulation language and animation system designed to model discrete event, continuous, and combined discrete/continuous systems. The paper presents an overview of the SIMAN/Cinema V modeling capabilities and describes some of the recent enhancements to the software.",
+		"publicationTitle": "Simulation Conference Proceedings, 1994. Winter",
+		"references": [
+			"718025",
+			"717225",
+			"717475"
+		],
+		"authors": [
+			"D.M. Profozich",
+			"D.T. Sturrock"
+		],
+		"link": "http://ieeexplore.ieee.org/document/717223/",
+		"id": "717223"
+	},
+	{
+		"publicationYear": "1993",
+		"doi": "10.1109/WSC.1993.718046",
+		"title": "Introduction to Siman/cinema",
+		"abstract": "SIMAN/Cinema V is a general-purpose simulation language and animation system designed to model discrete event, continuous, and combined discrete/ continuous systems. This paper presents an overview of the SIMAN/Cincma V modeling capabilities and describes some of the recent enhancements to the software.",
+		"publicationTitle": "Simulation Conference Proceedings, 1993. Winter",
+		"references": [
+			"185586"
+		],
+		"authors": [
+			"M.A. Glavach",
+			"D.T. Sturrock"
+		],
+		"link": "http://ieeexplore.ieee.org/document/718046/",
+		"id": "718046"
+	},
+	{
+		"publicationYear": "1993",
+		"doi": "10.1109/WSC.1993.718025",
+		"title": "Software for Simulation",
+		"abstract": "This tutorial describes computer languages and other software packages that support discrete-event simulation.",
+		"publicationTitle": "Simulation Conference Proceedings, 1993. Winter",
+		"references": [
+			"185591",
+			"185594",
+			"185595",
+			"129510"
+		],
+		"authors": [
+			"J. Banks"
+		],
+		"link": "http://ieeexplore.ieee.org/document/718025/",
+		"id": "718025"
+	},
+	{
+		"publicationYear": "1991",
+		"doi": "10.1109/WSC.1991.185586",
+		"title": "Selecting simulation software",
+		"abstract": "It is noted that the selection of appropriate simulation software from the vast number of packages available is a difficult task. The author first presents a classification of simulation modeling tools. Then, a collection of features of simulation software is discussed. Next, guidance is provided for selecting a simulation modeling tool. Lastly, a technique to reduce the vast number of simulation modeling tools to a manageable few is described. The selection of simulation software depends on the problems to be solved as much as on the characteristics of the various modeling tools.",
+		"publicationTitle": "Simulation Conference, 1991. Proceedings., Winter",
+		"references": [
+			"129509"
+		],
+		"authors": [
+			"J. Banks"
+		],
+		"link": "http://ieeexplore.ieee.org/document/185586/",
+		"id": "185586"
+	},
+	{
+		"publicationYear": "1991",
+		"doi": "10.1109/WSC.1991.185591",
+		"title": "GPSS World: A brief preview",
+		"abstract": "GPSS (general purpose simulation system) World is a complete redesign and reimplementation of the popular GPSS/PC simulation environment. The limitations of the old PC DOS environment and the emerging trends in desktop computing have combined to motivate drastic changes which are planned for the new environment to be made available, beginning in 1992. The inclusion of windowing, virtual memory, animation and hierarchical modeling is discussed.",
+		"publicationTitle": "Simulation Conference, 1991. Proceedings., Winter",
+		"references": [],
+		"authors": [
+			"S.W. Cox"
+		],
+		"link": "http://ieeexplore.ieee.org/document/185591/",
+		"id": "185591"
+	},
+	{
+		"publicationYear": "1991",
+		"doi": "10.1109/WSC.1991.185594",
+		"title": "NETWORK II.5, LANNET II.5 and COMNET II.5",
+		"abstract": "A powerful modeling tool is presented which can dramatically reduce the amount of time it takes to simulate a computer system. The NETWORK II.5 worldview and the class of problems it addresses are discussed. A summary of NETWORK II.5 capabilities is presented. To tie the concepts together, an example of using NETWORK II.5 is included. Consideration is also given to LAN (local area network) simulation with LANNET II.5 and to communication network simulation with COMNET II.5. LANNET II.5 and COMNET II.5 building blocks are discussed.",
+		"publicationTitle": "Simulation Conference, 1991. Proceedings., Winter",
+		"references": [],
+		"authors": [
+			"W.J. Garrison"
+		],
+		"link": "http://ieeexplore.ieee.org/document/185594/",
+		"id": "185594"
+	},
+	{
+		"publicationYear": "1991",
+		"doi": "10.1109/WSC.1991.185595",
+		"title": "Introduction to SIMFACTORY II.5",
+		"abstract": "SIMFACTORY II.5 is a factory simulator written in SIMSCRIPT II.5 that provides its user with the ability to quickly model factories without programming. This capability is made possible with a mouse-driven graphical user interface that enables the user to build a graphical representation of his factory. The author provides a brief introduction to SIMFACTORY II.5 and explains how models can be developed without programming. The type of users who benefit most from SIMFACTORY II.5, the types of systems SIMFACTORY II.5 can model, and the various implementations of SIMFACTORY II.5 are also described.",
+		"publicationTitle": "Simulation Conference, 1991. Proceedings., Winter",
+		"references": [],
+		"authors": [
+			"J. Goble"
+		],
+		"link": "http://ieeexplore.ieee.org/document/185595/",
+		"id": "185595"
+	},
+	{
+		"publicationYear": "1990",
+		"doi": "10.1109/WSC.1990.129510",
+		"title": "A tutorial on WITNESS",
+		"abstract": "WITNESS, a computerized simulation system designed for modeling manufacturing operations, has been designed to enable people with no previous simulation experience to learn and apply simulation modeling quickly. Models are constructed by defining the key elements that make up the manufacturing system, displaying them on the screen, and specifying the details of their timings, routings, capacities, labor requirements, etc. The latter information is entered on a detail form or template that prompts for relevant information and checks the validity of each answer. Complex routing and control logic is achieved with input and output rules and with actions commands on change of element status. Many interactions are available to help one validate and experiment with the model. Any desired changes can be incorporated instantly without code compilation or the need to reset the simulation to its initial state. The author explains the user interface, the steps used to build a WITNESS model, and the features most useful for testing and running the model.<<ETX>>",
+		"publicationTitle": "Simulation Conference, 1990. Proceedings., Winter",
+		"references": [],
+		"authors": [
+			"C. Murgiano"
+		],
+		"link": "http://ieeexplore.ieee.org/document/129510/",
+		"id": "129510"
+	},
+	{
+		"publicationYear": "1990",
+		"doi": "10.1109/WSC.1990.129509",
+		"title": "Modeling manufacturing systems using MANUPLAN and SIMSTARTER - A tutorial",
+		"abstract": "MANUPLAN and SIMSTARTER are software tools that allow rapid modeling and analysis of manufacturing systems. The benefits of rapid analysis in today's competitive manufacturing world are discussed. A sample problem regarding decision making for a manufacturing cell is stated, and it is shown how this problem can be addressed with MANUPLAN. The main features of the SIMSTARTER simulation generator are described, and examples of its use for the sample problem are given. These two tools can be integrated with Lotus 1-2-3, SIMAN/CINEMA, and SLAMSYSTEM/TESS with benefits for manufacturing analysis.<<ETX>>",
+		"publicationTitle": "Simulation Conference, 1990. Proceedings., Winter",
+		"references": [],
+		"authors": [
+			"R. Suri",
+			"D. Derleth",
+			"M. Tomsicek"
+		],
+		"link": "http://ieeexplore.ieee.org/document/129509/",
+		"id": "129509"
+	}
+]
