@@ -30,16 +30,17 @@ exports.findUser = function(id, res){
 }
 
 exports.findAllDomains = function(res){
+	
 	var query = DomainModel.find();
-	// query.select('domainName papers');
+	// query.select('domainName papers');	
 	query.exec(function(err, domains){
 		if(err) sendInternalServerError(res);
 		else if(domains){
 			obj = [];
 			for(var i = 0; i < domains.length; i++){
-				var domain = {'id':domains[i].id ,'name': domains[i].domainName, 'count': domains[i].papers.length};
+				var domain = {'id':domains[i].id ,'name': domains[i].domainName, 'count': domains[i].papers.length};				
 				obj.push(domain);
-			}
+			}			
 			res.send({'found':true, 'domains':obj});
 		}
 		else res.send({'found':false});

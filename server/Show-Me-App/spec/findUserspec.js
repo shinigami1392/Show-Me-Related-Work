@@ -23,7 +23,7 @@ describe(" checks showME Server is running or not", function() {
 		expect(body_res.user.first_name).toBe("First4");
 		expect(body_res.user.last_name).toBe("Last4");
 		expect(body_res.user.email).toBe("akhairna@asu.edu");
-		app.closeServer();
+		//app.closeServer();
 		done();
       });
     });

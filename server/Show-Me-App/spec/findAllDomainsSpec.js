@@ -4,15 +4,23 @@ var url = "http://localhost:8081/domains/all"
 
 describe("Find All Domains Test", function(){
     describe("GET /", function() {	  
-
+		
+		it("returns status code 200", function(done) {
+			request.get(url, function(error, response, body) {
+				expect(response.statusCode).toBe(200);
+				done();
+			});
+		});
+		
 		it("returns all domains data", function(done) {
 			request.get(url, function(error, response, body) {
-				//console.log(JSON.parse(body));
+				
 				var parsed_body = JSON.parse(body);
-				expect(body["id"]).toBe("1");
-				expect(body["name"]).toBe("Domain 1");
-				//console.log("after expect");
-				obj.closeServer();
+				expect(parsed_body['found']).toBe(true);				
+				var domains = parsed_body['domains'];
+				expect(domains.length).toEqual(6);			
+				
+				//obj.closeServer();
 				done();
 			});
 		});
