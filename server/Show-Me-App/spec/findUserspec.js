@@ -27,6 +27,18 @@ describe(" checks showME Server is running or not", function() {
 		done();
       });
     });
+	
+	
+	//test to see if the application handles non existent user or not.
+    it("returns user details", function(done) {
+	  var user_url = base_url + "users/userId/user890"
+      request.get(user_url, function(error, response, body) {
+		var body_res = JSON.parse(body);
+		expect(body_res.found).toBe(false);
+		//app.closeServer();
+		done();
+      });
+    });
   });
 });
 
