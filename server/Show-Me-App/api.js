@@ -47,13 +47,13 @@ exports.findAllDomains = function(res){
 	}); 
 }
 
-exports.findPapersforDomain = function(id, res){
+exports.findPapersforDomain = function(id, res){	
 	var query = DomainModel.findOne({id:id});
 	query.populate('papers');
-	query.exec(function(err, domain){
+	query.exec(function(err, domain){		
 		if(err) sendInternalServerError(res);
-		else if(domain) {
-			var papers = domain.papers;
+		else if(domain) {			
+			var papers = domain.papers;			
 			var objects = [];
 			for(var i = 0; i < papers.length; i++){
 				var object = {'id': papers[i].paperId, 'title': papers[i].title, 'authors': papers[i].author, 'date': papers[i].date, 'url':papers[i].url};
