@@ -28,7 +28,19 @@ describe(" SHowMe Relations", function() {
 	  var rel_url = base_url + "id=13&user=user0";
       request.get(rel_url, function(error, response, body) {
 		var body_res = JSON.parse(body);
-		console.log(body_res);
+		console.log(body_res.body_res);
+		expect(body_res.relation.id).toBe(13);
+		expect(body_res.relation.source_id).toBe();
+		expect(body_res.relation.source_name).toBe();
+		expect(body_res.relation.destination_id).toBe();
+		expect(body_res.relation.destination_name).toBe();
+		expect(body_res.relation.upvotes).toBe();
+		expect(body_res.relation.downvotes).toBe();
+		expect(body_res.relation.comments.text).toBe();
+		expect(body_res.relation.comments.timestamp).toBe();
+		expect(body_res.relation.comments.username).toBe();
+		expect(body_res.upvotedByUser).toBe();
+		expect(body_res.downvotedByUser).toBe();	
 		done();
       });
     });
