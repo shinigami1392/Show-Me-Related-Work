@@ -1,5 +1,5 @@
 var request = require("request");
-
+var app = require("../app.js");
 var base_url = "http://localhost:8081/";
 
 describe(" checks showME Server is running or not", function() {
