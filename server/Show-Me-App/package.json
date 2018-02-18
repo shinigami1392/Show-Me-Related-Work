@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "test": "jasmine-node spec/findAllDomainsSpec.js"
+    "test": "jasmine-node spec"
   },
   "dependencies": {
     "async": "^2.6.0",
