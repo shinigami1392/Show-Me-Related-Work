@@ -62,6 +62,9 @@ export default {
 
 
 <style>
+#app{
+  width: 100%;
+}
 .slide-leave-active {
   transition: opacity 0.2s ease;
   opacity: 0;
