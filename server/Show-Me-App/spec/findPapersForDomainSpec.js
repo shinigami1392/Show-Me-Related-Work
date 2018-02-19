@@ -16,8 +16,7 @@ describe("Find list of papers for given domain", function(){
 		it("returns all papers under that domain", function(done) {			
 			var url = base_url + "1";
 			request.get(url, function(error, response, body) {				
-				var parsed_body = JSON.parse(body);	
-				console.log(parsed_body);				
+				var parsed_body = JSON.parse(body);									
 				expect(parsed_body['total']).toEqual(parsed_body['papers'].length);		
 				done();
 			});
