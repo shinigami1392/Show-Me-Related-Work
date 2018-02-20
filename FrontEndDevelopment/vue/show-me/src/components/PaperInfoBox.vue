@@ -21,6 +21,29 @@
           </tr>
         </tbody>
       </table>
+
+      <!--test-->
+      <table class="table">
+      <tbody>
+          <tr>
+            <td>Title</td>
+            <td>{{testPaperInfo.name}}</td>
+          </tr>
+          <tr>
+            <td>Authors</td>
+            <td>{{testPaperInfo.author}}</td>
+          </tr>
+          <tr>
+            <td>Year</td>
+            <td>{{testPaperInfo.year}}</td>
+          </tr>
+          <tr>
+            <td>URL</td>
+            <td>{{testPaperInfo.url}}</td>
+          </tr>
+        </tbody>
+      </table>
+
     </app-box>
   </div>
 </template>
@@ -35,7 +58,8 @@ export default {
     return {
       infoBoxHeader: "Paper Information",
       errors: [],
-      paperInfo: {}
+      paperInfo: {},
+      testPaperInfo:{'name':'Machine learning','author':'CS Dojo','year':2002,'url':'www.example.com'}
     };
   },
 
