@@ -5,10 +5,10 @@
         {{boxHeaderProp}}
     </div>
 
-    <!--Test-->
+    <!--Test
     <div class="testBox">
         {{ testBoxHeader }}
-    </div>
+    </div>-->
 
 
     <div class="card-block" v-bind:style="cardBlockStyle">
