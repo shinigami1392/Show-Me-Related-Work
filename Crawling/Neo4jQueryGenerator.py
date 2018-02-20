@@ -4,7 +4,7 @@ json_data = json.load(open('response.json'))
 json_obj = json_data[0]
 
 query_set = ""
-relation_query_set = "CREATE\n"
+relation_query_set = "CREATE"
 
 for json_obj in json_data:
     query = "CREATE (Paper"
@@ -28,7 +28,7 @@ for json_obj in json_data:
     ref_count = ref_count + references.__len__()
     query = ""
     for reference in references:
-        query = query + "(Paper" + json_obj["id"]+")-[:HAS_REFERRED]->(Paper"+reference+"),\n"
+        query = query + "(Paper" + json_obj["id"]+")-[:HAS_REFERRED]->(Paper"+reference+"),"
     relation_query_set = relation_query_set + query
 
 #print ref_count
@@ -39,4 +39,4 @@ new = ''.join(new)
 #print new
 
 file = open("query.txt","w")
-file.write(query_set+"\n\n"+new)
+file.write(query_set+"\n"+new)
