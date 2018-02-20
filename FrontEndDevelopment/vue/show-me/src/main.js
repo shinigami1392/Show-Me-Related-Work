@@ -13,6 +13,8 @@ import Grid from './components/Grid.vue'
 import { routes } from './routes';
 import { store } from './store';
 
+import './assets/css/fontawesome-all.css';
+
 Vue.use(VueRouter);
 
 Vue.component('app-box', Box);
