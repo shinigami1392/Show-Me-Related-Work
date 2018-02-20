@@ -39,7 +39,7 @@ export default {
       researchAreasBoxHeader: "Research Areas",
       categories: [],
       errors: [],
-     testcategories: [{'id':1,'name':'software engineering'},{'id':2,'name':'machine learning'},{'id':3,'name':'web development'}]
+      testcategories: [{'id':1,'name':'software engineering'},{'id':2,'name':'machine learning'},{'id':3,'name':'web development'}]
     };
   },
 

@@ -27,12 +27,12 @@ describe('PaperInfoBox.vue', () => {
   });
 
 
-  /*
-  it('Negative test case: should not render catagories mobile development', () => {
+  
+  it('Negative test case: should not render invalid paper name', () => {
     const Constructor = Vue.extend(PaperInfoBox)
     const vm = new Constructor().$mount()
     expect(vm.$el.textContent).to.contain('mobile development'); 
   });
-  */
+  
   
 })
