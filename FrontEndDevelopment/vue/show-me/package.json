@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
-    "bootstrap": "^4.0.0-beta.2",
     "vue": "^2.4.4",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
@@ -40,6 +39,8 @@
     "chai": "^4.1.2",
     "chalk": "^2.0.1",
     "copy-webpack-plugin": "^4.0.1",
+    "bootstrap": "^4.0.0",
+    "bootstrap-sass": "^3.3.7",
     "cross-env": "^5.0.5",
     "css-loader": "^0.28.7",
     "expect": "^22.1.0",
@@ -81,6 +82,10 @@
     "sinon-chai": "^2.8.0",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "url-loader": "^0.5.8",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.6",
     "vue-loader": "^13.0.5",
     "vue-style-loader": "^3.0.1",
     "vue-template-compiler": "^2.4.4",

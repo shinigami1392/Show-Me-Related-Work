@@ -31,7 +31,6 @@ exports.findUser = function(id, res){
 
 exports.findAllDomains = function(res){
 	var query = DomainModel.find();
-	// query.select('domainName papers');
 	query.exec(function(err, domains){
 		if(err) sendInternalServerError(res);
 		else if(domains){
@@ -269,7 +268,10 @@ var getGraphNode = function(paperId, res){
 	resultPromise.then(result => {
 		session.close();
 		for (var i = 0; i< result.records.length; i++){
+<<<<<<< HEAD
 			console.log("id: "+result.records[i].get(0).properties.Id);
+=======
+>>>>>>> ui_revamp
 			resultSet['id'] = result.records[i].get(0).properties.Id;
 			resultSet['name'] = result.records[i].get(0).properties.Title;
 			resultSet['author'] = result.records[i].get(0).properties.Author;
