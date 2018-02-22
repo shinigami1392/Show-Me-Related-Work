@@ -28,7 +28,7 @@ export const routes = [{
     default: NavigationBar,
     'area-box': ListBox,
     'animation-box': AnimatedBox,
-    AboutSection
+    'about-box':AboutSection
   }
 },
 {

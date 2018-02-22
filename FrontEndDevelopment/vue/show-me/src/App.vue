@@ -40,6 +40,9 @@
           </div>
         </div>
       </div>
+      <div class="bottom">
+        <router-view name="about-box" :key="$route.fullPath"></router-view>
+      </div>
     </div>
   </div>
 </template>
