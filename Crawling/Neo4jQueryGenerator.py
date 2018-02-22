@@ -4,7 +4,7 @@ json_data = json.load(open('response.json'))
 json_obj = json_data[0]
 
 query_set = ""
-relation_query_set = "CREATE"
+relation_query_set = "CREATE "
 
 for json_obj in json_data:
     query = "CREATE (Paper"
@@ -34,8 +34,9 @@ for json_obj in json_data:
 #print ref_count
 
 new = list(relation_query_set)
-new[new.__len__()-2] = ";"
+new[new.__len__()-1] = ";"
 new = ''.join(new)
+print new
 #print new
 
 file = open("query.txt","w")
