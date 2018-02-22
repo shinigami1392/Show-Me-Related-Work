@@ -1,7 +1,7 @@
 <template>
   <div style="height:100%;">
     <app-box v-bind:boxHeaderProp="infoBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
-      <!--<table class="table">
+      <table class="table">
         <tbody>
           <tr>
             <td>Source Paper</td>
@@ -16,9 +16,9 @@
             <td>{{linkInfo.relation.upvotes}}</td>
           </tr>
         </tbody>
-      </table>-->
+      </table>
 
-      <!-- TEST -->
+      <!-- TEST 
       <table class="table">
         <tbody>
           <tr>
@@ -34,7 +34,7 @@
             <td>{{testLinkInfo.relation.upvotes}}</td>
           </tr>
         </tbody>
-      </table>
+      </table>-->
 
 
     </app-box>

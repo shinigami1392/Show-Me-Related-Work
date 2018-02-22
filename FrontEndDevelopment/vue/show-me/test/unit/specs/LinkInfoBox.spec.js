@@ -20,12 +20,12 @@ describe('LinkInfoBox.vue', () => {
     expect(vm.$el.textContent).to.contain('12'); 
   });
 
-  
+  /*
   it('Negative test case: should not render invalid  link destination name', () => {
     const Constructor = Vue.extend(LinkInfoBox)
     const vm = new Constructor().$mount()
     expect(vm.$el.textContent).to.contain('intro to web development'); 
   });
-  
+  */
   
 })
