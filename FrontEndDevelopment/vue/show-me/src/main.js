@@ -9,6 +9,7 @@ import PaperInfoBox from './components/PaperInfoBox.vue'
 import LinkInfoBox from './components/LinkInfoBox.vue'
 import PaginatedTable from './components/PaginatedTable.vue'
 import Grid from './components/Grid.vue'
+import Analytics from './components/AnalyticsComponent.vue'
 
 import { routes } from './routes';
 import { store } from './store/store';
@@ -27,6 +28,7 @@ Vue.component('app-paper-infobox', PaperInfoBox);
 Vue.component('app-link-infobox', LinkInfoBox);
 Vue.component('app-paginated-table', PaginatedTable);
 Vue.component('grid', Grid);
+Vue.component('app-analytics-component', Analytics);
 
 
 const router = new VueRouter({
