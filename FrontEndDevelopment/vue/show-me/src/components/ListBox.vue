@@ -7,12 +7,12 @@
       </li>
     </ul>
 
-  <!-- TEST
+  <!-- TEST-->
     <ul class="list-group">
       <li v-for="cat in testcategories" class="list-group-item">
         {{ cat.name }}
       </li>
-    </ul>-->
+    </ul>
   
 
 
