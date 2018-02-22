@@ -3,7 +3,9 @@ from mongoConnection import mongoClient
 import subprocess
 import json
 import subprocess
+import os
 import requests
+from Neo4jQueryGenerator import loadData
 
 class MyCrawler:
 	def __init__(self):
@@ -170,15 +172,26 @@ class MyCrawler:
 				self.OBJECTS.append(paperObject)
 
 				if len(self.OBJECTS) == 10:
-					self.databaseClient.savePapers(self.OBJECTS)
-					self.OBJECTS = []
-
+					self.savePapers()			
 			except Exception as e:
 				print e.message
 		
 		if len(self.OBJECTS):
+			self.savePapers()
+
+	def savePapers(self):
+		try:
 			self.databaseClient.savePapers(self.OBJECTS)
+			loadData(self.OBJECTS)
+			dir_path = os.path.dirname(os.path.realpath(__file__))
+			filepath = os.path.join(dir_path, 'NodeQueryRunner')
+			filepath = os.path.join(filepath, 'app.js')
+			test = subprocess.Popen(["node", filepath], stdout=subprocess.PIPE)
+			test.communicate()[0]
 			self.OBJECTS = []
+		except Exception as e:
+			print e.message
+
 
 	def crawlStreams(self):
 		for index, stream in enumerate(self.STREAMS):
