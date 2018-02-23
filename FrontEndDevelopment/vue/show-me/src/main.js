@@ -5,6 +5,7 @@ import Box from './components/Box.vue'
 import ListBox from './components/ListBox.vue'
 import NavigationBar from './components/NavigationBar.vue'
 import AboutSection from './components/AboutDev.vue'
+import Footer from './components/Footer.vue'
 import PapersTable from './components/PapersTable.vue'
 import PaperInfoBox from './components/PaperInfoBox.vue'
 import LinkInfoBox from './components/LinkInfoBox.vue'
@@ -23,6 +24,8 @@ Vue.use(VueRouter);
 Vue.component('app-box', Box);
 Vue.component('app-listbox', ListBox);
 Vue.component('app-navbar', NavigationBar);
+Vue.component('app-aboutdev', AboutSection);
+Vue.component('app-aboutdev', Footer);
 Vue.component('app-table', PapersTable);
 Vue.component('app-paper-infobox', PaperInfoBox);
 Vue.component('app-link-infobox', LinkInfoBox);

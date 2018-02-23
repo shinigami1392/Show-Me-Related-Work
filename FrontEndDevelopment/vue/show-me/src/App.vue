@@ -43,6 +43,11 @@
       <div class="bottom">
         <router-view name="about-box" :key="$route.fullPath"></router-view>
       </div>
+
+      <div class="bottom">
+        <router-view name="footer-box" :key="$route.fullPath"></router-view>
+      </div>
+
     </div>
   </div>
 </template>

@@ -1,6 +1,7 @@
 import ListBox from './components/ListBox.vue'
 import NavigationBar from './components/NavigationBar.vue'
 import AboutSection from './components/AboutDev.vue'
+import Footer from './components/Footer.vue'
 import NetworkGraph from './components/NetworkGraph.vue'
 import Feedback from './components/Feedback.vue'
 import LinkInfoBox from './components/LinkInfoBox.vue'
@@ -26,6 +27,7 @@ export const routes = [{
   name: 'home',
   components: {
     default: NavigationBar,
+    'footer-box': Footer,
     'area-box': ListBox,
     'animation-box': AnimatedBox,
     'about-box':AboutSection
