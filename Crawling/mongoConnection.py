@@ -12,7 +12,6 @@ class mongoClient:
 
 	def createMongoClient(self):
 		client = MongoClient(self.formMongoURL())
-		# print client
 		self.client = client
 
 	def saveDomain(self, domain):
@@ -23,6 +22,11 @@ class mongoClient:
 	def savePapers(self, objects):
 		db = self.client[self.dbName]
 		print 'saving papers', len(objects)
+		errors = []
 		for paper in objects:
-			result = db.papermodels.insert_one(paper)
+			try:
+				result = db.papermodels.insert_one(paper)
+			except Exception as e:
+				errors.append(paper['id'])
+		return errors
 			

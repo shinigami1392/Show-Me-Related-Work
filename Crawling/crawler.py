@@ -174,6 +174,8 @@ class MyCrawler:
 				if len(self.OBJECTS) == 10:
 					self.savePapers()			
 			except Exception as e:
+				i -= 1
+				del self.PAPERS[i]
 				print e.message
 		
 		if len(self.OBJECTS):
@@ -181,7 +183,9 @@ class MyCrawler:
 
 	def savePapers(self):
 		try:
-			self.databaseClient.savePapers(self.OBJECTS)
+			errors = self.databaseClient.savePapers(self.OBJECTS)
+			for paper in errors:
+				self.PAPERS.remove(paper)
 			loadData(self.OBJECTS)
 			dir_path = os.path.dirname(os.path.realpath(__file__))
 			filepath = os.path.join(dir_path, 'NodeQueryRunner')
@@ -204,7 +208,7 @@ class MyCrawler:
 
 
 	def saveStream(self, index, stream):
-		streamObject = {'id':index, 'name':stream, 'papers':self.PAPERS}
+		streamObject = {'id':index, 'domainName':stream, 'papers':self.PAPERS}
 		self.databaseClient.saveDomain(streamObject)
 		self.PAPERS = []
 
