@@ -1,5 +1,5 @@
 var request = require("request");
-var url = "http://localhost:8081/domains/all"
+var url = "http://54.201.123.246:8081/domains/all"
 
 describe("Find All Domains Test", function(){
     describe("GET /", function() {	  

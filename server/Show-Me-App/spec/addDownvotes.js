@@ -1,5 +1,5 @@
 var request = require("request");
-var base_url = "http://localhost:8081/relations/downvote/add?";
+var base_url = "http://54.201.123.246:8081/relations/downvote/add?";
 
 describe(" SHowMe Relations", function() {
   describe("GET /", function() {

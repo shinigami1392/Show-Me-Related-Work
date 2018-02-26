@@ -1,5 +1,5 @@
 var request = require("request");
-var base_url = "http://localhost:8081/domains/"
+var base_url = "http://54.201.123.246:8081/domains/"
 
 describe("Find list of papers for given domain", function(){
     describe("GET /", function() {	  

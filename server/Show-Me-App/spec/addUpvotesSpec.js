@@ -1,5 +1,5 @@
 var request = require("request");
-var url = "http://localhost:8081/relations/upvote/add"
+var url = "http://54.201.123.246:8081/relations/upvote/add"
 
 describe("Add upvote for a relation", function(){
     describe("GET /", function() {	  

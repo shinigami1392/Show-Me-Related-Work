@@ -1,5 +1,5 @@
 var request = require("request");
-var base_url = "http://localhost:8081/relations/get?";
+var base_url = "http://54.201.123.246:8081/relations/get?";
 
 describe(" SHowMe Relations", function() {
   describe("GET /", function() {

@@ -1,5 +1,5 @@
 var request = require("request");
-var url = "http://localhost:8081/relations/upvote/remove"
+var url = "http://54.201.123.246:8081/relations/upvote/remove"
 
 describe("Remove upvote for a relaton", function(){
     describe("GET /", function() {	  
