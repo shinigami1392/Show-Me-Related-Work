@@ -18,8 +18,6 @@ describe("Find All Domains Test", function(){
 				expect(parsed_body['found']).toBe(true);				
 				var domains = parsed_body['domains'];
 				expect(domains.length).toEqual(23);			
-				
-				//obj.closeServer();
 				done();
 			});
 		});
