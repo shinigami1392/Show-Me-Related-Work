@@ -1,5 +1,5 @@
 var request = require("request");
-var base_url = "http://localhost:8081/";
+var base_url = "http://54.201.123.246:8081/";
 
 describe(" checks showME Server is running or not", function() {
   describe("GET /", function() {
