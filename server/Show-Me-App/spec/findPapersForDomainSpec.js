@@ -1,5 +1,4 @@
 var request = require("request");
-var obj = require("../app.js")
 var base_url = "http://localhost:8081/domains/"
 
 describe("Find list of papers for given domain", function(){

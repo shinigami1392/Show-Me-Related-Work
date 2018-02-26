@@ -1,5 +1,4 @@
 var request = require("request");
-var obj = require("../app.js")
 var url = "http://localhost:8081/relations/upvote/add"
 
 describe("Add upvote for a relation", function(){

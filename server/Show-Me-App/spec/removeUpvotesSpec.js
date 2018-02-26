@@ -1,5 +1,4 @@
 var request = require("request");
-var obj = require("../app.js")
 var url = "http://localhost:8081/relations/upvote/remove"
 
 describe("Remove upvote for a relaton", function(){
