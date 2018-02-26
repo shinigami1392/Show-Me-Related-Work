@@ -22,7 +22,6 @@ describe(" checks showME Server is running or not", function() {
 		expect(body_res.user.first_name).toBe("First2");
 		expect(body_res.user.last_name).toBe("Last2");
 		expect(body_res.user.email).toBe("akhairna@asu.edu");
-		//app.closeServer();
 		done();
       });
     });
@@ -33,7 +32,6 @@ describe(" checks showME Server is running or not", function() {
       request.get(user_url, function(error, response, body) {
 		var body_res = JSON.parse(body);
 		expect(body_res.found).toBe(false);
-		//app.closeServer();
 		done();
       });
     });	
