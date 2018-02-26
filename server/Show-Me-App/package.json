@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "nodemon ./bin/www",
-    "test": "istanbul cover --include-all-sources node_modules/jasmine-node/bin/jasmine-node spec/findUserspec.js"
+    "test": "istanbul cover --include-all-sources jasmine-node spec/findUserspec.js"
   },
   "dependencies": {
     "async": "^2.6.0",
