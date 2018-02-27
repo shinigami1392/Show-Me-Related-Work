@@ -9,15 +9,20 @@ fs.readFile("query.txt", function (err, data) {
     query = data.toString('utf-8');
     var count = 0;
     var querySet = query.split("\n");
-    		const driver = neo4j.driver("bolt://127.0.0.1:7687", neo4j.auth.basic("neo4j", "neo4j123"));
-			const session = driver.session();
-			const resultPromise = session.run(query);
+    // for (var i=0; i<querySet.length; i++){
+    //     console.log(i);
+    //     console.log(querySet[i]);
+    // }
+	const driver = neo4j.driver("bolt://127.0.0.1:7687", neo4j.auth.basic("neo4j", "neo4j123"));
+	const session = driver.session();
+    // console.log(query);
+	const resultPromise = session.run(query);
 
-			resultPromise.then(result => {
-				session.close();
-				driver.close();
-			});
-    		count++;
-    		console.log(querySet[i]+count+ " Executed");
+	resultPromise.then(result => {
+		session.close();
+		driver.close();
+	});
+	count++;
+	// console.log(querySet[i]+count+ " Executed");
 
 });

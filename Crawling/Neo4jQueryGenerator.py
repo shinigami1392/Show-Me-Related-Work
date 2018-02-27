@@ -36,7 +36,7 @@ def loadData(papers):
 
 
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    filepath = os.path.join(dir_path, 'NodeQueryRunner')
-    filepath = os.path.join(filepath, 'query.txt')
+    # filepath = os.path.join(dir_path, 'NodeQueryRunner')
+    filepath = os.path.join(dir_path, 'query.txt')
     file = open(filepath,"wb")
     file.write(query_set+"\n"+new)

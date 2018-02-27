@@ -19,6 +19,10 @@ class mongoClient:
 		db = self.client[self.dbName]
 		result = db.domainmodels.insert_one(domain)
 
+	def disconnectMongoClient(self):
+		self.client.close()
+		self.client = None
+
 	def savePapers(self, objects, stream):
 		db = self.client[self.dbName]
 		print 'saving papers', len(objects)
@@ -43,10 +47,7 @@ class mongoClient:
 				'domainName': stream,
 				'papers': objects
 				})
-		for paper in objects:
-			try:
-				result = db.papermodels.insert_one(paper)
-			except Exception as e:
-				errors.append(paper['id'])
+			self.totalDomains += 1
+		
 		return errors
 			
