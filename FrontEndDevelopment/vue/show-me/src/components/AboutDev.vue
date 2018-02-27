@@ -88,7 +88,7 @@ I am also a blockchain enthusiast and work as a blockchain developer with the Bl
             <p  class = "devname">Chiraag Subramanian</p>
             <p class = "devrole">Frontend Developer</p>
               <p class = "devpic"><img src="https://media-exp2.licdn.com/media/AAEAAQAAAAAAAAgwAAAAJDczNjQ1N2FmLWI1MTMtNGE5Yi04ZmE5LWUwZmUxNzJmMTU5Mw.jpg" height="120px" width="130px" border="1px"></p>
-              <p class = "devabout">I am a Software Engineering graduate at Arizona State University mojoring in Software Engineering. I have 3 years of work experience with Full-stack development.</p>
+              <p class = "devabout">I am a Software Engineering graduate at Arizona State University majoring in Software Engineering. I have 3 years of work experience with Full-stack development.</p>
           </div>
         </td>
         </tr>
