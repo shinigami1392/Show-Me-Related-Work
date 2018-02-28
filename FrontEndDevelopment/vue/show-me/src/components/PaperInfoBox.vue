@@ -22,7 +22,7 @@
         </tbody>
       </table>
 
-      <!--test
+      <!--test-->
       <table class="table">
       <tbody>
           <tr>
@@ -42,7 +42,7 @@
             <td>{{testPaperInfo.url}}</td>
           </tr>
         </tbody>
-      </table>-->
+      </table>
 
     </app-box>
   </div>

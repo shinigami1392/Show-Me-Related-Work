@@ -5,11 +5,16 @@
         {{boxHeaderProp}}
     </div>
 
-    <!--Test
+    <!--Test-->
     <div class="testBox">
-        {{ testBoxHeader }}
-    </div>-->
+      <ul>
+          <li v-for="testBoxHeader in testBoxHeaders">
+            {{ testBoxHeader }}
+          </li>
+      </ul>
+    </div>
 
+     
 
     <div class="card-block" v-bind:style="cardBlockStyle">
          <div  v-bind:style="cardBlockContentStyle">
@@ -25,7 +30,7 @@
   export default {
       data () {
         return {
-          testBoxHeader: 'This is a box component'
+          testBoxHeaders: ['Papers Information','Relationship Information','List of papers','Comments on relationship','Show Me Related Work']
         }
       },
       props: ['boxHeaderProp', 'cardStyle','cardBlockStyle', 'cardBlockContentStyle']
