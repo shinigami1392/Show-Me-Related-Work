@@ -6,9 +6,10 @@ def loadData(papers):
     query_set = ""
     relation_query_set = "CREATE "
 
+ # CREATE (Paper1:ResearchPaper {Id:'1',Title:'Consistency-based search in feature selection', Author: 'ManoranjanDash', Domain: 'Machine Learning / AI', Link: 'http://www.sciencedirect.com/science/article/pii/S0004370203000791'}) 
     for json_obj in json_data:
         query = "CREATE (Paper"
-        query = query + json_obj["id"]+":ResearchPaper {Title:'"
+        query = query + json_obj["id"]+":ResearchPaper {Id:'"+json_obj["id"]+"',Title:'"
         query = query + json_obj["title"] + "', Author: '"
         author_list = json_obj["authors"]
 
@@ -25,8 +26,9 @@ def loadData(papers):
         references = json_obj["references"]
         ref_count = ref_count + references.__len__()
         query = ""
+        print references
         for reference in references:
-            query = query + "(Paper" + json_obj["id"]+")-[:HAS_REFERRED]->(Paper"+reference+"),"
+            query = query + "(Paper" + json_obj["id"]+")-[:HAS_REFERRED{ upvotes:'0', downvotes: '0'}]->(Paper"+reference+"),"
         relation_query_set = relation_query_set + query
 
     new = list(relation_query_set)
