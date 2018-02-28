@@ -1,7 +1,8 @@
 <template>
   <app-box v-bind:boxHeaderProp="researchPapersBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
-    <grid :data="papers " :move-pages="movePages" :start-row="startRow" :rows-per-page="rowsPerPage">
-    </grid>
+    <!--<grid :data="papers " :move-pages="movePages" :start-row="startRow" :rows-per-page="rowsPerPage">
+    </grid>-->
+    <datatable :columns="columns"></datatable>
   </app-box>
 </template>
 
@@ -30,6 +31,7 @@ export default {
       rowsPerPage: 5,
       researchPapersBoxHeader: "Research Papers",
       papers: [],
+      columns:["Title", "Author(s)"],
       cardStyle: "height:100%;",
       cardBlockStyle: "height:90%;",
       cardBlockContentStyle: "height:100%;"
