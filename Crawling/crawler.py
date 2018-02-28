@@ -64,6 +64,7 @@ class MyCrawler:
 
 	def decodeString(self, string):
 		string = string.replace('[::', '').replace('::]', '')
+		string = string.replace('\'', '').replace('\"', '')
 		return string
 
 	def extractPapers(self, content):
@@ -153,7 +154,7 @@ class MyCrawler:
 				paperObject = {}
 				paperObject['id'] = content['articleNumber']
 				paperObject['doi'] = content['doi']
-				paperObject['title'] = content['title']
+				paperObject['title'] = self.decodeString(content['title'])
 				paperObject['publicationTitle'] = content['publicationTitle']
 				paperObject['abstract'] = self.decodeString(content['abstract'])
 				paperObject['publicationYear'] = content['publicationYear']
