@@ -11,7 +11,9 @@ import PaginatedTable from './components/PaginatedTable.vue'
 import Grid from './components/Grid.vue'
 
 import { routes } from './routes';
-import { store } from './store/store';
+import { store } from './store';
+
+import './assets/css/fontawesome-all.css';
 
 Vue.use(VueRouter);
 

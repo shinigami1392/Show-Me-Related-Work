@@ -24,6 +24,8 @@
 
 <script>
 import axios from "axios";
+import { mapGetters } from 'vuex';
+
 export default {
     data() {
         return {
@@ -43,9 +45,6 @@ export default {
         var linkInfo = this.$route.matched[0].props.linkInfo;
         this.comments = linkInfo.relation.comments;
         this.weight = linkInfo.upvotes;
-    },
-    computed:{
-
     },
     methods: {
         getTimeStamp: function(timeInMilliseconds){
@@ -85,6 +84,13 @@ export default {
                 .catch(err => {
                     console.log(err);
                 });
+            
+            this.$store.state.comments.push({linkid:this.$route.params.linkid,text:this.user_comment});
+        }
+    },
+    computed:{
+        users(){
+            return this.$store.state.users;
         }
     }
 }            

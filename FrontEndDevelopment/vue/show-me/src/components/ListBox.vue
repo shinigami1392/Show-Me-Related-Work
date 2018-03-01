@@ -6,6 +6,16 @@
         <span class="badge badge-primary badge-pill">{{ category.count }}</span>
       </li>
     </ul>
+
+  <!-- TEST
+    <ul class="list-group">
+      <li v-for="cat in testcategories" class="list-group-item">
+        {{ cat.name }}
+      </li>
+    </ul>-->
+  
+
+
   </app-box>
 </template>
 
@@ -28,7 +38,8 @@ export default {
     return {
       researchAreasBoxHeader: "Research Areas",
       categories: [],
-      errors: []
+      errors: [],
+      testcategories: [{'id':1,'name':'software engineering'},{'id':2,'name':'machine learning'},{'id':3,'name':'web development'}]
     };
   },
 
@@ -46,5 +57,7 @@ export default {
 
 
 <style>
-
+.header{
+  background-color: #343a40;
+}
 </style>
