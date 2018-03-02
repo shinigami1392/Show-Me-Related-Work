@@ -8,7 +8,7 @@ var papersSchema = new Schema({
 	author : [String],
 	doi: {type: String, required: true, max:50},
 	stream: {type: String, required: true, max:50},
-	abstract: {type: String, required: false, max:1000}
+	abstract: {type: String, required: false, max:1000},
 	reference: {type: Object},
 	link : {type:String, required:true},
 	publicationYear : {type: String, required: true}

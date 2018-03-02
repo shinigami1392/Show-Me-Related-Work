@@ -47,14 +47,17 @@ exports.findAllDomains = function(res){
 
 exports.findPapersforDomain = function(id, res){
 	var query = DomainModel.findOne({id:id});
-	query.populate('papers');
+	// query.populate('papers');
 	query.exec(function(err, domain){
 		if(err) sendInternalServerError(res);
 		else if(domain) {
 			var papers = domain.papers;
+			// console.log(papers);
 			var objects = [];
 			for(var i = 0; i < papers.length; i++){
-				var object = {'id': papers[i].paperId, 'title': papers[i].title, 'authors': papers[i].author, 'date': papers[i].date, 'url':papers[i].url};
+				console.log('id :' + papers[i].id);
+				console.log('authors : ' + papers[i].authors);
+				var object = {'id': papers[i].id, 'title': papers[i].title, 'authors': papers[i].authors, 'publicationYear': papers[i].publicationYear, 'url':papers[i].link};
 				objects.push(object);
 			}
 			res.send({'total': objects.length, 'papers': objects});
