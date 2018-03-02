@@ -29,7 +29,6 @@ class mongoClient:
 		errors = []
 		document = db.domainmodels.find_one({'domainName':stream})
 		if document:
-			print 'inserting objects'
 			try:
 				papers = document['papers']
 				papers += objects
@@ -41,9 +40,8 @@ class mongoClient:
 				print e.message
 			
 		else:
-			print 'creating documents'
 			db.domainmodels.insert_one({
-				'id': self.totalDomains,
+				'id': str(self.totalDomains),
 				'domainName': stream,
 				'papers': objects
 				})
