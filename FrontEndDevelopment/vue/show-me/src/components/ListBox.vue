@@ -39,7 +39,13 @@ export default {
       researchAreasBoxHeader: "Research Areas",
       categories: [],
       errors: [],
-      testcategories: [{'id':1,'name':'software engineering'},{'id':2,'name':'machine learning'},{'id':3,'name':'web development'}]
+      testcategories: [{'id':1,'name':'Mining and Learning with Graphs and Relations'},
+                      {'id':2,'name':'Machine Learning for Computer Security'},
+                      {'id':3,'name':'In Memory of Alexey Chervonenkis'},
+                      {'id':4,'name':'Probabilistic Models of Link Structure'},
+                      {'id':5,'name':'Multiple Instance Learning'},
+                      {'id':6,'name':'Fast Signal Processing'},
+                      {'id':7,'name':'Software Engineering'}]
     };
   },
 
