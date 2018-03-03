@@ -13,4 +13,9 @@ router.get('/:id', function(req, res, next){
 	apis.findPapersforDomain(id, res);
 });
 
+router.post('/papers', function(req, res, next){
+	console.log("Here");
+	console.log(req.body);
+	apis.findPapersforDomain(1, res);
+});
 module.exports = router;
