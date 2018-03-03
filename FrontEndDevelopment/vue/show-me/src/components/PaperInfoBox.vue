@@ -22,7 +22,15 @@
         </tbody>
       </table>
 
-      <!--test-->
+        <!-- TEST-->
+    <ul class="list-group">
+      <li v-for="paper in testPaperInfo" class="list-group-item">
+        {{ paper.name }} | {{ paper.author }} | {{ paper.year }} | {{paper.url}}
+      </li>
+    </ul>
+  
+
+      <!--test
       <table class="table">
       <tbody>
           <tr>
@@ -42,7 +50,7 @@
             <td>{{testPaperInfo.url}}</td>
           </tr>
         </tbody>
-      </table>
+      </table>-->
 
     </app-box>
   </div>
@@ -59,7 +67,11 @@ export default {
       infoBoxHeader: "Paper Information",
       errors: [],
       paperInfo: {},
-      testPaperInfo:{'name':'Machine learning','author':'CS Dojo','year':2002,'url':'www.example.com'}
+      testPaperInfo:[{'name':'Genetic Algorithms and Machine Learning','author':'David E. GoldbergJohn H. Holland','year':1988,'url':'www.example.com'},
+      {'name':'Machine Learning for High-Speed Corner Detection','author':'Edward RostenTom Drummond','year':2006,'url':'www.example.com'},
+      {'name':'Analysis of gray level corner detection','author':'Khwang Teoh','year':1999,'url':'www.example.com'},
+      {'name':'Machine learning','author':'CS Dojo','year':2002,'url':'www.example.com'}]
+
     };
   },
 
