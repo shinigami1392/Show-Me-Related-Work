@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "test": "istanbul cover --include-all-sources ./node_modules/jasmine-node/bin/jasmine-node spec"	
   },
   "dependencies": {
     "async": "^2.6.0",
@@ -13,9 +14,15 @@
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "~4.15.5",
+    "istanbul": "^0.4.5",
     "mongoose": "^4.13.1",
     "morgan": "~1.9.0",
     "neo4j-driver": "^1.5.0",
+    "request": "^2.83.0",
     "serve-favicon": "~2.4.5"
+  },
+  "devDependencies": {
+    "expect": "^22.2.2",
+    "jasmine-node": "^1.14.5"
   }
 }
