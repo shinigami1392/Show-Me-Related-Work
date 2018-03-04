@@ -74,9 +74,8 @@ class MyCrawler:
 			if record['articleNumber'] in self.PAPERS:
 				continue
 			else:
-				# if len(self.PAPERS) < 20:
-				self.PAPERS.append(record['articleNumber'])
-			break
+				if len(self.PAPERS) < 5000:
+					self.PAPERS.append(record['articleNumber'])
 			i += 1
 
 
@@ -94,8 +93,8 @@ class MyCrawler:
 					if referenceId in self.PAPERS:
 						pass
 					else:
-						# if len(self.PAPERS) < 20:
-						self.PAPERS.append(referenceId)
+						if len(self.PAPERS) < 5000:
+							self.PAPERS.append(referenceId)
 				except:
 					pass
 		except:
@@ -177,7 +176,7 @@ class MyCrawler:
 				
 				self.OBJECTS.append(paperObject)
 
-				if len(self.OBJECTS) == 10:
+				if len(self.OBJECTS) == 25:
 					self.savePapers(stream)	
 					# print self.OBJECTS		
 			except Exception as e:
