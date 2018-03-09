@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var PaperModel = require('./papers.js');
+var RelationModel = require('./relations.js')
 var Schema = mongoose.Schema;
 
 var domainssSchema = new Schema({
@@ -13,7 +14,17 @@ var domainssSchema = new Schema({
 		doi: {type: String, required: true, max:50},
 		stream: {type: String, required: true, max:50},
 		abstract: {type: String, required: false, max:1000},
-		reference: [String],
+		reference: [{
+			relationTo:{type:String, required:true},
+			upvotes: [{type: Schema.ObjectId, ref:'UserModel'}],
+			downvotes: [{type: Schema.ObjectId, ref:'UserModel'}],
+			comments: [{
+				timestamp : {type: String, required:true},
+				text: {type: String, required:true},
+				userName: {type: String, required: true},
+				user : {type: Schema.ObjectId, ref:'UserModel'}
+			}]
+		}],
 		link : {type:String, required:true},
 		publicationYear : {type: String, required: true}
 	}]
