@@ -176,7 +176,7 @@ class MyCrawler:
 				
 				self.OBJECTS.append(paperObject)
 
-				if len(self.OBJECTS) == 25:
+				if len(self.OBJECTS) == 10:
 					self.savePapers(stream)	
 					# print self.OBJECTS		
 			except Exception as e:
@@ -190,17 +190,23 @@ class MyCrawler:
 
 	def savePapers(self, stream):
 		try:
-			self.databaseClient.createMongoClient()
-			self.databaseClient.savePapers(self.OBJECTS, stream)
-			self.databaseClient.disconnectMongoClient()
-			# for paper in errors:
-			# 	self.PAPERS.remove(paper)
 			loadData(self.OBJECTS)
 			dir_path = os.path.dirname(os.path.realpath(__file__))
 			filepath = os.path.join(dir_path, 'NodeQueryRunner')
 			filepath = os.path.join(filepath, 'app.js')
 			test = subprocess.Popen(["node", filepath], stdout=subprocess.PIPE)
 			test.communicate()[0]
+
+			self.databaseClient.createMongoClient()
+			self.databaseClient.savePapers(self.OBJECTS, stream)
+			self.databaseClient.disconnectMongoClient()
+			# for paper in errors:
+			# 	self.PAPERS.remove(paper)
+			
+
+			#deleting a file
+			# test = subprocess.Popen(["truncate", "query.txt", "-s", "0"], stdout=subprocess.PIPE)
+			# test.communicate()[0]
 
 		except Exception as e:
 			print e.message
