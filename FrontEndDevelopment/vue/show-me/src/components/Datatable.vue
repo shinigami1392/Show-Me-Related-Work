@@ -8,14 +8,6 @@
                 </tr>     
             </thead>
             <tbody>
-               <!-- <tr>
-                    <td>Multimedia Web Databases</td>
-                    <td>Selcuk Candan</td>
-                </tr>
-                <tr>
-                    <td>Aritificial Intelligence</td>
-                    <td>Khambapatti</td>    
-                </tr>    -->
             </tbody>    
         </table>
     </app-box> 
@@ -25,9 +17,6 @@
     export default {
         data() {
             return {
-                /*columns: [],
-                data: Array,
-                url: String */
                 researchPapersBoxHeader: "Research Papers",
                 cardStyle: "height:100%;",
                 cardBlockStyle: "height:90%;",
@@ -49,50 +38,12 @@
                         return JSON.stringify(d);
                     },
                     "dataType": "json",
-                    "dataSrc": function (json) {
-                            console.log("Inside"); 
-                           /*var displayData = new Array();
-                            displayData.push({'title':'Multimedia Web Databases','author':'Selcuk Candan'});
-                            displayData.push({'title':'Artificial Intelligence','author':'Khambapatti'})
-                            return displayData; */
-                              /*var displayData = new Object();
-                     displayData["draw"] = 1;
-                     displayData["recordsTotal"] = 2;
-                     displayData["recordsTotal"] = 2;
-                     displayData["data"] = new Array();
-                       
-                     var displayArray = new Array();
-                     displayArray.push("Multimedia Web Databases");
-                     displayArray.push("Selcuk Candan");
-                     displayData["data"].push(displayArray);
-
-                     displayArray = new Array();
-                     displayArray.push("Artificial Intelligence");
-                     displayArray.push("Khambapatti");
-                     displayData["data"].push(displayArray);
-                     return displayData;*/
-                    var displayData = {
-                        "draw": 1,
-                        "recordsTotal": 2,
-                        "recordsFiltered": 2 ,
-                        "data": [
-                            [   "Multimedia Web Databases",
-                                "Selcuk Candan"
-                            ],
-                            [   "Artificial Intelligence",
-                                "Khambapatti"
-                            ]
-                        ]
-                    }
-                    return displayData;
-                    }
-				},
-				"columns" : [ 
-					{ 'data' : 'title' }, 
-                    { 'data' : 'author'}
-                ]
+                    "columns" : [ 
+					    { 'data' : 'title' }, 
+                        { 'data' : 'author'}
+                    ]
+                } 
            });
-           // $(this.$el).DataTable();
         }
     }
 </script>
