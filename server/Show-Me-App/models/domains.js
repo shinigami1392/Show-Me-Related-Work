@@ -14,17 +14,18 @@ var domainssSchema = new Schema({
 		doi: {type: String, required: true, max:50},
 		stream: {type: String, required: true, max:50},
 		abstract: {type: String, required: false, max:1000},
-		reference: [{
-			relationTo:{type:String, required:true},
-			upvotes: [{type: Schema.ObjectId, ref:'UserModel'}],
-			downvotes: [{type: Schema.ObjectId, ref:'UserModel'}],
-			comments: [{
-				timestamp : {type: String, required:true},
-				text: {type: String, required:true},
-				userName: {type: String, required: true},
-				user : {type: Schema.ObjectId, ref:'UserModel'}
-			}]
-		}],
+		references : Schema.Types.Mixed,
+		// references: [{
+		// 	id:{type:String, required:true},
+		// 	upvotes: [{type: Schema.ObjectId, ref:'UserModel'}],
+		// 	downvotes: [{type: Schema.ObjectId, ref:'UserModel'}],
+		// 	comments: [{
+		// 		timestamp : {type: String, required:true},
+		// 		text: {type: String, required:true},
+		// 		userName: {type: String, required: true},
+		// 		user : {type: Schema.ObjectId, ref:'UserModel'}
+		// 	}]
+		// }],
 		link : {type:String, required:true},
 		publicationYear : {type: String, required: true}
 	}]

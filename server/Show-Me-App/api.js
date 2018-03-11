@@ -55,8 +55,8 @@ exports.findPapersforDomain = function(id, res){
 			// console.log(papers);
 			var objects = [];
 			for(var i = 0; i < papers.length; i++){
-				console.log('id :' + papers[i].id);
-				console.log('authors : ' + papers[i].authors);
+				// console.log('id :' + papers[i].id);
+				// console.log('authors : ' + papers[i].authors);
 				var object = {'id': papers[i].id, 'title': papers[i].title, 'authors': papers[i].authors, 'publicationYear': papers[i].publicationYear, 'url':papers[i].link};
 				objects.push(object);
 			}
@@ -68,52 +68,92 @@ exports.findPapersforDomain = function(id, res){
 	})
 }
 
-exports.findRelationFromId = function(relationId, userId, res){
-	if(!relationId) invalidInput('Please enter relationId', res);
+exports.findRelationFromId = function(domain, source, destination, userId, res){
+	if(!domain) invalidInput('Please enter domain', res);
+	if(!source) invalidInput('Please enter source', res);
+	if(!destination) invalidInput('Please enter destination', res);
 	if(!userId) invalidInput('Please enter user', res);
 
-	var query = RelationModel.findOne({relationId:relationId});
-	var userQuery = UserModel.findOne({userId: userId});
-	query.populate('relationFrom relationTo');
-	query.populate('comments', 'text timestamp userName');
-	query.exec(function(err, relation){
-		if(err) sendInternalServerError(err, res);
-		else if(relation){
-			userQuery.exec(function(err, user){
-				if(err) sendInternalServerError(err, res);
-				else if(user){
-					var result = {};
-					var object = {};
-					object['id'] = relation.relationId;
-					object['source_id'] = relation.relationFrom.paperId;
-					object['source_name'] = relation.relationFrom.title;
-					object['destination_id'] = relation.relationTo.paperId;
-					object['destination_name'] = relation.relationTo.title;
-					object['upvotes'] = relation.upvotes.length;
-					object['downvotes'] = relation.downvotes.length;
-					object['comments'] = [];
+	var query = DomainModel.findOne({id:domain})
+	query.exec(function(err, currentdomain){
+		if(err) sendInternalServerError(res);
+		else if(currentdomain){
+			var papers = currentdomain.papers;
+			var sourcePaper = null;
+			for(var i=0; i < papers.length; i++){
+				if(papers[i].id == source){
+					sourcePaper = papers[i];
+					break;
+				}
+			}
+			if(sourcePaper == null) invalidInput('Source paper not found', res);
+			else{
+				var relations = sourcePaper.references;
+				var foundFlag = false;
+				var keys = Object.keys(relations);
+				if(keys.indexOf(destination) != -1){
 
-					for(var i=0; i<relation.comments.length; i++){
-						var obj = {};
-						obj['text'] = relation.comments[i].text;
-						obj['timestamp'] = relation.comments[i].timestamp;
-						obj['user_name'] = relation.comments[i].userName;
-						object['comments'].push(obj);
-					}
-									
+					var upvoted = false;
+					var downvoted = false;
 
-					result['relation'] = object;
-					result['upvotedByUser'] = false;
-					result['downvotedByUser'] = false;
+					var up = relations[destination].upvotes.indexOf(userId);
+					if(up != -1) upvoted = true;
 
-					if(relation.upvotes.indexOf(user._id) >= 0) result['upvotedByUser'] = true;
-					else if(relation.downvotes.indexOf(user._id) > 0) result['downvotedByUser'] = true;
+					var down = relations[destination].downvotes.indexOf(userId);
+					if(down != -1) downvoted = true;
+
+					var result = {'relation':relations[destination], 'upvotedByUser':upvoted, 'downvotedByUser':downvoted};
 					res.send(result);
 				}
-				else invalidInput('Invalid User', res);
-			});
+				else{
+					invalidInput('There is no relation exists between papers!', res);
+				}
+			}
 		}
 	});
+
+	// var query = RelationModel.findOne({relationId:relationId});
+	// var userQuery = UserModel.findOne({userId: userId});
+	// query.populate('relationFrom relationTo');
+	// query.populate('comments', 'text timestamp userName');
+	// query.exec(function(err, relation){
+	// 	if(err) sendInternalServerError(err, res);
+	// 	else if(relation){
+	// 		userQuery.exec(function(err, user){
+	// 			if(err) sendInternalServerError(err, res);
+	// 			else if(user){
+	// 				var result = {};
+	// 				var object = {};
+	// 				object['id'] = relation.relationId;
+	// 				object['source_id'] = relation.relationFrom.paperId;
+	// 				object['source_name'] = relation.relationFrom.title;
+	// 				object['destination_id'] = relation.relationTo.paperId;
+	// 				object['destination_name'] = relation.relationTo.title;
+	// 				object['upvotes'] = relation.upvotes.length;
+	// 				object['downvotes'] = relation.downvotes.length;
+	// 				object['comments'] = [];
+
+	// 				for(var i=0; i<relation.comments.length; i++){
+	// 					var obj = {};
+	// 					obj['text'] = relation.comments[i].text;
+	// 					obj['timestamp'] = relation.comments[i].timestamp;
+	// 					obj['user_name'] = relation.comments[i].userName;
+	// 					object['comments'].push(obj);
+	// 				}
+									
+
+	// 				result['relation'] = object;
+	// 				result['upvotedByUser'] = false;
+	// 				result['downvotedByUser'] = false;
+
+	// 				if(relation.upvotes.indexOf(user._id) >= 0) result['upvotedByUser'] = true;
+	// 				else if(relation.downvotes.indexOf(user._id) > 0) result['downvotedByUser'] = true;
+	// 				res.send(result);
+	// 			}
+	// 			else invalidInput('Invalid User', res);
+	// 		});
+	// 	}
+	// });
 }
 
 exports.addUpvotes = function(relationId, userId, res){

@@ -4,9 +4,11 @@ var apis = require('../api.js');
 
 /* GET users listing. */
 router.get('/get', function(req, res, next) {
-	var relationId = req.query.id;
+	var domain = req.query.domain;
+	var source = req.query.source;
+	var destination = req.query.destination;
 	var user = req.query.user; 
-	apis.findRelationFromId(relationId, user, res);
+	apis.findRelationFromId(domain, source, destination, user, res);
 });
 
 router.put('/upvote/add', function(req, res, next){
