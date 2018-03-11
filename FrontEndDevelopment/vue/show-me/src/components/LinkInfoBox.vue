@@ -18,23 +18,25 @@
         </tbody>
       </table>
 
-      <!-- TEST 
+
+
+      <!-- TEST -->
       <table class="table">
         <tbody>
           <tr>
             <td>Source Paper</td>
-            <td>{{testLinkInfo.relation.source_name}}</td>
+            <td>{{testLinkInfo1.relation.source_name}}</td>
           </tr>
           <tr>
             <td>Destination Paper</td>
-            <td>{{testLinkInfo.relation.destination_name}}</td>
+            <td>{{testLinkInfo1.relation.destination_name}}</td>
           </tr>
           <tr>
             <td>Weight</td>
-            <td>{{testLinkInfo.relation.upvotes}}</td>
+            <td>{{testLinkInfo1.relation.upvotes}}</td>
           </tr>
         </tbody>
-      </table>-->
+      </table>
 
 
     </app-box>
@@ -51,7 +53,8 @@ export default {
       infoBoxHeader: "Link Information",
       errors: [],
       linkInfo: {},
-      testLinkInfo: {'relation': {'source_name':'Methods in machine learning', 'destination_name':'art of machine learning','upvotes':12}}
+      testLinkInfo: {'relation': {'source_name':'Methods in machine learning', 'destination_name':'art of machine learning','upvotes':12}},
+      testLinkInfo1: {'relation': {'source_name':'Cognitive computing', 'destination_name':'congitive computing with vision','upvotes':4}}
     };
   },
 
