@@ -314,3 +314,25 @@ var getGraphNode = function(paperId, res){
 }
 
 
+exports.findPapersForDomainPaginated = function(draw, start, length, areaid, res){
+	var query = DomainModel.findOne({id:areaid}, {papers:{$slice: [ start, length]}});
+	query.populate('papers');
+	query.exec(function(err, domain){
+		if(err) sendInternalServerError(res);
+		else if(domain) {
+			var papers = domain.papers;
+			var dttable = [];
+			for(var i = 0; i < papers.length; i++){
+				var object = [];
+				object.push(papers[i].title);
+				object.push(papers[i].author.toString().slice(0,-1)); 
+				dttable.push(object);
+			}
+			console.log(JSON.stringify(dttable));
+			res.send({"draw": draw, "recordsTotal": 47, "recordsFiltered":47, "data":dttable});
+		}
+		else{
+			res.send({"draw": draw, "recordsTotal": 2, "recordsFiltered":2, "data":[["Multimedia Web Databases", "Selcuk Candan"],["Artificial Intelligence", "Khambapatti"]]});
+		}
+	})
+}

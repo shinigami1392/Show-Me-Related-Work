@@ -9,13 +9,10 @@ router.get('/all', function(req, res, next) {
 
 router.get('/:id', function(req, res, next){
 	var id = req.params.id;
-	console.log(id);
 	apis.findPapersforDomain(id, res);
 });
 
 router.post('/papers', function(req, res, next){
-	console.log("Here");
-	console.log(req.body);
-	apis.findPapersforDomain(1, res);
+	apis.findPapersForDomainPaginated(req.body.draw, req.body.start, req.body.length, req.body.areaid, res);
 });
 module.exports = router;
