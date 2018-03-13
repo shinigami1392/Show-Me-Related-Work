@@ -9,13 +9,16 @@ def loadData(papers):
  # CREATE (Paper1:ResearchPaper {Id:'1',Title:'Consistency-based search in feature selection', Author: 'ManoranjanDash', Domain: 'Machine Learning / AI', Link: 'http://www.sciencedirect.com/science/article/pii/S0004370203000791'}) 
     try:
         for json_obj in json_data:
+            title = json_obj["title"]
+            title = title.replace("'","\\'")
             query = "CREATE (Paper"
             query = query + json_obj["id"]+":ResearchPaper {Id:'"+json_obj["id"]+"',Title:'"
-            query = query + json_obj["title"] + "', Author: '"
+            query = query + title + "', Author: '"
             author_list = json_obj["authors"]
 
             for i in range(0, author_list.__len__()-1):
-                query = query + author_list[i] + ","
+                author = author_list[i].replace("'","\\'")
+                query = query + author + ","
 
             query = query + author_list[author_list.__len__()-1] + "', "
             query = query + "Domain: '"+json_obj["stream"] + "',"
