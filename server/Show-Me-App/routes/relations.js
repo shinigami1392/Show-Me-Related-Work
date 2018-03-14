@@ -20,9 +20,12 @@ router.put('/upvote/add', function(req, res, next){
 });
 
 router.put('/downvote/add', function(req, res, next){
-	var relationId = req.query.id;
-	var user = req.query.user;
-	apis.addDownvotes(relationId, user, res);
+	var domain = req.query.domain;
+	var source = req.query.source;
+	var destination = req.query.destination;
+	var user = req.query.user; 
+	// apis.addUpvotes(domain, source, destination, user, res);
+	apis.addDownvotes(domain, source, destination, user, res);
 });
 
 router.put('/upvote/remove', function(req, res, next){
@@ -34,9 +37,13 @@ router.put('/upvote/remove', function(req, res, next){
 });
 
 router.put('/downvote/remove', function(req, res, next){
-	var relationId = req.query.id;
+	var domain = req.query.domain;
+	var source = req.query.source;
+	var destination = req.query.destination;
 	var user = req.query.user;
-	apis.removeDownvotes(relationId, user, res);
+	// var relationId = req.query.id;
+	// var user = req.query.user;
+	apis.removeDownvotes(domain, source, destination, user, res);
 });
 
 router.put('/comment/add', function(req, res, next){
