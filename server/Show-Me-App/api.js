@@ -182,8 +182,10 @@ exports.addUpvotes = function(domain, source, destination, userId, res){
 				var foundFlag = false;
 				var keys = Object.keys(relations);
 				if(keys.indexOf(destination) != -1){
-		
-					relations[destination].upvotes.push(userId);
+					
+					var index = relations[destination].upvotes.indexOf(userId);
+					if (index == -1)
+						relations[destination].upvotes.push(userId);
 
 					var index = relations[destination].downvotes.indexOf(userId);
 					if(index > -1)
@@ -226,30 +228,76 @@ exports.addUpvotes = function(domain, source, destination, userId, res){
 	// });
 }
 
-exports.removeUpvotes = function(relationId, userId, res){
-	if(!relationId) invalidInput('Please enter relationId', res);
+exports.removeUpvotes = function(domain, source, destination, userId, res){
+	if(!domain) invalidInput('Please enter domain', res);
+	if(!source) invalidInput('Please enter source', res);
+	if(!destination) invalidInput('Please enter destination', res);
 	if(!userId) invalidInput('Please enter user', res);
 
-	var query = RelationModel.findOne({relationId:relationId});
-	var userQuery = UserModel.findOne({userId: userId});
-
-	query.exec(function(err, relation){
-		if(err) sendInternalServerError(err, res);
-		else if(relation){
-			userQuery.exec(function(err, user){
-				if(err) sendInternalServerError(err, res);
-				else if(user){
-					if(relation.upvotes.indexOf(user._id) != -1)
-						relation.upvotes.splice(relation.upvotes.indexOf(user._id),1);
-					relation.save(function(err){
+	var query = DomainModel.findOne({id:domain});
+	query.exec(function(err, currentdomain){
+		if(err) sendInternalServerError(res);
+		else if(currentdomain){
+			var papers = currentdomain.papers;
+			var sourcePaper = null;
+			var sourceIndex = null;
+			for(var i=0; i < papers.length; i++){
+				if(papers[i].id == source){
+					sourcePaper = papers[i];
+					sourceIndex = i;
+					break;
+				}
+			}
+			if(sourcePaper == null) invalidInput('Source paper not found', res);
+			else{
+				var relations = JSON.parse(JSON.stringify(sourcePaper.references));
+				var foundFlag = false;
+				var keys = Object.keys(relations);
+				if(keys.indexOf(destination) != -1){
+					
+					var index = relations[destination].upvotes.indexOf(userId);
+					if (index > -1)
+						relations[destination].upvotes.splice(index, 1);
+  	
+					currentdomain.papers[sourceIndex].references = relations;
+					
+					currentdomain.save(function(err){
 						if(err) sendInternalServerError(err, res);
-						else res.send({'updated':true});
+						else{ 
+							res.send({'updated':true});
+						}
 					});
 				}
-				else invalidInput('Invalid User', res);
-			});
+				else{
+					invalidInput('There is no relation exists between papers!', res);
+				}
+			}
 		}
 	});
+
+	// if(!relationId) invalidInput('Please enter relationId', res);
+	// if(!userId) invalidInput('Please enter user', res);
+
+	// var query = RelationModel.findOne({relationId:relationId});
+	// var userQuery = UserModel.findOne({userId: userId});
+
+	// query.exec(function(err, relation){
+	// 	if(err) sendInternalServerError(err, res);
+	// 	else if(relation){
+	// 		userQuery.exec(function(err, user){
+	// 			if(err) sendInternalServerError(err, res);
+	// 			else if(user){
+	// 				if(relation.upvotes.indexOf(user._id) != -1)
+	// 					relation.upvotes.splice(relation.upvotes.indexOf(user._id),1);
+	// 				relation.save(function(err){
+	// 					if(err) sendInternalServerError(err, res);
+	// 					else res.send({'updated':true});
+	// 				});
+	// 			}
+	// 			else invalidInput('Invalid User', res);
+	// 		});
+	// 	}
+	// });
 }
 
 exports.addDownvotes = function(relationId, userId, res){

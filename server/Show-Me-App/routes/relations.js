@@ -26,9 +26,11 @@ router.put('/downvote/add', function(req, res, next){
 });
 
 router.put('/upvote/remove', function(req, res, next){
-	var relationId = req.query.id;
+	var domain = req.query.domain;
+	var source = req.query.source;
+	var destination = req.query.destination;
 	var user = req.query.user;
-	apis.removeUpvotes(relationId, user, res);
+	apis.removeUpvotes(domain, source, destination, user, res);
 });
 
 router.put('/downvote/remove', function(req, res, next){
