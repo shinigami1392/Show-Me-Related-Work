@@ -35,6 +35,7 @@ app.use('/users', users);
 app.use('/domains', domains);
 app.use('/relations', relations);
 app.use('/graphNode', graphNode);
+app.use('/oauth/facebook', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
