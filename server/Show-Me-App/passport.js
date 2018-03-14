@@ -3,7 +3,7 @@ const FacebookTokenStrategy = require('passport-facebook-token');
 
 passport.use('facebookToken', new FacebookTokenStrategy({
 	clientID: '159840638064281',
-	clientSecret: '950e64df0eb1410040886e2abe459a77'
+	clientSecret: ''
 }, async(accessToken, refreshToken, profile, done)=>{
 	try{
 		console.log('profile', profile);
