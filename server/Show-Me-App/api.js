@@ -111,49 +111,6 @@ exports.findRelationFromId = function(domain, source, destination, userId, res){
 			}
 		}
 	});
-
-	// var query = RelationModel.findOne({relationId:relationId});
-	// var userQuery = UserModel.findOne({userId: userId});
-	// query.populate('relationFrom relationTo');
-	// query.populate('comments', 'text timestamp userName');
-	// query.exec(function(err, relation){
-	// 	if(err) sendInternalServerError(err, res);
-	// 	else if(relation){
-	// 		userQuery.exec(function(err, user){
-	// 			if(err) sendInternalServerError(err, res);
-	// 			else if(user){
-	// 				var result = {};
-	// 				var object = {};
-	// 				object['id'] = relation.relationId;
-	// 				object['source_id'] = relation.relationFrom.paperId;
-	// 				object['source_name'] = relation.relationFrom.title;
-	// 				object['destination_id'] = relation.relationTo.paperId;
-	// 				object['destination_name'] = relation.relationTo.title;
-	// 				object['upvotes'] = relation.upvotes.length;
-	// 				object['downvotes'] = relation.downvotes.length;
-	// 				object['comments'] = [];
-
-	// 				for(var i=0; i<relation.comments.length; i++){
-	// 					var obj = {};
-	// 					obj['text'] = relation.comments[i].text;
-	// 					obj['timestamp'] = relation.comments[i].timestamp;
-	// 					obj['user_name'] = relation.comments[i].userName;
-	// 					object['comments'].push(obj);
-	// 				}
-									
-
-	// 				result['relation'] = object;
-	// 				result['upvotedByUser'] = false;
-	// 				result['downvotedByUser'] = false;
-
-	// 				if(relation.upvotes.indexOf(user._id) >= 0) result['upvotedByUser'] = true;
-	// 				else if(relation.downvotes.indexOf(user._id) > 0) result['downvotedByUser'] = true;
-	// 				res.send(result);
-	// 			}
-	// 			else invalidInput('Invalid User', res);
-	// 		});
-	// 	}
-	// });
 }
 
 exports.addUpvotes = function(domain, source, destination, userId, res){
@@ -206,26 +163,6 @@ exports.addUpvotes = function(domain, source, destination, userId, res){
 			}
 		}
 	});
-	// var query = DomainModel.findOne({id:domain});
-	// var userQuery = UserModel.findOne({userId: userId});
-
-	// query.exec(function(err, domain){
-	// 	if(err) sendInternalServerError(err, res);
-	// 	else if(relation){
-	// 		userQuery.exec(function(err, user){
-	// 			if(err) sendInternalServerError(err, res);
-	// 			else if(user){
-	// 				if(relation.upvotes.indexOf(user._id) == -1)
-	// 					relation.upvotes.push(user._id);
-	// 				relation.save(function(err){
-	// 					if(err) sendInternalServerError(err, res);
-	// 					else res.send({'updated':true});
-	// 				});
-	// 			}
-	// 			else invalidInput('Invalid User', res);
-	// 		});
-	// 	}
-	// });
 }
 
 exports.removeUpvotes = function(domain, source, destination, userId, res){
@@ -274,30 +211,6 @@ exports.removeUpvotes = function(domain, source, destination, userId, res){
 			}
 		}
 	});
-
-	// if(!relationId) invalidInput('Please enter relationId', res);
-	// if(!userId) invalidInput('Please enter user', res);
-
-	// var query = RelationModel.findOne({relationId:relationId});
-	// var userQuery = UserModel.findOne({userId: userId});
-
-	// query.exec(function(err, relation){
-	// 	if(err) sendInternalServerError(err, res);
-	// 	else if(relation){
-	// 		userQuery.exec(function(err, user){
-	// 			if(err) sendInternalServerError(err, res);
-	// 			else if(user){
-	// 				if(relation.upvotes.indexOf(user._id) != -1)
-	// 					relation.upvotes.splice(relation.upvotes.indexOf(user._id),1);
-	// 				relation.save(function(err){
-	// 					if(err) sendInternalServerError(err, res);
-	// 					else res.send({'updated':true});
-	// 				});
-	// 			}
-	// 			else invalidInput('Invalid User', res);
-	// 		});
-	// 	}
-	// });
 }
 
 exports.addDownvotes = function(domain, source, destination, userId, res){
@@ -350,29 +263,6 @@ exports.addDownvotes = function(domain, source, destination, userId, res){
 			}
 		}
 	});
-	// if(!relationId) invalidInput('Please enter relationId', res);
-	// if(!userId) invalidInput('Please enter user', res);
-
-	// var query = RelationModel.findOne({relationId:relationId});
-	// var userQuery = UserModel.findOne({userId: userId});
-
-	// query.exec(function(err, relation){
-	// 	if(err) sendInternalServerError(err, res);
-	// 	else if(relation){
-	// 		userQuery.exec(function(err, user){
-	// 			if(err) sendInternalServerError(err, res);
-	// 			else if(user){
-	// 				if(relation.upvotes.indexOf(user._id) == -1)
-	// 					relation.downvotes.push(user._id);
-	// 				relation.save(function(err){
-	// 					if(err) sendInternalServerError(err, res);
-	// 					else res.send({'updated':true});
-	// 				});
-	// 			}
-	// 			else invalidInput('Invalid User', res);
-	// 		});
-	// 	}
-	// });
 }
 
 exports.removeDownvotes = function(domain, source, destination, userId, res){
@@ -421,63 +311,60 @@ exports.removeDownvotes = function(domain, source, destination, userId, res){
 			}
 		}
 	});
-	// if(!relationId) invalidInput('Please enter relationId', res);
-	// if(!userId) invalidInput('Please enter user', res);
-
-	// var query = RelationModel.findOne({_id:relationId});
-	// var userQuery = UserModel.findOne({userId: userId});
-
-	// query.exec(function(err, relation){
-	// 	if(err) sendInternalServerError(err, res);
-	// 	else if(relation){
-	// 		userQuery.exec(function(err, user){
-	// 			if(err) sendInternalServerError(err, res);
-	// 			else if(user){
-	// 				if(relation.downvotes.indexOf(user._id) != -1)
-	// 					relation.downvotes.splice(relation.downvotes.indexOf(user._id),1);
-	// 				relation.save(function(err){
-	// 					if(err) sendInternalServerError(err, res);
-	// 					else res.send({'updated':true});
-	// 				});
-	// 			}
-	// 			else invalidInput('Invalid User', res);
-	// 		});
-	// 	}
-	// });
 }
 
-exports.addComments = function(relationId, text, userId, res){
-	if(!relationId) invalidInput('Please enter relationId', res);
+exports.addComments = function(domain, source, destination, userId, text, res){
+	if(!domain) invalidInput('Please enter domain', res);
+	if(!source) invalidInput('Please enter source', res);
+	if(!destination) invalidInput('Please enter destination', res);
+	if(!userId) invalidInput('Please enter user', res);
 	if(!text) invalidInput('Please enter text', res);
-	if(!userId) invalidInput('Please provide user', res);
 
-	var query = RelationModel.findOne({relationId:relationId});
-	var userQuery = UserModel.findOne({userId: userId});
+	var query = DomainModel.findOne({id:domain});
+	var userquery = UserModel.findOne({userId:userId});
+	query.exec(function(err, currentdomain){
+		if(err) sendInternalServerError(res);
+		else if(currentdomain){
+			var papers = currentdomain.papers;
+			var sourcePaper = null;
+			var sourceIndex = null;
+			for(var i=0; i < papers.length; i++){
+				if(papers[i].id == source){
+					sourcePaper = papers[i];
+					sourceIndex = i;
+					break;
+				}
+			}
 
-	query.exec(function(err, relation){
-		if(err) sendInternalServerError(err, res);
-		else if(relation){
-			userQuery.exec(function(err, user){
-				if(err) sendInternalServerError(err, res);
-				else if(user){
-					//creating a new comment
-					var comment = new CommentModel({'user':user._id, 'text':text, 'timestamp':Date.now(), 'userName': user.name});
-					comment.save(function(err){
-						if(err) sendInternalServerError(err, res);
-						else{
-							relation.comments.push(comment._id);
-							relation.save(function(err){
+			if(sourcePaper == null) invalidInput('Source paper not found', res);
+			else{
+				var relations = JSON.parse(JSON.stringify(sourcePaper.references));
+				var foundFlag = false;
+				var keys = Object.keys(relations);
+
+				if(keys.indexOf(destination) != -1){
+					userquery.exec(function(err, user){
+						if (err) sendInternalServerError(res);
+						else if(user){
+							var obj = {'comment':text, 'userId':userId, 'username': user.first_name + ' ' + user.last_name};
+							obj['timestamp'] = new Date();
+							relations[destination].comments.push(obj);
+							currentdomain.papers[sourceIndex].references = relations;
+							currentdomain.save(function(err){
 								if(err) sendInternalServerError(err, res);
-								else res.send({'added':true});
+								else{ 
+									res.send({'updated':true});
+								}
 							});		
 						}
-					})
-					
+						else invalidInput('Send a valid user', res);
+					});
 				}
-				else invalidInput('Invalid User', res);
-			});
+				else{
+					invalidInput('There is no relation exists between papers!', res);
+				}
+			}
 		}
-		else invalidInput('Invalid Relation', res);
 	});
 }
 
