@@ -103,14 +103,15 @@ export default {
   components: { facebookLogin },
   methods: {
     getUserData() {
-      this.FB.api('/user/oauth/facebook', 'GET', { fields: 'id,name,email' },
+      this.FB.api('http://localhost:8080/', 'GET', { fields: 'id,name,email' },
         userInformation => {
+          console.log("userinfo "+ JSON.stringify(userInformation));
           this.personalID = userInformation.id;
           this.email = userInformation.email;
           this.name = userInformation.name;
-          console.log(this.personalID);
-          console.log(this.email);
-          console.log(this.name);
+          console.log("ID "+this.personalID);
+          console.log("email "+this.email);
+          console.log("name" +this.name);
         }
       )
     },
@@ -121,7 +122,7 @@ export default {
     },
     onLogin() {
       this.isConnected = true
-      this.getUserData()
+      //this.getUserData()
     },
     onLogout() {
       this.isConnected = false;
@@ -129,16 +130,16 @@ export default {
   }
 };
 
-Vue.use(VueAuthenticate, {
-  baseUrl: 'http://localhost:8081', // Your API domain
+// Vue.use(VueAuthenticate, {
+//   baseUrl: 'http://localhost:8080', // Your API domain
   
-  providers: {
-    facebook: {
-      clientId: '159840638064281',
-      redirectUri: 'http://localhost:8081/' // Your client app URL
-    }
-  }
-})
+//   providers: {
+//     facebook: {
+//       clientId: '159840638064281',
+//       redirectUri: 'http://localhost:8080/' // Your client app URL
+//     }
+//   }
+// })
 </script>
 
 <style>
