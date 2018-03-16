@@ -20,20 +20,13 @@
       {{startRow / rowsPerPage + 1}} out of {{Math.ceil(data.length / rowsPerPage)}}
     </p>
     <button type="button" class="btn btn-outline-dark btn-sm" @click="movePages(1)">Next</button>
-     <ul class="list-group">
+  </div>
+  
+   <ul class="list-group">
       <li v-for="paper in testData" class="list-group-item">
         {{ paper.title }} | {{ paper.authors }}
       </li>
     </ul>
-  </div>
-  <div>
-    <ul class="list-group">
-      <li v-for="paper in testData" class="list-group-item">
-        {{ paper.title }} | {{ paper.authors }}
-      </li>
-    </ul>
-  </div>
-   
 </div>
 </template>
 
