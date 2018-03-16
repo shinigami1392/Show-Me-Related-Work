@@ -9,7 +9,9 @@
         <button type="submit"><i class="fa fa-search"></i></button>
     </div>
       <div id="login">
-        <button type="button" class="btn btn-default btn-sm">
+        <facebook-login class="button" appId="159840638064281" @login="onLogin" @logout="onLogout" @sdk-loaded="sdkLoaded"><i class="fab fa-facebook"></i>
+        </facebook-login>
+        <!-- <button type="button" class="btn btn-default btn-sm">
           <span class="glyphicon glyphicon-home"></span> Login <i class="fab fa-github"></i>
         </button>
 
@@ -18,7 +20,7 @@
         </button>
         <button type="button" class="btn btn-default btn-sm">
           <span class="glyphicon glyphicon-home"></span> Login <i class="fab fa-facebook"></i>
-        </button>
+        </button> -->
         <!-- <a href="/">
           <button type="button" class="btn btn-default btn-sm">
             <span class="glyphicon glyphicon-home"></span> Home <i class="fas fa-home"></i>
@@ -35,9 +37,23 @@
 
 <script>
 import axios from "axios";
+import VueAuthenticate from 'vue-authenticate';
+import Vue from 'vue';
+import facebookLogin from './fbLogin.js'
+//import facebookLogin from './fbLogin.js'
 
 function sendLoginRequestToLinkedIn() { }
 function sendLoginRequestToFacebook() { }
+
+// new Vue({
+//   methods: {
+//     authenticate: function (provider) {
+//       this.$auth.authenticate(provider).then(function () {
+//         // Execute application logic after successful social authentication
+//       })
+//     }
+//   }
+// })
 
 // window.fbAsyncInit = function() {
 //     FB.init({
@@ -75,11 +91,55 @@ export default {
         firstname: "John",
         lastname: "Doe",
         username: "johndoe2020",
-        email: "johndoe2020@gmail.com"
+        email: "johndoe2020@gmail.com",
+        isConnected: false,
+        name: '',
+        email: '',
+        personalID: '',
+        FB: undefined
       }
-    };
+    }
+  },
+  components: { facebookLogin },
+  methods: {
+    getUserData() {
+      this.FB.api('http://localhost:8080/', 'GET', { fields: 'id,name,email' },
+        userInformation => {
+          console.log("userinfo "+ JSON.stringify(userInformation));
+          this.personalID = userInformation.id;
+          this.email = userInformation.email;
+          this.name = userInformation.name;
+          console.log("ID "+this.personalID);
+          console.log("email "+this.email);
+          console.log("name" +this.name);
+        }
+      )
+    },
+    sdkLoaded(payload) {
+      this.isConnected = payload.isConnected
+      this.FB = payload.FB
+      if (this.isConnected) this.getUserData()
+    },
+    onLogin() {
+      this.isConnected = true
+      //this.getUserData()
+    },
+    onLogout() {
+      this.isConnected = false;
+    }
   }
 };
+
+// Vue.use(VueAuthenticate, {
+//   baseUrl: 'http://localhost:8080', // Your API domain
+  
+//   providers: {
+//     facebook: {
+//       clientId: '159840638064281',
+//       redirectUri: 'http://localhost:8080/' // Your client app URL
+//     }
+//   }
+// })
 </script>
 
 <style>

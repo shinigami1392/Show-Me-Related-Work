@@ -14,7 +14,9 @@
   },
   "dependencies": {
     "axios": "^0.17.1",
+    "facebook-login-vuejs": "^2.1.3",
     "vue": "^2.4.4",
+    "vue-authenticate": "^1.3.4",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },
