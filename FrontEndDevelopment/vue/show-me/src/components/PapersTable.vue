@@ -1,6 +1,12 @@
 <template>
   <div>
-    <app-box v-bind:boxHeaderProp="researchPaperAndRelationsBoxHeader">
+    <app-box v-bind:boxHeaderProp="researchPaperAndRelationsBoxHeader"></app-box>
+    <!-- TEST-->
+    <ul class="list-group">
+      <li v-for="paper in testPaperInfo" class="list-group-item">
+        {{ paper.name }} | {{ paper.author }} | {{ paper.year }} | {{paper.url}}
+      </li>
+    </ul>
       <!--<span>Catagory id is : {{$route.params.areaid}}</span>-->
       <table class="table">
         <thead>
@@ -13,12 +19,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="paper in papers">
+          <tr v-for="paper in testPaperInfo">
             <td>
               <router-link :to="{ name:'paperInfo', params:{ areaid:$route.params.areaid, paperid:paper.id }}">{{ paper.title }}</router-link>
             </td>
-            <td>{{ paper.authors }}</td>
-            <td>{{ paper.date }}</td>
+            <td>{{ paper.author }}</td>
+            <td>{{ paper.year }}</td>
             <td>
               <a href='${paper.url}'>{{ paper.url }}</a>
             </td>
@@ -26,6 +32,10 @@
           </tr>
         </tbody>
       </table>
+
+
+  
+
     </app-box>
   </div>
 </template>
@@ -57,7 +67,12 @@ export default {
       researchPaperAndRelationsBoxHeader: "Research Papers and References",
       areaid: this.$route.params.areaid,
       errors: [],
-      papers: []
+      papers: [],
+
+      testPaperInfo:[{'name':'Genetic Algorithms and Machine Learning','author':'David E. GoldbergJohn H. Holland','year':1988,'url':'www.example.com'},
+      {'name':'Machine Learning for High-Speed Corner Detection','author':'Edward RostenTom Drummond','year':2006,'url':'www.example.com'},
+      {'name':'Analysis of gray level corner detection','author':'Khwang Teoh','year':1999,'url':'www.example.com'},
+      {'name':'Machine learning','author':'CS Dojo','year':2002,'url':'www.example.com'}]
     };
   },
 

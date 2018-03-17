@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Grid from '@/components/Grid';
-
+  
+  /*
 describe('Grid.vue', () => {
   it('should render paper tilte as A threshold selection method from gray-level histograms', () => {
     const Constructor = Vue.extend(Grid)
@@ -51,14 +52,14 @@ describe('Grid.vue', () => {
     const vm = new Constructor().$mount()
     expect(vm.$el.textContent).to.contain('Willamowski'); 
   });
-  
-  /*
+
   it('Negative test case: should not render invalid paper title', () => {
     const Constructor = Vue.extend(Grid)
     const vm = new Constructor().$mount()
     expect(vm.$el.textContent).to.contain('application development'); 
   });
-  */
+ 
 
   
 })
+ */
