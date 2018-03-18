@@ -48,8 +48,10 @@
                     },
                    "dataSrc": function ( json ) {
                         vm.papers = [];
-                        vm.columns = ["Title","Authors"];
-                        for ( var i=0, ien=json.data.length ; i<ien ; i++ ) {
+                        if(json.data && json.data.length > 0){
+                            vm.columns = ["Title","Authors"];
+                        }
+                        for ( var i=0, len=json.data.length ; i<len ; i++ ) {
                             var obj = {};
                             obj.id = json.data[i][0];
                             obj.title = json.data[i][1];
