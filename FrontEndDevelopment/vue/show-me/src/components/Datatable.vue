@@ -2,10 +2,14 @@
     <app-box v-bind:boxHeaderProp="researchPapersBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
         <table id ='dtable'>
             <thead>
+                  
                 <tr>
-                    <th>Title</th>
-                    <th>Author(s)</th>
-                </tr>     
+                    <th v-for="column in columns">{{column}}</th>
+                <tr> 
+                 <tr v-for="paper in papers">
+                    <td><router-link :to="{ name:'paperInfo', params:{ areaid:$route.params.areaid, paperid:paper.id }}">{{ paper.title }}</router-link></td>
+                    <td>{{paper.authors}}</td>
+                 </tr>
             </thead>
             <tbody>
             </tbody>    
@@ -20,12 +24,13 @@
                 researchPapersBoxHeader: "Research Papers",
                 cardStyle: "height:100%;",
                 cardBlockStyle: "height:90%; overflow-y:scroll;",
-                cardBlockContentStyle: "height:100%;"
+                cardBlockContentStyle: "height:100%;",
+                papers:[],
+                columns: []
             };
         },
         mounted(){
            var vm = this;
-           console.log("Mounted");
            $('#dtable').DataTable({
                 "processing" : true,
                 "serverSide" : true,
@@ -39,15 +44,35 @@
                     "type": "POST",
                     "data": function ( d ) {
                         d.areaid = vm.$route.params.areaid
-                        console.log("Here");
                         return JSON.stringify(d);
                     },
+                   "dataSrc": function ( json ) {
+                        vm.papers = [];
+                        vm.columns = ["Title","Authors"];
+                        for ( var i=0, ien=json.data.length ; i<ien ; i++ ) {
+                            var obj = {};
+                            obj.id = json.data[i][0];
+                            obj.title = json.data[i][1];
+                            obj.authors = json.data[i][2];
+                            vm.papers.push(obj);
+                        }
+                      return json.data;
+
+                    },
                     "dataType": "json",
-                    "columns" : [ 
-					    { 'data' : 'title' }, 
-                        { 'data' : 'author'}
-                    ]
-                } 
+                },
+                "columnDefs": [
+                        {
+                          "targets": [ 0 ],
+                          "visible": false
+                        },
+                        { "targets": [ 1 ],
+                          "visible": false  
+                        },
+                        { "targets": [ 2 ],
+                          "visible": false  
+                        }
+                ] 
            });
         }
     }

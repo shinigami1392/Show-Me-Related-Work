@@ -4,8 +4,8 @@ import NetworkGraph from './components/NetworkGraph.vue'
 import Feedback from './components/Feedback.vue'
 import LinkInfoBox from './components/LinkInfoBox.vue'
 import AnimatedBox from './components/AnimatedBox.vue'
-import PaginatedTable from './components/PaginatedTable.vue'
 import Datatable from './components/Datatable.vue'
+
 //Lazy routing
 const PapersTable = resolve => {
   require.ensure(['./components/PapersTable.vue'], () => {
@@ -40,6 +40,7 @@ export const routes = [{
 {
   path: '/areas/:areaid/paper/:paperid',
   beforeEnter: (to, from, next) => {
+    console.log("beforeEnter");
     next();
   },
   components: {
