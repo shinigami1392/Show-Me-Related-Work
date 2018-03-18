@@ -3,7 +3,6 @@ var router = express.Router();
 var apis = require('../api.js');
 var passport = require('passport');
 var UsersController = require('../controllers/usersController');
-var request = require('request');
 
 
 /* GET users listing. */
@@ -14,32 +13,16 @@ router.get('/userId/:id', function(req, res, next) {
 
 router.route('/oauth/facebook').post(passport.authenticate('facebookToken', {session: false}, UsersController.facebookOAuth));
 
-module.exports = router;
-
-router.get('/oauth/linkedIn', function(req, res, next) {
-	
-	var p = 'https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=864gws1gwfmanp&redirect_uri=http://localhost:8080/&state=abcde&scope=r_basicprofile';
-		
-	request(p, (err, res, body) => {	   
-	  if (err) { return console.log(err);
-	});
+/* Route to be seclected when user choose to sign in using LinkedIn */ 
+router.get('/oauth/linkedin', function(req, res, next) {
+	apis.getLinkedInAuthorizationCode(req,res);
 });
 
+/* Redirect API for linkedIn. This API will be called when linkedIn 
+   processes the user credentials and sends back the authoriation code */
 router.get('/oauth/linkedIn/callback', function(req, res, next) {	
-
-	var url = req.url;
-	var code = url.split("=")[1]
-	code = code.substring(0, code.length-6);	
-	var query = "https://www.linkedin.com/oauth/v2/"+code;
-	var incomingdata;
-	request(query, (err, res, body) => {	   
-	   	if (res.statusCode == 200) {
-			incomingdata = body;	
-	    }
-		else if (err) { 
-			return console.log(err); 
-	    }		     
-	});	
-	
-	res.send(incomingdata);
+	apis.getLinkedInAccessToken(req,res);
 });
+
+
+module.exports = router;	

@@ -5,6 +5,9 @@ var RelationModel = require('./models/relations.js');
 var CommentModel = require('./models/comments.js');
 var GraphNodeModel = require('./neo4jmodels/graphNode.js');
 var resultSet = [];
+var http = require('http');
+var https = require('https');
+var url = require('url');
 
 var exports = module.exports = {};
 
@@ -313,4 +316,81 @@ var getGraphNode = function(paperId, res){
 	});
 }
 
+exports.getLinkedInAuthorizationCode = function(req, res){
+	var client_id = "864gws1gwfmanp";
+	var callbackURL = "http://localhost:8081/users/oauth/linkedin/callback";
+	var state = "1234567"
+	var scope = 'r_basicprofile ';
+	
+	if (req.url !='/favicon.ico') {
+		/* calling linkedIn API to generate authorization code and send it on registered redirect API */
+		res.writeHead(302, {
+			'Location': 'https://www.linkedin.com/uas/oauth2/authorization?response_type=code&client_id=' + client_id + '&scope=' + scope + '&state=' + state + '&redirect_uri=' + callbackURL
+		});
+		res.end();		
+	}
+}
 
+/* This function is invoked from getAccessToken when access token is successfully  returned by 
+   linkedIn API	it calls linkedIn API to fetch user details. Type of data to be retrived can be 
+   changed by changing the parameter requstingAPI */
+var fetchData = function(request, response, access_token, requstingAPI, callback) {
+	var options = {
+		host: 'api.linkedin.com',
+		port: 443,
+		path: '/v1/' + requstingAPI + "?format=json&oauth2_access_token=" + access_token
+	};
+
+	var req = https.request(options, function(res) {
+		res.on('data', function(d) {
+			response.end(d);
+		});
+	});
+
+	req.on('error', function(e) {		
+		response.end("Got error while fetching user data");
+	});
+	req.end();
+};
+
+/* This function get client_id, client_secret key, callbackURL and authorization_code and calls 
+   linkedIn	API which returns the access token. it internally calls function to fetch the user data */
+var getAccessToken = function(client_id, client_secret, callbackURL, request, response, authorization_code, requstingAPI) {	
+
+	var options = {
+		host: 'api.linkedin.com',
+		port: 443,
+		path: "/uas/oauth2/accessToken?grant_type=authorization_code&code=" + authorization_code + "&redirect_uri=" + callbackURL + "&client_id=" + client_id + "&client_secret=" + client_secret
+	};
+
+	/* Calling API to get access token */
+	var req = https.request(options, function(res) {
+		res.on('data', function(d) {		
+			access_token = JSON.parse(d).access_token;		
+			fetchData(request, response, access_token, requstingAPI );
+		});
+	});
+
+	req.on('error', function(e) {		
+		response.end("Got error generating the access token");
+	});
+	req.end();
+};
+
+exports.getLinkedInAccessToken = function(req, res){
+	var client_id = "864gws1gwfmanp";
+	var client_secret = "GnRfsHdnQrxkAI2P";
+	var callbackURL = "http://localhost:8081/users/oauth/linkedin/callback";
+	var requstingAPI = 'people/~:(first-name,last-name,headline,picture-url)';
+	var query_object = url.parse(req.url, true).query;
+	var authorization_code = query_object.code;
+
+	var options = {
+		host: 'api.linkedin.com',
+		port: 443,
+		path: "/uas/oauth2/accessToken?grant_type=authorization_code&code=" + authorization_code + "&redirect_uri=" + callbackURL + "&client_id=" + client_id + "&client_secret=" + client_secret
+	};
+	
+	/* Calling function to generate access token using authorization code */
+	getAccessToken(client_id, client_secret, callbackURL, req, res, authorization_code, requstingAPI); 
+}
