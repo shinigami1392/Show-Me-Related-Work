@@ -6,6 +6,14 @@
                    <span style="color:green; font-weight:bold;"> {{comment.user_name}}</span> <span style="color:grey;">[{{ getTimeStamp(comment.timestamp) }}]</span>: {{comment.text}} <hr />
                 </li>
             </ul>
+
+              <!-- TEST-->
+            <ul class="list-group">
+            <li v-for="comment in testComments" class="list-group-item">
+                {{comment.user_name}} |  {{comment.text}} 
+            </li>
+            </ul>
+  
         </div>
         <div style="width:100%; height:30%">
             <div style="width:70%; height:100%; margin-right:25px;float:left;">
@@ -31,6 +39,10 @@ export default {
         return {
             feedbackBoxHeader: "Feedback",
             comments: [],
+            testComments: [{'user_name':'CS Dojo','text':'this is good relation'},
+            {'user_name':'Dr. Senapati','text':'this should be most voted relation'},
+            {'user_name':'Dr.Pashupati','text':'I am glad I found this website'},
+            ],
             weight: 0,
             user_comment: [],
             likeButtonClass : "btn btn-primary"
