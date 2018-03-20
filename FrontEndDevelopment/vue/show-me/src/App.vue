@@ -10,9 +10,6 @@
     <div id="main">
       <div class="container-fluid" style="height:700px">
         <div class="row content" style="height:60%;">
-          <div class="col-md-3" style="height:100%;">
-            <router-view name="area-box"></router-view>
-          </div>
           <div class="col-md-9" style="height:100%;">
             <transition name="slide" mode="out-in">
               <router-view name="animation-box"></router-view>
@@ -22,6 +19,9 @@
               <router-view name="table-box" :key="$route.fullPath"></router-view>
             </transition>
           </div>
+          <div class="col-md-3" style="height:100%;">
+            <router-view name="area-box"></router-view>
+          </div>  
         </div>
 
         <div class="row" style="height:30%; margin-top:20px;">
