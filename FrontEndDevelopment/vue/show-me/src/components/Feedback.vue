@@ -69,10 +69,10 @@ export default {
         },
         addComment: function() {
             axios
-                .put(`http://localhost:8081/relations/comment/add?relationId=` + this.$route.params.linkid + `&text=` + this.user_comment + `&user_name=user0`)
+                .put(`http://54.201.123.246:8081/relations/comment/add?relationId=` + this.$route.params.linkid + `&text=` + this.user_comment + `&user_name=user0`)
                 .then(response => {
                     axios
-                        .get(`http://localhost:8081/relations/get?id=` + this.$route.params.linkid + `&user=user0`)
+                        .get(`http://54.201.123.246:8081/relations/get?id=` + this.$route.params.linkid + `&user=user0`)
                         .then(response => {
                              this.comments =  response.data.relation.comments;
                              this.user_comment='';

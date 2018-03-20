@@ -35,7 +35,7 @@ const router = new VueRouter({
 import axios from "axios";
 function fetchPaperInfo(paperid) {
   axios
-    .get(`http://localhost:8081/graphNode/graphNode/` + paperid)
+    .get(`http://54.201.123.246:8081/graphNode/graphNode/` + paperid)
     .then(response => {
       return response.data;
     })
@@ -53,7 +53,7 @@ function setPaperInfoValue(value) {
 router.beforeEach(function (to, from, next) {
   if (to.name === 'paperInfo') {
     axios
-      .get(`http://localhost:8081/graphNode/graphNode/` + to.params.paperid)
+      .get(`http://54.201.123.246:8081/graphNode/graphNode/` + to.params.paperid)
       .then(response => {
         paperInfo = response.data;
         to.matched[0].props.paperInfo = paperInfo;
@@ -68,7 +68,7 @@ router.beforeEach(function (to, from, next) {
   else if (to.name === 'linkInfo') {
     var fetchLinkInfo = function () {
       axios
-        .get(`http://localhost:8081/relations/get?id=` + to.params.linkid + '&' + 'user=user0')
+        .get(`http://54.201.123.246:8081/relations/get?id=` + to.params.linkid + '&' + 'user=user0')
         .then(response => {
           to.matched[0].props.linkInfo = response.data;
           next();
@@ -80,7 +80,7 @@ router.beforeEach(function (to, from, next) {
 
     if (paperInfo == '') {
       axios
-        .get(`http://localhost:8081/graphNode/graphNode/` + to.params.paperid)
+        .get(`http://54.201.123.246:8081/graphNode/graphNode/` + to.params.paperid)
         .then(response => {
           paperInfo = response.data;
           to.matched[0].props.paperInfo = paperInfo;
