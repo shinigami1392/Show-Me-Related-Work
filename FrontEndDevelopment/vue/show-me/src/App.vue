@@ -25,7 +25,7 @@
         </div>
 
         <div class="row" style="height:30%; margin-top:20px;">
-          <div class="col-md-3" style="height:100%;">
+          <div class="col-md-9" style="height:100%;">
             <transition name="slide" mode="out-in">
               <router-view name="info-box" :key="$route.fullPath"></router-view>
               <router-view name="link-info-box" :key="$route.fullPath"></router-view>
