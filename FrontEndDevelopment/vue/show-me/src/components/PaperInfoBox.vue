@@ -1,22 +1,22 @@
 <template>
-  <div style="height:100%;">
+  <div style="height:110%;">
     <app-box v-bind:boxHeaderProp="infoBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
       <table class="table">
         <tbody>
           <tr>
-            <td>Title</td>
+            <td> <b> Title </b></td>
             <td>{{paperInfo.name}}</td>
           </tr>
           <tr>
-            <td>Authors</td>
+            <td> <b>Authors </b></td>
             <td>{{paperInfo.author}}</td>
           </tr>
           <tr>
-            <td>Year</td>
+            <td><b>Year </b></td>
             <td>{{paperInfo.year}}</td>
           </tr>
           <tr>
-            <td>URL</td>
+            <td><b> URL </b></td>
             <td>{{paperInfo.url}}</td>
           </tr>
         </tbody>
