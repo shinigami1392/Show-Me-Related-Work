@@ -1,0 +1,44 @@
+<head>
+
+<style>
+
+.devname{
+      font-size:20px;
+      margin:0;
+    }
+
+.devrole{
+      margin-bottom:10;
+      margin-top:0;
+    }
+
+.devabout{
+      padding-left:140px;
+    }
+
+.devpic{
+      float: left;
+      margin:0;
+    }
+
+.aboutdev {
+  background: -webkit-radial-gradient(circle, #fff, #fff);
+  display: flex;
+  align-items: center;
+  justify-content: space-around;\
+  margin-top: 50px;
+}
+.aboutdevheader{
+      border-radius: 3px;
+    }
+
+.devSection {
+  width: 100%;
+  padding-left: 3%;
+  float: left;
+  text-align: left;
+}
+
+</style>
+
+</head>
