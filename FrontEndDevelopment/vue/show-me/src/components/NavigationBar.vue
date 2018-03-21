@@ -8,9 +8,13 @@
         <input type="text" placeholder="Search.." name="search">
         <button type="submit"><i class="fa fa-search"></i></button>
     </div>
+      <button @click="onClick" class="Button">
+          <slot>Log in using LinkedIn</slot>
+      </button>
       <div id="login">
         <facebook-login class="button" appId="159840638064281" @login="onLogin" @logout="onLogout" @sdk-loaded="sdkLoaded"><i class="fab fa-facebook"></i>
         </facebook-login>
+        
         <!-- <button type="button" class="btn btn-default btn-sm">
           <span class="glyphicon glyphicon-home"></span> Login <i class="fab fa-github"></i>
         </button>
@@ -126,8 +130,20 @@ export default {
     },
     onLogout() {
       this.isConnected = false;
+    },
+    onClick() {
+       console.log('LinkedIn Button clicked');
+       axios
+        .get(`http://localhost:8081/users/oauth/linkedin/`)
+        .then(response => {
+          return response.data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
     }
   }
+
 };
 
 // Vue.use(VueAuthenticate, {

@@ -4,7 +4,6 @@ var apis = require('../api.js');
 var passport = require('passport');
 var UsersController = require('../controllers/usersController');
 
-
 /* GET users listing. */
 router.get('/userId/:id', function(req, res, next) {
 	var userId = req.params.id; 
@@ -15,12 +14,16 @@ router.route('/oauth/facebook').post(passport.authenticate('facebookToken', {ses
 
 /* Route to be seclected when user choose to sign in using LinkedIn */ 
 router.get('/oauth/linkedin', function(req, res, next) {
+	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+	res.setHeader('Access-Control-Allow-Origin', 'null');	
 	apis.getLinkedInAuthorizationCode(req,res);
 });
 
 /* Redirect API for linkedIn. This API will be called when linkedIn 
    processes the user credentials and sends back the authoriation code */
-router.get('/oauth/linkedIn/callback', function(req, res, next) {	
+router.get('/oauth/linkedIn/callback', function(req, res, next) {
+	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');	
+	res.setHeader('Access-Control-Allow-Origin', 'null');	
 	apis.getLinkedInAccessToken(req,res);
 });
 
