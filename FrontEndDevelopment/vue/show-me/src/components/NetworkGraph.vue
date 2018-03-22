@@ -9,6 +9,11 @@
 
                 <div class="col-md-4" style="padding: 0px 0px;">
                     <div style="height:100%; width:inherit; overflow-y:auto;">
+                        <input type="checkbox"  id="l1" value="incoming"  
+                        v-model="linkType" v-on:change="filterLinks()">Incoming Links</input>
+                        <input type="checkbox"  id="l2" value="outgoing"  
+                        v-model="linkType" v-on:change="filterLinks()">Outgoing Links</input>
+                        
                         <table id="legend" class="table table-condensed">
                             <thead>
                                 <tr>
@@ -41,20 +46,21 @@ function plotGraph(vm, paperInfo) {
     var edges = [];
     var graph_elements = [];
     var legend_elements = [];
-
-    nodes.push({ data: { id: paperInfo.id } });
+    var incoming_citations = [];
+    nodes.push({ data: { id: paperInfo.id , type: 'root'} });
     legend_elements.push({ id: paperInfo.id, name: paperInfo.name });
 
     for (var i = 0; i < paperInfo.incoming_relations.length; i++) {
         var nodeObj = {
-            data: { id: '' }
+            data: { id: '' , type: 'incoming'}
         };
-
+        
         var edgeObj = {
-            data: { id: '', source: '', target: paperInfo.id }
+            data: { id: '', source: '', target: paperInfo.id, type: 'incoming' }
         }
-
+       
         nodeObj.data.id = paperInfo.incoming_relations[i].source_id;
+        incoming_citations.push(nodeObj.data.id);
         legend_elements.push({ id: paperInfo.incoming_relations[i].source_id, name: paperInfo.incoming_relations[i].source_name });
 
         edgeObj.data.id = 'e' + paperInfo.incoming_relations[i].id;
@@ -63,17 +69,29 @@ function plotGraph(vm, paperInfo) {
         edges.push(edgeObj);
     }
 
+    const incoming_citations_set = new Set(incoming_citations);
+
     for (var i = 0; i < paperInfo.outgoing_relations.length; i++) {
-        var nodeObj = {
-            data: { id: '' }
-        };
-
-        var edgeObj = {
-            data: { id: '', source: paperInfo.id, target: '' }
+        
+        var nodeObj = {};
+        if(incoming_citations_set.has(paperInfo.outgoing_relations[i].destination_id)){
+            for(var j = 0; j < nodes.length ; j++) {
+                   if(nodes[j].data.id == paperInfo.outgoing_relations[i].destination_id){
+                       nodes[j].data.type = 'incoming_outgoing';
+                       nodeObj = nodes[j];
+                       break;
+                   }
+            }
         }
-
-        nodeObj.data.id = paperInfo.outgoing_relations[i].destination_id;
-        legend_elements.push({ id: paperInfo.outgoing_relations[i].destination_id, name: paperInfo.outgoing_relations[i].destination_name });
+        else{
+            nodeObj = {
+                data: { id: paperInfo.outgoing_relations[i].destination_id, type: 'outgoing'}
+            };
+            legend_elements.push({ id: paperInfo.outgoing_relations[i].destination_id, name: paperInfo.outgoing_relations[i].destination_name });
+        }
+        var edgeObj = {
+            data: { id: '', source: paperInfo.id, target: '', type: 'outgoing' }
+        }
 
         edgeObj.data.id = 'e' + paperInfo.outgoing_relations[i].id;
         edgeObj.data.target = paperInfo.outgoing_relations[i].destination_id;
@@ -126,7 +144,9 @@ export default {
             graphBoxHeader: "Network Graph",
             graphElements: [],
             graphLegendElements: [],
-            isOpen: false
+            isOpen: false,
+            linkType:[],
+            graph:{}
         }
     },
     created() {
@@ -172,6 +192,23 @@ export default {
             selectedEdgeId = selectedEdgeId.substr(1);
             router.replace('/areas/' + route.params.areaid + '/paper/' + route.params.paperid + '/links/' + selectedEdgeId);
         });
+        this.graph = cy;
+    },
+    methods: {
+        filterLinks: function () {
+            var vm = this;
+            vm.graph.elements().forEach(function( ele ){
+                 if(ele.data('type') == 'root' || ele.data('type') == 'incoming_outgoing'){
+                     return;
+                 }
+                 if(!vm.linkType.includes(ele.data('type'))){
+                     ele.style('visibility', 'hidden');
+                 }
+                 else{
+                     ele.style('visibility', 'visible');
+                 }
+            });
+        }
     }
 
 };
