@@ -12,7 +12,7 @@
                         <input type="checkbox"  id="l1" value="incoming"  
                         v-model="linkType" v-on:change="filterLinks()">Incoming Links</input>
                         <input type="checkbox"  id="l2" value="outgoing"  
-                        v-model="linkType" v-on:change="filterLinks()">Outgoing Links</input>
+                        v-model="linkType" v-on:change="filterLinks()" checked>Outgoing Links</input>
                         
                         <table id="legend" class="table table-condensed">
                             <thead>
@@ -145,7 +145,7 @@ export default {
             graphElements: [],
             graphLegendElements: [],
             isOpen: false,
-            linkType:[],
+            linkType:["incoming","outgoing"],
             graph:{}
         }
     },
@@ -192,20 +192,28 @@ export default {
             selectedEdgeId = selectedEdgeId.substr(1);
             router.replace('/areas/' + route.params.areaid + '/paper/' + route.params.paperid + '/links/' + selectedEdgeId);
         });
+
+        cy.maxZoom(0.9);
+        
         this.graph = cy;
     },
     methods: {
         filterLinks: function () {
             var vm = this;
             vm.graph.elements().forEach(function( ele ){
-                 if(ele.data('type') == 'root' || ele.data('type') == 'incoming_outgoing'){
+                 if(ele.data('type') == 'root'){
                      return;
                  }
-                 if(!vm.linkType.includes(ele.data('type'))){
+
+                 if(ele.data('type') != 'incoming_outgoing' && !vm.linkType.includes(ele.data('type'))){
                      ele.style('visibility', 'hidden');
                  }
                  else{
                      ele.style('visibility', 'visible');
+                 }
+
+                if(vm.linkType.length == 0 && ele.data('type') == 'incoming_outgoing'){
+                     ele.style('visibility', 'hidden');
                  }
             });
         }
