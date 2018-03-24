@@ -1,9 +1,6 @@
 <template>
 
-  <div class="card" v-bind:style="cardStyle">
-    <div class="card-header card-outline-info h6 customBox testBox">
-        {{boxHeaderProp}}
-    </div>
+  <div class="card">
     <div class="wrap">
     <div class="search">
         <input type="text" class="searchTerm" placeholder="What are you looking for?">
@@ -24,8 +21,7 @@
         return {
           
         }
-      },
-      props: ['boxHeaderProp', 'cardStyle','cardBlockStyle', 'cardBlockContentStyle']
+      }
   };
 </script>
 

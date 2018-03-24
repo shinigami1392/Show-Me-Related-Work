@@ -14,7 +14,7 @@
             <transition name="slide" mode="out-in">
               <router-view name="animation-box"></router-view>
             </transition>
-            <app-searchbox></app-searchbox>
+            
             <transition name="slide" mode="out-in">
               <router-view name="table-box" :key="$route.fullPath"></router-view>
             </transition>

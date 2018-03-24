@@ -5,7 +5,7 @@
         <a href="/"><img src="../assets/ShowMe3.png" id="logo"></a>
       </div>
       <div class="topnav" align="left">
-        <input type="text" placeholder="Search.." name="search">
+        <input type="text" name="search" placeholder="Search.."> 
         <button type="submit"><i class="fa fa-search"></i></button>
     </div>
       <div id="login">
@@ -99,14 +99,19 @@ export default {
   padding-top: 9px;
 }
 
-
-
-.topnav input[type=text] {
-  font-size: 17px;
-  background: #343a40;
-  width: 40%;
-  border: 1;
-  border-radius: 3px;
+input[type=text] {
+    width: 200px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
 }
+
+input[type=text]:focus {
+    width: 50%;
+}
+
 
 </style>

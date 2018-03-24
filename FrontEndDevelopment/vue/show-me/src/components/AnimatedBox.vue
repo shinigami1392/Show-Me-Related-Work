@@ -1,8 +1,17 @@
 <template>
+
     <div id="animated-back">
+      
           <h1> SHOW ME<br/> related work</h1>
-          <h3> A better way to find relations between scholarly articles</h3>
+          <h3> A better way to find relations between scholarly articles</h3>      
+         
+
     </div>
+
+   
+
+    
+    
 </template>
 
 <script></script>
@@ -40,6 +49,10 @@ h3 {
   padding: 0;
   overflow: hidden;
 }
+
+
+
+
 @keyframes animateHeading {
   0% {
     transform: rotate(90deg);
