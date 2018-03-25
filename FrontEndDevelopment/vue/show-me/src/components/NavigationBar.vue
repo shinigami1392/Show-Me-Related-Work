@@ -53,18 +53,22 @@ export default {
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 100%
+  width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
 }
 .header{
       border-radius: 0px;
       width: 100%;
       height: 50px;
-      background-color: #343a40;
+      background-color: #0E6390;
+
     }
 
 #login{
       padding-top: 10px;
-      padding-right: 10px;
+      padding-right: 20px;
       padding-left: 10px;
       text-align: right;
       float: right;

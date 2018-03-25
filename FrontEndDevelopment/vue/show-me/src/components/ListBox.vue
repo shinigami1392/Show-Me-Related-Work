@@ -57,7 +57,5 @@ export default {
 
 
 <style>
-.header{
-  background-color: #343a40;
-}
+
 </style>
