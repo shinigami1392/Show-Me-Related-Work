@@ -10,14 +10,25 @@ def loadData(papers):
     try:
         for json_obj in json_data:
             title = json_obj["title"]
-            title = title.replace("'","\\'")
+            if title.find("'") == 1:
+                print "Title before removal:" 
+                print title
+                title = title.replace("'","")
+                print "Title after removal:" 
+                print title
             query = "CREATE (Paper"
             query = query + json_obj["id"]+":ResearchPaper {Id:'"+json_obj["id"]+"',Title:'"
             query = query + title + "', Author: '"
             author_list = json_obj["authors"]
 
             for i in range(0, author_list.__len__()-1):
-                author = author_list[i].replace("'","\\'")
+                author = author_list[i].replace("'","")
+                if author.find("'") == 1:
+                    print "author before removal:" 
+                    print author
+                    author = author.replace("'","")
+                    print "author after removal:" 
+                    print author
                 query = query + author + ","
 
             query = query + author_list[author_list.__len__()-1] + "', "
