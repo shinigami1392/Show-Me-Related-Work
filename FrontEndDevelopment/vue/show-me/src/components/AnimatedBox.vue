@@ -30,9 +30,9 @@
 h1 {
   font-family: "Kaushan Script";
   text-align: center;
-
-  border-top: solid black 3.9px;
-  border-bottom: solid black 5.9px;
+  color: #0077b5;
+  border-top: solid #86888A 3.9px;
+  border-bottom: solid #86888A 3.9px;
 
   padding: 0;
   overflow: hidden;
@@ -42,8 +42,8 @@ h1 {
 h3 {
   font-family: "Kaushan Script";
   text-align: right;
-
-  border-bottom: solid black 2.9px;
+  color: #0077b5;
+  border-bottom: solid #86888A 2.9px;
   padding: 0;
   overflow: hidden;
 }

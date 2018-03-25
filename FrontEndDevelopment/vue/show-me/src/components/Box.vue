@@ -35,7 +35,7 @@
 
 <style>
 .customBox{
-  background: #3b5998;
+  background: #0077b5;
   color: #fff;
   display: flex;
   align-items: center;
