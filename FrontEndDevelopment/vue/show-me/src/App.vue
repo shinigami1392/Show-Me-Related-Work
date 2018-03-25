@@ -26,22 +26,28 @@
             <router-view name="area-box"></router-view>
           </div>  
         </div>
+		
+		
 
         <div class="row" style="height:70%; margin-top:5px;">
-          <div class="col-md-9" style="height:50%;">
+          <div class="col-md-6" style="height:50%">
+														<!--<app-box v-bind:boxHeaderProp = "userFeedbackBoxHeader">
+																		  </app-box> -->
             <transition name="slide" mode="out-in">
-              <router-view name="info-box" :key="$route.fullPath"></router-view>
-              <router-view name="link-info-box" :key="$route.fullPath"></router-view>
-            </transition>
-          </div>
-          <div class="col-md-9" style="height:100%">
-            <!--<app-box v-bind:boxHeaderProp = "userFeedbackBoxHeader">
-                              </app-box> -->
-            <transition name="slide" mode="out-in">
+			  <router-view name="info-box" :key="$route.fullPath"></router-view>
               <router-view name="feedback-box" :key="$route.fullPath"></router-view>
             </transition>
           </div>
+		  <div class="col-md-6" style="height:50%;">
+            <transition name="slide" mode="out-in">
+			  <router-view name="link-info-box" :key="$route.fullPath"></router-view>
+            </transition>
+          </div>
         </div>
+		
+		
+		
+		
       </div>
     </div>
   </div>
