@@ -1,16 +1,17 @@
 <template>
 
-  <div class="card">
-    <div class="wrap">
-    <div class="search">
-        <input type="text" class="searchTerm" placeholder="What are you looking for?">
-        <button type="submit" class="searchButton">
-            <i class="fa fa-search"></i>
-        </button>
-    </div>
-</div>
-    
-  </div>
+
+    <div id="custom-search-input">
+                <div class="input-group col-md-12">
+                    <input type="text" class="form-control input-lg" placeholder="What are you looking for..." />
+                    <span class="input-group-btn">
+                        <button class="btn btn-info btn-lg" type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+      </div>
+
 
 </template>
 
@@ -27,56 +28,44 @@
 
 
 <style>
-.customBox{
-  background: #343a40;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
+#custom-search-input{
+    background: -webkit-radial-gradient(circle, #fff, #fff);
+    margin-left: 500px;
+    margin-right: 500px;
+    align-items: center;
+    padding: 3px;
+    border: solid 2px #3399FF;
+    border-radius: 6px;
+    background-color: #fff;
+
 }
 
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
-
-
-.search {
+#custom-search-input input:focus{
   width: 100%;
-  position: relative
 }
 
-.searchTerm {
-  float: left;
-  width: 100%;
-  border: 3px solid #00B4CC;
-  padding: 5px;
-  height: 20px;
-  border-radius: 5px;
-  outline: none;
-  color: #9DBFAF;
+#custom-search-input input{
+    width:500px;
+    border: 0;
+    box-shadow: none;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
 }
 
-.searchTerm:focus{
-  color: #00B4CC;
+#custom-search-input button{
+    margin: 2px 0 0 0;
+    background: none;
+    box-shadow: none;
+    border: 0;
+    color: #666666;
+    padding: 0 8px 0 10px;
+    border-left: solid 1px #ccc;
 }
 
-.searchButton {
-  position: absolute;  
-  right: -50px;
-  width: 40px;
-  height: 36px;
-  border: 1px solid #00B4CC;
-  background: #00B4CC;
-  text-align: center;
-  color: #fff;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 20px;
+#custom-search-input button:hover{
+    border: 0;
+    box-shadow: none;
+    border-left: solid 1px rgb(204, 204, 204);
 }
 
-.wrap{
-  width: 30%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
 </style>

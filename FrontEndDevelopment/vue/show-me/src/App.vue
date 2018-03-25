@@ -10,6 +10,9 @@
     <div id="main">
       <div class="container-fluid" style="height:700px">
         <div class="row content" style="height:60%;">
+          <div class="col-md-12">
+            <router-view name="search-box"></router-view>
+          </div>
           <div class="col-md-9" style="height:100%;">
             <transition name="slide" mode="out-in">
               <router-view name="animation-box"></router-view>

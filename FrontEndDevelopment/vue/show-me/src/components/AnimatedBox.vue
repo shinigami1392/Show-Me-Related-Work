@@ -1,11 +1,9 @@
 <template>
 
     <div id="animated-back">
-      
-          <h1> SHOW ME<br/> related work</h1>
-          <h3> A better way to find relations between scholarly articles</h3>      
-         
 
+          <h1> SHOW ME<br/> related work<br/></h1>
+          <h3> A better way to find relations between scholarly articles</h3>      
     </div>
 
    
@@ -20,9 +18,9 @@
 @import url(https://fonts.googleapis.com/css?family=Kaushan+Script);
 
 #animated-back {
-  background: -webkit-radial-gradient(circle, #CED0DE, #fff);
+  background: -webkit-radial-gradient(circle, #fff, #fff);
   height: 100%;
-  margin: 0;
+  margin: auto;
   padding: 0;
   display: flex;
   align-items: center;

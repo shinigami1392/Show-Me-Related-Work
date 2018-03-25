@@ -5,6 +5,7 @@ import Feedback from './components/Feedback.vue'
 import LinkInfoBox from './components/LinkInfoBox.vue'
 import AnimatedBox from './components/AnimatedBox.vue'
 import PaginatedTable from './components/PaginatedTable.vue'
+import SearchBox from './components/SearchBox.vue'
 
 //Lazy routing
 const PapersTable = resolve => {
@@ -26,7 +27,8 @@ export const routes = [{
   components: {
     default: NavigationBar,
     'area-box': ListBox,
-    'animation-box': AnimatedBox
+    'animation-box': AnimatedBox,
+    'search-box': SearchBox
   }
 },
 {

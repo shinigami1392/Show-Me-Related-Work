@@ -1,13 +1,13 @@
 <template>
   <div id="navigation" class="navbar navbar-default customNav">
     <div class="header">
-      <div id="logoDiv">
+      <!--<div id="logoDiv">
         <a href="/"><img src="../assets/ShowMe3.png" id="logo"></a>
-      </div>
+      </div>-->
       <div class="topnav" align="left">
         <input type="text" name="search" placeholder="Search.."> 
-        <button type="submit"><i class="fa fa-search"></i></button>
-    </div>
+        <button type="submit"><i class="fa fa-search searchButton"></i></button>
+      </div>
       <div id="login">
         <button type="button" class="btn btn-default btn-sm">
           <span class="glyphicon glyphicon-home"></span> Login <i class="fab fa-github"></i>
@@ -50,7 +50,6 @@ export default {
 
 <style>
 .customNav {
-  background: -webkit-radial-gradient(circle, #fff, #fff);
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -62,13 +61,7 @@ export default {
       height: 50px;
       background-color: #343a40;
     }
-.customBox {
-    background: #343a40;
-    color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
+
 #login{
       padding-top: 10px;
       padding-right: 10px;
@@ -100,7 +93,7 @@ export default {
 }
 
 input[type=text] {
-    width: 200px;
+    width: 150px;
     box-sizing: border-box;
     border: 2px solid #ccc;
     border-radius: 4px;
@@ -110,8 +103,15 @@ input[type=text] {
 }
 
 input[type=text]:focus {
-    width: 50%;
+    width: 30%;
 }
 
+.searchButton {
 
+  text-align: center;
+  color: #000;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+}
 </style>
