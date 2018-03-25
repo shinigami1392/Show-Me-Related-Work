@@ -1,5 +1,5 @@
 <template>
-  <div style="height:100%;">
+  <div style="height:auto;">
     <app-box v-bind:boxHeaderProp="infoBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
       <table class="table">
         <tbody>

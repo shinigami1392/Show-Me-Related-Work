@@ -1,6 +1,6 @@
 <template>
     <app-box v-bind:boxHeaderProp="feedbackBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
-        <div style="width:100%; height:70%">
+        <div style="width:100%; height:50%">
             <ul class="list-group" style="height:100%; overflow-y:auto;">
                 <li v-for="comment in comments">
                    <span style="color:green; font-weight:bold;"> {{comment.user_name}}</span> <span style="color:grey;">[{{ getTimeStamp(comment.timestamp) }}]</span>: {{comment.text}} <hr />
