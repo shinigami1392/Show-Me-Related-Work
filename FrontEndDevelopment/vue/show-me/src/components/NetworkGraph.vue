@@ -7,18 +7,20 @@
                     </div>
                 </div>
 
-                <div class="col-md-4" style="padding: 0px 0px;">
-                    <div style="height:100%; width:inherit; overflow-y:auto;">
+                <div class="col-md-4" style="padding: 0px 0px; height:100%;">
+                    <div style="height:100%; width:inherit;">
+                        <div style="height:7%;">
                         <input type="checkbox"  id="l1" value="incoming"  
                         v-model="linkType" v-on:change="filterLinks()">Incoming Links</input>
                         <input type="checkbox"  id="l2" value="outgoing"  
                         v-model="linkType" v-on:change="filterLinks()" checked>Outgoing Links</input>
-                        
-                        <table id="legend" class="table table-condensed">
+                        </div>
+                        <table id="legend" class="table table-condensed" style="display: block; height: 90%; overflow-y:scroll; table-layout:fixed;">
                             <thead>
                                 <tr>
                                     <th>Id</th>
                                     <th>Title</th>
+                                    <th>Weight</th>
                                 </tr>
                             </thead>
 
@@ -26,10 +28,12 @@
                                 <tr v-if="graphLegendElements && graphLegendElements.length" v-for="graphElement in graphLegendElements">
                                     <td class="small">{{ graphElement.id }}</td>
                                     <td class="small">{{ graphElement.name }}</td>
+                                    <td class="small">{{ graphElement.weight }}</td>
                                 </tr>
                             </tbody>
 
                         </table>
+                        
                     </div>
                 </div>
             </div>
@@ -38,6 +42,7 @@
 </template>
 
 <script>
+
 
 
 function plotGraph(vm, paperInfo) {
@@ -49,7 +54,6 @@ function plotGraph(vm, paperInfo) {
     var incoming_citations = [];
     nodes.push({ data: { id: paperInfo.id , type: 'root'} });
     legend_elements.push({ id: paperInfo.id, name: paperInfo.name });
-
     for (var i = 0; i < paperInfo.incoming_relations.length; i++) {
         var nodeObj = {
             data: { id: '' , type: 'incoming'}
@@ -61,7 +65,7 @@ function plotGraph(vm, paperInfo) {
        
         nodeObj.data.id = paperInfo.incoming_relations[i].source_id;
         incoming_citations.push(nodeObj.data.id);
-        legend_elements.push({ id: paperInfo.incoming_relations[i].source_id, name: paperInfo.incoming_relations[i].source_name });
+        legend_elements.push({ id: paperInfo.incoming_relations[i].source_id, name: paperInfo.incoming_relations[i].source_name, weight: paperInfo.incoming_relations[i].weight });
 
         edgeObj.data.id = 'e' + paperInfo.incoming_relations[i].id;
         edgeObj.data.source = paperInfo.incoming_relations[i].source_id;
@@ -87,7 +91,7 @@ function plotGraph(vm, paperInfo) {
             nodeObj = {
                 data: { id: paperInfo.outgoing_relations[i].destination_id, type: 'outgoing'}
             };
-            legend_elements.push({ id: paperInfo.outgoing_relations[i].destination_id, name: paperInfo.outgoing_relations[i].destination_name });
+            legend_elements.push({ id: paperInfo.outgoing_relations[i].destination_id, name: paperInfo.outgoing_relations[i].destination_name, weight: paperInfo.outgoing_relations[i].weight });
         }
         var edgeObj = {
             data: { id: '', source: paperInfo.id, target: '', type: 'outgoing' }
@@ -194,8 +198,16 @@ export default {
         });
 
         cy.maxZoom(0.9);
-        
+
         this.graph = cy;
+        $(document).ready(function() {
+            $('#legend').DataTable({
+                 "paging":   false,
+                 "info": false
+            });
+            $('#legend_wrapper').css('height','92%');
+            $('#legend_filter').css('height','10%');
+        });
     },
     methods: {
         filterLinks: function () {
@@ -244,6 +256,10 @@ export default {
     display: table;
     border: 1px solid #666666;
     width: auto;
+}
+
+#legend_wrapper{
+    height:100%;
 }
 
 .tblRow {
