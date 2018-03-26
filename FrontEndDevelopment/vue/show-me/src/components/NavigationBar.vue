@@ -9,7 +9,7 @@
         <button type="submit"><i class="fa fa-search"></i></button>
     </div>
       <div id="login">
-        <button type="button" class="btn btn-default btn-sm">
+        <button type="button" class="btn btn-default btn-sm"  @click="login()">
           <span class="glyphicon glyphicon-home"></span> Login <i class="fab fa-github"></i>
         </button>
         <!-- <a href="/">
@@ -28,7 +28,7 @@
 
 <script>
 import axios from "axios";
-
+import AuthenticationService from "../Auth/AuthService"
 function sendLoginRequest() { }
 function sendLogoutRequest() { }
 
@@ -43,7 +43,11 @@ export default {
         username: "johndoe2020",
         email: "johndoe2020@gmail.com"
       }
-    };
+    }
+  },
+  methods: {
+    login,
+    logout
   }
 };
 </script>
