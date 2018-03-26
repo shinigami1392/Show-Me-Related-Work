@@ -34,7 +34,7 @@
     margin-right: 500px;
     align-items: center;
     padding: 3px;
-    border: solid 2px #0077b5;
+    border: solid 2px #0E6390;
     border-radius: 6px;
     background-color: #fff;
 
@@ -57,7 +57,7 @@
     background: none;
     box-shadow: none;
     border: 0;
-    color: #0077b5;
+    color: #0E6390;
     padding: 0 8px 0 10px;
     border-left: solid 1px #ccc;
 }

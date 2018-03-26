@@ -1,7 +1,6 @@
 <template>
 
     <div id="animated-back">
-
           <h1> SHOW ME<br/> related work<br/></h1>
           <h3> A better way to find relations between scholarly articles</h3>      
     </div>
@@ -30,11 +29,10 @@
 h1 {
   font-family: "Kaushan Script";
   text-align: center;
-  color: #0077b5;
+  color: #0E6390;
   border-top: solid #86888A 3.9px;
   border-bottom: solid #86888A 3.9px;
 
-  padding: 0;
   overflow: hidden;
   animation: animateHeading 3s forwards;
 }
@@ -42,18 +40,15 @@ h1 {
 h3 {
   font-family: "Kaushan Script";
   text-align: right;
-  color: #0077b5;
+  color: #0E6390;
   border-bottom: solid #86888A 2.9px;
   padding: 0;
   overflow: hidden;
 }
 
-
-
-
 @keyframes animateHeading {
   0% {
-    transform: rotate(90deg);
+    transform: rotate(360deg);
     width: 0;
     height: 0;
   }
@@ -69,8 +64,7 @@ h3 {
   }
   100% {
     width: 25%;
-
-    height: 3.11em;
+    height: 2.8em;
   }
 }
 </style>
