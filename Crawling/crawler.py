@@ -64,7 +64,7 @@ class MyCrawler:
 
 	def decodeString(self, string):
 		string = string.replace('[::', '').replace('::]', '')
-		string = string.replace('\'', '').replace('\"', '')
+		string = string.replace("'", "").replace('\"', '')
 		return string
 
 	def extractPapers(self, content):
@@ -164,7 +164,10 @@ class MyCrawler:
 				#getting authors
 				paperObject['authors'] = []
 				for author in content['authors']:
-					paperObject['authors'].append(author['name'])
+					if "'" in author['name']:
+						print "printing in extractPaperInfo()"
+						print author['name']
+					paperObject['authors'].append(self.decodeString(author['name']))
 				
 				references = self.getReferences(paperObject['id'])
 				referenceArray = {}
@@ -175,6 +178,11 @@ class MyCrawler:
 				paperCount += 1
 				
 				self.OBJECTS.append(paperObject)
+				for object in self.OBJECTS:
+					for author in object['authors']:
+						if "'" in author:
+							print author
+
 
 				if len(self.OBJECTS) == 10:
 					self.savePapers(stream)	
@@ -190,6 +198,13 @@ class MyCrawler:
 
 	def savePapers(self, stream):
 		try:
+			for object in self.OBJECTS:
+			 	for author in object['authors']:
+					if "'" in author:
+						print author
+			 			print "printing in savePapers()"
+			# 		print object['authors']
+
 			loadData(self.OBJECTS)
 			dir_path = os.path.dirname(os.path.realpath(__file__))
 			filepath = os.path.join(dir_path, 'NodeQueryRunner')
