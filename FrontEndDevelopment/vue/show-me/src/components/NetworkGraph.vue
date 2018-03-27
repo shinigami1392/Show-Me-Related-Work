@@ -53,7 +53,7 @@ function plotGraph(vm, paperInfo) {
     var legend_elements = [];
     var incoming_citations = [];
     nodes.push({ data: { id: paperInfo.id , type: 'root'} });
-    legend_elements.push({ id: paperInfo.id, name: paperInfo.name });
+    legend_elements.push({ id: paperInfo.id, name: paperInfo.name, type: 'root'});
     for (var i = 0; i < paperInfo.incoming_relations.length; i++) {
         var nodeObj = {
             data: { id: '' , type: 'incoming'}
@@ -65,7 +65,7 @@ function plotGraph(vm, paperInfo) {
        
         nodeObj.data.id = paperInfo.incoming_relations[i].source_id;
         incoming_citations.push(nodeObj.data.id);
-        legend_elements.push({ id: paperInfo.incoming_relations[i].source_id, name: paperInfo.incoming_relations[i].source_name, weight: paperInfo.incoming_relations[i].weight });
+        legend_elements.push({ id: paperInfo.incoming_relations[i].source_id, name: paperInfo.incoming_relations[i].source_name, weight: paperInfo.incoming_relations[i].weight, type: 'incoming'});
 
         edgeObj.data.id = 'e' + paperInfo.incoming_relations[i].id;
         edgeObj.data.source = paperInfo.incoming_relations[i].source_id;
@@ -91,7 +91,7 @@ function plotGraph(vm, paperInfo) {
             nodeObj = {
                 data: { id: paperInfo.outgoing_relations[i].destination_id, type: 'outgoing'}
             };
-            legend_elements.push({ id: paperInfo.outgoing_relations[i].destination_id, name: paperInfo.outgoing_relations[i].destination_name, weight: paperInfo.outgoing_relations[i].weight });
+            legend_elements.push({ id: paperInfo.outgoing_relations[i].destination_id, name: paperInfo.outgoing_relations[i].destination_name, weight: paperInfo.outgoing_relations[i].weight, type: 'outgoing'});
         }
         var edgeObj = {
             data: { id: '', source: paperInfo.id, target: '', type: 'outgoing' }
@@ -107,6 +107,7 @@ function plotGraph(vm, paperInfo) {
     graph_elements.push.apply(graph_elements, edges);
 
     vm.graphLegendElements = legend_elements;
+    vm.legendElements = JSON.parse(JSON.stringify(legend_elements));
     var cy = cytoscape({
         container: document.getElementById('details'), // container to render in
         elements: graph_elements,
@@ -132,7 +133,11 @@ function plotGraph(vm, paperInfo) {
             }
         ],
         layout: {
-            name: 'circle'
+            name: 'dagre',
+            rankDir: 'LR',
+  
+            animate: true,
+            animationDuration: 500
         }
     });
 
@@ -148,9 +153,11 @@ export default {
             graphBoxHeader: "Network Graph",
             graphElements: [],
             graphLegendElements: [],
+            legendElements:[],
             isOpen: false,
             linkType:["incoming","outgoing"],
-            graph:{}
+            graph:{},
+            datatable:{}
         }
     },
     created() {
@@ -197,11 +204,11 @@ export default {
             router.replace('/areas/' + route.params.areaid + '/paper/' + route.params.paperid + '/links/' + selectedEdgeId);
         });
 
-        cy.maxZoom(0.9);
+        cy.maxZoom(2.0);
 
         this.graph = cy;
         $(document).ready(function() {
-            $('#legend').DataTable({
+           this.datatable = $('#legend').DataTable({
                  "paging":   false,
                  "info": false
             });
@@ -228,6 +235,15 @@ export default {
                      ele.style('visibility', 'hidden');
                  }
             });
+
+            vm.graphLegendElements = vm.legendElements.filter(function (element) {
+                        return element.type == 'root' || vm.linkType.includes(element.type)
+            });
+            
+            //$('#legend').DataTable().destroy();
+            //$('#legend').DataTable().clear();
+            //$('#legend').DataTable().rows().invalidate().draw();
+            //$('#legend').DataTable();
         }
     }
 
