@@ -1,10 +1,12 @@
 import auth0 from 'auth0-js'
 import { AUTH_CONFIG } from './auth0-variables'
 import EventEmitter from 'eventemitter3'
-import router from './../router'
+//import router from '../../router'
+
+
 
 export default class AuthService {
-  authenticated = this.isAuthenticated()
+ /* authenticated = this.isAuthenticated()
   authNotifier = new EventEmitter()
 
   constructor () {
@@ -21,13 +23,21 @@ export default class AuthService {
     audience: `https://${AUTH_CONFIG.domain}/userinfo`,
     responseType: 'token id_token',
     scope: 'openid'
-  })
+  }) */
 
   login () {
-    this.auth0.authorize()
+    //console.log("in login of AuthServ.js")
+    new auth0.WebAuth({
+      domain: AUTH_CONFIG.domain,
+      clientID: AUTH_CONFIG.clientId,
+      redirectUri: AUTH_CONFIG.callbackUrl,
+      audience: `https://${AUTH_CONFIG.domain}/userinfo`,
+      responseType: 'token id_token',
+      scope: 'openid'
+    }).authorize()
   }
 
-  handleAuthentication () {
+  /* handleAuthentication () {
     this.auth0.parseHash((err, authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
       this.setSession(authResult)
@@ -49,23 +59,21 @@ export default class AuthService {
     localStorage.setItem('id_token', authResult.idToken)
     localStorage.setItem('expires_at', expiresAt)
     this.authNotifier.emit('authChange', { authenticated: true })
-  }
+  } */
 
   logout () {
-    // Clear access token and ID token from local storage
     localStorage.removeItem('access_token')
     localStorage.removeItem('id_token')
     localStorage.removeItem('expires_at')
     this.userProfile = null
     this.authNotifier.emit('authChange', false)
-    // navigate to the home route
     router.replace('home')
   }
 
-  isAuthenticated () {
+  /*isAuthenticated () {
     // Check whether the current time is past the
     // access token's expiry time
     let expiresAt = JSON.parse(localStorage.getItem('expires_at'))
     return new Date().getTime() < expiresAt
-  }
+  } */
 }
