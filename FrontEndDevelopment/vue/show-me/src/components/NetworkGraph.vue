@@ -25,7 +25,7 @@
                             </thead>
 
                             <tbody>
-                                <tr v-if="graphLegendElements && graphLegendElements.length" v-for="graphElement in graphLegendElements">
+                                <tr v-if="graphLegendElements && graphLegendElements.length" v-for="graphElement in graphLegendElements" :key="graphElement.id">
                                     <td class="small">{{ graphElement.id }}</td>
                                     <td class="small">{{ graphElement.name }}</td>
                                     <td class="small">{{ graphElement.weight }}</td>
@@ -235,15 +235,26 @@ export default {
                      ele.style('visibility', 'hidden');
                  }
             });
-
-            vm.graphLegendElements = vm.legendElements.filter(function (element) {
-                        return element.type == 'root' || vm.linkType.includes(element.type)
+            var dtRecords = [];
+            vm.legendElements.filter(function (element) {
+                        if(element.type == 'root' || vm.linkType.includes(element.type)){
+                            var row = [];
+                            row.push(element.id);
+                            row.push(element.name);
+                            if(element.weight == null || element.weight === undefined){
+                                row.push(0);
+                            }
+                            else{
+                                row.push(element.weight);
+                            }
+                            dtRecords.push(row);
+                            return true;
+                        }
+                        return false;
             });
-            
-            //$('#legend').DataTable().destroy();
-            //$('#legend').DataTable().clear();
-            //$('#legend').DataTable().rows().invalidate().draw();
-            //$('#legend').DataTable();
+            vm.graphLegendElements = [];
+            $('#legend').DataTable().clear();
+            $('#legend').DataTable().rows.add(dtRecords).draw();
         }
     }
 
