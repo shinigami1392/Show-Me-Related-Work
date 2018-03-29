@@ -67,8 +67,9 @@ router.beforeEach(function (to, from, next) {
   }
   else if (to.name === 'linkInfo') {
     var fetchLinkInfo = function () {
+      var papers = to.params.linkid.split("_");
       axios
-        .get(`http://localhost:8081/relations/get?id=` + to.params.linkid + '&' + 'user=user0')
+        .get(`http://localhost:8081/relations/get?domain=` + to.params.areaid + `&source=`+papers[0]+`&destination=`+papers[1]+`&user=user0`)
         .then(response => {
           to.matched[0].props.linkInfo = response.data;
           next();
