@@ -13,7 +13,7 @@
           <div class="col-md-12">
             <router-view name="search-box"></router-view>
           </div>
-          <div class="col-md-9" style="height:100%;">
+          <div class="col-md-11" style="height:100%;">
             <transition name="slide" mode="out-in">
               <router-view name="animation-box"></router-view>
             </transition>
@@ -22,7 +22,7 @@
               <router-view name="table-box" :key="$route.fullPath"></router-view>
             </transition>
           </div>
-          <div class="col-md-3" style="height:100%;">
+          <div class="col-md-1" style="height:100%;">
             <router-view name="area-box"></router-view>
           </div>  
         </div>
