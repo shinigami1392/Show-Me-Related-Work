@@ -13,15 +13,11 @@
         {{ cat.name }}
       </li>
     </ul>-->
-  
-
-
-  </app-box>
+   </app-box>
 </template>
 
 <script>
 import axios from "axios";
-
 function getPaperCatagories(vm) {
   axios
     .get(`http://54.201.123.246:8081/domains/all`)
@@ -32,7 +28,6 @@ function getPaperCatagories(vm) {
       vm.errors.push(err);
     });
 }
-
 export default {
   data() {
     return {
@@ -42,10 +37,8 @@ export default {
       testcategories: [{'id':1,'name':'software engineering'},{'id':2,'name':'machine learning'},{'id':3,'name':'web development'}]
     };
   },
-
   methods: {
   },
-
   created() {
     getPaperCatagories(this);
     this.cardStyle = "height:100%";
@@ -55,7 +48,5 @@ export default {
 };
 </script>
 
-
 <style>
-
 </style>

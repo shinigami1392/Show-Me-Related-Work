@@ -1,4 +1,4 @@
-import ListBox from './components/ListBox.vue'
+import ListBox from './components/SideNavigationBar.vue'
 import NavigationBar from './components/NavigationBar.vue'
 import NetworkGraph from './components/NetworkGraph.vue'
 import Feedback from './components/Feedback.vue'
