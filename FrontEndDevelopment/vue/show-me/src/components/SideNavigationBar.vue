@@ -1,14 +1,15 @@
 <template>
-	<app-box v-bind:boxHeaderProp="researchAreasBoxHeader" v-bind:cardStyle="cardStyle" v-on:click.native="flag = true">
-		<div v-if="flag" id="mySidenav" v-bind:cardBlockStyle="cardBlockStyle">
-			<div v-on:click.native="flag = false" >×</div>
+	<div>
+		<app-box v-bind:boxHeaderProp="researchAreasBoxHeader" v-bind:cardStyle="cardStyle" v-on:click.native="openNav">
+		</app-box>	
+		<div id="sideBar" v-bind:cardBlockStyle="cardBlockStyle">
+			<a href="javascript:void(0)">×</a>
 			<a href="#">About</a>
 			<a href="#">Services</a>
 			<a href="#">Clients</a>
 			<a href="#">Contact</a>
-		</div>
-	</app-box>
-	
+		</div>	
+	</div>
 </template>
 
 <script>
@@ -35,21 +36,15 @@ export default {
     };
   },
   methods: {
-	openNav: function () {
-		mySidenav = document.getElementById('mySidenav');
-		mySidenav.style.width="250px";
-    },
-
-    closeNav: function () {
-    let sideBarElement = "sideBar";
-      let close = document.getElementById(sideBarElement); 
-      close.style.width = "0px";
-    }
+	openNav: function(event){
+		open = document.getElementById("sideBar");
+		open.style.width = "250px";
+	}
   },
   created() {
     getPaperCatagories(this);
     this.cardStyle = "writing-mode:tb-rl;height:100%;float:right;cursor:pointer";
-    this.cardBlockStyle = "height:90%;position:absolute;overflow-x:hidden;top:0;right:25px;font-size:36px;margin-left:50px";
+    this.cardBlockStyle = "";
     this.cardBlockContentStyle = "height:100%;"
   }
 };
