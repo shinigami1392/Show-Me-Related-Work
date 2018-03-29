@@ -44,6 +44,17 @@ export default {
   },
 
   methods: {
+    openNav: function () {
+      let sideBarElement = "sideBar";
+      let open = document.getElementById(sideBarElement); 
+      open.style.width = "250px"; ;
+    },
+
+    closeNav: function () {
+    let sideBarElement = "sideBar";
+      let close = document.getElementById(sideBarElement); 
+      close.style.width = "0px";
+    }
   },
 
   created() {
