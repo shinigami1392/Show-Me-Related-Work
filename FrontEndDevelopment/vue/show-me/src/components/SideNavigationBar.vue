@@ -1,14 +1,18 @@
 <template>
 	<div>
+      <div id="sideBar" class="sidenav "  >
+        <a href="javascript:void(0)" class="closebtn" @click="closeNav">&times;</a>
+        <ul class="list-group" v-if="categories && categories.length" style="height:100%; overflow-y:auto; overflow-x:hidden;">
+          <li v-for="category in categories" class="list-group-item">
+          <router-link :to="{ name:'allPapers',params:{areaid:category.id}}">{{ category.name }}</router-link>
+          <span class="badge badge-primary badge-pill">{{ category.count }}</span>
+          </li>
+        </ul>
+		  </div>
 		<app-box v-bind:boxHeaderProp="researchAreasBoxHeader" v-bind:cardStyle="cardStyle" v-on:click.native="openNav">
-		</app-box>	
-		<div id="sideBar" v-bind:cardBlockStyle="cardBlockStyle">
-			<a href="javascript:void(0)">×</a>
-			<a href="#">About</a>
-			<a href="#">Services</a>
-			<a href="#">Clients</a>
-			<a href="#">Contact</a>
-		</div>	
+
+    </app-box>	
+	
 	</div>
 </template>
 
@@ -31,15 +35,21 @@ export default {
       researchAreasBoxHeader: "Research Areas",
 	  flag: false,
       categories: [],
-      errors: [],
-      testcategories: [{'id':1,'name':'software engineering'},{'id':2,'name':'machine learning'},{'id':3,'name':'web development'}]
+      errors: []      
     };
   },
   methods: {
-	openNav: function(event){
-		open = document.getElementById("sideBar");
-		open.style.width = "250px";
-	}
+    closeNav: function (event) {      
+        let sideBarElement = "sideBar";
+        let close = document.getElementById(sideBarElement); 
+        close.style.width = "0px";
+    },
+    openNav: function(event){
+      let sideBarElement = "sideBar";
+      open = document.getElementById(sideBarElement);
+      open.style.width = "250px";
+    }   
+
   },
   created() {
     getPaperCatagories(this);
@@ -50,4 +60,24 @@ export default {
 };
 </script>
 <style>
+  .sidenav {
+      height: 100%;
+      width: 0;
+      position: fixed;    
+      z-index: 1;
+      top: 0;
+      right: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+  }
+  .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+  }
+
 </style>
