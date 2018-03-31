@@ -49,13 +49,35 @@ var paperInfo = '';
 function setPaperInfoValue(value) {
   paperInfo = value;
 }
+var visitedPapers = [];
+const maxVisitHistory = 5;
 
+var countVisitedPapers = 0;
 router.beforeEach(function (to, from, next) {
   if (to.name === 'paperInfo') {
+    countVisitedPapers++;
+    console.log("countVisitedPapers: "+countVisitedPapers);
+
+
+    if(visitedPapers.length < maxVisitHistory){
+      visitedPapers.push({'id':to.params.paperid,'name':''})
+    }
+    else if(visitedPapers.length == maxVisitHistory){
+        for(let index = 1; index <= maxVisitHistory - 1; index++){
+            visitedPapers[index-1] =visitedPapers[index];
+        }
+        visitedPapers[maxVisitHistory - 1] = {'id':to.params.paperid, 'name':''};
+    }
+
     axios
       .get(`http://localhost:8081/graphNode/graphNode/` + to.params.paperid)
       .then(response => {
         paperInfo = response.data;
+        console.log(JSON.stringify(paperInfo));
+        if(paperInfo != null){
+          visitedPapers[visitedPapers.length - 1]['name'] =  paperInfo.name;
+        }
+        console.log("Visited Papers: "+JSON.stringify(visitedPapers));
         to.matched[0].props.paperInfo = paperInfo;
         setPaperInfoValue(paperInfo);
         next();
@@ -66,7 +88,9 @@ router.beforeEach(function (to, from, next) {
       });
   }
   else if (to.name === 'linkInfo') {
+    
     var fetchLinkInfo = function () {
+      visitedPapers.push()
       axios
         .get(`http://localhost:8081/relations/get?id=` + to.params.linkid + '&' + 'user=user0')
         .then(response => {
