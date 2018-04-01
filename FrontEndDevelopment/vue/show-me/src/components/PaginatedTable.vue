@@ -2,6 +2,7 @@
   <app-box v-bind:boxHeaderProp="researchPapersBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
     <grid :data="papers " :move-pages="movePages" :start-row="startRow" :rows-per-page="rowsPerPage">
     </grid>
+
   </app-box>
 </template>
 

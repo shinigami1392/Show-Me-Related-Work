@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "EventEmitter": "^1.0.0",
-    "auth0-js": "^9.4.1",
+    "auth0-js": "^9.4.2",
     "axios": "^0.17.1",
     "vue": "^2.4.4",
     "vue-router": "^3.0.1",

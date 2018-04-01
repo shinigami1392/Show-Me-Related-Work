@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     login,
-    logout    
+    logout
   }
 };
 </script>
