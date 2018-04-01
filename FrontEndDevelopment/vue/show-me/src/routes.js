@@ -36,7 +36,8 @@ export const routes = [{
   name: 'allPapers',
   components: {
     'area-box': ListBox,
-    'table-box': PaginatedTable
+    'table-box': PaginatedTable,
+    'search-box': SearchBox
   },
 },
 {
@@ -47,7 +48,8 @@ export const routes = [{
   components: {
     'area-box': ListBox,
     'table-box': NetworkGraph,
-    'info-box': PaperInfoBox
+    'info-box': PaperInfoBox,
+    'search-box': SearchBox
   },
   name: 'paperInfo',
   meta: { adminOnly: false }
@@ -59,7 +61,8 @@ export const routes = [{
     'area-box': ListBox,
     'table-box': NetworkGraph,
     'link-info-box': LinkInfoBox,
-    'feedback-box': Feedback
+    'feedback-box': Feedback,
+    'search-box': SearchBox
   },
   name: 'linkInfo'
 },

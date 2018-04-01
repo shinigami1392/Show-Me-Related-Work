@@ -4,10 +4,7 @@
       <!--<div id="logoDiv">
         <a href="/"><img src="../assets/ShowMe3.png" id="logo"></a>
       </div>-->
-      <div class="topnav" align="left">
-        <input type="text" name="search" placeholder="Search.."> 
-        <button type="submit"><i class="fa fa-search searchButton"></i></button>
-      </div>
+
       <div id="login">
         <button type="button" class="btn btn-default btn-sm">
           <span class="glyphicon glyphicon-home"></span> Login <i class="fab fa-github"></i>

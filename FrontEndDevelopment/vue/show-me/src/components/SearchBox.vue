@@ -37,7 +37,7 @@
     border: solid 2px #0E6390;
     border-radius: 6px;
     background-color: #fff;
-
+    margin-bottom: 5px;
 }
 
 #custom-search-input input:focus{
