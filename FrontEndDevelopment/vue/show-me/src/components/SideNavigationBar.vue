@@ -1,18 +1,16 @@
 <template>
 	<div>
-      <div id="sideBar" class="sidenav "  >
-        <a href="javascript:void(0)" class="closebtn" @click="closeNav">&times;</a>
-        <ul class="list-group" v-if="categories && categories.length" style="height:100%; overflow-y:auto; overflow-x:hidden;">
+      <div id="sideBar" class="sidenav ">
+		<a href="javascript:void(0)" class="closebtn" @click="closeNav"> Close &times;</a>
+        <ul class="list-group" v-if="categories && categories.length" style="height:50%; background-color: #283e4a; overflow-y:auto; overflow-x:hidden;">
           <li v-for="category in categories" class="list-group-item">
           <router-link :to="{ name:'allPapers',params:{areaid:category.id}}">{{ category.name }}</router-link>
           <span class="badge badge-primary badge-pill">{{ category.count }}</span>
           </li>
         </ul>
-		  </div>
+	  </div>
 		<app-box v-bind:boxHeaderProp="researchAreasBoxHeader" v-bind:cardStyle="cardStyle" v-on:click.native="openNav">
-
-    </app-box>	
-	
+		</app-box>	
 	</div>
 </template>
 
@@ -61,23 +59,38 @@ export default {
 </script>
 <style>
   .sidenav {
-      height: 100%;
+	  height: 50%; 
       width: 0;
-      position: fixed;    
+	  position: fixed; 
       z-index: 1;
       top: 0;
       right: 0;
-      background-color: #111;
+      background-color: #283e4a;
       overflow-x: hidden;
       transition: 0.5s;
       padding-top: 60px;
   }
+  
+  .sidenav a {
+    text-decoration: none;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+   }
+   
+   .sidenav a:hover {
+    color: black;
+	font-weight:bold;
+	text-decoration:underline;
+	}
+   
   .sidenav .closebtn {
       position: absolute;
       top: 0;
       right: 25px;
-      font-size: 36px;
-      margin-left: 50px;
+      font-size: 20px;
+	  color: grey;
+      margin-left: 30px;
   }
 
 </style>
