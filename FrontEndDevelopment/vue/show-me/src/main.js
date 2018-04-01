@@ -52,13 +52,8 @@ function setPaperInfoValue(value) {
 var visitedPapers = [];
 const maxVisitHistory = 5;
 
-var countVisitedPapers = 0;
 router.beforeEach(function (to, from, next) {
   if (to.name === 'paperInfo') {
-    countVisitedPapers++;
-    console.log("countVisitedPapers: "+countVisitedPapers);
-
-
     if(visitedPapers.length < maxVisitHistory){
       visitedPapers.push({'id':to.params.paperid,'name':''})
     }
@@ -73,12 +68,12 @@ router.beforeEach(function (to, from, next) {
       .get(`http://localhost:8081/graphNode/graphNode/` + to.params.paperid)
       .then(response => {
         paperInfo = response.data;
-        console.log(JSON.stringify(paperInfo));
         if(paperInfo != null){
           visitedPapers[visitedPapers.length - 1]['name'] =  paperInfo.name;
         }
-        console.log("Visited Papers: "+JSON.stringify(visitedPapers));
+
         to.matched[0].props.paperInfo = paperInfo;
+        to.matched[0].props.visitedPapers = visitedPapers;
         setPaperInfoValue(paperInfo);
         next();
       })
@@ -90,7 +85,6 @@ router.beforeEach(function (to, from, next) {
   else if (to.name === 'linkInfo') {
     
     var fetchLinkInfo = function () {
-      visitedPapers.push()
       axios
         .get(`http://localhost:8081/relations/get?id=` + to.params.linkid + '&' + 'user=user0')
         .then(response => {

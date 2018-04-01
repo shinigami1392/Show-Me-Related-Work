@@ -3,7 +3,14 @@
         <div class="container" style="height:100%;">
             <div class="row" style="height:100%;">
                 <div class="col-md-8" style="height:100%;">
-                    <div id="details" style="height:100%;">
+                    <div id="visited_papers" style="height:10%;">
+                        Recently Viewed Papers: 
+                        <span v-for="(visitedPaper, index) in visitedPapers">
+                            <router-link :to="{ name:'paperInfo', params:{ areaid:$route.params.areaid, paperid:visitedPaper.id}}" :title="visitedPaper.name">{{visitedPaper.id}}</router-link>
+                            <small v-if="index != visitedPapers.length - 1"> > </small>
+                        </span>
+                    </div>
+                    <div id="details" style="height:90%;">
                     </div>
                 </div>
 
@@ -154,6 +161,7 @@ export default {
             graphElements: [],
             graphLegendElements: [],
             legendElements:[],
+            visitedPapers:[],
             isOpen: false,
             linkType:["incoming","outgoing"],
             graph:{},
@@ -168,6 +176,7 @@ export default {
     mounted() {
 
         var paperInfo = this.$route.matched[0].props.paperInfo;
+        this.visitedPapers = this.$route.matched[0].props.visitedPapers;
         var router = this.$router;
         var route = this.$route;
 
