@@ -52,12 +52,39 @@
 </template>
 
 <script>
+
+import axios from "axios";
+
+function getUserData(vm,token) {  
+  axios
+    .get(`https://pushkar-showme.auth0.com/userinfo`,{headers: { Authorization: "Bearer " + token }})
+    .then(response => {
+      vm.userData = JSON.stringify(response.data);
+      console.log("user data: "+vm.userData);
+    })
+    .catch(err => {
+      vm.errors.push(err);
+    });
+}
+
+
+
 export default {
   name: "app",
   data() {
     return {
+      userData:{},
       userFeedbackBoxHeader: "Comment and Vote"
     };
+  },
+  mounted() {
+      var path = JSON.stringify(this.$route.fullPath);
+      
+      if (path.length > 5 ) {        
+        var token =   path.split("&")[0].split("=")[1]; 
+        getUserData(this, token)
+      }
+
   }
 };
 </script>

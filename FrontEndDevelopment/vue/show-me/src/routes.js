@@ -6,6 +6,10 @@ import LinkInfoBox from './components/LinkInfoBox.vue'
 import AnimatedBox from './components/AnimatedBox.vue'
 import PaginatedTable from './components/PaginatedTable.vue'
 import SearchBox from './components/SearchBox.vue'
+import Vue from 'vue'
+import Router from 'vue-router'
+
+Vue.use(Router)
 
 //Lazy routing
 const PapersTable = resolve => {
@@ -75,3 +79,13 @@ export const routes = [{
 
 
 ];
+//
+// routes.beforeEach((to, from, next) => {
+//   if(to.name == 'allPapers') { // check if "to"-route is "callback" and allow access
+//   next()
+// } else if (router.app.$auth.isAuthenticated()) { // if authenticated allow access
+//   next()
+// } else { // trigger auth0 login
+//   router.app.$auth.login()
+// }
+// })
