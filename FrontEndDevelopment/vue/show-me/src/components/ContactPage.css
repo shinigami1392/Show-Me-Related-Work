@@ -2,26 +2,134 @@
 
 <style>
 
-html {
-  box-sizing: border-box;
-}
+		body {
+			font-family: Arial;
+		}
+	
+       #map {
+        height: 400px;
+        width: 50%;
+		float:left;
+		margin-top: 30px;
+       }
+	   
+	   #navigation-container {
+			background-color: #333;
+	   }
+	   
+	   
+	   #navigation-container ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+			padding-top: 10px;
+			overflow: hidden;
+			display:inline-block;
+			float: right;
+		}
 
-*, *:before, *:after {
-  box-sizing: inherit;
-	font-family: Georgia,Times,Times New Roman,serif;
-	font-size: 18px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 500;
-	line-height: 26.4px;
+		#navigation-container li {
+			float: right;
+		}
 
-}
-
-.h2 {
-	font-weight: bold;
-}
-
-
+		#navigation-container li a {
+			display: block;
+			color: white;
+			text-align: center;
+			padding: 14px 40px;
+			text-decoration: none;
+		}	
+		
+		#navigation-container li a:hover {
+			background-color: #111;
+		}
+		
+		.logo {
+			display: inline-block;
+			vertical-align: top;
+			width: 150px;
+			height: 60px;
+			margin-right: 20px;
+			margin-top: 5px;    /* if you want it vertically middle of the navbar. */
+			margin-bottom: 5px;
+			margin-left: 50px;
+		}
+		
+		#page-content {
+			padding-top: 60px;
+			width: 60%;
+			margin: 0 auto;
+		}
+		
+		#contact-us {
+			padding-left: 40px;
+			float:left;
+		}
+		
+		#contact-info {
+			padding: 0;
+			margin: 0;
+		}
+		
+		#contact-info p { 
+			margin:0 
+		}
+		
+		input[type=email], select {
+			width: 250px;
+			padding: 12px 20px;
+			margin: 8px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+		
+		textarea {
+			width: 400px;
+			padding: 12px 20px;
+			margin: 8px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+			max-width:500px;
+			max-height:200px;
+			min-width: 400px;
+			min-height: 100px;
+		}
+		
+		.submit-button {
+			background-color: white; 
+			color: black; 
+			border: 2px solid #008CBA;
+			border-radius: 20px;
+			padding-top: 10px;
+			padding-bottom: 10px;
+			padding-left: 30px;
+			padding-right: 30px;
+		}
+		
+		.submit-button:hover {
+			background-color: #008CBA;
+			color: white;
+		}
+		
+		#contact-us h1 {
+			font-size: 39px;
+			font-style: normal;
+			font-variant: normal;
+			font-weight: 200;
+			line-height: 26.4px;
+		}
+		
+		#contact-us h2 {
+			font-size: 20px;
+			font-style: normal;
+			font-variant: normal;
+			font-weight: 550;
+			line-height: 26.4px;
+		}
 </style>
 
 </head>
