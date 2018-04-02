@@ -67,12 +67,14 @@ export default class AuthService {
      }
 
   logout () {
+    localStorage.removeItem('userData')
+    localStorage.setItem('authorized', false)
+    console.log('user data : ' + localStorage.getItem('userData'))
     localStorage.removeItem('access_token')
     localStorage.removeItem('id_token')
     localStorage.removeItem('expires_at')
     this.userProfile = null
-    this.authNotifier.emit('authChange', false)
-    router.replace('home')
+    //this.authNotifier.emit('authChange', false)
   }
 
   /*isAuthenticated () {

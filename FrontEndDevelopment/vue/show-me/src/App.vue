@@ -17,17 +17,17 @@
             <transition name="slide" mode="out-in">
               <router-view name="animation-box"></router-view>
             </transition>
-            
+
             <transition name="slide" mode="out-in">
               <router-view name="table-box" :key="$route.fullPath"></router-view>
             </transition>
           </div>
           <div class="col-md-1" style="height:100%;">
             <router-view name="area-box"></router-view>
-          </div>  
+          </div>
         </div>
-		
-		
+
+
 
         <div class="row" style="height:70%; margin-top:5px;">
           <div class="col-md-6" style="height:50%">
@@ -43,9 +43,9 @@
 			  <router-view name="link-info-box" :key="$route.fullPath"></router-view>
             </transition>
           </div>
-        </div>		
-		
-		
+        </div>
+
+
       </div>
     </div>
   </div>
@@ -55,12 +55,24 @@
 
 import axios from "axios";
 
-function getUserData(vm,token) {  
+function getUserData(vm,token) {
   axios
     .get(`https://pushkar-showme.auth0.com/userinfo`,{headers: { Authorization: "Bearer " + token }})
     .then(response => {
       vm.userData = JSON.stringify(response.data);
-      console.log("user data: "+vm.userData);
+      //console.log(typeof response.data)
+      //console.log("user data: "+ vm.userData);
+      if (localStorage.getItem('userData')!="" || localStorage.getItem('userData')!= undefined){
+        //TODO: an API call to user API of ShowMe backend Server
+        //TODO: check if the user exist, if yes populate the user data else populate the user data and also store it at backend
+        localStorage.setItem('userData', vm.userData)
+        localStorage.setItem('authorized', true)
+        console.log("data in local storage")
+        console.log(localStorage.getItem('userData'))
+      }
+      else{
+
+      }
     })
     .catch(err => {
       vm.errors.push(err);
@@ -79,9 +91,9 @@ export default {
   },
   mounted() {
       var path = JSON.stringify(this.$route.fullPath);
-      
-      if (path.length > 5 ) {        
-        var token =   path.split("&")[0].split("=")[1]; 
+
+      if (path.length > 5 ) {
+        var token =   path.split("&")[0].split("=")[1];
         getUserData(this, token)
       }
 
