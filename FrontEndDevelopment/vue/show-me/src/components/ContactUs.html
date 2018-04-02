@@ -1,34 +1,101 @@
  <!DOCTYPE html>
 <html>
 <head>
-<title>About Us</title>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
+<title>Contact Us</title>
 <link rel="stylesheet" type="text/css" href="ContactPage.css">
 </head>
-<body>
-
-
-
-
-<div class="row">
-
-<h2>About Us</h2>
-
-<p>
-	Show Me is proposed to be a community driven application with the goal to enable researchers find related work (citations in the papers) and help fellow researchers by providing feedback on the citations.
-</p>
-
-<p>
-	In the field of research and discovery, it is often cumbersome for the researchers to browse through different research papers and keep track of relations between them. It takes a lot of time and effort to study the paper and explore the cited work, since the researchers may not understand the extent of relevancy of the cited papers without reading them. This may hinder the progress of their research work.
-</p>
-
-<p>
-	Show Me is a web application which will allow the users to browse and navigate through different categories of research papers and visualize relations among them as a network graph. Nodes in the network graph represents the papers and the edges represents the relations between the papers. Users can provide their feedback for the relations between papers in the form of comments. They also have the option to upvote or downvote the relations as per their understanding. The application is directed to the researchers as end users in their research area.
-</p>
-
-<br>
+<body style="font-family: Arial;">
   
-</div>
+	<div class="navigation-bar">
+        <div id="navigation-container">
+			<a>
+				<img class="logo" src="showMeLogo.png">
+			</a>
+            <ul>
+			  <li><a class="active" href="#home">Home</a></li>
+			  <li><a href="#news">News</a></li>
+			  <li><a href="#contact">Contact</a></li>
+			  <li><a href="#about">About</a></li>
+			</ul>
+        </div>
+    </div>
+	
+	<div id="page-content">
+		<div id="map"></div>
+		
+		<div id="contact-us">
+		
+			<h1>Contact Us</h1>
+			<div class="envelop-icon"><i class="far fa-envelope fa-2x"></i></div>
+			<h2>Don't hesitate to contact us</h2>
+			
+			<div id="contact-info">
+				<b>Show Me Related Work</b>
+				<p>Phone: +1 (0) 000 0000 001 </p>
+				<p>Email: customer_support@showme.com</p>
+			</div>
+			
+			<br/>
+			
+			<form action="https://formspree.io/rajatsjc@gmail.com" method="POST">
+			  <input name="email" type="email" placeholder="Your email">
+			  <br/>
+			  <textarea name="message"  placeholder="Your message"></textarea>
+			  <br/>
+			  <button class="submit-button" type="submit">Send Message</button>
+			</form>
+		
+		</div>
+	</div>
+	
+	<div class="footerheader">
 
+        <div id="footerSection">
 
-</body>
+            <div>
+			
+			<div style="float: left;color:white; padding-top:15px; padding-left :40px;">
+			  <i class="far fa-copyright"></i>
+			</div>
+			
+		    <div style="float: left;">
+			  <p style="color:#666970;"><b>2018</b></p>
+			</div>
+			
+			<div style="float: left;">
+			  <p style="color:white;"><b>ShowMe</b></p>
+			</div>
+			
+			<div class="link-icons">
+				<a href="#" target="_blank"> About Us </a>
+				<a href="#" target="_blank"> Contact Us </a>
+				<a href="#" target="_blank"> <i class="fab fa-facebook-f fa-lg"></i> </a>
+				<a href="#" target="_blank"> <i class="fab fa-twitter fa-lg"></i> </a>
+				<a href="#" target="_blank"> <i class="fas fa-envelope fa-lg"></i> </a>
+				<a href="#" target="_blank"> <i class="fas fa-phone-square fa-lg"></i> </a>
+			</div>
+
+        </div>
+
+    </div>
+	
+    
+    <script>
+      function initMap() {
+        var uluru = {lat: 33.424821, lng: -111.927902};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+          center: uluru
+        });
+        var marker = new google.maps.Marker({
+          position: uluru,
+          map: map
+        });
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_mVy0e-Aw8R2ch7kVkm7BWJ3jVO61mXw&callback=initMap">
+    </script>
+  </body>
 </html> 
