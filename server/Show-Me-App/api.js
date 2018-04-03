@@ -314,3 +314,44 @@ var getGraphNode = function(paperId, res){
 }
 
 
+exports.findPapersForDomainPaginated = function(draw, start, length, areaid, res){
+
+	var totalPapersForDomainQuery =  DomainModel.aggregate([
+		  { $match: { id: areaid } },
+		  { $project: {
+				  id: "$id",
+				  paperCount: { $size: "$papers" }
+			}
+		  }  
+		])
+	var totalRecords;
+	totalPapersForDomainQuery.exec(function(err, result){
+		if(err) sendInternalServerError(err, result);
+		if(result === undefined || result.length == 0 || result[0] == null){
+			res.send({"draw": draw, "recordsTotal": 0, "recordsFiltered":0, "data":[]});
+		}
+		else{
+			totalRecords = result[0].paperCount;
+			query = DomainModel.findOne({id:areaid}, {papers:{$slice: [ start, length]}});
+			query.populate('papers');
+			query.exec(function(err, domain){
+				if(err) sendInternalServerError(res);
+				else if(domain) {
+					var papers = domain.papers;
+					var dttable = [];
+					for(var i = 0; i < papers.length; i++){
+						var object = [];
+						object.push(papers[i].paperId);
+						object.push(papers[i].title);
+						object.push(papers[i].author.toString().slice(0,-1)); 
+						dttable.push(object);
+					}
+					res.send({"draw": draw, "recordsTotal": totalRecords, "recordsFiltered":totalRecords, "data":dttable});
+				}
+				else{
+					res.send({"draw": draw, "recordsTotal": 0, "recordsFiltered":0, "data":[]});
+				}
+			})
+		}	
+	});
+}
