@@ -1,6 +1,6 @@
 <template>
     <app-box v-bind:boxHeaderProp="researchPapersBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
-        <table id ='dtable'>
+        <table id ='dtable' style="width:100%;">
             <thead>
                   
                 <tr>
