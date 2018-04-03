@@ -1,6 +1,6 @@
 var async = require('async');
 var mongoose = require('mongoose');
-
+mongoose.Promise = global.Promise;
 var config = require('../config.json');
 var UserModel = require('./users.js');
 var PaperModel = require('./papers.js');
