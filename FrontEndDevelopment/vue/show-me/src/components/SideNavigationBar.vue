@@ -1,16 +1,21 @@
 <template>
 	<div>
+    <div style="overflow-X: auto;">
       <div id="sideBar" class="sidenav ">
-		<a href="javascript:void(0)" class="closebtn" @click="closeNav"> Close &times;</a>
-        <ul class="list-group" v-if="categories && categories.length" style="height:50%; background-color: #283e4a; overflow-y:auto; overflow-x:hidden;">
+        <a href="javascript:void(0)" class="closebtn" @click="closeNav"> Close &times;</a>        
+        <ul class="list-group" v-if="categories && categories.length" >
           <li v-for="category in categories" class="list-group-item">
-          <router-link :to="{ name:'allPapers',params:{areaid:category.id}}">{{ category.name }}</router-link>
-          <span class="badge badge-primary badge-pill">{{ category.count }}</span>
+            <router-link :to="{ name:'allPapers',params:{areaid:category.id}}">{{ category.name }}</router-link>
+            <span class="badge badge-primary badge-pill">{{ category.count }}</span>
           </li>
-        </ul>
-	  </div>
-		<app-box v-bind:boxHeaderProp="researchAreasBoxHeader" v-bind:cardStyle="cardStyle" v-on:click.native="openNav">
-		</app-box>	
+        </ul>        
+      </div>
+    </div>
+    <div style="overflow-X: auto;">
+		  <app-box v-bind:boxHeaderProp="researchAreasBoxHeader"  style="height:100; width:30;" v-bind:cardStyle ="cardStyle"  v-on:click.native="openNav">
+		  </app-box>
+    </div>
+    	
 	</div>
 </template>
 
@@ -59,13 +64,13 @@ export default {
 </script>
 <style>
   .sidenav {
-	  height: 50%; 
+	    height: 50%; 
       width: 0;
-	  position: fixed; 
+	    position: fixed; 
       z-index: 1;
-      top: 0;
+      top: 0;      
       right: 0;
-      background-color: #283e4a;
+      background-color: #283e4a;      
       overflow-x: hidden;
       transition: 0.5s;
       padding-top: 60px;
@@ -80,8 +85,8 @@ export default {
    
    .sidenav a:hover {
     color: black;
-	font-weight:bold;
-	text-decoration:underline;
+	  font-weight:bold;
+	  text-decoration:underline;
 	}
    
   .sidenav .closebtn {
@@ -89,7 +94,7 @@ export default {
       top: 0;
       right: 25px;
       font-size: 20px;
-	  color: grey;
+	    color: grey;
       margin-left: 30px;
   }
 
