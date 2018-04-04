@@ -18,7 +18,8 @@
             <!--<img :src="userImage" alt="Avatar">-->
           <!--</md-avatar>-->
         <!--</span>-->
-        <md-menu md-align-trigger>
+        <div v-show="authenticated">
+          <md-menu md-align-trigger>
           <md-button class="md-icon-button" md-menu-trigger>
             <md-avatar>
               <img :src="userImage">
@@ -36,7 +37,7 @@
             </md-menu-item>
             </a>
 
-            <a href="#" @click="logout()"><md-menu-item>
+            <a href="/" @click="logout()"><md-menu-item>
               <span><b>Sign Out</b></span>
             </md-menu-item></a>
           </md-menu-content>
@@ -45,6 +46,9 @@
           :md-active.sync="ProfileDialogue"
           :md-title="userName"
           md-content="Your <b>Profile</b> here!" />
+
+        </div>
+        
 
       </div>
     </div>

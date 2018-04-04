@@ -33,6 +33,7 @@ export default {
             comments: [],
             weight: 0,
             user_comment: [],
+             authenticated: false,
             likeButtonClass : "btn btn-primary"
         }
     },
@@ -47,6 +48,10 @@ export default {
         this.weight = linkInfo.upvotes;
     },
     methods: {
+
+        isAuthenticated: function(){
+            this.authenticated = localStorage.getItem('authorized');
+        },
         getTimeStamp: function(timeInMilliseconds){
             
             var date = new Date(parseInt(timeInMilliseconds,10)); 
