@@ -1,18 +1,12 @@
 <template>
-
-
     <div id="custom-search-input">
-                <div class="input-group col-md-12">
+            <div >                    
+                <span class="input-group-btn">
                     <input type="text" class="form-control input-lg" placeholder="What are you looking for..." />
-                    <span class="input-group-btn">
-                        <button class="btn btn-info btn-lg" type="button">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </span>
-                </div>
-      </div>
-
-
+                    <button class="btn btn-info btn-lg fas fa-search" type="button"></button>
+                </span>
+            </div>
+      </div>      
 </template>
 
 
@@ -40,12 +34,8 @@
     margin-bottom: 5px;
 }
 
-#custom-search-input input:focus{
-  width: 100%;
-}
-
 #custom-search-input input{
-    width:500px;
+    width:250px;
     border: 0;
     box-shadow: none;
     -webkit-transition: width 0.4s ease-in-out;
@@ -56,10 +46,9 @@
     margin: 2px 0 0 0;
     background: none;
     box-shadow: none;
-    border: 0;
     color: #0E6390;
     padding: 0 8px 0 10px;
-    border-left: solid 1px #ccc;
+    border-left: solid 1px #ccc;    
 }
 
 #custom-search-input button:hover{
@@ -67,5 +56,16 @@
     box-shadow: none;
     border-left: solid 1px rgb(204, 204, 204);
 }
+
+@media only screen and (max-width: 1350px){
+    #custom-search-input input { width: 75%; }
+}
+
+
+@media only screen and (max-width: 1120px){
+    #custom-search-input input { width: 0px; }
+    #custom-search-input button { visibility: hidden; }
+}
+
 
 </style>
