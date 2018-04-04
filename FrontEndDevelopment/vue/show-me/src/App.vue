@@ -60,15 +60,14 @@ function getUserData(vm,token) {
     .get(`https://pushkar-showme.auth0.com/userinfo`,{headers: { Authorization: "Bearer " + token }})
     .then(response => {
       vm.userData = JSON.stringify(response.data);
-      //console.log(typeof response.data)
-      //console.log("user data: "+ vm.userData);
       if (localStorage.getItem('userData')!="" || localStorage.getItem('userData')!= undefined){
         //TODO: an API call to user API of ShowMe backend Server
         //TODO: check if the user exist, if yes populate the user data else populate the user data and also store it at backend
         localStorage.setItem('userData', vm.userData)
         localStorage.setItem('authorized', true)
-        console.log("data in local storage")
-        console.log(localStorage.getItem('userData'))
+        vm.userObj.userImage = JSON.parse(localStorage.getItem('userData')).picture
+        vm.userObj.userName = JSON.parse(localStorage.getItem('userData')).given_name
+        vm.userObj.authenticated = localStorage.getItem('authorized')
       }
       else{
 
@@ -78,7 +77,6 @@ function getUserData(vm,token) {
       vm.errors.push(err);
     });
 }
-
 
 
 export default {
@@ -95,22 +93,10 @@ export default {
   },
   mounted() {
       var path = JSON.stringify(this.$route.fullPath);
-
       if (path.length > 5 ) {
         var token =   path.split("&")[0].split("=")[1];
         getUserData(this, token)
       }
-
-      if(localStorage.getItem('userData')!=undefined){
-        this.userObj.userImage = JSON.parse(localStorage.getItem('userData')).picture
-        this.userObj.userName = JSON.parse(localStorage.getItem('userData')).given_name
-        this.userObj.authenticated = localStorage.getItem('authorized')
-        console.log("in navbar: "+JSON.parse(localStorage.getItem('userData')).given_name)
-      }
-      else{
-        this.userObj.userImage = ""
-      }
-
   }
 };
 </script>

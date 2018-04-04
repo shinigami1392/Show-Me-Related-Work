@@ -1,25 +1,14 @@
 <template>
   <div id="navigation" class="navbar navbar-default customNav">
     <div class="header">
-      <!--<div id="logoDiv">
-        <a href="/"><img src="../assets/ShowMe3.png" id="logo"></a>
-      </div>-->
       <a href="/"><md-icon class="md-size-2x">home</md-icon></a>
 
       <div id="login" >
-        <button type="button" class="btn btn-default btn-sm"  @click="login()">
+        <button type="button" v-if="!userData.authenticated" class="btn btn-default btn-sm"  @click="login()">
           <span class="glyphicon glyphicon-home"></span> Sign In <i class="fas fa-sign-in-alt"></i>
         </button>
-        <!--<button type="button" class="btn btn-default btn-sm"  @click="logout()">-->
-          <!--<span class="glyphicon glyphicon-home"></span> Sign Out <i class="fas fa-sign-out-alt"></i>-->
-        <!--</button>-->
-        <!--<span>-->
-          <!--<md-avatar>-->
-            <!--<img :src="userImage" alt="Avatar">-->
-          <!--</md-avatar>-->
-        <!--</span>-->
-        <md-menu md-align-trigger >
-          <img :src="userImage" class="md-icon-button" md-menu-trigger >
+        <md-menu md-align-trigger v-if="userData.authenticated">
+          <img :src="userData.userImage" class="md-icon-button" md-menu-trigger >
           <md-tooltip md-direction="bottom">{{userName}}</md-tooltip>
 
           <md-menu-content>
