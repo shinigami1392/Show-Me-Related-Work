@@ -33,10 +33,12 @@ export default {
             comments: [],
             weight: 0,
             user_comment: [],
-             authenticated: false,
+            givenname:'',
+            authenticated: false,
             likeButtonClass : "btn btn-primary"
         }
     },
+    props: ['userData'],
     created() {
         this.cardStyle = "height:100%";
         this.cardBlockStyle = "height:80%;"
@@ -46,6 +48,8 @@ export default {
         var linkInfo = this.$route.matched[0].props.linkInfo;
         this.comments = linkInfo.relation.comments;
         this.weight = linkInfo.upvotes;
+        this.givenname = userData.given_name;
+        this.authenticated = userData.authenticated;
     },
     methods: {
 
@@ -74,10 +78,10 @@ export default {
         },
         addComment: function() {
             axios
-                .put(`http://54.201.123.246:8081/relations/comment/add?relationId=` + this.$route.params.linkid + `&text=` + this.user_comment + `&user_name=user0`)
+                .put(`http://54.201.123.246:8081/relations/comment/add?relationId=` + this.$route.params.linkid + `&text=` + this.user_comment + `&user_name=` + this.givenname)
                 .then(response => {
                     axios
-                        .get(`http://54.201.123.246:8081/relations/get?id=` + this.$route.params.linkid + `&user=user0`)
+                        .get(`http://54.201.123.246:8081/relations/get?id=` + this.$route.params.linkid + `&user=` + this.username)
                         .then(response => {
                              this.comments =  response.data.relation.comments;
                              this.user_comment='';

@@ -36,10 +36,6 @@
 
       </div>
     </div>
-    <!--<div class="navbar-header">
-      <a class="navbar-brand" href="#">SHOW ME</a>
-    </div>-->
-
   </div>
 </template>
 

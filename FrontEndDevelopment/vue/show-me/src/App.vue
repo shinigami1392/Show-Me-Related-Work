@@ -35,7 +35,7 @@
 																		  </app-box> -->
             <transition name="slide" mode="out-in">
 			  <router-view name="info-box" :key="$route.fullPath"></router-view>
-              <router-view name="feedback-box" :key="$route.fullPath"></router-view>
+              <router-view name="feedback-box" :key="$route.fullPath" :userData="userObj"></router-view>
             </transition>
           </div>
 		  <div class="col-md-6" style="height:50%;">
@@ -69,9 +69,7 @@ function getUserData(vm,token) {
         vm.userObj.userName = JSON.parse(localStorage.getItem('userData')).given_name
         vm.userObj.authenticated = localStorage.getItem('authorized')
       }
-      else{
-
-      }
+      vm.$router.push('home');
     })
     .catch(err => {
       vm.errors.push(err);
