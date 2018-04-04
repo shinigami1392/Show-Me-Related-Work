@@ -18,7 +18,7 @@
             <!--<img :src="userImage" alt="Avatar">-->
           <!--</md-avatar>-->
         <!--</span>-->
-        <div v-show="authenticated">
+        <div v-if="authenticated">
           <md-menu md-align-trigger>
           <md-button class="md-icon-button" md-menu-trigger>
             <md-avatar>
