@@ -6,7 +6,7 @@
       </div>-->
       <a href="/"><md-icon class="md-size-2x">home</md-icon></a>
 
-      <div id="login">
+      <div id="login" >
         <button type="button" class="btn btn-default btn-sm"  @click="login()">
           <span class="glyphicon glyphicon-home"></span> Sign In <i class="fas fa-sign-in-alt"></i>
         </button>
@@ -18,13 +18,9 @@
             <!--<img :src="userImage" alt="Avatar">-->
           <!--</md-avatar>-->
         <!--</span>-->
-        <md-menu md-align-trigger>
-          <md-button class="md-icon-button" md-menu-trigger>
-            <md-avatar>
-              <img :src="userImage">
-            </md-avatar>
-            <md-tooltip md-direction="bottom">{{userName}}</md-tooltip>
-          </md-button>
+        <md-menu md-align-trigger >
+          <img :src="userImage" class="md-icon-button" md-menu-trigger >
+          <md-tooltip md-direction="bottom">{{userName}}</md-tooltip>
 
           <md-menu-content>
             <md-menu-item>
