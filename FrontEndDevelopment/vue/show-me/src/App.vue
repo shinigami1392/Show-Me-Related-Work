@@ -2,7 +2,7 @@
   <div id="app">
     <!-- Fixed navbar -->
     <div>
-      <app-navbar>
+      <app-navbar :userData="userObj">
       </app-navbar>
     </div>
 
@@ -85,7 +85,11 @@ export default {
   name: "app",
   data() {
     return {
-      userData:{},
+      userObj:{
+        userImage : "",
+        userName : "",
+        authenticated: false,
+      },
       userFeedbackBoxHeader: "Comment and Vote"
     };
   },
@@ -95,6 +99,16 @@ export default {
       if (path.length > 5 ) {
         var token =   path.split("&")[0].split("=")[1];
         getUserData(this, token)
+      }
+
+      if(localStorage.getItem('userData')!=undefined){
+        this.userObj.userImage = JSON.parse(localStorage.getItem('userData')).picture
+        this.userObj.userName = JSON.parse(localStorage.getItem('userData')).given_name
+        this.userObj.authenticated = localStorage.getItem('authorized')
+        console.log("in navbar: "+JSON.parse(localStorage.getItem('userData')).given_name)
+      }
+      else{
+        this.userObj.userImage = ""
       }
 
   }

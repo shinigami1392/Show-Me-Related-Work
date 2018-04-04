@@ -18,18 +18,18 @@
             <!--<img :src="userImage" alt="Avatar">-->
           <!--</md-avatar>-->
         <!--</span>-->
-        <div v-if="authenticated">
+        <div v-if="userData.authenticated">
           <md-menu md-align-trigger>
           <md-button class="md-icon-button" md-menu-trigger>
             <md-avatar>
-              <img :src="userImage">
+              <img :src="userData.userImage">
             </md-avatar>
-            <md-tooltip md-direction="bottom">{{userName}}</md-tooltip>
+            <md-tooltip md-direction="bottom">{{userData.userName}}</md-tooltip>
           </md-button>
 
           <md-menu-content>
             <md-menu-item>
-              <span><b>Hi, {{userName}}</b></span>
+              <span><b>Hi, {{userData.userName}}</b></span>
             </md-menu-item>
             <a href="#" @click="ProfileDialogue = true">
             <md-menu-item>
@@ -68,34 +68,22 @@ Vue.use(VueMaterial)
 
 
 const auth = new AuthenticationService()
-const {login, logout, authenticated, authNotifier} = auth
+const {login, logout, isAuthenticated} = auth
 
 export default {
   data() {
     return {
       auth,
       ProfileDialogue: false,
-      authenticated: false,
-      userImage : "",
-      userName : ""
     }
   },
+  props:['userData'],
   methods: {
     login,
-    logout
-  },
-   mounted() {
-    if(localStorage.getItem('userData')!=undefined){
-      this.userImage = JSON.parse(localStorage.getItem('userData')).picture
-      this.userName = JSON.parse(localStorage.getItem('userData')).given_name
-      this.authenticated = localStorage.getItem('authorized')
-      console.log("in navbar: "+JSON.parse(localStorage.getItem('userData')).given_name)
-
-    }
-    else{
-      this.userImage = ""
-    }
+    logout,
+    isAuthenticated
   }
+  
 };
 </script>
 
