@@ -16,6 +16,7 @@ import { store } from './store';
 
 import './assets/css/fontawesome-all.css';
 
+
 Vue.use(VueRouter);
 
 Vue.component('app-box', Box);
@@ -27,6 +28,7 @@ Vue.component('app-link-infobox', LinkInfoBox);
 Vue.component('app-paginated-table', PaginatedTable);
 Vue.component('grid', Grid);
 Vue.component('app-searchbox', SearchBox);
+
 
 
 const router = new VueRouter({
@@ -108,5 +110,7 @@ new Vue({
   el: '#app',
   store: store,
   router: router,
-  render: h => h(App)
+  render: h => h(App),
+
+  
 })

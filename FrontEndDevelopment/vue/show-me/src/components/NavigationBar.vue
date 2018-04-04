@@ -24,7 +24,7 @@
 
           <md-menu-content>
             <md-menu-item>
-              <span><b>Hi, {{userName}}</b></span>
+              <span><b>Hi, {{userData.userName}}</b></span>
             </md-menu-item>
             <a href="#" @click="ProfileDialogue = true">
             <md-menu-item>
@@ -32,7 +32,7 @@
             </md-menu-item>
             </a>
 
-            <a href="#" @click="logout()"><md-menu-item>
+            <a href="/" @click="logout()"><md-menu-item>
               <span><b>Sign Out</b></span>
             </md-menu-item></a>
           </md-menu-content>
@@ -41,6 +41,9 @@
           :md-active.sync="ProfileDialogue"
           :md-title="userName"
           md-content="Your <b>Profile</b> here!" />
+
+        </div>
+        
 
       </div>
     </div>
@@ -60,34 +63,22 @@ Vue.use(VueMaterial)
 
 
 const auth = new AuthenticationService()
-const {login, logout, authenticated, authNotifier} = auth
+const {login, logout, isAuthenticated} = auth
 
 export default {
   data() {
     return {
       auth,
       ProfileDialogue: false,
-      authenticated: false,
-      userImage : "",
-      userName : ""
     }
   },
+  props:['userData'],
   methods: {
     login,
-    logout
-  },
-   mounted() {
-    if(localStorage.getItem('userData')!=undefined){
-      this.userImage = JSON.parse(localStorage.getItem('userData')).picture
-      this.userName = JSON.parse(localStorage.getItem('userData')).given_name
-      this.authenticated = localStorage.getItem('authorized')
-      console.log("in navbar: "+JSON.parse(localStorage.getItem('userData')).given_name)
-
-    }
-    else{
-      this.userImage = ""
-    }
+    logout,
+    isAuthenticated
   }
+  
 };
 </script>
 

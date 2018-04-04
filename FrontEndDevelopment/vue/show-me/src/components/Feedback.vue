@@ -1,6 +1,6 @@
 <template>
     <app-box v-bind:boxHeaderProp="feedbackBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
-        <div style="width:100%; height:50%">
+        <div v-if="authenticated" style="width:100%; height:50%">
             <ul class="list-group" style="height:100%; overflow-y:auto;">
                 <li v-for="comment in comments">
                    <span style="color:green; font-weight:bold;"> {{comment.user_name}}</span> <span style="color:grey;">[{{ getTimeStamp(comment.timestamp) }}]</span>: {{comment.text}} <hr />
@@ -33,6 +33,7 @@ export default {
             comments: [],
             weight: 0,
             user_comment: [],
+             authenticated: false,
             likeButtonClass : "btn btn-primary"
         }
     },
@@ -47,6 +48,10 @@ export default {
         this.weight = linkInfo.upvotes;
     },
     methods: {
+
+        isAuthenticated: function(){
+            this.authenticated = localStorage.getItem('authorized');
+        },
         getTimeStamp: function(timeInMilliseconds){
             
             var date = new Date(parseInt(timeInMilliseconds,10)); 
