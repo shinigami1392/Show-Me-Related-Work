@@ -10,6 +10,7 @@ import LinkInfoBox from './components/LinkInfoBox.vue'
 import PaginatedTable from './components/PaginatedTable.vue'
 import Grid from './components/Grid.vue'
 import SearchBox from './components/SearchBox.vue'
+import Datatable from './components/Datatable.vue'
 
 import { routes } from './routes';
 import { store } from './store';
@@ -29,6 +30,7 @@ Vue.component('app-paginated-table', PaginatedTable);
 Vue.component('grid', Grid);
 Vue.component('app-searchbox', SearchBox);
 
+Vue.component('datatable', Datatable);
 
 
 const router = new VueRouter({
@@ -53,14 +55,31 @@ var paperInfo = '';
 function setPaperInfoValue(value) {
   paperInfo = value;
 }
+var visitedPapers = [];
+const maxVisitHistory = 5;
 
 router.beforeEach(function (to, from, next) {
   if (to.name === 'paperInfo') {
+    if(visitedPapers.length < maxVisitHistory){
+      visitedPapers.push({'id':to.params.paperid,'name':''})
+    }
+    else if(visitedPapers.length == maxVisitHistory){
+        for(let index = 1; index <= maxVisitHistory - 1; index++){
+            visitedPapers[index-1] =visitedPapers[index];
+        }
+        visitedPapers[maxVisitHistory - 1] = {'id':to.params.paperid, 'name':''};
+    }
+
     axios
       .get(`http://54.201.123.246:8081/graphNode/graphNode/` + to.params.paperid)
       .then(response => {
         paperInfo = response.data;
+        if(paperInfo != null){
+          visitedPapers[visitedPapers.length - 1]['name'] =  paperInfo.name;
+        }
+
         to.matched[0].props.paperInfo = paperInfo;
+        to.matched[0].props.visitedPapers = visitedPapers;
         setPaperInfoValue(paperInfo);
         next();
       })
@@ -70,11 +89,13 @@ router.beforeEach(function (to, from, next) {
       });
   }
   else if (to.name === 'linkInfo') {
+    
     var fetchLinkInfo = function () {
       axios
         .get(`http://54.201.123.246:8081/relations/get?id=` + to.params.linkid + '&' + 'user=user0')
         .then(response => {
           to.matched[0].props.linkInfo = response.data;
+          to.matched[0].props.visitedPapers = visitedPapers;
           next();
         })
         .catch(err => {

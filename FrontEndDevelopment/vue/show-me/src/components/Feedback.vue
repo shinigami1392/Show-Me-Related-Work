@@ -1,18 +1,16 @@
 <template>
     <app-box v-bind:boxHeaderProp="feedbackBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
-        <div v-if="authenticated" style="width:100%; height:50%">
             <ul class="list-group" style="height:100%; overflow-y:auto;">
                 <li v-for="comment in comments">
                    <span style="color:green; font-weight:bold;"> {{comment.user_name}}</span> <span style="color:grey;">[{{ getTimeStamp(comment.timestamp) }}]</span>: {{comment.text}} <hr />
                 </li>
             </ul>
-        </div>
         <div style="width:100%; height:30%">
             <div style="width:70%; height:100%; margin-right:25px;float:left;">
                 <textarea v-model="user_comment" class="form-control" type="text" rows="10" style="height:95%;" placeholder="Your comments" />
             </div>
             <div style="width:25%; height:100%; margin-top:5px; float:left;">
-                <button type="button" v-on:click="addComment()" class="btn btn-success">Comment</button> &nbsp;
+                <button type="button" v-on:click="addComment()" class="btn btn-success btn-sm">Comment</button> &nbsp;
                 <button v-bind:class="likeButtonClass" v-on:click="toggleLikeButton">Like
                     <i class="fa fa-thumbs-o-up"></i>
                 </button>
@@ -35,7 +33,7 @@ export default {
             user_comment: [],
             givenname:'',
             authenticated: false,
-            likeButtonClass : "btn btn-primary"
+            likeButtonClass : "btn btn-primary btn-sm"
         }
     },
     props: ['userData'],
@@ -47,6 +45,7 @@ export default {
     mounted() {
         var linkInfo = this.$route.matched[0].props.linkInfo;
         this.comments = linkInfo.relation.comments;
+        console.log(JSON.stringify(this.comments));
         this.weight = linkInfo.upvotes;
         this.givenname = userData.given_name;
         this.authenticated = userData.authenticated;

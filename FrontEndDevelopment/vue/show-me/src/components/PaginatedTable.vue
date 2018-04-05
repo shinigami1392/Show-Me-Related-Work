@@ -31,6 +31,7 @@ export default {
       rowsPerPage: 5,
       researchPapersBoxHeader: "Research Papers",
       papers: [],
+      columns:["Title", "Author(s)"],
       cardStyle: "height:100%;",
       cardBlockStyle: "height:90%;",
       cardBlockContentStyle: "height:100%;"

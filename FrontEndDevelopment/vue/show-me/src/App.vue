@@ -8,7 +8,7 @@
 
     <!--  Main -->
     <div id="main">
-      <div class="container-fluid" style="height:700px">
+      <div class="container-fluid" style="height:800px">
         <div class="row content" style="height:60%;">
           <div class="col-md-12">
             <router-view name="search-box"></router-view>
@@ -29,7 +29,7 @@
 
 
 
-        <div class="row" style="height:70%; margin-top:5px;">
+        <div class="row" style="height:40%; margin-top:70px;">
           <div class="col-md-6" style="height:50%">
 														<!--<app-box v-bind:boxHeaderProp = "userFeedbackBoxHeader">
 																		  </app-box> -->
