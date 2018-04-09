@@ -1,12 +1,17 @@
 <template>
 
-    <div id="animated-back">
+    <!-- <div id="animated-back">
           <h1> SHOW ME<br/> related work<br/></h1>
           <h3> A better way to find relations between scholarly articles</h3>      
-    </div>
-
-   
-
+    </div>  -->
+	<div>
+		<div id="animated-back">
+			  <h1><img src="./LogoMakr_7jkdrq.png" /></h1>
+		</div>
+		<div id="animated-back">
+			  <h3> A better way to find relations between scholarly articles</h3>    
+		</div>
+	</div>
     
     
 </template>
@@ -27,21 +32,23 @@
 }
 
 h1 {
-  font-family: "Kaushan Script";
-  text-align: center;
+  /* font-family: "Kaushan Script";  */
+  /* text-align: middle;  */
+  width: 450px;
   color: #0E6390;
-  border-top: solid #86888A 3.9px;
-  border-bottom: solid #86888A 3.9px;
+  /* border-top: solid #86888A 3.9px; */
+  /* border-bottom: solid #86888A 3.9px; */
 
   overflow: hidden;
-  animation: animateHeading 3s forwards;
+  /* animation: animateHeading 3s forwards;  */
 }
 
 h3 {
   font-family: "Kaushan Script";
-  text-align: right;
-  color: #0E6390;
-  border-bottom: solid #86888A 2.9px;
+  text-align: center;
+  color: black;
+  /*border-bottom: solid #86888A 2.9px; */
+  border-bottom: solid #0E6390 2.9px;
   padding: 0;
   overflow: hidden;
 }

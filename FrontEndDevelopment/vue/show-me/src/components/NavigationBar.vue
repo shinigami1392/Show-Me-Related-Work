@@ -1,7 +1,8 @@
 <template>
   <div id="navigation" class="navbar navbar-default customNav">
     <div class="header">
-      <a href="/"><md-icon class="md-size-2x">home</md-icon></a>
+      <a href="/"><img width="120" height="60" hspace="20" src="./LogoMakr_5Y0a40.png" /></a>
+	  <!--  <md-icon class="md-size-2x">home</md-icon></a>  -->
 
       <div id="login" >
         <button type="button" v-if="!userData.authenticated" class="btn btn-default btn-sm"  @click="login()">

@@ -70,6 +70,7 @@ export default {
       z-index: 1;
       top: 0;      
       right: 0;
+	  display: flex;
       background-color: #283e4a;      
       overflow-x: hidden;
       transition: 0.5s;
