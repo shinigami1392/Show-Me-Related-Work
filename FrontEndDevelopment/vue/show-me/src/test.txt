@@ -1,3 +1,5 @@
 This file is related to task 348. I am pushing a sample file to check whether the jenkins job is working correctly or not to deploy the application.
 
 Test 2 trying after removing npm test command.
+
+TEst 3 - modified the build shell code.
