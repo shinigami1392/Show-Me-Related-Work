@@ -1,7 +1,7 @@
 <template>
   <div id="navigation" class="navbar navbar-default customNav">
     <div class="header">
-      <a href="/"><img width="120" height="60" hspace="20" src="./LogoMakr_5Y0a40.png" /></a>
+      <a href="/"><img width="60" height="60" hspace="20" src="./LogoMakr_9i2uuu.png" /></a>
 	  <!--  <md-icon class="md-size-2x">home</md-icon></a>  -->
 
       <div id="login" >
