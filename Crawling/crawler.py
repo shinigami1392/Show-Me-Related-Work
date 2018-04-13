@@ -80,6 +80,7 @@ class MyCrawler:
 			else:
 				if len(self.PAPERS) < 5000:
 					self.PAPERS.append(record['articleNumber'])
+
 			i += 1
 
 
@@ -99,6 +100,7 @@ class MyCrawler:
 					else:
 						if len(self.PAPERS) < 5000:
 							self.PAPERS.append(referenceId)
+
 				except:
 					pass
 		except:
@@ -145,64 +147,65 @@ class MyCrawler:
 		return False
 
 
-	def extractPaperInfo(self, stream):
+	def extractPaperInfo(self, stream, loadedPapers):
 		i = 0
 		paperCount = 0
 
 		while i <  len(self.PAPERS):
 			paperId = self.PAPERS[i]
-			print i, paperId
 			i += 1
 
-			url = 'https://ieeexplore.ieee.org/document/' + paperId + '/'
-			# print url
-			content = self.call(url, self.paperHeaders)
-			# file = open('appu.html', 'wb')
-			# file.write(content)
-			# file.close()
-			content = self.fetchDocumentContent(content)
+			if paperId not in loadedPapers:
+				print i, paperId
+				url = 'https://ieeexplore.ieee.org/document/' + paperId + '/'
+				# print url
+				content = self.call(url, self.paperHeaders)
+				# file = open('appu.html', 'wb')
+				# file.write(content)
+				# file.close()
+				content = self.fetchDocumentContent(content)
 
-			try:
-				paperObject = {}
-				paperObject['id'] = content['articleNumber']
-				paperObject['doi'] = content['doi']
-				paperObject['title'] = self.decodeString(content['title'])
-				paperObject['publicationTitle'] = content['publicationTitle']
-				paperObject['abstract'] = self.decodeString(content['abstract'])
-				paperObject['publicationYear'] = content['publicationYear']
-				paperObject['stream'] = stream
-				paperObject['link'] = 'http://ieeexplore.ieee.org/document/' + paperObject['id'] + '/'
+				try:
+					paperObject = {}
+					paperObject['id'] = content['articleNumber']
+					paperObject['doi'] = content['doi']
+					paperObject['title'] = self.decodeString(content['title'])
+					paperObject['publicationTitle'] = content['publicationTitle']
+					paperObject['abstract'] = self.decodeString(content['abstract'])
+					paperObject['publicationYear'] = content['publicationYear']
+					paperObject['stream'] = stream
+					paperObject['link'] = 'http://ieeexplore.ieee.org/document/' + paperObject['id'] + '/'
 
-				#getting authors
-				paperObject['authors'] = []
-				for author in content['authors']:
-					if "'" in author['name']:
-						print "printing in extractPaperInfo()"
-						print author['name']
-					paperObject['authors'].append(self.decodeString(author['name']))
-				
-				references = self.getReferences(paperObject['id'])
-				referenceArray = {}
-				for reference in references:
-					refereneObject = {'id':reference, 'upvotes':[], 'downvotes':[], 'comments':[]}
-					referenceArray[reference] = refereneObject
-				paperObject['references'] = referenceArray
-				paperCount += 1
-				
-				self.OBJECTS.append(paperObject)
-				for object in self.OBJECTS:
-					for author in object['authors']:
-						if "'" in author:
-							print author
+					#getting authors
+					paperObject['authors'] = []
+					for author in content['authors']:
+						if "'" in author['name']:
+							print "printing in extractPaperInfo()"
+							print author['name']
+						paperObject['authors'].append(self.decodeString(author['name']))
+
+					references = self.getReferences(paperObject['id'])
+					referenceArray = {}
+					for reference in references:
+						refereneObject = {'id':reference, 'upvotes':[], 'downvotes':[], 'comments':[]}
+						referenceArray[reference] = refereneObject
+					paperObject['references'] = referenceArray
+					paperCount += 1
+
+					self.OBJECTS.append(paperObject)
+					for object in self.OBJECTS:
+						for author in object['authors']:
+							if "'" in author:
+								print author
 
 
-				if len(self.OBJECTS) == 10:
-					self.savePapers(stream)	
-					# print self.OBJECTS		
-			except Exception as e:
-				i -= 1
-				del self.PAPERS[i]
-				print e.message
+					if len(self.OBJECTS) == 10:
+						self.savePapers(stream)
+						# print self.OBJECTS
+				except Exception as e:
+					i -= 1
+					del self.PAPERS[i]
+					print e.message
 		
 		print 'came out of loop', len(self.	OBJECTS)
 		if len(self.OBJECTS):
@@ -226,6 +229,11 @@ class MyCrawler:
 			self.databaseClient.createMongoClient()
 			self.databaseClient.savePapers(self.OBJECTS, stream)
 			self.databaseClient.disconnectMongoClient()
+
+			for object in self.OBJECTS:
+				with open("extractedPapers.txt","a") as file:
+					file.write(object['id'] + "\n")
+
 			# for paper in errors:
 			# 	self.PAPERS.remove(paper)
 			
@@ -240,13 +248,13 @@ class MyCrawler:
 		self.OBJECTS = []
 
 
-	def crawlStreams(self):
+	def crawlStreams(self, loadedPapers):
 		for index, stream in enumerate(self.STREAMS):
 			for i in xrange(1, 2):
 				print 'Crawling papers for the stream: ' + stream
 				content = self.formURL(stream, i)
 				self.extractPapers(content)
-			self.extractPaperInfo(stream)
+			self.extractPaperInfo(stream, loadedPapers)
 			self.saveStream(index, stream)
 
 
@@ -255,11 +263,19 @@ class MyCrawler:
 		# self.databaseClient.saveDomain(streamObject)
 		self.PAPERS = []
 
+	def getExtractedPapers(self):
+		paperIDs = set(open('extractedPapers.txt').read().split())
+		print paperIDs
+		return paperIDs
+
+
+
 def main():
 	myCrawlObject = MyCrawler()
 	try:
 		myCrawlObject.databaseClient.createMongoClient()
-		myCrawlObject.crawlStreams()
+		loadedPapers = myCrawlObject.getExtractedPapers()
+		myCrawlObject.crawlStreams(loadedPapers)
 	except Exception as e:
 		print 'Error connecting to database', e.message
 
