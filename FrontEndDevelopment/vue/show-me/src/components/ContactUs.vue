@@ -35,7 +35,10 @@ export default {
   
 }
 </script>
-    body {
+   
+		
+<style>
+ body {
 			font-family: Arial;
 		}
 	
@@ -127,7 +130,4 @@ export default {
 			float:left;
 			padding-right:5px;
 		}
-		
-<style>
-
 </style>
