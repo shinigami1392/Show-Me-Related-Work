@@ -108,10 +108,14 @@ class MyCrawler:
 	def fetchDocumentContent(self, content):
 		try:
 			soup = BeautifulSoup(content, 'html.parser')
-			data = soup.find_all('script')[27].string
+			data = soup.find_all('script')[23].string
+			# print data
+			# print len(data)#[27].string
+			# print data
 			j1 = data.split('global.document.metadata=')[1].rsplit('};')[0]
 			j1 += '}'
 			r = json.loads(j1)
+			# print r
 			return r
 		except Exception, e:
 			print 'caught in fetching document', e.message
@@ -150,8 +154,12 @@ class MyCrawler:
 			print i, paperId
 			i += 1
 
-			url = 'http://ieeexplore.ieee.org/document/' + paperId + '/'
+			url = 'https://ieeexplore.ieee.org/document/' + paperId + '/'
+			# print url
 			content = self.call(url, self.paperHeaders)
+			# file = open('appu.html', 'wb')
+			# file.write(content)
+			# file.close()
 			content = self.fetchDocumentContent(content)
 
 			try:
@@ -207,7 +215,6 @@ class MyCrawler:
 					if "'" in author:
 						print author
 			 			print "printing in savePapers()"
-			# 		print object['authors']
 
 			loadData(self.OBJECTS)
 			dir_path = os.path.dirname(os.path.realpath(__file__))
