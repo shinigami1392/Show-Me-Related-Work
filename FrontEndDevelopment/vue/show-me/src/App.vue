@@ -11,6 +11,7 @@
     <div id="main">
       <div class="container-fluid" style="height:800px">
         <router-view class="col-md-12" name="aboutus"></router-view>
+        <router-view class="col-md-12" name="contactus"></router-view>
         <div class="row content" style="height:60%;">
           <div class="col-md-12">
             <router-view name="search-box"></router-view>
