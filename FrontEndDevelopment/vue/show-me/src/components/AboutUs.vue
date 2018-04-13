@@ -1,29 +1,4 @@
- <!DOCTYPE html>
-<html>
-
-<head>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
-<link rel="stylesheet" type="text/css" href="AboutPage.css">
-<title>About Us</title>
-</head>
-
-<body style="font-family: Arial;">
-
-	<div class="navigation-bar">
-        <div id="navigation-container">
-			<a>
-				<img class="logo" src="showMeLogo.png">
-			</a>
-            <ul>
-			  <li><a class="active" href="#home">Home</a></li>
-			  <li><a href="#news">News</a></li>
-			  <li><a href="#contact">Contact</a></li>
-			  <li><a href="#about">About</a></li>
-			</ul>
-        </div>
-    </div>
-
-
+<template>
 <div class="row">
 
 <h1>About ShowMe</h1>
@@ -44,6 +19,7 @@
 
 
 <h1>Meet The Team</h1>
+<br>
   <div class="column">
     <div class="card">
       <img src="https://media.licdn.com/dms/image/C4E03AQHvKMW3611fCQ/profile-displayphoto-shrink_800_800/0?e=1527490800&v=alpha&t=vlEZcohnh97avodKRl-yjqjflKANqfvhoCwitOtTo5o" alt="Apoorv Khairnar" style="width:100%">
@@ -166,37 +142,103 @@
   
 </div>
 
+</template>
 
-<div class="footerheader">
 
-        <div id="footerSection">
 
-            <div>
-			
-			<div style="float: left;color:white; padding-top:15px; padding-left :40px;">
-			  <i class="far fa-copyright"></i>
-			</div>
-			
-		    <div style="float: left;">
-			  <p style="color:#666970;"><b>2018</b></p>
-			</div>
-			
-			<div style="float: left;">
-			  <p style="color:white;"><b>ShowMe</b></p>
-			</div>
-			
-			<div class="link-icons">
-				<a href="#" target="_blank"> About Us </a>
-				<a href="#" target="_blank"> Contact Us </a>
-				<a href="#" target="_blank"> <i class="fab fa-facebook-f fa-lg"></i> </a>
-				<a href="#" target="_blank"> <i class="fab fa-twitter fa-lg"></i> </a>
-				<a href="#" target="_blank"> <i class="fas fa-envelope fa-lg"></i> </a>
-				<a href="#" target="_blank"> <i class="fas fa-phone-square fa-lg"></i> </a>
-			</div>
+<script>
+export default {};
+</script>
 
-        </div>
 
-    </div>
 
-</body>
-</html> 
+<style>
+h2 {
+  font-size: 25px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 200;
+  line-height: 26.4px;
+}
+
+h1 {
+  font-size: 32px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 200;
+  line-height: 26.4px;
+}
+
+.column {
+  float: left;
+  width: 31.3%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+@media screen and (max-width: 650px) {
+  .column {
+    width: 100%;
+    display: block;
+  }
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  padding: 0 16px;
+}
+
+.container::after,
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.title {
+  color: grey;
+}
+
+.button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.button:hover {
+  background-color: #555;
+}
+
+.row {
+  margin: auto;
+  width: 70%;
+  padding: 10px;
+}
+
+.email-icon {
+  float: left;
+  padding-right: 5px;
+}
+
+.linkedin-github {
+  padding-bottom: 10px;
+}
+
+.linkedin-github a {
+  color: black;
+  text-decoration: none;
+}
+
+.link-icons fab:hover {
+  color: #8b2252;
+}
+</style>

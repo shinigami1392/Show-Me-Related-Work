@@ -10,6 +10,7 @@
     <!--  Main -->
     <div id="main">
       <div class="container-fluid" style="height:800px">
+        <router-view class="col-md-12" name="aboutus"></router-view>
         <div class="row content" style="height:60%;">
           <div class="col-md-12">
             <router-view name="search-box"></router-view>
@@ -26,13 +27,13 @@
           <div class="col-md-1" style="height:100%;">
             <router-view name="area-box"></router-view>
           </div>
+
         </div>
-
-
+          
 
         <div class="row" style="height:40%; margin-top:70px;">
           <div class="col-md-6" style="height:50%">
-														<!--<app-box v-bind:boxHeaderProp = "userFeedbackBoxHeader">
+          <!--<app-box v-bind:boxHeaderProp = "userFeedbackBoxHeader">
 																		  </app-box> -->
             <transition name="slide" mode="out-in">
 			  <router-view name="info-box" :key="$route.fullPath"></router-view>

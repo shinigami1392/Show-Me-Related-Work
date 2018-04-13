@@ -6,6 +6,7 @@ import LinkInfoBox from './components/LinkInfoBox.vue'
 import AnimatedBox from './components/AnimatedBox.vue'
 import SearchBox from './components/SearchBox.vue'
 import Datatable from './components/Datatable.vue'
+import AboutUs from './components/AboutUs.vue'
 
 //Lazy routing
 const PapersTable = resolve => {
@@ -31,6 +32,14 @@ export const routes = [{
     'search-box': SearchBox
   }
 },
+{
+  path: '/aboutus',
+  name: 'aboutus',
+  components: {
+    'aboutus': AboutUs,
+  },
+},
+
 {
   path: '/areas/:areaid',
   name: 'allPapers',
