@@ -155,6 +155,8 @@ class MyCrawler:
 			paperId = self.PAPERS[i]
 			i += 1
 
+			references = self.getReferences(paperId)
+
 			if paperId not in loadedPapers:
 				print i, paperId
 				url = 'https://ieeexplore.ieee.org/document/' + paperId + '/'
@@ -184,7 +186,7 @@ class MyCrawler:
 							print author['name']
 						paperObject['authors'].append(self.decodeString(author['name']))
 
-					references = self.getReferences(paperObject['id'])
+					#references = self.getReferences(paperObject['id'])
 					referenceArray = {}
 					for reference in references:
 						refereneObject = {'id':reference, 'upvotes':[], 'downvotes':[], 'comments':[]}
