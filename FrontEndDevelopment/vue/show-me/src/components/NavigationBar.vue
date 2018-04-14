@@ -30,7 +30,7 @@
         <md-dialog-alert
           :md-active.sync="ProfileDialogue"
           :md-title="userName"
-          md-content="Your <b>Profile</b> here!" />
+          md-content="<h6>First Name:</h6> </br><h6>Last Name:</h6></br><h6>Email:</h6>" />
 
         </div>
         
