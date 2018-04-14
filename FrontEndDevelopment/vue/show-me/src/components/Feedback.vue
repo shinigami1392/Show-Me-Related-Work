@@ -1,15 +1,15 @@
 <template>
     <app-box v-bind:boxHeaderProp="feedbackBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
-            <ul class="list-group" style="height:100%; overflow-y:auto;">
+            <ul class="list-group" style="max-height:300px; overflow-y:auto;">
                 <li v-for="comment in comments">
                    <span style="color:green; font-weight:bold;"> {{comment.user_name}}</span> <span style="color:grey;">[{{ getTimeStamp(comment.timestamp) }}]</span>: {{comment.text}} <hr />
                 </li>
             </ul>
-        <div style="width:100%; height:30%">
-            <div style="width:70%; height:100%; margin-right:25px;float:left;">
-                <textarea v-model="user_comment" class="form-control" type="text" rows="10" style="height:95%;" placeholder="Your comments" />
+        <div style="width:100%;">
+            <div style="width:70%; margin-right:25px;float:left;">
+                <textarea v-model="user_comment" class="form-control" type="text" rows="5" style="height:95%;" placeholder="Your comments" />
             </div>
-            <div style="width:25%; height:100%; margin-top:5px; float:left;">
+            <div style="width:25%; margin-top:5px; float:left;">
                 <button type="button" v-on:click="addComment()" class="btn btn-success btn-sm">Comment</button> &nbsp;
                 <button v-bind:class="likeButtonClass" v-on:click="toggleLikeButton">Like
                     <i class="fa fa-thumbs-o-up"></i>
@@ -38,7 +38,7 @@ export default {
     },
     props: ['userData'],
     created() {
-        this.cardStyle = "height:100%";
+        this.cardStyle = "";
         this.cardBlockStyle = "height:80%;"
         this.cardBlockContentStyle = "height:100%;"
     },

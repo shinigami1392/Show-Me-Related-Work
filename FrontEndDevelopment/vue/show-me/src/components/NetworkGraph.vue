@@ -10,7 +10,7 @@
                             <small v-if="index != visitedPapers.length - 1"> > </small>
                         </span>
                     </div>
-                    <div id="details" style="height:90%;">
+                    <div id="details">
                     </div>
                 </div>
 

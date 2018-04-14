@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    <div id="foreground">
+  <div id="app" style="min-height:100vh;">
+    <div id="foreground" style="min-height:100vh;">
     <!-- Fixed navbar -->
     <div>
       <app-navbar :userData="userObj">
@@ -9,10 +9,10 @@
 
     <!--  Main -->
     <div id="main">
-      <div class="container-fluid" style="height:800px">
+      <div class="container-fluid" style="">
         <router-view class="col-md-12" name="aboutus"></router-view>
         <router-view class="col-md-12" name="contactus"></router-view>
-        <div class="row content" style="height:60%;">
+        <div class="row content">
           <div class="col-md-12">
             <router-view name="search-box"></router-view>
           </div>
@@ -32,8 +32,8 @@
         </div>
           
 
-        <div class="row" style="height:40%; margin-top:70px;">
-          <div class="col-md-6" style="height:50%">
+        <div class="row" style="margin-top:70px;">
+          <div class="col-md-6" style="">
           <!--<app-box v-bind:boxHeaderProp = "userFeedbackBoxHeader">
 																		  </app-box> -->
             <transition name="slide" mode="out-in">
@@ -41,7 +41,7 @@
               <router-view name="feedback-box" :key="$route.fullPath" :userData="userObj"></router-view>
             </transition>
           </div>
-		  <div class="col-md-6" style="height:50%;">
+		  <div class="col-md-6" style="">
             <transition name="slide" mode="out-in">
 			  <router-view name="link-info-box" :key="$route.fullPath"></router-view>
             </transition>
@@ -104,7 +104,7 @@ export default {
 </script>
 
 <style>
-#app{
+body{
   width: 100%;
   background-image: url(circuits2.jpg);
 }
