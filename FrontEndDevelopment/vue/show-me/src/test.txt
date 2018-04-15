@@ -15,3 +15,5 @@ Test 8 - Last test didnt work out. Configured the private key of the remote serv
 Test 9 - Last test failed due to non sudo priviledges. Testing with sudo priviledges.
 
 Test 10 - Last attempt failed as well as jenkins user didnt have premission to remotely deploy the code.
+
+Test 11 - jenkins user didnt have the permission to copy from /var/lib/ location. Changed the jenkins workspace directory and testing.
