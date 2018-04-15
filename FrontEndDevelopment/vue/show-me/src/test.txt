@@ -13,3 +13,5 @@ Test 7 - after installing incrontab
 Test 8 - Last test didnt work out. Configured the private key of the remote server.
 
 Test 9 - Last test failed due to non sudo priviledges. Testing with sudo priviledges.
+
+Test 10 - Last attempt failed as well as jenkins user didnt have premission to remotely deploy the code.
