@@ -8,4 +8,4 @@ Test 4 - Trying to fix the Host key verification failed error.
 
 Test 5 - Permission denied with private key file.
 
-Test 6 - after installing incrontab 
+Test 7 - after installing incrontab 
