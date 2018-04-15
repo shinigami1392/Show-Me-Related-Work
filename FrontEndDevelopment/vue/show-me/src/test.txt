@@ -9,3 +9,5 @@ Test 4 - Trying to fix the Host key verification failed error.
 Test 5 - Permission denied with private key file.
 
 Test 7 - after installing incrontab 
+
+Test 8 - Last test didnt work out. Configured the private key of the remote server.
