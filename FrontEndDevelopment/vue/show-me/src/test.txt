@@ -11,3 +11,5 @@ Test 5 - Permission denied with private key file.
 Test 7 - after installing incrontab 
 
 Test 8 - Last test didnt work out. Configured the private key of the remote server.
+
+Test 9 - Last test failed due to non sudo priviledges. Testing with sudo priviledges.
