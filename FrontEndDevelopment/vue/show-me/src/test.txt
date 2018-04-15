@@ -5,3 +5,5 @@ Test 2 trying after removing npm test command.
 TEst 3 - modified the build shell code.
 
 Test 4 - Trying to fix the Host key verification failed error.
+
+Test 5 - Permission denied with private key file.
