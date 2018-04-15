@@ -17,3 +17,5 @@ Test 9 - Last test failed due to non sudo priviledges. Testing with sudo privile
 Test 10 - Last attempt failed as well as jenkins user didnt have premission to remotely deploy the code.
 
 Test 11 - jenkins user didnt have the permission to copy from /var/lib/ location. Changed the jenkins workspace directory and testing.
+
+Test 12 - Missed few more configurations. Fixed them and trying again.
