@@ -20,4 +20,4 @@ Test 11 - jenkins user didnt have the permission to copy from /var/lib/ location
 
 Test 12 - Missed few more configurations. Fixed them and trying again.
 
-Final Test - Last Test was successful after so many attempts. Final push to configure the setting properly to our code deployment.
+Final Test - Last Test was successful after so many attempts. Final push to configure the setting properly to our code deployment
