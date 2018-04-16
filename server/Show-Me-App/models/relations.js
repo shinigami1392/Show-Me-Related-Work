@@ -6,8 +6,6 @@ var CommentModel = require('./comments.js');
 var Schema = mongoose.Schema;
 
 var relationsSchema = new Schema({
-	relationId: {type: String, required:true},
-	relationFrom : {type: Schema.Types.ObjectId, ref:'PaperModel'},
 	relationTo : {type: Schema.Types.ObjectId, ref:'PaperModel'},
 	upvotes : [{type: Schema.ObjectId, ref:'UserModel'}],
 	downvotes : [{type: Schema.ObjectId, ref:'UserModel'}],

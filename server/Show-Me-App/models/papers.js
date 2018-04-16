@@ -4,10 +4,14 @@ var Schema = mongoose.Schema;
 
 var papersSchema = new Schema({
 	paperId : {type: String, required: true, max:100},
-	title : {type: String, required: true, max:100},
+	title : {type: String, required: true, max:500},
 	author : [String],
-	url : {type:String, required:true},
-	date : {type: Date, required: true}
+	doi: {type: String, required: true, max:50},
+	stream: {type: String, required: true, max:50},
+	abstract: {type: String, required: false, max:1000},
+	reference: {type: Object},
+	link : {type:String, required:true},
+	publicationYear : {type: String, required: true}
 });
 
 papersSchema.virtual('name').get(function(){

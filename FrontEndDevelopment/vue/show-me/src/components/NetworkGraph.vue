@@ -74,10 +74,12 @@ function plotGraph(vm, paperInfo) {
         incoming_citations.push(nodeObj.data.id);
         legend_elements.push({ id: paperInfo.incoming_relations[i].source_id, name: paperInfo.incoming_relations[i].source_name, weight: paperInfo.incoming_relations[i].weight, type: 'incoming'});
 
-        edgeObj.data.id = 'e' + paperInfo.incoming_relations[i].id;
+        edgeObj.data.id = 'e' + paperInfo.incoming_relations[i].source_id+'_'+paperInfo.id;
         edgeObj.data.source = paperInfo.incoming_relations[i].source_id;
+        
         nodes.push(nodeObj);
         edges.push(edgeObj);
+        
     }
 
     const incoming_citations_set = new Set(incoming_citations);
@@ -104,12 +106,13 @@ function plotGraph(vm, paperInfo) {
             data: { id: '', source: paperInfo.id, target: '', type: 'outgoing' }
         }
 
-        edgeObj.data.id = 'e' + paperInfo.outgoing_relations[i].id;
+        edgeObj.data.id = 'e' +paperInfo.id+'_'+paperInfo.outgoing_relations[i].destination_id;
         edgeObj.data.target = paperInfo.outgoing_relations[i].destination_id;
         nodes.push(nodeObj);
         edges.push(edgeObj);
     }
-
+    console.log(JSON.stringify(nodes));
+    console.log(JSON.stringify(edges));
     graph_elements.push.apply(graph_elements, nodes);
     graph_elements.push.apply(graph_elements, edges);
 
