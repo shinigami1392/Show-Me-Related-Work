@@ -9,40 +9,44 @@ var resultSet = [];
 var exports = module.exports = {};
 
 
-var sendInternalServerError = function(err, res){
+var sendInternalServerError = function (err, res) {
 	res.status(501).send(err);
 }
 
-var invalidInput = function(err, res){
+var invalidInput = function (err, res) {
 	res.status(400).send(err);
 }
 
-exports.findUser = function(id, res){
-	var query = UserModel.findOne({userId:id});
-	query.exec(function(err, user){
-		if(err) sendInternalServerError(res);
-		else if(user) {
-			res.send({'found':true, 'user':{'first_name': user.first_name, 'last_name': user.last_name,
-					'email':user.email}});
+exports.findUser = function (id, res) {
+	var query = UserModel.findOne({ userId: id });
+	query.exec(function (err, user) {
+		if (err) sendInternalServerError(res);
+		else if (user) {
+			res.send({
+				'found': true, 'user': {
+					'first_name': user.first_name, 'last_name': user.last_name,
+					'email': user.email
+				}
+			});
 		}
-		else res.send({'found':false});
+		else res.send({ 'found': false });
 	});
 }
 
-exports.findAllDomains = function(res){
+exports.findAllDomains = function (res) {
 	var query = DomainModel.find();
 	query.exec(function(err, domains){
 		if(err) sendInternalServerError(res);
 		else if(domains){
 			obj = [];
-			for(var i = 0; i < domains.length; i++){
-				var domain = {'id':domains[i].id ,'name': domains[i].domainName, 'count': domains[i].papers.length};
+			for (var i = 0; i < domains.length; i++) {
+				var domain = { 'id': domains[i].id, 'name': domains[i].domainName, 'count': domains[i].papers.length };
 				obj.push(domain);
 			}
-			res.send({'found':true, 'domains':obj});
+			res.send({ 'found': true, 'domains': obj });
 		}
-		else res.send({'found':false});
-	}); 
+		else res.send({ 'found': false });
+	});
 }
 
 exports.findPapersforDomain = function(id, res){
@@ -60,10 +64,10 @@ exports.findPapersforDomain = function(id, res){
 				var object = {'id': papers[i].id, 'title': papers[i].title, 'authors': papers[i].authors, 'publicationYear': papers[i].publicationYear, 'url':papers[i].link};
 				objects.push(object);
 			}
-			res.send({'total': objects.length, 'papers': objects});
+			res.send({ 'total': objects.length, 'papers': objects });
 		}
-		else{
-			res.send({'total': 0, 'papers': []});
+		else {
+			res.send({ 'total': 0, 'papers': [] });
 		}
 	})
 }
@@ -368,16 +372,16 @@ exports.addComments = function(domain, source, destination, userId, text, res){
 	});
 }
 
-exports.getGraph = function(paperId, res){
+exports.getGraph = function (paperId, res) {
 	var response = {};
 	var node = getGraphNode(paperId, res);
 	console.log("Res:" + node);
 }
 
-var getGraphNode = function(paperId, res){
+var getGraphNode = function (paperId, res) {
 	var driver = GraphNodeModel.getDriver();
 	var session = driver.session();
-	var resultPromise = session.run('MATCH (p:ResearchPaper {Id:"'+paperId+'"}) return p');
+	var resultPromise = session.run('MATCH (p:ResearchPaper {Id:"' + paperId + '"}) return p');
 	resultSet = {};
 	resultSet['incoming_relations'] = [];
 	resultSet['outgoing_relations'] = [];
@@ -388,17 +392,17 @@ var getGraphNode = function(paperId, res){
 			resultSet['name'] = result.records[i].get(0).properties.Title;
 			resultSet['author'] = result.records[i].get(0).properties.Author;
 			resultSet['url'] = result.records[i].get(0).properties.Link;
-			resultSet['year'] = "";
+			resultSet['year'] = result.records[i].get(0).properties.Link;
 		}
 
 		driver.close();
 		driver = GraphNodeModel.getDriver();
 		session = driver.session();
-		var resultPromise1 = session.run('MATCH p=(p1:ResearchPaper)-[r:HAS_REFERRED]->(p2:ResearchPaper) where p1.Id="'+ paperId + '"RETURN r, p2');
+		var resultPromise1 = session.run('MATCH p=(p1:ResearchPaper)-[r:HAS_REFERRED]->(p2:ResearchPaper) where p1.Id="' + paperId + '"RETURN r, p2');
 		resultPromise1.then(result1 => {
 			session.close();
-			for (var i = 0; i< result1.records.length; i++){
-				var data ={};
+			for (var i = 0; i < result1.records.length; i++) {
+				var data = {};
 				data['id'] = result1.records[i].get(0).properties.relId;
 				data['destination_name'] = result1.records[i].get(1).properties.Title;
 				data['destination_id'] = result1.records[i].get(1).properties.Id;
@@ -409,12 +413,12 @@ var getGraphNode = function(paperId, res){
 			driver.close();
 			driver = GraphNodeModel.getDriver();
 			session = driver.session();
-			var resultPromise2 = session.run('MATCH p=(p1:ResearchPaper)<-[r:HAS_REFERRED]-(p2:ResearchPaper) where p1.Id="'+ paperId + '"RETURN r, p2');
-			resultPromise2.then(function(result2){
+			var resultPromise2 = session.run('MATCH p=(p1:ResearchPaper)<-[r:HAS_REFERRED]-(p2:ResearchPaper) where p1.Id="' + paperId + '"RETURN r, p2');
+			resultPromise2.then(function (result2) {
 				session.close();
 				var objects = [];
-				for (var i = 0; i< result2.records.length; i++){
-					var data ={};
+				for (var i = 0; i < result2.records.length; i++) {
+					var data = {};
 					data['id'] = result2.records[i].get(0).properties.relId;
 					data['source_name'] = result2.records[i].get(1).properties.Title;
 					data['source_id'] = result2.records[i].get(1).properties.Id;
@@ -425,8 +429,70 @@ var getGraphNode = function(paperId, res){
 				res.send(resultSet);
 			});
 		});
-		
+
 	});
 }
 
 
+exports.findPapersForDomainPaginated = function(draw, start, length, areaid, res){
+	var totalPapersForDomainQuery =  DomainModel.aggregate([
+		  { $match: { id: areaid } },
+		  { $project: {
+				  id: "$id",
+				  paperCount: { $size: "$papers" }
+			}
+		  }  
+		])
+	var totalRecords;
+	totalPapersForDomainQuery.exec(function(err, result){
+		if(err) sendInternalServerError(err, result);
+		if(result === undefined || result.length == 0 || result[0] == null){
+			res.send({"draw": draw, "recordsTotal": 0, "recordsFiltered":0, "data":[]});
+		}
+		else{
+			totalRecords = result[0].paperCount;
+			query = DomainModel.findOne({id:areaid}, {papers:{$slice: [ start, length]}});
+			//query = DomainModel.findOne({id:areaid});
+			//query.populate('papers');
+			query.exec(function(err, domain){
+				if(err) sendInternalServerError(res);
+				else if(domain) {
+					var papers = domain.papers;
+					var dttable = [];
+					for(var i = 0; i < papers.length; i++){
+						var object = [];
+						object.push(papers[i].id);
+						object.push(papers[i].title);
+						object.push(papers[i].authors.toString().slice(0,-1)); 
+						dttable.push(object);
+					}
+					res.send({"draw": draw, "recordsTotal": totalRecords, "recordsFiltered":totalRecords, "data":dttable});
+				}
+				else{
+					res.send({"draw": draw, "recordsTotal": 0, "recordsFiltered":0, "data":[]});
+				}
+			})
+		}	
+	});
+}
+exports.search = function (text, res) {
+	var query = PaperModel.find(
+		{ $text: { $search: text } },
+		{ score: { $meta: "textScore" } }
+	).sort({ score: { $meta: 'textScore' } });
+	
+	query.exec(function (err, papers) {
+		if (err) sendInternalServerError(res);
+		else if (papers) {
+			var paperList = [];
+			for (var i = 0; i < papers.length; i++) {
+				var paper = { 'id': papers[i].paperId, 'title': papers[i].title, 'authors': papers[i].author, 'date': papers[i].date, 'url': papers[i].url };
+				paperList.push(paper);
+			}
+			res.send({ 'total': paperList.length, 'papers': paperList });
+		}
+		else {
+			res.send({ 'total': 0, 'papers': [] });
+		}
+	});
+}

@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
 var PaperModel = require('./papers.js');
 var RelationModel = require('./relations.js')
 var Schema = mongoose.Schema;

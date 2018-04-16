@@ -1,6 +1,6 @@
 {
-	"mongoURL" : "mongodb://127.0.0.1/showMe",
-	"neo4jURL" : "bolt://localhost:7687",
+	"mongoURL" : "mongodb://ShowMeAdmin2:h0wM3MoN50!f@54.201.123.246:27017/showMe",
+	"neo4jURL" : "bolt://54.201.123.246:7687",
 	"neo4jUsername" : "neo4j",
-	"neo4jPassword" : "neo4j123"
+	"neo4jPassword" : "N30forj2990T##"
 }

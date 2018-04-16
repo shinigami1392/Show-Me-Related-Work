@@ -1,0 +1,23 @@
+This file is related to task 348. I am pushing a sample file to check whether the jenkins job is working correctly or not to deploy the application.
+
+Test 2 trying after removing npm test command.
+
+TEst 3 - modified the build shell code.
+
+Test 4 - Trying to fix the Host key verification failed error.
+
+Test 5 - Permission denied with private key file.
+
+Test 7 - after installing incrontab 
+
+Test 8 - Last test didnt work out. Configured the private key of the remote server.
+
+Test 9 - Last test failed due to non sudo priviledges. Testing with sudo priviledges.
+
+Test 10 - Last attempt failed as well as jenkins user didnt have premission to remotely deploy the code.
+
+Test 11 - jenkins user didnt have the permission to copy from /var/lib/ location. Changed the jenkins workspace directory and testing.
+
+Test 12 - Missed few more configurations. Fixed them and trying again.
+
+Final Test - Last Test was successful after so many attempts. Final push to configure the setting properly to our code deployment
