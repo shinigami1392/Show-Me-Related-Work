@@ -240,7 +240,8 @@ h2 {
 	font-style: normal;
 	font-variant: normal;
 	font-weight: 200;
-	line-height: 26.4px;
+  line-height: 26.4px;
+  color: aliceblue
 }
 
 h1 {
@@ -248,7 +249,8 @@ h1 {
 	font-style: normal;
 	font-variant: normal;
 	font-weight: 200;
-	line-height: 26.4px;
+  line-height: 26.4px;
+  color: aliceblue
 }
 
 .column {

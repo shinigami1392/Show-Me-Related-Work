@@ -11,6 +11,7 @@ import PaginatedTable from './components/PaginatedTable.vue'
 import Grid from './components/Grid.vue'
 import SearchBox from './components/SearchBox.vue'
 import Datatable from './components/Datatable.vue'
+import Footer from './components/Footer.vue'
 
 import { routes } from './routes';
 import { store } from './store';
@@ -29,6 +30,7 @@ Vue.component('app-link-infobox', LinkInfoBox);
 Vue.component('app-paginated-table', PaginatedTable);
 Vue.component('grid', Grid);
 Vue.component('app-searchbox', SearchBox);
+Vue.component('app-footer', Footer);
 
 Vue.component('datatable', Datatable);
 
