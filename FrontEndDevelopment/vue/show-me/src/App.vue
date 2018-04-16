@@ -1,58 +1,58 @@
 <template>
-  <div id="app" style="min-height:100vh;">
+<div id="app" style="min-height:100vh;">
     <div id="foreground" style="min-height:100vh;">
-    <!-- Fixed navbar -->
-    <div>
-      <app-navbar :userData="userObj">
-      </app-navbar>
-    </div>
-
-    <!--  Main -->
-    <div id="main">
-      <div class="container-fluid" style="">
-        <router-view class="col-md-12" name="aboutus"></router-view>
-        <router-view class="col-md-12" name="contactus"></router-view>
-        <div class="row content">
-          <div class="col-md-12">
-            <router-view name="search-box"></router-view>
-          </div>
-          <div class="col-md-11" style="height:100%;">
-            <transition name="slide" mode="out-in">
-              <router-view name="animation-box"></router-view>
-            </transition>
-
-            <transition name="slide" mode="out-in">
-              <router-view name="table-box" :key="$route.fullPath"></router-view>
-            </transition>
-          </div>
-          <div class="col-md-1" style="height:100%;">
-            <router-view name="area-box"></router-view>
-          </div>
-
-        </div>
-          
-
-        <div class="row" style="margin-top:70px;">
-          <div class="col-md-6" style="">
-          <!--<app-box v-bind:boxHeaderProp = "userFeedbackBoxHeader">
-																		  </app-box> -->
-            <transition name="slide" mode="out-in">
-			  <router-view name="info-box" :key="$route.fullPath"></router-view>
-              <router-view name="feedback-box" :key="$route.fullPath" :userData="userObj"></router-view>
-            </transition>
-          </div>
-		  <div class="col-md-6" style="">
-            <transition name="slide" mode="out-in">
-			  <router-view name="link-info-box" :key="$route.fullPath"></router-view>
-            </transition>
-          </div>
+        <!-- Fixed navbar -->
+        <div>
+            <app-navbar :userData="userObj">
+            </app-navbar>
         </div>
 
+        <!--  Main -->
+        <div id="main">
+            <div class="container-fluid">
+                <router-view class="col-md-12" name="aboutus"></router-view>
+                <router-view class="col-md-12" name="contactus"></router-view>
+                <div class="row content">
+                    <div class="col-sm-6 col-sm-offset-2">
+                        <router-view name="search-box"></router-view>
+                    </div>
+                    <div class="col-md-11" style="height:100%;">
+                        <transition name="slide" mode="out-in">
+                            <router-view name="animation-box"></router-view>
+                        </transition>
+                        <transition name="slide" mode="out-in">
+                            <router-view name="table-box" :key="$route.fullPath"></router-view>
+                        </transition>
+                    </div>
+                    <div class="col-md-1" style="height:100%;">
+                        <router-view name="area-box"></router-view>
+                    </div>
+                </div>
 
-      </div>
+
+                <div class="row" style="margin-top:70px;">
+                    <div class="col-md-6">
+                        <transition name="slide" mode="out-in">
+                            <router-view name="info-box" :key="$route.fullPath"></router-view>
+                            <router-view name="feedback-box" :key="$route.fullPath" :userData="userObj"></router-view>
+                        </transition>
+                    </div>
+                    <div class="col-md-6">
+                        <transition name="slide" mode="out-in">
+                            <router-view name="link-info-box" :key="$route.fullPath"></router-view>
+                        </transition>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Footer-->
+        <div>
+            <app-footer></app-footer>
+        </div>
+
     </div>
-    </div>
-  </div>
+</div>
 </template>
 
 <script>
