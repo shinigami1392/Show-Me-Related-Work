@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">83.33% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>5/6</span>
+        <span class='fraction'>0/7</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -35,13 +35,13 @@
         <span class='fraction'>0/1</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">83.33% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>5/6</span>
+        <span class='fraction'>0/7</span>
       </div>
     </div>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line low'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -63,19 +63,14 @@
 18
 19
 20
-21</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+21
+22
+23
+24
+25</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -83,19 +78,36 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span></td><td class="text"><pre class="prettyprint lang-js">var mongoose = require('mongoose');
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >var mongoose = require('mongoose');</span>
+<span class="cstat-no" title="statement not covered" >mongoose.Promise = global.Promise;</span>
+<span class="cstat-no" title="statement not covered" >var Schema = mongoose.Schema;</span>
 &nbsp;
-var Schema = mongoose.Schema;
-&nbsp;
-var papersSchema = new Schema({
+<span class="cstat-no" title="statement not covered" >var papersSchema = new Schema({</span>
 	paperId : {type: String, required: true, max:100},
-	title : {type: String, required: true, max:100},
+	title : {type: String, required: true, max:500},
 	author : [String],
-	url : {type:String, required:true},
-	date : {type: Date, required: true}
+	doi: {type: String, required: true, max:50},
+	stream: {type: String, required: true, max:50},
+	abstract: {type: String, required: false, max:1000},
+	reference: {type: Object},
+	link : {type:String, required:true},
+	publicationYear : {type: String, required: true}
 });
 &nbsp;
-papersSchema.virtual('name').get(<span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >papersSchema.virtual('name').get(<span class="fstat-no" title="function not covered" >function(){</span></span>
 <span class="cstat-no" title="statement not covered" >	return this.title;</span>
 });
 &nbsp;
@@ -103,13 +115,13 @@ papersSchema.virtual('name').get(<span class="fstat-no" title="function not cove
 // 	return '/catalog/paper/' + this._id;
 // });
 &nbsp;
-module.exports = mongoose.model('PaperModel', papersSchema);</pre></td></tr>
+<span class="cstat-no" title="statement not covered" >module.exports = mongoose.model('PaperModel', papersSchema);</span></pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Mar 02 2018 18:50:30 GMT-0700 (US Mountain Standard Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Apr 17 2018 18:57:18 GMT-0700 (US Mountain Standard Time)
 </div>
 </div>
 <script src="../../prettify.js"></script>

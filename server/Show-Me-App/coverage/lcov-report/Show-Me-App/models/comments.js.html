@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">80% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>8/10</span>
+        <span class='fraction'>0/11</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -35,13 +35,13 @@
         <span class='fraction'>0/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">80% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>8/10</span>
+        <span class='fraction'>0/11</span>
       </div>
     </div>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line low'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -64,55 +64,58 @@
 19
 20
 21
-22</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
+22
+23</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span></td><td class="text"><pre class="prettyprint lang-js">var mongoose = require('mongoose');
-var UserModel = require('./users.js');
-var Schema = mongoose.Schema;
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >var mongoose = require('mongoose');</span>
+<span class="cstat-no" title="statement not covered" >mongoose.Promise = global.Promise;</span>
+<span class="cstat-no" title="statement not covered" >var UserModel = require('./users.js');</span>
+<span class="cstat-no" title="statement not covered" >var Schema = mongoose.Schema;</span>
 &nbsp;
-var commentsSchema = new Schema({
+<span class="cstat-no" title="statement not covered" >var commentsSchema = new Schema({</span>
 	timestamp : {type: String, required:true},
 	text: {type: String, required:true},
 	userName: {type: String, required: true},
 	user : {type: Schema.ObjectId, ref:'UserModel'}
 });
 &nbsp;
-commentsSchema.virtual('name').get(<span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >commentsSchema.virtual('name').get(<span class="fstat-no" title="function not covered" >function(){</span></span>
 <span class="cstat-no" title="statement not covered" >	return this.text + ' by ' + this.user;</span>
 });
 &nbsp;
-commentsSchema.virtual('url').get(<span class="fstat-no" title="function not covered" >function(){</span>
+<span class="cstat-no" title="statement not covered" >commentsSchema.virtual('url').get(<span class="fstat-no" title="function not covered" >function(){</span></span>
 <span class="cstat-no" title="statement not covered" >	return '/catalog/comment/' + this._id;</span>
 });
 &nbsp;
-var CommentModel = mongoose.model('CommentModel', commentsSchema);
+<span class="cstat-no" title="statement not covered" >var CommentModel = mongoose.model('CommentModel', commentsSchema);</span>
 &nbsp;
-module.exports = mongoose.model('CommentModel', commentsSchema);</pre></td></tr>
+<span class="cstat-no" title="statement not covered" >module.exports = mongoose.model('CommentModel', commentsSchema);</span></pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Mar 02 2018 18:50:30 GMT-0700 (US Mountain Standard Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Apr 17 2018 18:57:18 GMT-0700 (US Mountain Standard Time)
 </div>
 </div>
 <script src="../../prettify.js"></script>

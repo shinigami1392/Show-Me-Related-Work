@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for Show-Me-App\spec\findAllDomainsSpec.js</title>
+    <title>Code coverage report for Show-Me-App\spec\findPapersForDomainSpec.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -16,7 +16,7 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../index.html">all files</a> / <a href="index.html">Show-Me-App/spec/</a> findAllDomainsSpec.js
+      <a href="../../index.html">all files</a> / <a href="index.html">Show-Me-App/spec/</a> findPapersForDomainSpec.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
@@ -68,8 +68,7 @@
 23
 24
 25
-26
-27</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+26</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
@@ -79,12 +78,11 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
@@ -96,25 +94,24 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var request = require("request");
-var url = "http://54.201.123.246:8081/domains/all"
+var base_url = "http://54.201.123.246:8081/domains/"
 &nbsp;
-describe("Find All Domains Test", function(){
+describe("Find list of papers for given domain", function(){
     describe("GET /", function() {	  
 		
-		it("returns status code 200", function(done) {
-			request.get(url, function(error, response, body) {
+		it("returns status code 200", function(done) {			
+			var url = base_url + "1";			
+			request.get(url, function(error, response, body) {				
 				expect(response.statusCode).toBe(200);
 				done();
 			});
 		});
 		
-		it("returns all domains data", function(done) {
-			request.get(url, function(error, response, body) {
-				
-				var parsed_body = JSON.parse(body);
-				expect(parsed_body['found']).toBe(true);				
-				var domains = parsed_body['domains'];
-				expect(domains.length).toEqual(6);			
+		it("returns all papers under that domain", function(done) {			
+			var url = base_url + "0";
+			request.get(url, function(error, response, body) {				
+				var parsed_body = JSON.parse(body);				
+				expect(parsed_body['total']).toEqual(parsed_body['papers'].length);		
 				done();
 			});
 		});

@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">94.44% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>17/18</span>
+        <span class='fraction'>0/19</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -30,18 +30,18 @@
         <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">66.67% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>2/3</span>
+        <span class='fraction'>0/3</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">94.44% </span>
+        <span class="strong">0% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>17/18</span>
+        <span class='fraction'>0/19</span>
       </div>
     </div>
   </div>
-  <div class='status-line high'></div>
+  <div class='status-line low'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet">1
 2
@@ -155,38 +155,33 @@
 110
 111
 112
-113</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
+113</td><td class="line-coverage quiet"><span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -266,34 +261,39 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var async = require('async');
-var mongoose = require('mongoose');
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >var async = require('async');</span>
+<span class="cstat-no" title="statement not covered" >var mongoose = require('mongoose');</span>
+<span class="cstat-no" title="statement not covered" >mongoose.Promise = global.Promise;</span>
+<span class="cstat-no" title="statement not covered" >var config = require('../config.json');</span>
+<span class="cstat-no" title="statement not covered" >var UserModel = require('./users.js');</span>
+<span class="cstat-no" title="statement not covered" >var PaperModel = require('./papers.js');</span>
+<span class="cstat-no" title="statement not covered" >var DomainModel = require('./domains.js');</span>
+<span class="cstat-no" title="statement not covered" >var RelationModel = require('./relations.js');</span>
 &nbsp;
-var config = require('../config.json');
-var UserModel = require('./users.js');
-var PaperModel = require('./papers.js');
-var DomainModel = require('./domains.js');
-var RelationModel = require('./relations.js');
-&nbsp;
-var exports = module.exports = {};
-var connectToMongo = function(){
-	var mongoURL = config.mongoURL;
+<span class="cstat-no" title="statement not covered" >var exports = module.exports = {};</span>
+<span class="cstat-no" title="statement not covered" >var connectToMongo = <span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >	var mongoURL = config.mongoURL;</span>
 	
-	mongoose.connect(mongoURL,{
+<span class="cstat-no" title="statement not covered" >	mongoose.connect(mongoURL,{</span>
   		useMongoClient: true
 	});	
 &nbsp;
-	var db = mongoose.connection;
-	db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+<span class="cstat-no" title="statement not covered" >	var db = mongoose.connection;</span>
+<span class="cstat-no" title="statement not covered" >	db.on('error', console.error.bind(console, 'MongoDB connection error:'));</span>
 }
 &nbsp;
-var getRandom = <span class="fstat-no" title="function not covered" >function(max){</span>
+<span class="cstat-no" title="statement not covered" >var getRandom = <span class="fstat-no" title="function not covered" >function(max){</span></span>
 <span class="cstat-no" title="statement not covered" >	return Math.floor(Math.random()*max);</span>
 }
 &nbsp;
-exports.createModels = function(){
-	connectToMongo();
+<span class="cstat-no" title="statement not covered" >exports.createModels = <span class="fstat-no" title="function not covered" >function(){</span></span>
+<span class="cstat-no" title="statement not covered" >	connectToMongo();</span>
 	
 		// console.log(data[i][0], data[i][1], data[i][2]);
 		// PaperModel.find({'paperId':'1'}).exec(function(err, from){
@@ -378,14 +378,14 @@ exports.createModels = function(){
 	// 		else console.log('saved successfully '+i.toString());
 	// 	})
 	// }
-	console.log('Database connection successful!');
+<span class="cstat-no" title="statement not covered" >	console.log('Database connection successful!');</span>
 }</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Mar 02 2018 18:50:30 GMT-0700 (US Mountain Standard Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Apr 17 2018 18:57:18 GMT-0700 (US Mountain Standard Time)
 </div>
 </div>
 <script src="../../prettify.js"></script>
