@@ -59,7 +59,7 @@ export const routes = [{
 {
   path: '/areas/:areaid/paper/:paperid',
   beforeEnter: (to, from, next) => {
-    console.log("beforeEnter");
+    //console.log("beforeEnter");
     next();
   },
   components: {

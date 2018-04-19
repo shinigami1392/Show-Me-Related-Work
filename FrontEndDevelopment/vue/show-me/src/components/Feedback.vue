@@ -76,9 +76,29 @@ export default {
             }   
         },
         addComment: function() {
+
+                let domainId = this.$route.params.areaid;
+                let relationId = (this.$route.params.linkid).split('_'); 
+                let sourceId = relationId[0];
+                let destinationId = relationId[1];
+                let textContent =  this.user_comment;
+                let userId = '';
+                if((localStorage.getItem("userData") != null)){
+                    let userObj = JSON.parse(localStorage.getItem("userData"));
+                    userId = userObj.sub;
+                }
+
+                let requestUrl = `http://54.201.123.246:8081/relations/comment/add?domain=` + domainId + `&source=` + sourceId + `&destination=` + destinationId + `&user=` + userId+`&text=` + textContent; 
+                console.log(requestUrl);
+            
             axios
-                .put(`http://54.201.123.246:8081/relations/comment/add?relationId=` + this.$route.params.linkid + `&text=` + this.user_comment + `&user_name=` + this.givenname)
+                .put(requestUrl)
                 .then(response => {
+
+                    // if true then 
+                    console.log(response.data);
+
+
                     axios
                         .get(`http://54.201.123.246:8081/relations/get?id=` + this.$route.params.linkid + `&user=` + this.username)
                         .then(response => {
