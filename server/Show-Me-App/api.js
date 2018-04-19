@@ -106,7 +106,14 @@ exports.findRelationFromId = function(domain, source, destination, userId, res){
 					var down = relations[destination].downvotes.indexOf(userId);
 					if(down != -1) downvoted = true;
 
-					var result = {'relation':relations[destination], 'upvotedByUser':upvoted, 'downvotedByUser':downvoted};
+					var result = {'relation':{
+										'upvotes':relations[destination].upvotes.length,
+										'downvotes': relations[destination].downvotes.length,
+										'comments': relations[destination].comments
+									}
+								 	'upvotedByUser':upvoted,
+								 	'downvotedByUser':downvoted
+								 };
 					res.send(result);
 				}
 				else{
