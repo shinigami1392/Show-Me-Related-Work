@@ -87,12 +87,17 @@ exports.findRelationFromId = function(domain, source, destination, userId, res){
 			for(var i=0; i < papers.length; i++){
 				if(papers[i].id == source){
 					sourcePaper = papers[i];
-					break;
+				}
+				if(papers[i].id == destination){
+					destinationPaper = papers[i];
 				}
 			}
 			if(sourcePaper == null) invalidInput('Source paper not found', res);
+			else if(destinationPaper == null) invalidInput('Destination paper not found', res);
 			else{
 				var relations = sourcePaper.references;
+				var sourceTitle = sourcePaper.title;
+				var destinationTitle = destinationPaper.title;
 				var foundFlag = false;
 				var keys = Object.keys(relations);
 				if(keys.indexOf(destination) != -1){
@@ -111,7 +116,9 @@ exports.findRelationFromId = function(domain, source, destination, userId, res){
 										'upvotes':relations[destination].upvotes.length,
 										'downvotes': relations[destination].downvotes.length,
 										'comments': relations[destination].comments
-									}
+									},
+									'destinationTitle': destinationTitle,
+									'sourceTitle': sourceTitle,
 								 	'upvotedByUser':upvoted,
 								 	'downvotedByUser':downvoted
 								 };
