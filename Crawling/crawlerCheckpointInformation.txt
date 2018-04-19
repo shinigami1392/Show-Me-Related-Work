@@ -1,0 +1,14 @@
+- The file extractedPapers stores the IDs of all the papers which are already crawled.
+
+- The ID is stored in the file only when the paper is added in both MongoDB and Neo4j.
+
+- The crawler script adds the papers to the databases in a batch of 10 hence the file
+  extractedPapers aso stores the papers in the batch of 10.
+
+- The references of a peper are already fetched before checking if the paper is present
+  in the the file to make sure no peper is left without checking.
+
+- In the beginning of the script run, file is read into a set to prevent multiple file reads.
+
+- It is advised to take a git pull everytime before running the script so that the latest 
+  checkpoint is present in the extractedPapers file.

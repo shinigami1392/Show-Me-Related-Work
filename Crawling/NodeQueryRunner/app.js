@@ -14,6 +14,7 @@ fs.readFile("query.txt", function (err, data) {
     //     console.log(querySet[i]);
     // }
 	const driver = neo4j.driver("bolt://54.201.123.246:7687", neo4j.auth.basic("neo4j", "N30forj2990T##"));
+	// const driver = neo4j.driver("bolt://127.0.0.1:7687", neo4j.auth.basic("neo4j", "neo4j123"));
 	const session = driver.session();
     // console.log(query);
 	const resultPromise = session.run(query);
