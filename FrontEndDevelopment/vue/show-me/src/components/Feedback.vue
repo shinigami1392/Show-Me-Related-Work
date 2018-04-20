@@ -93,7 +93,7 @@ export default {
         },
         addRemoveUpvote : function(){        
             this.weight = this.weight + 1;
-            //this.givenname = "Abc";
+            this.givenname = "User0";
 
             if(this.upvoteButtonClass === 'btn btn-primary btn-sm'){
                 this.upvoteButtonClass = 'btn btn-default'
@@ -103,7 +103,7 @@ export default {
                          `&user=` + this.givenname)
                     .then(response => {
                             if (response.status == 200) {
-                                //console.log("Upvote added");
+                                this.upvotesCount = this.upvotesCount + 1;
                             }
                             
                     })
@@ -120,8 +120,8 @@ export default {
                     .put(`http://54.201.123.246:8081/relations/upvote/remove?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
                         `&user=` + this.givenname)
                     .then(response => {
-                            if (response.status == 200) {
-                               // console.log("Upvote removed");
+                            if (response.status == 200) {                               
+                               this.upvotesCount = this.upvotesCount - 1;
                             }
                     })
                     .catch(err => {
@@ -143,8 +143,8 @@ export default {
                     .put(`http://54.201.123.246:8081/relations/downvote/add?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
                         `&user=` + this.givenname)
                     .then(response => {
-                            if (response.status == 200) {
-                               // console.log("Downvote added");
+                            if (response.status == 200) {                               
+                               this.downvotesCount = this.downvotesCount + 1;
                             }
                             
                     })
@@ -161,8 +161,8 @@ export default {
                     .put(`http://54.201.123.246:8081/relations/downvote/remove?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
                         `&user=` + this.givenname)
                     .then(response => {
-                            if (response.status == 200) {
-                                //console.log("Downvote removed");
+                            if (response.status == 200) {                                
+                                this.downvotesCount = this.downvotesCount - 1;
                             }
                     })
                     .catch(err => {
