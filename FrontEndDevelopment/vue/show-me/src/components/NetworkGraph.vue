@@ -111,8 +111,8 @@ function plotGraph(vm, paperInfo) {
         nodes.push(nodeObj);
         edges.push(edgeObj);
     }
-    console.log(JSON.stringify(nodes));
-    console.log(JSON.stringify(edges));
+    //console.log(JSON.stringify(nodes));
+    //console.log(JSON.stringify(edges));
     graph_elements.push.apply(graph_elements, nodes);
     graph_elements.push.apply(graph_elements, edges);
 

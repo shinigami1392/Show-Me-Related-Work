@@ -1,7 +1,6 @@
 <template>
 	
 	<div id="page-content">
-		<div id="map"></div>
 		
 		<div id="contact-us">
 		
@@ -31,25 +30,6 @@
 
 
 <script>
-export default {
-  data() {
-    return {
-    };
-  },
-  methods: {
-    initMap: function () {
-        var uluru = {lat: 33.424821, lng: -111.927902};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 15,
-          center: uluru
-        });
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map
-        });
-      }
-	}
-}
 </script>
    
 		
@@ -58,14 +38,7 @@ export default {
 			font-family: Arial;
 		}
 	
-       #map {
-        height: 400px;
-        width: 50%;
-		float:left;
-		margin-top: 30px;
-       }
-	   
-		#page-content {
+    	#page-content {
 			padding-top: 60px;
 			width: 60%;
 			margin: 0 auto;

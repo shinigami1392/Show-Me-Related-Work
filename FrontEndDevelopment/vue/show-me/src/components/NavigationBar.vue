@@ -54,6 +54,7 @@ const {login, logout, isAuthenticated} = auth
 export default {
   data() {
     return {
+      userName:'',
       auth,
       ProfileDialogue: false,
     }
