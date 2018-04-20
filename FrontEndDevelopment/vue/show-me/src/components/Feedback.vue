@@ -9,11 +9,14 @@
             <div style="width:70%; margin-right:25px;float:left;">
                 <textarea v-model="user_comment" class="form-control" type="text" rows="5" style="height:95%;" placeholder="Your comments" />
             </div>
-            <div style="width:25%; margin-top:5px; float:left;">
+            <div style="width:25%; margin-top:5px; float:left;">                
+                <button v-bind:class="upvoteButtonClass" v-on:click="addRemoveUpvote">Upvote
+                    <i class="fa fa-thumbs-up"></i>
+                </button><span><b>{{this.upvotesCount}}</b></span>
+                <button v-bind:class="downvoteButtonClass" v-on:click="addRemoveDownvote">Downvote
+                    <i class="fa fa-thumbs-down"></i>
+                </button><span><b>{{this.downvotesCount}}</b></span>
                 <button type="button" v-on:click="addComment()" class="btn btn-success btn-sm">Comment</button> &nbsp;
-                <button v-bind:class="likeButtonClass" v-on:click="toggleLikeButton">Like
-                    <i class="fa fa-thumbs-o-up"></i>
-                </button>
             </div>
             <div style="clear:both;"></div>
         </div>
@@ -33,8 +36,17 @@ export default {
             user_comment: [],
             givenname:'',
             authenticated: false,
-            likeButtonClass : "btn btn-primary btn-sm"
+            upvoteButtonClass : "btn btn-primary btn-sm",
+            downvoteButtonClass :"btn btn-primary btn-sm",
+            domain :'',
+            source :'',
+            destination :'',
+            upvotesCount : 0,
+            downvotesCount : 0
         }
+    },
+    components: {
+        "icon": require("vue-icons")    
     },
     props: ['userData'],
     created() {
@@ -44,11 +56,23 @@ export default {
     },
     mounted() {
         var linkInfo = this.$route.matched[0].props.linkInfo;
+        this.upvotesCount = linkInfo.relation.upvotes.length;
+        this.downvotesCount = linkInfo.relation.downvotes.length;        
         this.comments = linkInfo.relation.comments;
         console.log(JSON.stringify(this.comments));
-        this.weight = linkInfo.upvotes;
+        if (linkInfo.upvotes == undefined){
+            this.weight = 0;
+        } 
+        else {
+            this.weight = linkInfo.upvotes;
+        }   
+
+        this.domain = this.$route.params.areaid;        
+        var nodes = this.$route.params.linkid
+        this.source = nodes.split("_")[0];
+        this.destination = nodes.split("_")[1];            
         this.givenname = userData.given_name;
-        this.authenticated = userData.authenticated;
+        this.authenticated = userData.authenticated;        
     },
     methods: {
 
@@ -67,12 +91,85 @@ export default {
 		    }
 		    return val;
         },
-        toggleLikeButton : function(){
-            if(this.likeButtonClass === 'btn btn-primary'){
-                this.likeButtonClass = 'btn btn-default'
+        addRemoveUpvote : function(){        
+            this.weight = this.weight + 1;
+            //this.givenname = "Abc";
+
+            if(this.upvoteButtonClass === 'btn btn-primary btn-sm'){
+                this.upvoteButtonClass = 'btn btn-default'
+               
+                axios
+                    .put(`http://54.201.123.246:8081/relations/upvote/add?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
+                         `&user=` + this.givenname)
+                    .then(response => {
+                            if (response.status == 200) {
+                                //console.log("Upvote added");
+                            }
+                            
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    }
+                );           
+
             }    
-            else if(this.likeButtonClass === 'btn btn-default') {
-                this.likeButtonClass = 'btn btn-primary'
+            else if(this.upvoteButtonClass === 'btn btn-default') {
+                this.upvoteButtonClass = 'btn btn-primary btn-sm'
+                
+                axios
+                    .put(`http://54.201.123.246:8081/relations/upvote/remove?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
+                        `&user=` + this.givenname)
+                    .then(response => {
+                            if (response.status == 200) {
+                               // console.log("Upvote removed");
+                            }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    }
+                );
+
+            }   
+        },
+        addRemoveDownvote : function(){         
+            
+            this.weight = this.weight + 1;                     
+            //this.givenname = "Abc";
+
+            if(this.downvoteButtonClass === 'btn btn-primary btn-sm'){
+                this.downvoteButtonClass = 'btn btn-default'
+               
+                axios
+                    .put(`http://54.201.123.246:8081/relations/downvote/add?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
+                        `&user=` + this.givenname)
+                    .then(response => {
+                            if (response.status == 200) {
+                               // console.log("Downvote added");
+                            }
+                            
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    }
+                );           
+
+            }    
+            else if(this.downvoteButtonClass === 'btn btn-default') {
+                this.downvoteButtonClass = 'btn btn-primary btn-sm'
+                
+                axios
+                    .put(`http://54.201.123.246:8081/relations/downvote/remove?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
+                        `&user=` + this.givenname)
+                    .then(response => {
+                            if (response.status == 200) {
+                                //console.log("Downvote removed");
+                            }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    }
+                );
+
             }   
         },
         addComment: function() {
