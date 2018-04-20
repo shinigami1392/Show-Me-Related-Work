@@ -11,11 +11,11 @@
             </div>
             <div style="width:25%; margin-top:5px; float:left;">                
                 <button v-bind:class="upvoteButtonClass" v-on:click="addRemoveUpvote">Upvote
-                    <i class="fa fa-thumbs-o-up"></i>
-                </button>
+                    <i class="fa fa-thumbs-up"></i>
+                </button><span><b>{{this.upvotesCount}}</b></span>
                 <button v-bind:class="downvoteButtonClass" v-on:click="addRemoveDownvote">Downvote
-                    <i class="fa fa-thumbs-o-down"></i>
-                </button>
+                    <i class="fa fa-thumbs-down"></i>
+                </button><span><b>{{this.downvotesCount}}</b></span>
                 <button type="button" v-on:click="addComment()" class="btn btn-success btn-sm">Comment</button> &nbsp;
             </div>
             <div style="clear:both;"></div>
@@ -41,7 +41,12 @@ export default {
             domain :'',
             source :'',
             destination :'',
+            upvotesCount : 0,
+            downvotesCount : 0
         }
+    },
+    components: {
+        "icon": require("vue-icons")    
     },
     props: ['userData'],
     created() {
@@ -50,7 +55,9 @@ export default {
         this.cardBlockContentStyle = "height:100%;"
     },
     mounted() {
-        var linkInfo = this.$route.matched[0].props.linkInfo;        
+        var linkInfo = this.$route.matched[0].props.linkInfo;
+        this.upvotesCount = linkInfo.relation.upvotes.length;
+        this.downvotesCount = linkInfo.relation.downvotes.length;        
         this.comments = linkInfo.relation.comments;
         console.log(JSON.stringify(this.comments));
         if (linkInfo.upvotes == undefined){

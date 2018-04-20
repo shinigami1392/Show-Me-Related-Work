@@ -13,7 +13,7 @@
           </tr>
           <tr>
             <td>Weight</td>
-            <td>{{linkInfo.relation.upvotes}}</td>
+            <td>{{linkInfo.relation.upvotes.length - linkInfo.relation.downvotes.length}}</td>
           </tr>
         </tbody>
       </table>
