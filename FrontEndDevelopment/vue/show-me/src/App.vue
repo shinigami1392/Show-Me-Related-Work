@@ -30,7 +30,7 @@
                 </div>
 
 
-                <div class="row" style="margin-top:70px;">
+                <div class="row" style="margin-top:70px; margin-bottom:70px">
                     <div class="col-md-6">
                         <transition name="slide" mode="out-in">
                             <router-view name="info-box" :key="$route.fullPath"></router-view>
@@ -47,9 +47,9 @@
         </div>
 
         <!--Footer-->
-        <div>
+        <footer>
             <app-footer></app-footer>
-        </div>
+        </footer>
 
     </div>
 </div>
@@ -107,7 +107,7 @@ export default {
 body{
   width: 100%;
   background-image: url(circuits2.jpg);
-}
+} 
 
 #foreground{
   background-color:rgba(0, 0, 0, 0.5);

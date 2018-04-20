@@ -28,6 +28,11 @@ export default {
 
 <style>
     .footer {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 1rem;
         background: -webkit-radial-gradient(circle, #fff, #fff);
         display: flex;
         align-items: center;
