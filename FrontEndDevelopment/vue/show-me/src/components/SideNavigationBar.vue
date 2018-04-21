@@ -11,8 +11,8 @@
         </ul>        
       </div>
     </div>
-    <div style="overflow-X: auto;">
-		  <app-box v-bind:boxHeaderProp="researchAreasBoxHeader"  style="height:100; width:30;" v-bind:cardStyle ="cardStyle"  v-on:click.native="openNav">
+    <div id="rArea" style="overflow-X: auto;">
+		  <app-box  v-bind:boxHeaderProp="researchAreasBoxHeader"  style="height:100; width:30;" v-bind:cardStyle ="cardStyle"  v-on:click.native="openNav">
 		  </app-box>
     </div>
     	
@@ -20,6 +20,17 @@
 </template>
 
 <script>
+var navBarOpen = false;
+$(window).click(function() {
+  if (navBarOpen) {
+      let sideBarElement = "sideBar";
+      let close = document.getElementById(sideBarElement); 
+      close.style.width = "0px";
+      navBarOpen = false;
+  }   
+});
+
+
 import axios from "axios";
 function getPaperCatagories(vm) {
   axios
@@ -46,11 +57,14 @@ export default {
         let sideBarElement = "sideBar";
         let close = document.getElementById(sideBarElement); 
         close.style.width = "0px";
+        navBarOpen = false;
     },
     openNav: function(event){
       let sideBarElement = "sideBar";
       open = document.getElementById(sideBarElement);
       open.style.width = "250px";
+      navBarOpen = true;
+      event.stopPropagation();
     }   
 
   },
