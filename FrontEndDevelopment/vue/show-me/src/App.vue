@@ -60,22 +60,36 @@
 import axios from "axios";
 
 function getUserData(vm,token) {
+  console.log("Getting user data");
   axios
     .get(`https://pushkar-showme.auth0.com/userinfo`,{headers: { Authorization: "Bearer " + token }})
     .then(response => {
       vm.userData = JSON.stringify(response.data);
+      console.log("+++++++++");
+      console.log(JSON.stringify(vm.$store.state.userObjStore));
       if (localStorage.getItem('userData')!="" || localStorage.getItem('userData')!= undefined){
         //TODO: an API call to user API of ShowMe backend Server
         //TODO: check if the user exist, if yes populate the user data else populate the user data and also store it at backend
-        localStorage.setItem('userData', vm.userData)
-        localStorage.setItem('authorized', true)
-        vm.userObj.userImage = JSON.parse(localStorage.getItem('userData')).picture
-        vm.userObj.userName = JSON.parse(localStorage.getItem('userData')).given_name
-        vm.userObj.authenticated = localStorage.getItem('authorized')
+        localStorage.setItem('userData', vm.userData);
+        localStorage.setItem('authorized', true);
+        let userDataTemp = {};
+        vm.userObj.userImage = JSON.parse(localStorage.getItem('userData')).picture;
+        vm.userObj.userName = JSON.parse(localStorage.getItem('userData')).given_name;
+        vm.userObj.authorized = true;
+        vm.$store.commit('setAuthorization',  vm.userObj);
+      }else{
+        let userDataTemp = {};
+        vm.userObj.userImage = JSON.parse(localStorage.getItem('userData')).picture;
+        vm.userObj.userName = JSON.parse(localStorage.getItem('userData')).given_name;
+        vm.userObj.authorized = true;
+        vm.$store.commit('setAuthorization',  vm.userObj);
       }
+      console.log("+++++++++");
+      console.log(JSON.stringify(vm.$store.state.userObjStore));
       vm.$router.push('home');
     })
     .catch(err => {
+      console.log('in error');
       vm.errors.push(err);
     });
 }
@@ -88,8 +102,10 @@ export default {
       userObj:{
         userImage : "",
         userName : "",
-        authenticated: false,
+        authorized: false,
+        
       },
+      errors : [],
       userFeedbackBoxHeader: "Comment and Vote"
     };
   },
