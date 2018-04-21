@@ -13,7 +13,7 @@ import axios from "axios";
 function getPapersFromId(vm) {
   let areaid = vm.$route.params.areaid
   axios
-    .get(`http://localhost:8081/domains/` + areaid)
+    .get(`http://54.201.123.246:8081/domains/` + areaid)
     .then(response => {
       vm.papers = response.data.papers;
     })

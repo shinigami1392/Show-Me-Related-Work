@@ -4,14 +4,19 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Material+Icons">
+  <link rel="stylesheet" href="https://unpkg.com/vue-material@beta/dist/vue-material.min.css">
+  <link rel="stylesheet" href="https://unpkg.com/vue-material@beta/dist/theme/default.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.9/css/all.css" integrity="sha384-5SOiIsAziJl6AWe0HWRKTXlfcSHKmYV4RBF18PPJ173Kzn7jzMyFuTtk8JA7QQG1" crossorigin="anonymous">
+
   <title>show-me</title>
   <style>
-    
+
     #main,
     .container-fluid {
       height: 100%;
     }
-    
+
   </style>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.2.4/cytoscape.js"></script>
@@ -25,6 +30,18 @@
 <body>
   <div id="app"></div>
   <script src="/dist/build.js"></script>
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/vue-material@beta"></script>
+  <script>
+    Vue.use(VueMaterial.default)
+
+    new Vue({
+      el: '#app'
+    })
+  </script>
+      <script async defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_mVy0e-Aw8R2ch7kVkm7BWJ3jVO61mXw&callback=initMap">
+      </script>
 </body>
 
 </html>

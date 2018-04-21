@@ -1,76 +1,94 @@
 <template>
   <div id="navigation" class="navbar navbar-default customNav">
     <div class="header">
-      <div id="logoDiv">
-        <a href="/"><img src="../assets/ShowMe3.png" id="logo"></a>
-      </div>
-      <div class="topnav" align="left">
-        <input type="text" placeholder="Search.." name="search">
-        <button type="submit"><i class="fa fa-search"></i></button>
-    </div>
-      <div id="login">
-        <button type="button" class="btn btn-default btn-sm"  @click="login()">
-          <span class="glyphicon glyphicon-home"></span> Login <i class="fab fa-github"></i>
-        </button>
-        <!-- <a href="/">
-          <button type="button" class="btn btn-default btn-sm">
-            <span class="glyphicon glyphicon-home"></span> Home <i class="fas fa-home"></i>
-          </button>
-        </a> -->
-      </div>
-    </div>
-    <!--<div class="navbar-header">
-      <a class="navbar-brand" href="#">SHOW ME</a>
-    </div>-->
+      <a href="/"><img width="60" height="60" hspace="20" src="./LogoMakr_9i2uuu.png" /></a>
+	  <!--  <md-icon class="md-size-2x">home</md-icon></a>  -->
 
+      <div id="login" >
+        <button type="button" v-if="!userData.authenticated" class="btn btn-default btn-sm"  @click="login()">
+          <span class="glyphicon glyphicon-home"></span> Sign In <i class="fas fa-sign-in-alt"></i>
+        </button>
+        <md-menu md-align-trigger v-if="userData.authenticated">
+          <img :src="userData.userImage" class="md-icon-button" md-menu-trigger >
+          <md-tooltip md-direction="bottom">{{userName}}</md-tooltip>
+
+          <md-menu-content>
+            <md-menu-item>
+              <span><b>Hi, {{userData.userName}}</b></span>
+            </md-menu-item>
+            <a href="#" @click="ProfileDialogue = true">
+            <md-menu-item>
+              <span><b>Profile</b></span>
+            </md-menu-item>
+            </a>
+
+            <a href="/" @click="logout()"><md-menu-item>
+              <span><b>Sign Out</b></span>
+            </md-menu-item></a>
+          </md-menu-content>
+        </md-menu>
+        <md-dialog-alert
+          :md-active.sync="ProfileDialogue"
+          :md-title="userName"
+          md-content="<h6>First Name:</h6> </br><h6>Last Name:</h6></br><h6>Email:</h6>" />
+
+        </div>
+        
+
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import AuthenticationService from "../Auth/AuthService"
+import Vue from 'vue'
+import AuthenticationService from "../Auth/AuthService";
+import VueMaterial from 'vue-material';
+Vue.use(VueMaterial)
+
 
 const auth = new AuthenticationService()
-const {login, logout, authenticated, authNotifier} = auth
+const {login, logout, isAuthenticated} = auth
 
 export default {
   data() {
     return {
       auth,
-      authenticated
+      ProfileDialogue: false,
     }
   },
+  props:['userData'],
   methods: {
     login,
-    logout
+    logout,
+    isAuthenticated
   }
+  
 };
 </script>
 
 <style>
 .customNav {
-  background: -webkit-radial-gradient(circle, #fff, #fff);
   display: flex;
   align-items: center;
   justify-content: space-around;
-  width: 100%
+  width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
 }
 .header{
       border-radius: 0px;
       width: 100%;
-      height: 50px;
-      background-color: #343a40;
+      height: 60px;
+      background-color: #0E6390;
+
     }
-.customBox {
-    background: #343a40;
-    color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
+
 #login{
       padding-top: 10px;
-      padding-right: 10px;
+      padding-right: 20px;
       padding-left: 10px;
       text-align: right;
       float: right;
@@ -98,14 +116,22 @@ export default {
   padding-top: 9px;
 }
 
-
-
-.topnav input[type=text] {
-  font-size: 17px;
-  background: #343a40;
-  width: 40%;
-  border: 1;
-  border-radius: 3px;
+input[type=text] {
+    width: 150px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
 }
 
+input[type=text]:focus {
+    width: 30%;
+}
+
+  .md-size-2x{
+    margin-top: 0.3%;
+    margin-left: 1%;
+  }
 </style>

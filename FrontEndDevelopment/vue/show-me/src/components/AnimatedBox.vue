@@ -1,19 +1,30 @@
 <template>
-    <div id="animated-back">
-          <h1> SHOW ME<br/> related work</h1>
-          <h3> A better way to find relations between scholarly articles</h3>
-    </div>
+
+    <!-- <div id="animated-back">
+          <h1> SHOW ME<br/> related work<br/></h1>
+          <h3> A better way to find relations between scholarly articles</h3>      
+    </div>  -->
+	<div>
+		<div id="animated-back">
+			  <h1><img src="./frontlogo.png" /></h1>
+		</div>
+		<div id="animated-back">
+			  <h3> A better way to find relations between scholarly articles</h3>    
+		</div>
+	</div>
+    
+    
 </template>
 
 <script></script>
 
 <style>
-@import url(https://fonts.googleapis.com/css?family=Kaushan+Script);
+@import url('https://fonts.googleapis.com/css?family=Russo+One');
 
 #animated-back {
-  background: -webkit-radial-gradient(circle, #CED0DE, #fff);
+  
   height: 100%;
-  margin: 0;
+  margin: auto;
   padding: 0;
   display: flex;
   align-items: center;
@@ -21,28 +32,31 @@
 }
 
 h1 {
-  font-family: "Kaushan Script";
-  text-align: center;
+  /* font-family: "Kaushan Script";  */
+  /* text-align: middle;  */
+  width: 450px;
+  color: #0E6390;
+  /* border-top: solid #86888A 3.9px; */
+  /* border-bottom: solid #86888A 3.9px; */
 
-  border-top: solid black 3.9px;
-  border-bottom: solid black 5.9px;
-
-  padding: 0;
   overflow: hidden;
-  animation: animateHeading 3s forwards;
+  /* animation: animateHeading 3s forwards;  */
 }
 
 h3 {
-  font-family: "Kaushan Script";
-  text-align: right;
-
-  border-bottom: solid black 2.9px;
+  /* font-family: "Kaushan Script"; */
+  font-family: 'Russo one', sans-serif;
+  text-align: center;
+  color: white;
+  /*border-bottom: solid #86888A 2.9px; */
+  border-bottom: solid #0E6390 2.9px;
   padding: 0;
   overflow: hidden;
 }
+
 @keyframes animateHeading {
   0% {
-    transform: rotate(90deg);
+    transform: rotate(360deg);
     width: 0;
     height: 0;
   }
@@ -58,8 +72,7 @@ h3 {
   }
   100% {
     width: 25%;
-
-    height: 3.11em;
+    height: 2.8em;
   }
 }
 </style>

@@ -9,12 +9,14 @@ import PaperInfoBox from './components/PaperInfoBox.vue'
 import LinkInfoBox from './components/LinkInfoBox.vue'
 import PaginatedTable from './components/PaginatedTable.vue'
 import Grid from './components/Grid.vue'
+import SearchBox from './components/SearchBox.vue'
 import Datatable from './components/Datatable.vue'
 
 import { routes } from './routes';
 import { store } from './store';
 
 import './assets/css/fontawesome-all.css';
+
 
 Vue.use(VueRouter);
 
@@ -26,6 +28,8 @@ Vue.component('app-paper-infobox', PaperInfoBox);
 Vue.component('app-link-infobox', LinkInfoBox);
 Vue.component('app-paginated-table', PaginatedTable);
 Vue.component('grid', Grid);
+Vue.component('app-searchbox', SearchBox);
+
 Vue.component('datatable', Datatable);
 
 
@@ -37,7 +41,7 @@ const router = new VueRouter({
 import axios from "axios";
 function fetchPaperInfo(paperid) {
   axios
-    .get(`http://localhost:8081/graphNode/graphNode/` + paperid)
+    .get(`http://54.201.123.246:8081/graphNode/graphNode/` + paperid)
     .then(response => {
       return response.data;
     })
@@ -67,7 +71,7 @@ router.beforeEach(function (to, from, next) {
     }
 
     axios
-      .get(`http://localhost:8081/graphNode/graphNode/` + to.params.paperid)
+      .get(`http://54.201.123.246:8081/graphNode/graphNode/` + to.params.paperid)
       .then(response => {
         paperInfo = response.data;
         if(paperInfo != null){
@@ -87,10 +91,12 @@ router.beforeEach(function (to, from, next) {
   else if (to.name === 'linkInfo') {
     
     var fetchLinkInfo = function () {
+      var papers = to.params.linkid.split("_");
       axios
-        .get(`http://localhost:8081/relations/get?id=` + to.params.linkid + '&' + 'user=user0')
+        .get(`http://54.201.123.246:8081/relations/get?domain=` + to.params.areaid + `&source=`+papers[0]+`&destination=`+papers[1]+`&user=user0`)
         .then(response => {
           to.matched[0].props.linkInfo = response.data;
+          to.matched[0].props.visitedPapers = visitedPapers;
           next();
         })
         .catch(err => {
@@ -100,7 +106,7 @@ router.beforeEach(function (to, from, next) {
 
     if (paperInfo == '') {
       axios
-        .get(`http://localhost:8081/graphNode/graphNode/` + to.params.paperid)
+        .get(`http://54.201.123.246:8081/graphNode/graphNode/` + to.params.paperid)
         .then(response => {
           paperInfo = response.data;
           to.matched[0].props.paperInfo = paperInfo;

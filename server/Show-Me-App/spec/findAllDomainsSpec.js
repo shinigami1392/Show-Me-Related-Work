@@ -1,6 +1,5 @@
 var request = require("request");
-var obj = require("../app.js")
-var url = "http://localhost:8081/domains/all"
+var url = "http://54.201.123.246:8081/domains/all"
 
 describe("Find All Domains Test", function(){
     describe("GET /", function() {	  
@@ -18,9 +17,7 @@ describe("Find All Domains Test", function(){
 				var parsed_body = JSON.parse(body);
 				expect(parsed_body['found']).toBe(true);				
 				var domains = parsed_body['domains'];
-				expect(domains.length).toEqual(1);			
-				
-				//obj.closeServer();
+				expect(domains.length).toEqual(6);			
 				done();
 			});
 		});

@@ -1,10 +1,13 @@
-import ListBox from './components/ListBox.vue'
+import ListBox from './components/SideNavigationBar.vue'
 import NavigationBar from './components/NavigationBar.vue'
 import NetworkGraph from './components/NetworkGraph.vue'
 import Feedback from './components/Feedback.vue'
 import LinkInfoBox from './components/LinkInfoBox.vue'
 import AnimatedBox from './components/AnimatedBox.vue'
+import SearchBox from './components/SearchBox.vue'
 import Datatable from './components/Datatable.vue'
+import AboutUs from './components/AboutUs.vue'
+import ContactUs from './components/ContactUs.vue'
 
 //Lazy routing
 const PapersTable = resolve => {
@@ -26,14 +29,30 @@ export const routes = [{
   components: {
     default: NavigationBar,
     'area-box': ListBox,
-    'animation-box': AnimatedBox
+    'animation-box': AnimatedBox,
+    'search-box': SearchBox
   }
+},
+{
+  path: '/aboutus',
+  name: 'aboutus',
+  components: {
+    'aboutus': AboutUs,
+  },
+},
+{
+  path: '/contactus',
+  name: 'contactus',
+  components: {
+    'contactus': ContactUs,
+  },
 },
 {
   path: '/areas/:areaid',
   name: 'allPapers',
   components: {
     'area-box': ListBox,
+    'search-box': SearchBox,
     'table-box': Datatable
   },
 },
@@ -46,7 +65,8 @@ export const routes = [{
   components: {
     'area-box': ListBox,
     'table-box': NetworkGraph,
-    'info-box': PaperInfoBox
+    'info-box': PaperInfoBox,
+    'search-box': SearchBox
   },
   name: 'paperInfo',
   meta: { adminOnly: false }
@@ -58,7 +78,8 @@ export const routes = [{
     'area-box': ListBox,
     'table-box': NetworkGraph,
     'link-info-box': LinkInfoBox,
-    'feedback-box': Feedback
+    'feedback-box': Feedback,
+    'search-box': SearchBox
   },
   name: 'linkInfo'
 },
@@ -71,13 +92,3 @@ export const routes = [{
 
 
 ];
-//
-// routes.beforeEach((to, from, next) => {
-//   if(to.name == 'allPapers') { // check if "to"-route is "callback" and allow access
-//   next()
-// } else if (router.app.$auth.isAuthenticated()) { // if authenticated allow access
-//   next()
-// } else { // trigger auth0 login
-//   router.app.$auth.login()
-// }
-// })

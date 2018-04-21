@@ -39,7 +39,7 @@
                 "searching": false,
                 "ordering": false,
 				"ajax" : {
-					"url": "http://localhost:8081/domains/papers",
+					"url": "http://54.201.123.246:8081/domains/papers",
                     "contentType":"application/json",
                     "type": "POST",
                     "data": function ( d ) {
