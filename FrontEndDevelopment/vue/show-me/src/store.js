@@ -13,7 +13,12 @@ export const store = new Vuex.Store({
             picture:'',
             authorized: false 
         },
-        domains:{}
+        domains:{},
+        voting:{
+            weight:0,
+            upvotesCount:0,
+            downvotesCount:0   
+        }
     },
     mutations:{
         setAuthorization(state, payload){
@@ -26,6 +31,11 @@ export const store = new Vuex.Store({
         },
         setDomains(state, value){
             state.domains = value;
+        },
+        setVoting(state, payload){
+            state.voting.weight = payload.weight
+            state.voting.upvotesCount = payload.upvotesCount
+            state.voting.downvotesCount = payload.downvotesCount
         }
     }
 });

@@ -80,7 +80,7 @@ export default {
 </script>
 <style>
   .sidenav {
-	    height: 50%; 
+	    height: 100%; 
       width: 0;
 	    position: fixed; 
       z-index: 1;
