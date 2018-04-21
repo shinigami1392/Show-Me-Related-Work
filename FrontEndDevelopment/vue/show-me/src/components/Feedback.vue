@@ -2,7 +2,7 @@
     <app-box v-bind:boxHeaderProp="feedbackBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
             <ul class="list-group" style="max-height:300px; overflow-y:auto;">
                 <li v-for="com in comments">
-                   <span style="color:green; font-weight:bold;"> {{com.username}}</span> <span style="color:grey;">[{{ getTimeStamp(com.timestamp) }}]</span>: {{com.comment}} <hr />
+                   <span style="color:green; font-weight:bold;"> {{com.username}}</span>&ensp;<span style="color:#696969;font-weight:bold;">{{ getTimeStamp(com.timestamp) }}</span>:&ensp; {{com.comment}} <hr />
                 </li>
             </ul>
         <div v-if="userObjTemp.authorized" style="width:100%;">
@@ -31,10 +31,8 @@ export default {
         return {
             feedbackBoxHeader: "Feedback",
             comments: [],
+            user_comment:'',
             weight: 0,
-            user_comment: [],
-            // givenname:'',
-            // authenticated: false,
             upvoteButtonClass : "btn btn-primary btn-sm",
             downvoteButtonClass :"btn btn-primary btn-sm",
             domain :'',
@@ -42,8 +40,7 @@ export default {
             destination :'',
             upvotesCount : 0,
             downvotesCount : 0,
-            userObjTemp: this.$store.state.userObjStore,
-
+            userObjTemp: this.$store.state.userObjStore
         }
     },
     components: {
@@ -51,8 +48,12 @@ export default {
     },
     created() {
         this.cardStyle = "";
-        this.cardBlockStyle = "height:80%;"
-        this.cardBlockContentStyle = "height:100%;"
+        this.cardBlockStyle = "height:80%;";
+        this.cardBlockContentStyle = "height:100%;";
+        this.domain = this.$route.params.areaid;    
+        var nodes = this.$route.params.linkid
+        this.source = nodes.split("_")[0];
+        this.destination = nodes.split("_")[1];    
     },
     mounted() {
         var linkInfo = this.$route.matched[0].props.linkInfo;
@@ -66,21 +67,14 @@ export default {
         else {
             this.weight = linkInfo.upvotes;
         }   
-
-        this.domain = this.$route.params.areaid;        
-        var nodes = this.$route.params.linkid
-        this.source = nodes.split("_")[0];
-        this.destination = nodes.split("_")[1];                 
+             
     },
     methods: {
 
-        isAuthenticated: function(){
-            this.authenticated = localStorage.getItem('authorized');
-        },
         getTimeStamp: function(timeInMilliseconds){
-            
-            var date = new Date(parseInt(timeInMilliseconds,10)); 
-            var timestamp =  date.getFullYear() +":"+ this.monthFormat(date.getMonth()+1) +":"+  date.getDate()+":"+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds(); 
+            let d  = new Date(timeInMilliseconds)
+            var date = new Date(timeInMilliseconds); 
+            var timestamp =  date.getFullYear() +"/"+ this.monthFormat(date.getMonth()+1) +"/"+  date.getDate()+" at "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds(); 
             return timestamp;
         },
         monthFormat : function(val){
@@ -91,19 +85,15 @@ export default {
         },
         addRemoveUpvote : function(){        
             this.weight = this.weight + 1;
-            this.givenname = "User0";
-
             if(this.upvoteButtonClass === 'btn btn-primary btn-sm'){
                 this.upvoteButtonClass = 'btn btn-default'
-               
                 axios
                     .put(`http://54.201.123.246:8081/relations/upvote/add?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
-                         `&user=` + this.givenname)
+                         `&user=` + this.userObjTemp.userid)
                     .then(response => {
                             if (response.status == 200) {
                                 this.upvotesCount = this.upvotesCount + 1;
-                            }
-                            
+                            }  
                     })
                     .catch(err => {
                         console.log(err);
@@ -113,7 +103,6 @@ export default {
             }    
             else if(this.upvoteButtonClass === 'btn btn-default') {
                 this.upvoteButtonClass = 'btn btn-primary btn-sm'
-                
                 axios
                     .put(`http://54.201.123.246:8081/relations/upvote/remove?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
                         `&user=` + this.givenname)
@@ -126,38 +115,32 @@ export default {
                         console.log(err);
                     }
                 );
-
             }   
         },
         addRemoveDownvote : function(){         
             
             this.weight = this.weight + 1;                     
-            //this.givenname = "Abc";
 
             if(this.downvoteButtonClass === 'btn btn-primary btn-sm'){
                 this.downvoteButtonClass = 'btn btn-default'
-               
                 axios
                     .put(`http://54.201.123.246:8081/relations/downvote/add?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
-                        `&user=` + this.givenname)
+                        `&user=` + this.userObjTemp.userid)
                     .then(response => {
                             if (response.status == 200) {                               
                                this.downvotesCount = this.downvotesCount + 1;
                             }
-                            
                     })
                     .catch(err => {
                         console.log(err);
                     }
                 );           
-
             }    
             else if(this.downvoteButtonClass === 'btn btn-default') {
                 this.downvoteButtonClass = 'btn btn-primary btn-sm'
-                
                 axios
                     .put(`http://54.201.123.246:8081/relations/downvote/remove?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
-                        `&user=` + this.givenname)
+                        `&user=` + this.userObjTemp.userid)
                     .then(response => {
                             if (response.status == 200) {                                
                                 this.downvotesCount = this.downvotesCount - 1;
@@ -172,14 +155,7 @@ export default {
         },
         addComment: function() {
 
-                let domainId = this.$route.params.areaid;
-                let relationId = (this.$route.params.linkid).split('_'); 
-                let sourceId = relationId[0];
-                let destinationId = relationId[1];
-                let textContent =  this.user_comment;
-                let userId = userObjTemp.userid;
-
-                let requestUrl = `http://54.201.123.246:8081/relations/comment/add?domain=` + domainId + `&source=` + sourceId + `&destination=` + destinationId + `&user=` + userId+`&text=` + textContent; 
+                let requestUrl = `http://54.201.123.246:8081/relations/comment/add?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination + `&user=` + this.userObjTemp.userid+`&text=` + this.user_comment; 
                 console.log(requestUrl);
             axios
                 .put(requestUrl)
@@ -187,15 +163,16 @@ export default {
 
                     // if true then 
                     console.log(response.data);
-                    axios
-                        .get(`http://54.201.123.246:8081/relations/get?id=` + this.$route.params.linkid + `&user=` + this.username)
-                        .then(response => {
-                             this.comments =  response.data.relation.comments;
-                             this.user_comment='';
-                        })
-                        .catch(err => {
-                            console.log(err);
-                        });
+                    let text = this.user_comment;
+                    let userCom = {};
+                    userCom.comment = this.user_comment;
+                    userCom.userId = this.userObjTemp.userid;
+                    userCom.username = this.userObjTemp.given_name + " "+ this.userObjTemp.family_name;
+                    var d = new Date();
+                    userCom.timestamp = d.toISOString();
+
+                    this.comments.push(userCom);
+                    
                 })
                 .catch(err => {
                     console.log(err);
