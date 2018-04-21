@@ -47,16 +47,18 @@
 		#contact-us {
 			padding-left: 40px;
 			float:left;
+			color: white;
 		}
 		
 		#contact-info {
 			padding: 0;
 			margin: 0;
+			color: white;
 		}
 		
 		#contact-info p { 
 			margin:0;
-			color: #787878;
+			
 		}
 		
 		input[type=email], select {
