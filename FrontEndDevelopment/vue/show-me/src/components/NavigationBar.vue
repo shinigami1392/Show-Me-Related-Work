@@ -49,22 +49,6 @@ Vue.use(VueMaterial)
 const auth = new AuthenticationService()
 const {login, logout, isAuthenticated} = auth
 
-function checkLoggedIn(){
-  // if (localStorage.getItem('userData')!="" || localStorage.getItem('userData')!= undefined){
-  //       //TODO: an API call to user API of ShowMe backend Server
-  //       //TODO: check if the user exist, if yes populate the user data else populate the user data and also store it at backend
-  //       localStorage.setItem('userData', vm.userData)
-  //       localStorage.setItem('authorized', true)
-  //       userObj.userImage = JSON.parse(localStorage.getItem('userData')).picture;
-  //       userObj.userName = JSON.parse(localStorage.getItem('userData')).given_name;
-  //       userObj.authenticated = localStorage.getItem('authorized');
-  //     }else{
-        
-  //       userObj.authenticated = false;
-  //     }
- 
-}
-
 export default {
   data() {
     return {

@@ -14,17 +14,18 @@ export const store = new Vuex.Store({
             authorized: false 
         },
         domains:{}
-        //authorized: false
     },
     mutations:{
         setAuthorization(state, payload){
-
             state.userObjStore.given_name  = payload.given_name
             state.userObjStore.family_name  = payload.family_name
             state.userObjStore.email  = payload.email
             state.userObjStore.userid  = payload.userid
             state.userObjStore.picture  = payload.picture
             state.userObjStore.authorized  = payload.authorized
+        },
+        setDomains(state, value){
+            state.domains = value;
         }
     }
 });
