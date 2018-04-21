@@ -254,7 +254,7 @@ h2 {
 	font-variant: normal;
 	font-weight: 200;
   line-height: 26.4px;
-  color: aliceblue
+  color: #35342f
 }
 h1 {
 	font-size: 32px;
@@ -262,11 +262,11 @@ h1 {
 	font-variant: normal;
 	font-weight: 200;
   line-height: 26.4px;
-  color: aliceblue
+  color: #35342f
 }
 .column {
   float: left;
-  width: 23%;
+  width: 33%;
   margin-bottom: 16px;
   padding: 0 8px;
 }
@@ -317,7 +317,9 @@ h1 {
 }
 
 .AboutProj {
-    color: white;
+    color: #000;
+    font-size: 16px;
+
 }
 
 .email-icon {
