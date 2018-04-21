@@ -62,6 +62,7 @@ const maxVisitHistory = 5;
 
 router.beforeEach(function (to, from, next) {
   if (to.name === 'paperInfo') {
+    
     if(visitedPapers.length < maxVisitHistory){
       visitedPapers.push({'id':to.params.paperid,'name':''})
     }
@@ -91,7 +92,6 @@ router.beforeEach(function (to, from, next) {
       });
   }
   else if (to.name === 'linkInfo') {
-    
     var fetchLinkInfo = function () {
       var papers = to.params.linkid.split("_");
       axios
@@ -107,6 +107,16 @@ router.beforeEach(function (to, from, next) {
     }
 
     if (paperInfo == '') {
+      if(visitedPapers.length < maxVisitHistory){
+        visitedPapers.push({'id':to.params.paperid,'name':''})
+      }
+      else if(visitedPapers.length == maxVisitHistory){
+          for(let index = 1; index <= maxVisitHistory - 1; index++){
+              visitedPapers[index-1] =visitedPapers[index];
+          }
+          visitedPapers[maxVisitHistory - 1] = {'id':to.params.paperid, 'name':''};
+      }
+  
       axios
         .get(`http://54.201.123.246:8081/graphNode/graphNode/` + to.params.paperid)
         .then(response => {

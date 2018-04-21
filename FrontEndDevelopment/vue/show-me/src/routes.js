@@ -58,10 +58,6 @@ export const routes = [{
 },
 {
   path: '/areas/:areaid/paper/:paperid',
-  beforeEnter: (to, from, next) => {
-    console.log("beforeEnter");
-    next();
-  },
   components: {
     'area-box': ListBox,
     'table-box': NetworkGraph,

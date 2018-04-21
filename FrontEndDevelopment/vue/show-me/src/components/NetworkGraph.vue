@@ -177,13 +177,18 @@ export default {
         this.cardBlockContentStyle = "height:100%;"
     },
     mounted() {
-
         var paperInfo = this.$route.matched[0].props.paperInfo;
         this.visitedPapers = this.$route.matched[0].props.visitedPapers;
         var router = this.$router;
         var route = this.$route;
 
         var cy = plotGraph(this, paperInfo);
+
+        if(route.params.linkid !== undefined){
+            cy.getElementById('e'+route.params.linkid).style('line-color', 'blue');
+            cy.getElementById('e'+route.params.linkid).style('target-arrow-color', 'blue');
+        }
+
         cy.on('tap', 'node', function(evt) {
             var selectedNodeId = evt.target.id();
             router.replace('/areas/' + route.params.areaid + '/paper/' + selectedNodeId);

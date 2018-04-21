@@ -31,6 +31,7 @@
         },
         mounted(){
            var vm = this;
+           console.log("Datatable Route: "+JSON.stringify(this.$route.category));
            $('#dtable').DataTable({
                 "processing" : true,
                 "serverSide" : true,
