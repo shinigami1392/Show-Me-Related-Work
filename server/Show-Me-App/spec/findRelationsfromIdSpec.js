@@ -4,7 +4,7 @@ var base_url = "http://54.201.123.246:8081/relations/get?";
 describe(" SHowMe Relations", function() {
   describe("GET /", function() {
 	  
-	//test to check if invalid Relation Id is properly handled by the application.
+	//test to check if invalid relation Id is properly handled by the application.
     it("returns status code 200", function(done) {
 	  var relation_url = base_url + "domain=0&source=399838&destination=404723&user=user0";
       request.get(relation_url, function(error, response, body) {
@@ -38,7 +38,7 @@ describe(" SHowMe Relations", function() {
 		//expect(body_res.relation.comments.timestamp).toBe("");
 		//expect(body_res.relation.comments).toBe();
 		expect(body_res.upvotedByUser).toBe(false);
-		expect(body_res.downvotedByUser).toBe(false);	
+		expect(body_res.downvotedByUser).toBe(true);	
 		done();
       });
     });
