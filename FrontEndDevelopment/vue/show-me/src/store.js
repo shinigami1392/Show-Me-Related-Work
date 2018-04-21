@@ -9,7 +9,8 @@ export const store = new Vuex.Store({
             userName:'',
             userImage:'',
             authorized: false 
-        }
+        },
+        domains:{}
         //authorized: false
     },
     mutations:{
@@ -17,6 +18,9 @@ export const store = new Vuex.Store({
             state.userObjStore.userName = value.userName;
             state.userObjStore.userImage = value.userImage;
             state.userObjStore.authorized = value.authorized;
+        },
+        setDomains(state, value){
+            state.domains = value;
         }
     }
 });
