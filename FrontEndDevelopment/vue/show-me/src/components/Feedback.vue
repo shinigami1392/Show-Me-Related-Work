@@ -10,12 +10,11 @@
                 <textarea v-model="user_comment" class="form-control" type="text" rows="5" style="height:95%;" placeholder="Your comments" />
             </div>
             <div style="width:25%; margin-top:5px; float:left;">                
-                <button v-bind:class="upvoteButtonClass" v-on:click="addRemoveUpvote">Upvote
-                    <i class="fa fa-thumbs-up"></i>
-                </button><span><b>{{this.upvotesCount}}</b></span>
-                <button v-bind:class="downvoteButtonClass" v-on:click="addRemoveDownvote">Downvote
-                    <i class="fa fa-thumbs-down"></i>
-                </button><span><b>{{this.downvotesCount}}</b></span>
+                
+                <i class="fa fa-thumbs-up upvoteButtonClass"  v-on:click="addRemoveUpvote"></i>                
+                <span><b>{{this.upvotesCount}}</b></span>                
+                <i class="fa fa-thumbs-down downvoteButtonClass" v-on:click="addRemoveDownvote"></i>
+                <span><b>{{this.downvotesCount}}</b></span>
                 <button type="button" v-on:click="addComment()" class="btn btn-success btn-sm">Comment</button> &nbsp;
             </div>
             <div style="clear:both;"></div>
