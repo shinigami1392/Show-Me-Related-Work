@@ -130,12 +130,9 @@ export default {
 <style>
 body{
   width: 100%;
-  background-image: url(circuits2.jpg);
+  background-color: #dddddd
 } 
 
-#foreground{
-  background-color:rgba(0, 0, 0, 0.5);
-}
 .slide-leave-active {
   transition: opacity 0.2s ease;
   opacity: 0;

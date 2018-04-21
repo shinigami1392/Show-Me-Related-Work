@@ -2,17 +2,12 @@
     <div class="footerheader">
     <div id="footerSection">
         <div style="float: left;color:white; padding-top:15px; padding-left :40px;">
-            <i class="far fa-copyright"></i><span style="font-family: Arial;"> ShowMe-Related Research Work, 2018</span>
+            <i class="far fa-copyright"></i><span style="font-family: Arial;"> ShowMe Related Work 2018</span>
         </div>
-        <div class="link-icons" style="color:#fff">
-            <router-link :to="{ name:'aboutus'}">About Us</router-link>
-            <router-link :to="{ name:'contactus'}">Contact Us</router-link>
-            <a href="#" target="_blank">
-                <i class="fab fa-facebook-f fa-lg"></i>
-            </a>
-            <a href="#" target="_blank">
-                <i class="fas fa-envelope fa-lg"></i>
-            </a>
+        <div style="float: right;color:white; padding-top:15px; padding-left :40px;" class="link-icons">
+            <router-link :to="{ name:'aboutus'}" style="color:#fff">About Us</router-link>
+            <router-link :to="{ name:'contactus'}" style="color:#fff">Contact Us</router-link>
+            <span style="font-family: Arial;">Made with ❤ at ASU</span>
         </div>
     </div>
     </div>
@@ -46,7 +41,7 @@ export default {
         border-radius: 3px;
         width: 100%;
         height: 50px;
-        background-color: #000;
+        background-color: #35342f;
     }
 
     .footerSection {

@@ -47,9 +47,9 @@ h3 {
   /* font-family: "Kaushan Script"; */
   font-family: 'Russo one', sans-serif;
   text-align: center;
-  color: white;
+  color: #35342f;
   /*border-bottom: solid #86888A 2.9px; */
-  border-bottom: solid #0E6390 2.9px;
+  border-bottom: solid #3dbd5d 2.9px;
   padding: 0;
   overflow: hidden;
 }

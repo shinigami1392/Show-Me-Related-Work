@@ -2,7 +2,7 @@
 <div id="navigation" class="navbar navbar-default customNav">
     <div class="header">
         <a href="/">
-            <img width="60" height="60" hspace="20" src="./LogoMakr_9i2uuu.png" />
+            <img width="50" height="40" hspace="20" src="./LogoMakr_9i2uuu.png" />
         </a>
         <div id="login">
             <button type="button" v-if="!userObjTemp.authorized" class="btn btn-default btn-sm" @click="login()">
@@ -81,32 +81,17 @@ export default {
 .header{
       border-radius: 0px;
       width: 100%;
-      height: 60px;
-      background-color: #0E6390;
-
-    }
+      height: 50px;
+      background-color: #35342f
+}
 
 #login{
-      padding-top: 10px;
+      padding-top: 5px;
       padding-right: 20px;
       padding-left: 10px;
       text-align: right;
       float: right;
     }
-
-#logoDiv{
-  width: 100%;
-  padding-bottom: 5px;
-}
-
-#logo{
-
-  width: 8%;
-  padding-top: 3px;
-  padding-right: 10px;
-  padding-left: 10px;
-  float: left;
-}
 
 .topnav {
   width: 50%;
@@ -116,22 +101,8 @@ export default {
   padding-top: 9px;
 }
 
-input[type=text] {
-    width: 150px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-}
-
-input[type=text]:focus {
-    width: 30%;
-}
-
-  .md-size-2x{
+.md-size-2x{
     margin-top: 0.3%;
     margin-left: 1%;
-  }
+}
 </style>
