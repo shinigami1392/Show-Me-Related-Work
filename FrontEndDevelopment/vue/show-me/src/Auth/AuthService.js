@@ -7,8 +7,6 @@ import EventEmitter from 'eventemitter3'
 
 export default class AuthService {
 
-
-
    login () {
      //console.log("in login of AuthServ.js")
      new auth0.WebAuth({

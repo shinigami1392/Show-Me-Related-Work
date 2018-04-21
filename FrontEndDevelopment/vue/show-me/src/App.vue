@@ -30,11 +30,11 @@
                 </div>
 
 
-                <div class="row" style="margin-top:70px; margin-bottom:70px">
+                <div class="row" style="margin-top:70px; margin-bottom:100px">
                     <div class="col-md-6">
                         <transition name="slide" mode="out-in">
                             <router-view name="info-box" :key="$route.fullPath"></router-view>
-                            <router-view name="feedback-box" :key="$route.fullPath" :userData="userObj"></router-view>
+                            <router-view name="feedback-box" :key="$route.fullPath"></router-view>
                         </transition>
                     </div>
                     <div class="col-md-6">
