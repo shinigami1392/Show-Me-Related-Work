@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for Show-Me-App\spec\addDownvotes.js</title>
+    <title>Code coverage report for Show-Me-App\spec\removeDownvotes.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -16,7 +16,7 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../index.html">all files</a> / <a href="index.html">Show-Me-App/spec/</a> addDownvotes.js
+      <a href="../../index.html">all files</a> / <a href="index.html">Show-Me-App/spec/</a> removeDownvotes.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
@@ -118,7 +118,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js"><span class="cstat-no" title="statement not covered" >var request = require("request");</span>
-<span class="cstat-no" title="statement not covered" >var base_url = "http://54.201.123.246:8081/relations/downvote/add?";</span>
+<span class="cstat-no" title="statement not covered" >var base_url = "http://54.201.123.246:8081/relations/downvote/remove?";</span>
 &nbsp;
 <span class="cstat-no" title="statement not covered" >describe(" SHowMe Relations", <span class="fstat-no" title="function not covered" >function() {</span></span>
 <span class="cstat-no" title="statement not covered" >  describe("GET /", <span class="fstat-no" title="function not covered" >function() {</span></span>
@@ -127,21 +127,21 @@
 <span class="cstat-no" title="statement not covered" >    it("returns status code 200", <span class="fstat-no" title="function not covered" >function(done) {</span></span>
 <span class="cstat-no" title="statement not covered" >	  var relation_url = base_url + "domain=0&amp;source=399838&amp;destination=404723&amp;user=user0";</span>
 <span class="cstat-no" title="statement not covered" >      request.get(relation_url, <span class="fstat-no" title="function not covered" >function(error, response, body) {</span></span>
-<span class="cstat-no" title="statement not covered" >        expect(response.statusCode).toBe(200);</span>
+<span class="cstat-no" title="statement not covered" >        expect(response.statusCode).not.toBe(200);</span>
 <span class="cstat-no" title="statement not covered" >        done();</span>
       });
     });
 	
 	//test to check if invalid user Id is properly handled by the application.
 <span class="cstat-no" title="statement not covered" >    it("returns status code 200", <span class="fstat-no" title="function not covered" >function(done) {</span></span>
-<span class="cstat-no" title="statement not covered" >	  var user_url = base_url + "domain=0&amp;source=399838&amp;destination=404723&amp;user=user965";</span>
+<span class="cstat-no" title="statement not covered" >	  var user_url = base_url + "domain=0&amp;source=399838&amp;destination=399838&amp;user=user0";</span>
 <span class="cstat-no" title="statement not covered" >      request.get(user_url, <span class="fstat-no" title="function not covered" >function(error, response, body) {</span></span>
 <span class="cstat-no" title="statement not covered" >        expect(response.statusCode).not.toBe(200);</span>
 <span class="cstat-no" title="statement not covered" >        done();</span>
       });
     });
 	  
-	//test to see if all downvote is properly updated.
+	//test to see if downvote is properly removed.
 <span class="cstat-no" title="statement not covered" >    it("updates the downvote for a user for a particular relation", <span class="fstat-no" title="function not covered" >function(done) {</span></span>
 <span class="cstat-no" title="statement not covered" >	  var rel_url = base_url + "domain=0&amp;source=399838&amp;destination=404723&amp;user=user0";</span>
 <span class="cstat-no" title="statement not covered" >      request.get(rel_url, <span class="fstat-no" title="function not covered" >function(error, response, body) {</span></span>

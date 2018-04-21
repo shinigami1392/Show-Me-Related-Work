@@ -14,7 +14,7 @@ describe(" SHowMe Relations", function() {
     });
 	
 	//test to check if invalid user Id is properly handled by the application.
-    it("returns status code 200", function(done) {
+    it("returns status code 404", function(done) {
 	  var user_url = base_url + "domain=1&source=399838&destination=404723&user=user0";
       request.get(user_url, function(error, response, body) {
         expect(response.statusCode).not.toBe(200);
