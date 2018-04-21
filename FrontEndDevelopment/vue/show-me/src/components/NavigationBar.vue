@@ -5,10 +5,11 @@
 	  <!--  <md-icon class="md-size-2x">home</md-icon></a>  -->
 
       <div id="login" >
-        <button type="button" v-if="!userData.authenticated" class="btn btn-default btn-sm"  @click="login()">
+        <span>{{userData.authenticated}}</span>
+        <button type="button" v-if="!userData.authorized" class="btn btn-default btn-sm"  @click="login()">
           <span class="glyphicon glyphicon-home"></span> Sign In <i class="fas fa-sign-in-alt"></i>
         </button>
-        <md-menu md-align-trigger v-if="userData.authenticated">
+        <md-menu md-align-trigger v-if="userData.authorized">
           <img :src="userData.userImage" class="md-icon-button" md-menu-trigger >
           <md-tooltip md-direction="bottom">{{userName}}</md-tooltip>
 
@@ -33,8 +34,6 @@
           md-content="<h6>First Name:</h6> </br><h6>Last Name:</h6></br><h6>Email:</h6>" />
 
         </div>
-        
-
       </div>
     </div>
   </div>
@@ -51,6 +50,22 @@ Vue.use(VueMaterial)
 const auth = new AuthenticationService()
 const {login, logout, isAuthenticated} = auth
 
+function checkLoggedIn(){
+  // if (localStorage.getItem('userData')!="" || localStorage.getItem('userData')!= undefined){
+  //       //TODO: an API call to user API of ShowMe backend Server
+  //       //TODO: check if the user exist, if yes populate the user data else populate the user data and also store it at backend
+  //       localStorage.setItem('userData', vm.userData)
+  //       localStorage.setItem('authorized', true)
+  //       userObj.userImage = JSON.parse(localStorage.getItem('userData')).picture;
+  //       userObj.userName = JSON.parse(localStorage.getItem('userData')).given_name;
+  //       userObj.authenticated = localStorage.getItem('authorized');
+  //     }else{
+        
+  //       userObj.authenticated = false;
+  //     }
+ 
+}
+
 export default {
   data() {
     return {
@@ -58,6 +73,9 @@ export default {
       auth,
       ProfileDialogue: false,
     }
+  },
+  mounted(){
+    checkLoggedIn();
   },
   props:['userData'],
   methods: {
