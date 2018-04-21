@@ -6,17 +6,24 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     state:{
         userObjStore:{
-            userName:'',
-            userImage:'',
+            given_name:'',
+            family_name:'',
+            email:'',
+            userid:'',
+            picture:'',
             authorized: false 
         }
         //authorized: false
     },
     mutations:{
-        setAuthorization(state, value){
-            state.userObjStore.userName = value.userName;
-            state.userObjStore.userImage = value.userImage;
-            state.userObjStore.authorized = value.authorized;
+        setAuthorization(state, payload){
+
+            state.userObjStore.given_name  = payload.given_name
+            state.userObjStore.family_name  = payload.family_name
+            state.userObjStore.email  = payload.email
+            state.userObjStore.userid  = payload.userid
+            state.userObjStore.picture  = payload.picture
+            state.userObjStore.authorized  = payload.authorized
         }
     }
 });

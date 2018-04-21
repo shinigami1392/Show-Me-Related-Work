@@ -9,12 +9,12 @@
           <span class="glyphicon glyphicon-home"></span> Sign In <i class="fas fa-sign-in-alt"></i>
         </button>
         <md-menu md-align-trigger v-if="$store.state.userObjStore.authorized">
-          <img :src="userData.userImage" class="md-icon-button" md-menu-trigger >
-          <md-tooltip md-direction="bottom">{{$store.state.userObjStore.userName}}</md-tooltip>
+          <img :src="$store.state.userObjStore.picture" class="md-icon-button" md-menu-trigger >
+          <md-tooltip md-direction="bottom">{{$store.state.userObjStore.given_name}}</md-tooltip>
 
           <md-menu-content>
             <md-menu-item>
-              <span><b>Hi, {{$store.state.userObjStore.userName}}</b></span>
+              <span><b>Hi, {{$store.state.userObjStore.given_name}}</b></span>
             </md-menu-item>
             <a href="#" @click="ProfileDialogue = true">
             <md-menu-item>
@@ -76,11 +76,9 @@ export default {
   mounted(){
     checkLoggedIn();
   },
-  props:['userData'],
   methods: {
     login,
     logout,
-    isAuthenticated
   }
   
 };

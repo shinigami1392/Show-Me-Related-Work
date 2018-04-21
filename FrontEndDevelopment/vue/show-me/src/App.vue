@@ -3,7 +3,7 @@
     <div id="foreground" style="min-height:100vh;">
         <!-- Fixed navbar -->
         <div>
-            <app-navbar :userData="userObj">
+            <app-navbar>
             </app-navbar>
         </div>
 
@@ -60,62 +60,55 @@
 import axios from "axios";
 
 function getUserData(vm,token) {
-  console.log("Getting user data");
-  if (localStorage.getItem('userData')=="" || localStorage.getItem('userData')== undefined){
-    axios
+  
+  if(localStorage.getItem('userData') !="" && localStorage.getItem('userData') != undefined && localStorage.getItem('userData') != null){
+          let userObjTemp = JSON.parse(localStorage.getItem('userData'));
+          vm.createPayloadAndCommit(userObjTemp);
+  }
+  else{
+      axios
       .get(`https://pushkar-showme.auth0.com/userinfo`,{headers: { Authorization: "Bearer " + token }})
       .then(response => {
-        vm.userData = JSON.stringify(response.data);
-        console.log("+++++++++");
-        console.log(JSON.stringify(vm.$store.state.userObjStore));
-        if (localStorage.getItem('userData')!="" || localStorage.getItem('userData')!= undefined){
-          //TODO: an API call to user API of ShowMe backend Server
-          //TODO: check if the user exist, if yes populate the user data else populate the user data and also store it at backend
-          localStorage.setItem('userData', vm.userData);
-          localStorage.setItem('authorized', true);
-          let userDataTemp = {};
-          vm.userObj.userImage = JSON.parse(localStorage.getItem('userData')).picture;
-          vm.userObj.userName = JSON.parse(localStorage.getItem('userData')).given_name;
-          vm.userObj.authorized = true;
-          vm.$store.commit('setAuthorization',  vm.userObj);
-        }else{
-          vm.userObj.userImage = JSON.parse(localStorage.getItem('userData')).picture;
-          vm.userObj.userName = JSON.parse(localStorage.getItem('userData')).given_name;
-          vm.userObj.authorized = true;
-          vm.$store.commit('setAuthorization',  vm.userObj);
-        }
-        console.log("+++++++++");
-        console.log(JSON.stringify(vm.$store.state.userObjStore));
-        vm.$router.push('home');
+          let userData = JSON.stringify(response.data);
+          localStorage.setItem('userData', userData);
+          let userObjTemp = JSON.parse(localStorage.getItem('userData'));
+          vm.createPayloadAndCommit(userObjTemp);
+          vm.$router.push('home');
       })
       .catch(err => {
-        console.log('in error');
+        console.log(err);
         vm.errors.push(err);
       });
-    }else{
-      // localStorage.setItem('userData', vm.userData);
-      // localStorage.setItem('authorized', true);
-      vm.userObj.userImage = JSON.parse(localStorage.getItem('userData')).picture;
-      vm.userObj.userName = JSON.parse(localStorage.getItem('userData')).given_name;
-      vm.userObj.authorized = true;
-      vm.$store.commit('setAuthorization',  vm.userObj);
-    }
+  }
+
+
 }
+
+  
+
 
 
 export default {
   name: "app",
   data() {
     return {
-      userObj:{
-        userImage : "",
-        userName : "",
-        authorized: false,
-        
-      },
       errors : [],
       userFeedbackBoxHeader: "Comment and Vote"
     };
+  },
+  methods: {
+
+    createPayloadAndCommit : function(userObjTemp){
+        let payload = {};
+        payload.given_name= userObjTemp.given_name;
+        payload.family_name= userObjTemp.family_name;
+        payload.email= userObjTemp.email;
+        payload.userid= userObjTemp.sub;
+        payload.picture= userObjTemp.picture;
+        payload.authorized= true;
+        this.$store.commit('setAuthorization',  payload);
+    }
+
   },
   mounted() {
       var path = JSON.stringify(this.$route.fullPath);
@@ -125,12 +118,10 @@ export default {
       }
   },
   created(){
-    console.log(localStorage.getItem('userData')!="");
+
     if (localStorage.getItem('userData')!="" && localStorage.getItem('userData')!= undefined && localStorage.getItem('userData')!= null){
-      this.userObj.userImage = JSON.parse(localStorage.getItem('userData')).picture;
-          this.userObj.userName = JSON.parse(localStorage.getItem('userData')).given_name;
-          this.userObj.authorized = true;
-          this.$store.commit('setAuthorization',  this.userObj);
+          let userObjTemp = JSON.parse(localStorage.getItem("userData"));
+          this.createPayloadAndCommit(userObjTemp);
     }
   }
 };
