@@ -12,7 +12,8 @@ export const store = new Vuex.Store({
             userid:'',
             picture:'',
             authorized: false 
-        }
+        },
+        domains:{}
         //authorized: false
     },
     mutations:{

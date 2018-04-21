@@ -29,9 +29,17 @@
                 columns: []
             };
         },
+        created(){
+            var domains = this.$store.state.domains;
+            for(var i = 0 ; i < domains.length; i++){
+                if(domains[i].id !== undefined && domains[i].id == this.$route.params.areaid){
+                    this.researchPapersBoxHeader = "Research Papers ["+domains[i].name+"]";
+                    break;
+                }
+            }
+        },
         mounted(){
            var vm = this;
-           console.log("Datatable Route: "+JSON.stringify(this.$route.category));
            $('#dtable').DataTable({
                 "processing" : true,
                 "serverSide" : true,
