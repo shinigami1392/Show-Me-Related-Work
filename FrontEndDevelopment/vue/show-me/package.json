@@ -17,6 +17,7 @@
     "auth0-js": "^9.4.2",
     "axios": "^0.17.1",
     "vue": "^2.4.4",
+    "vue-icons": "^2.0.0",
     "vue-material": "^1.0.0-beta-8",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"

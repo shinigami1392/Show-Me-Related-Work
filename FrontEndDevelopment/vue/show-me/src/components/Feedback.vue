@@ -9,11 +9,13 @@
             <div style="width:70%; margin-right:25px;float:left;">
                 <textarea v-model="user_comment" class="form-control" type="text" rows="5" style="height:95%;" placeholder="Your comments" />
             </div>
-            <div style="width:25%; margin-top:5px; float:left;">
+            <div style="width:25%; margin-top:5px; float:left;">                
+                
+                <i class="fa fa-thumbs-up upvoteButtonClass"  v-on:click="addRemoveUpvote"></i>                
+                <span><b>{{this.upvotesCount}}</b></span>                
+                <i class="fa fa-thumbs-down downvoteButtonClass" v-on:click="addRemoveDownvote"></i>
+                <span><b>{{this.downvotesCount}}</b></span>
                 <button type="button" v-on:click="addComment()" class="btn btn-success btn-sm">Comment</button> &nbsp;
-                <button v-bind:class="likeButtonClass" v-on:click="toggleLikeButton">Like
-                    <i class="fa fa-thumbs-o-up"></i>
-                </button>
             </div>
             <div style="clear:both;"></div>
         </div>
@@ -33,8 +35,17 @@ export default {
             user_comment: [],
             givenname:'',
             authenticated: false,
-            likeButtonClass : "btn btn-primary btn-sm"
+            upvoteButtonClass : "btn btn-primary btn-sm",
+            downvoteButtonClass :"btn btn-primary btn-sm",
+            domain :'',
+            source :'',
+            destination :'',
+            upvotesCount : 0,
+            downvotesCount : 0
         }
+    },
+    components: {
+        "icon": require("vue-icons")    
     },
     props: ['userData'],
     created() {
@@ -44,11 +55,23 @@ export default {
     },
     mounted() {
         var linkInfo = this.$route.matched[0].props.linkInfo;
+        this.upvotesCount = linkInfo.relation.upvotes.length;
+        this.downvotesCount = linkInfo.relation.downvotes.length;        
         this.comments = linkInfo.relation.comments;
         console.log(JSON.stringify(this.comments));
-        this.weight = linkInfo.upvotes;
+        if (linkInfo.upvotes == undefined){
+            this.weight = 0;
+        } 
+        else {
+            this.weight = linkInfo.upvotes;
+        }   
+
+        this.domain = this.$route.params.areaid;        
+        var nodes = this.$route.params.linkid
+        this.source = nodes.split("_")[0];
+        this.destination = nodes.split("_")[1];            
         this.givenname = userData.given_name;
-        this.authenticated = userData.authenticated;
+        this.authenticated = userData.authenticated;        
     },
     methods: {
 
@@ -67,18 +90,111 @@ export default {
 		    }
 		    return val;
         },
-        toggleLikeButton : function(){
-            if(this.likeButtonClass === 'btn btn-primary'){
-                this.likeButtonClass = 'btn btn-default'
+        addRemoveUpvote : function(){        
+            this.weight = this.weight + 1;
+            this.givenname = "User0";
+
+            if(this.upvoteButtonClass === 'btn btn-primary btn-sm'){
+                this.upvoteButtonClass = 'btn btn-default'
+               
+                axios
+                    .put(`http://54.201.123.246:8081/relations/upvote/add?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
+                         `&user=` + this.givenname)
+                    .then(response => {
+                            if (response.status == 200) {
+                                this.upvotesCount = this.upvotesCount + 1;
+                            }
+                            
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    }
+                );           
+
             }    
-            else if(this.likeButtonClass === 'btn btn-default') {
-                this.likeButtonClass = 'btn btn-primary'
+            else if(this.upvoteButtonClass === 'btn btn-default') {
+                this.upvoteButtonClass = 'btn btn-primary btn-sm'
+                
+                axios
+                    .put(`http://54.201.123.246:8081/relations/upvote/remove?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
+                        `&user=` + this.givenname)
+                    .then(response => {
+                            if (response.status == 200) {                               
+                               this.upvotesCount = this.upvotesCount - 1;
+                            }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    }
+                );
+
+            }   
+        },
+        addRemoveDownvote : function(){         
+            
+            this.weight = this.weight + 1;                     
+            //this.givenname = "Abc";
+
+            if(this.downvoteButtonClass === 'btn btn-primary btn-sm'){
+                this.downvoteButtonClass = 'btn btn-default'
+               
+                axios
+                    .put(`http://54.201.123.246:8081/relations/downvote/add?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
+                        `&user=` + this.givenname)
+                    .then(response => {
+                            if (response.status == 200) {                               
+                               this.downvotesCount = this.downvotesCount + 1;
+                            }
+                            
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    }
+                );           
+
+            }    
+            else if(this.downvoteButtonClass === 'btn btn-default') {
+                this.downvoteButtonClass = 'btn btn-primary btn-sm'
+                
+                axios
+                    .put(`http://54.201.123.246:8081/relations/downvote/remove?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
+                        `&user=` + this.givenname)
+                    .then(response => {
+                            if (response.status == 200) {                                
+                                this.downvotesCount = this.downvotesCount - 1;
+                            }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    }
+                );
+
             }   
         },
         addComment: function() {
+
+                let domainId = this.$route.params.areaid;
+                let relationId = (this.$route.params.linkid).split('_'); 
+                let sourceId = relationId[0];
+                let destinationId = relationId[1];
+                let textContent =  this.user_comment;
+                let userId = '';
+                if((localStorage.getItem("userData") != null)){
+                    let userObj = JSON.parse(localStorage.getItem("userData"));
+                    userId = userObj.sub;
+                }
+
+                let requestUrl = `http://54.201.123.246:8081/relations/comment/add?domain=` + domainId + `&source=` + sourceId + `&destination=` + destinationId + `&user=` + userId+`&text=` + textContent; 
+                console.log(requestUrl);
+            
             axios
-                .put(`http://54.201.123.246:8081/relations/comment/add?relationId=` + this.$route.params.linkid + `&text=` + this.user_comment + `&user_name=` + this.givenname)
+                .put(requestUrl)
                 .then(response => {
+
+                    // if true then 
+                    console.log(response.data);
+
+
                     axios
                         .get(`http://54.201.123.246:8081/relations/get?id=` + this.$route.params.linkid + `&user=` + this.username)
                         .then(response => {

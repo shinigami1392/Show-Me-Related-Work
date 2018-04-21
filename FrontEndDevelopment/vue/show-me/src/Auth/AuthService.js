@@ -22,33 +22,6 @@ export default class AuthService {
      //handleAuthentication()
    }
 
-
-
-   handleAuthentication () {
-     this.auth0.parseHash((err, authResult) => {
-       if (authResult && authResult.accessToken && authResult.idToken) {
-         console.log(authResult.accessToken)
-         //this.setSession(authResult)
-       //router.replace('home')
-     } else if (err) {
-       //router.replace('home')
-       console.log(err)
-       alert(`Error: ${err.error}. Check the console for further details.`)
-     }
-   })
-   }
-
-     setSession (authResult) {
-       // Set the time that the access token will expire at
-       let expiresAt = JSON.stringify(
-         authResult.expiresIn * 1000 + new Date().getTime()
-       )
-       localStorage.setItem('access_token', authResult.accessToken)
-       localStorage.setItem('id_token', authResult.idToken)
-       localStorage.setItem('expires_at', expiresAt)
-       this.authNotifier.emit('authChange', { authenticated: true })
-     }
-
   logout () {
     localStorage.removeItem('userData')
     localStorage.setItem('authorized', false)
@@ -58,12 +31,5 @@ export default class AuthService {
     localStorage.removeItem('expires_at')
     this.userProfile = null
     //this.authNotifier.emit('authChange', false)
-  }
-
-  isAuthenticated () {
-    // Check whether the current time is past the
-    // access token's expiry time
-    let authUser = localStorage.getItem('authorized')
-    return authUser;
   }
 }

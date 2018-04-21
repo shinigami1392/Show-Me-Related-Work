@@ -30,7 +30,7 @@
                 </div>
 
 
-                <div class="row" style="margin-top:70px;">
+                <div class="row" style="margin-top:70px; margin-bottom:70px">
                     <div class="col-md-6">
                         <transition name="slide" mode="out-in">
                             <router-view name="info-box" :key="$route.fullPath"></router-view>
@@ -47,9 +47,9 @@
         </div>
 
         <!--Footer-->
-        <div>
+        <footer>
             <app-footer></app-footer>
-        </div>
+        </footer>
 
     </div>
 </div>
@@ -60,24 +60,46 @@
 import axios from "axios";
 
 function getUserData(vm,token) {
-  axios
-    .get(`https://pushkar-showme.auth0.com/userinfo`,{headers: { Authorization: "Bearer " + token }})
-    .then(response => {
-      vm.userData = JSON.stringify(response.data);
-      if (localStorage.getItem('userData')!="" || localStorage.getItem('userData')!= undefined){
-        //TODO: an API call to user API of ShowMe backend Server
-        //TODO: check if the user exist, if yes populate the user data else populate the user data and also store it at backend
-        localStorage.setItem('userData', vm.userData)
-        localStorage.setItem('authorized', true)
-        vm.userObj.userImage = JSON.parse(localStorage.getItem('userData')).picture
-        vm.userObj.userName = JSON.parse(localStorage.getItem('userData')).given_name
-        vm.userObj.authenticated = localStorage.getItem('authorized')
-      }
-      vm.$router.push('home');
-    })
-    .catch(err => {
-      vm.errors.push(err);
-    });
+  console.log("Getting user data");
+  if (localStorage.getItem('userData')=="" || localStorage.getItem('userData')== undefined){
+    axios
+      .get(`https://pushkar-showme.auth0.com/userinfo`,{headers: { Authorization: "Bearer " + token }})
+      .then(response => {
+        vm.userData = JSON.stringify(response.data);
+        console.log("+++++++++");
+        console.log(JSON.stringify(vm.$store.state.userObjStore));
+        if (localStorage.getItem('userData')!="" || localStorage.getItem('userData')!= undefined){
+          //TODO: an API call to user API of ShowMe backend Server
+          //TODO: check if the user exist, if yes populate the user data else populate the user data and also store it at backend
+          localStorage.setItem('userData', vm.userData);
+          localStorage.setItem('authorized', true);
+          let userDataTemp = {};
+          vm.userObj.userImage = JSON.parse(localStorage.getItem('userData')).picture;
+          vm.userObj.userName = JSON.parse(localStorage.getItem('userData')).given_name;
+          vm.userObj.authorized = true;
+          vm.$store.commit('setAuthorization',  vm.userObj);
+        }else{
+          vm.userObj.userImage = JSON.parse(localStorage.getItem('userData')).picture;
+          vm.userObj.userName = JSON.parse(localStorage.getItem('userData')).given_name;
+          vm.userObj.authorized = true;
+          vm.$store.commit('setAuthorization',  vm.userObj);
+        }
+        console.log("+++++++++");
+        console.log(JSON.stringify(vm.$store.state.userObjStore));
+        vm.$router.push('home');
+      })
+      .catch(err => {
+        console.log('in error');
+        vm.errors.push(err);
+      });
+    }else{
+      // localStorage.setItem('userData', vm.userData);
+      // localStorage.setItem('authorized', true);
+      vm.userObj.userImage = JSON.parse(localStorage.getItem('userData')).picture;
+      vm.userObj.userName = JSON.parse(localStorage.getItem('userData')).given_name;
+      vm.userObj.authorized = true;
+      vm.$store.commit('setAuthorization',  vm.userObj);
+    }
 }
 
 
@@ -88,8 +110,10 @@ export default {
       userObj:{
         userImage : "",
         userName : "",
-        authenticated: false,
+        authorized: false,
+        
       },
+      errors : [],
       userFeedbackBoxHeader: "Comment and Vote"
     };
   },
@@ -99,6 +123,15 @@ export default {
         var token =   path.split("&")[0].split("=")[1];
         getUserData(this, token)
       }
+  },
+  created(){
+    console.log(localStorage.getItem('userData')!="");
+    if (localStorage.getItem('userData')!="" && localStorage.getItem('userData')!= undefined && localStorage.getItem('userData')!= null){
+      this.userObj.userImage = JSON.parse(localStorage.getItem('userData')).picture;
+          this.userObj.userName = JSON.parse(localStorage.getItem('userData')).given_name;
+          this.userObj.authorized = true;
+          this.$store.commit('setAuthorization',  this.userObj);
+    }
   }
 };
 </script>
@@ -107,7 +140,7 @@ export default {
 body{
   width: 100%;
   background-image: url(circuits2.jpg);
-}
+} 
 
 #foreground{
   background-color:rgba(0, 0, 0, 0.5);
