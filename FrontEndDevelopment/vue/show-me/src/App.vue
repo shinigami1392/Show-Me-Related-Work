@@ -60,18 +60,29 @@
 import axios from "axios";
 
 function getUserData(vm,token) {
-  
-  if(localStorage.getItem('userData') !="" && localStorage.getItem('userData') != undefined && localStorage.getItem('userData') != null){
-          let userObjTemp = JSON.parse(localStorage.getItem('userData'));
-          vm.createPayloadAndCommit(userObjTemp);
+    if(localStorage.getItem('userData') !="" && localStorage.getItem('userData') != undefined && localStorage.getItem('userData') != null){
+        let userObjTemp = JSON.parse(localStorage.getItem('userData'));
+    vm.createPayloadAndCommit(userObjTemp);
   }
   else{
-      axios
+    axios
       .get(`https://pushkar-showme.auth0.com/userinfo`,{headers: { Authorization: "Bearer " + token }})
       .then(response => {
           let userData = JSON.stringify(response.data);
+          //console.log(JSON.stringify(response.data));
           localStorage.setItem('userData', userData);
           let userObjTemp = JSON.parse(localStorage.getItem('userData'));
+          axios.post('http://localhost:8081/users/user', {
+              userId: response.data.sub,
+              first_name: response.data.given_name,
+              last_name: response.data.family_name,
+              email: response.data.email
+            }).then(function (response) {
+                //console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
           vm.createPayloadAndCommit(userObjTemp);
           vm.$router.push('home');
       })
