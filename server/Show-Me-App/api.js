@@ -24,7 +24,9 @@ exports.findUser = function (id, res) {
 		else if (user) {
 			res.send({
 				'found': true, 'user': {
-					'first_name': user.first_name, 'last_name': user.last_name,
+					'userId' : user.userId,
+					'first_name': user.first_name, 
+					'last_name': user.last_name,
 					'email': user.email
 				}
 			});
@@ -448,6 +450,30 @@ var getGraphNode = function (paperId, res) {
 	});
 }
 
+exports.findOrCreateUser = function(id, first_name, last_name, email, res){
+	var query = UserModel.findOne({ userId: id });
+	query.exec(function (err, user) {
+		if (err) sendInternalServerError(res);
+		else if (user) {
+			res.send({
+				'found': true, 'user': {
+					'first_name': user.first_name, 'last_name': user.last_name,
+					'email': user.email, 'userId' : user.userId
+				}
+			});
+		}
+		else {
+			console.log('not found trying to create...');
+			var newUser = {'userId' : id, 'first_name' : first_name, 'last_name' : last_name, 'email' : email};
+			var data = new UserModel(newUser);
+			data.save();
+			res.send({ 'found': false , 'user': {
+				'first_name': first_name, 'last_name': last_name,
+				'email': email, 'userId' : id
+			}});
+		}
+	});
+}
 
 exports.findPapersForDomainPaginated = function(draw, start, length, areaid, res){
 	var totalPapersForDomainQuery =  DomainModel.aggregate([
