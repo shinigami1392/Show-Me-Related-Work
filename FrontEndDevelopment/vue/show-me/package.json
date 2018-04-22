@@ -13,6 +13,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@deveodk/vue-toastr": "^1.0.4",
     "EventEmitter": "^1.0.0",
     "auth0-js": "^9.4.2",
     "axios": "^0.17.1",

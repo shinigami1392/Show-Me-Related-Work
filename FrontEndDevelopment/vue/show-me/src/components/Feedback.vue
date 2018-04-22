@@ -5,21 +5,17 @@
                    <span style="color:green; font-weight:bold;"> {{com.username}}</span>&ensp;<br/><span style="color:#696969;font-weight:bold;">{{ getTimeStamp(com.timestamp) }}</span>&ensp;&ensp; {{com.comment}} <hr />
                 </li>
             </ul>
-        <div v-if="userObjTemp.authorized" style="width:100%;">
-            <div style="width:70%; margin-right:25px;float:left;padding:10px">
-                <textarea required v-model="user_comment" class="form-control" type="text" rows="3" style="height:90%; " placeholder="Your comments" />
-                <button type="button" v-on:click="addComment()" style="margin-top:10px;" class="btn btn-success btn-md">Comment</button> &nbsp;
-
+        <div  style="width:100%;">
+            <div style="width:90%; margin-right:25px;float:left;padding:10px">
+                <textarea required v-model="user_comment" class="form-control" type="text" rows="1" style="height:90%; " placeholder="Your comments" />
+                <button type="button" v-on:click="userObjTemp.authorized ? addComment():showErrMsg()" style="margin-top:10px;" class="btn btn-success btn-md">Comment</button> &nbsp;
             </div>
-            <div style="width:25%; margin-top:5px; float:left;">                
-                
-                <i class="fa fa-thumbs-up upvoteButtonClass"  v-on:click="addRemoveUpvote"></i>                
+            <div style="width:25%; margin-top:5px; float:left;">
+                <i class="fa fa-thumbs-up upvoteButtonClass"  v-on:click="userObjTemp.authorized ? addRemoveUpvote:showErrMsg()"></i>                
                 <span><b>{{this.upvotesCount}}</b></span>                
-                <i class="fa fa-thumbs-down downvoteButtonClass" v-on:click="addRemoveDownvote"></i>
+                <i class="fa fa-thumbs-down downvoteButtonClass" v-on:click="userObjTemp.authorized ?addRemoveDownvote:showErrMsg()"></i>
                 <span><b>{{this.downvotesCount}}</b></span>
             </div>
-
-            <div style="clear:both;"></div>
         </div>
     </app-box>
 </template>
@@ -156,8 +152,7 @@ export default {
             }   
         },
         addComment: function() {
-
-                let requestUrl = `http://54.201.123.246:8081/relations/comment/add?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination + `&user=` +'user0'+`&text=` + this.user_comment; 
+                let requestUrl = `http://54.201.123.246:8081/relations/comment/add?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination + `&user=` +this.userObjTemp.userid+`&text=` + this.user_comment; 
                 console.log(requestUrl);
             axios
                 .put(requestUrl)
@@ -174,13 +169,39 @@ export default {
                         var d = new Date();
                         userCom.timestamp = d.toISOString();
                         this.comments.push(userCom);
+                        this.user_comment='';
+                        this.$toastr('add', {
+                            title: 'Successfully Posted', // Toast Title
+                            msg: '', // Message
+                            timeout: 1000, // Timeout in ms
+                            position: 'toast-bottom-left', // Toastr position
+                            type: 'success' // Toastr type
+                        });
                     }
-                    
+                    else{
+                        this.$toastr('warning', 'Something went wrong', 'Please check if you are logged in');
+                    }
                     
                 })
                 .catch(err => {
-                    console.log(err);
+                    let errObj = JSON.parse(JSON.stringify(err));
+                    this.$toastr('add', {
+                    title: 'Bad request', // Toast Title
+                    msg: errObj.response.data, // Message
+                    timeout: 5000, // Timeout in ms
+                    position: 'toast-bottom-full-width', // Toastr position
+                    type: 'error' // Toastr type
+                    });
                 });
+        },
+        showErrMsg : function(){
+            this.$toastr('add', {
+                    title: 'Want to get involved?', // Toast Title
+                    msg: 'Please sign in', // Message
+                    timeout: 5000, // Timeout in ms
+                    position: 'toast-top-full-width', // Toastr position
+                    type: 'info' // Toastr type
+            });
         }
     }
 }            
