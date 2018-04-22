@@ -12,7 +12,8 @@ import Grid from './components/Grid.vue'
 import SearchBox from './components/SearchBox.vue'
 import Datatable from './components/Datatable.vue'
 import Footer from './components/Footer.vue'
-
+import VueToastr from '@deveodk/vue-toastr'
+import '@deveodk/vue-toastr/dist/@deveodk/vue-toastr.css'
 import { routes } from './routes';
 import { store } from './store';
 
@@ -20,7 +21,11 @@ import './assets/css/fontawesome-all.css';
 
 
 Vue.use(VueRouter);
-
+Vue.use(VueToastr, {
+  defaultPosition: 'toast-bottom-center',
+  defaultType: 'info',
+  defaultTimeout: 50000
+})
 Vue.component('app-box', Box);
 Vue.component('app-listbox', ListBox);
 Vue.component('app-navbar', NavigationBar);

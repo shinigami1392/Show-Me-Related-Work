@@ -156,8 +156,7 @@ export default {
             }   
         },
         addComment: function() {
-
-                let requestUrl = `http://54.201.123.246:8081/relations/comment/add?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination + `&user=` +'user0'+`&text=` + this.user_comment; 
+                let requestUrl = `http://54.201.123.246:8081/relations/comment/add?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination + `&user=` +this.userObjTemp.userid+`&text=` + this.user_comment; 
                 console.log(requestUrl);
             axios
                 .put(requestUrl)
@@ -174,12 +173,29 @@ export default {
                         var d = new Date();
                         userCom.timestamp = d.toISOString();
                         this.comments.push(userCom);
+                        this.user_comment='';
+                        this.$toastr('add', {
+                            title: 'Successfully Posted', // Toast Title
+                            msg: '', // Message
+                            timeout: 1000, // Timeout in ms
+                            position: 'toast-bottom-left', // Toastr position
+                            type: 'success' // Toastr type
+                        });
                     }
-                    
+                    else{
+                        this.$toastr('warning', 'Something went wrong', 'Please check if you are logged in');
+                    }
                     
                 })
                 .catch(err => {
-                    console.log(err);
+                    let errObj = JSON.parse(JSON.stringify(err));
+                    this.$toastr('add', {
+                    title: 'Bad request', // Toast Title
+                    msg: errObj.response.data, // Message
+                    timeout: 5000, // Timeout in ms
+                    position: 'toast-bottom-full-width', // Toastr position
+                    type: 'error' // Toastr type
+                    });
                 });
         }
     }
