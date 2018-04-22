@@ -7,8 +7,8 @@
             </ul>
         <div  style="width:100%;">
             <div style="width:90%; margin-right:25px;float:left;padding:10px">
-                <textarea required v-model="user_comment" class="form-control" type="text" rows="1" style="height:90%; " placeholder="Your comments" />
-                <button type="button" v-on:click="userObjTemp.authorized ? addComment():showErrMsg()" style="margin-top:10px;" class="btn btn-success btn-md">Comment</button> &nbsp;
+                <textarea v-model="user_comment" class="form-control" type="text" rows="1" style="height:90%; " placeholder="Your comments" />
+                <button type="button" v-on:click="userObjTemp.authorized ?(user_comment!=''?addComment():showTextErrMsg()):showErrMsg()" style="margin-top:10px;" class="btn btn-success btn-md">Comment</button> &nbsp;
             </div>
             <div style="width:25%; margin-top:5px; float:left;">
                 <i class="fa fa-thumbs-up upvoteButtonClass"  v-on:click="userObjTemp.authorized ? addRemoveUpvote:showErrMsg()"></i>                
@@ -173,7 +173,7 @@ export default {
                         this.$toastr('add', {
                             title: 'Successfully Posted', // Toast Title
                             msg: '', // Message
-                            timeout: 1000, // Timeout in ms
+                            timeout: 2000, // Timeout in ms
                             position: 'toast-bottom-left', // Toastr position
                             type: 'success' // Toastr type
                         });
@@ -201,6 +201,15 @@ export default {
                     timeout: 5000, // Timeout in ms
                     position: 'toast-top-full-width', // Toastr position
                     type: 'info' // Toastr type
+            });
+        },
+        showTextErrMsg:function(){
+            this.$toastr('add', {
+                    title: 'Please enter text', // Toast Title
+                    msg: '', // Message
+                    timeout: 2000, // Timeout in ms
+                    position: 'toast-bottom-left', // Toastr position
+                    type: 'error' // Toastr type
             });
         }
     }
