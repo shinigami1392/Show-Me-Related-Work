@@ -6,7 +6,7 @@
     </div>  -->
 	<div>
 		<div id="animated-back">
-			  <h1><img src="./frontlogo.png" /></h1>
+			  <h1><img src="../assets/images/frontlogo.png" /></h1>
 		</div>
 		<div id="animated-back">
 			  <h3> A better way to find relations between scholarly articles</h3>    

@@ -2,7 +2,7 @@
 <div id="navigation" class="navbar navbar-default customNav">
     <div class="header">
         <a href="/">
-            <img width="50" height="40" hspace="20" src="./LogoMakr_9i2uuu.png" />
+            <img width="50" height="40" hspace="20" src="../assets/images/logoHeader.png" />
         </a>
         <div id="login">
             <button type="button" v-if="!userObjTemp.authorized" class="btn btn-default btn-sm" @click="login()">
@@ -10,14 +10,13 @@
                 <i class="fas fa-sign-in-alt"></i>
             </button>
             <md-menu md-align-trigger v-if="userObjTemp.authorized">
+                <span>
+                    <b>Hi, {{userObjTemp.given_name}} {{userObjTemp.family_name}}</b>
+                </span>
                 <img :src="userObjTemp.picture" class="md-icon-button" md-menu-trigger>
                 <md-tooltip md-direction="bottom">{{userObjTemp.given_name}}</md-tooltip>
                 <md-menu-content>
-                    <md-menu-item>
-                        <span>
-                            <b>Hi, {{userObjTemp.given_name}}</b>
-                        </span>
-                    </md-menu-item>
+                    
                     <a href="#" @click="ProfileDialogue = true">
                         <md-menu-item>
                             <span>
@@ -77,6 +76,7 @@ export default {
   padding-left: 0px;
   padding-right: 0px;
   padding-top: 0px;
+  color: #fff;
 }
 .header{
       border-radius: 0px;

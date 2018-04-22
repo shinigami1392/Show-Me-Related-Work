@@ -1,13 +1,15 @@
 <template>
     <app-box v-bind:boxHeaderProp="feedbackBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
             <ul class="list-group" style="max-height:300px; overflow-y:auto;">
-                <li v-for="com in comments">
-                   <span style="color:green; font-weight:bold;"> {{com.username}}</span>&ensp;<span style="color:#696969;font-weight:bold;">{{ getTimeStamp(com.timestamp) }}</span>:&ensp; {{com.comment}} <hr />
+                <li style="padding-left:5px; " v-for="com in comments">
+                   <span style="color:green; font-weight:bold;"> {{com.username}}</span>&ensp;<br/><span style="color:#696969;font-weight:bold;">{{ getTimeStamp(com.timestamp) }}</span>&ensp;&ensp; {{com.comment}} <hr />
                 </li>
             </ul>
         <div v-if="userObjTemp.authorized" style="width:100%;">
-            <div style="width:70%; margin-right:25px;float:left;">
-                <textarea v-model="user_comment" class="form-control" type="text" rows="5" style="height:95%;" placeholder="Your comments" />
+            <div style="width:70%; margin-right:25px;float:left;padding:10px">
+                <textarea required v-model="user_comment" class="form-control" type="text" rows="3" style="height:90%; " placeholder="Your comments" />
+                <button type="button" v-on:click="addComment()" style="margin-top:10px;" class="btn btn-success btn-md">Comment</button> &nbsp;
+
             </div>
             <div style="width:25%; margin-top:5px; float:left;">                
                 
@@ -15,8 +17,8 @@
                 <span><b>{{this.upvotesCount}}</b></span>                
                 <i class="fa fa-thumbs-down downvoteButtonClass" v-on:click="addRemoveDownvote"></i>
                 <span><b>{{this.downvotesCount}}</b></span>
-                <button type="button" v-on:click="addComment()" class="btn btn-success btn-sm">Comment</button> &nbsp;
             </div>
+
             <div style="clear:both;"></div>
         </div>
     </app-box>
@@ -155,23 +157,25 @@ export default {
         },
         addComment: function() {
 
-                let requestUrl = `http://54.201.123.246:8081/relations/comment/add?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination + `&user=` + this.userObjTemp.userid+`&text=` + this.user_comment; 
+                let requestUrl = `http://54.201.123.246:8081/relations/comment/add?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination + `&user=` +'user0'+`&text=` + this.user_comment; 
                 console.log(requestUrl);
             axios
                 .put(requestUrl)
                 .then(response => {
 
                     // if true then 
-                    console.log(response.data);
-                    let text = this.user_comment;
-                    let userCom = {};
-                    userCom.comment = this.user_comment;
-                    userCom.userId = this.userObjTemp.userid;
-                    userCom.username = this.userObjTemp.given_name + " "+ this.userObjTemp.family_name;
-                    var d = new Date();
-                    userCom.timestamp = d.toISOString();
-
-                    this.comments.push(userCom);
+                    console.log(response.data.updated);
+                    if(response.data.updated){
+                        let text = this.user_comment;
+                        let userCom = {};
+                        userCom.comment = this.user_comment;
+                        userCom.userId = this.userObjTemp.userid;
+                        userCom.username = this.userObjTemp.given_name + " "+ this.userObjTemp.family_name;
+                        var d = new Date();
+                        userCom.timestamp = d.toISOString();
+                        this.comments.push(userCom);
+                    }
+                    
                     
                 })
                 .catch(err => {
