@@ -467,8 +467,6 @@ exports.findPapersForDomainPaginated = function(draw, start, length, areaid, res
 		else{
 			totalRecords = result[0].paperCount;
 			query = DomainModel.findOne({id:areaid}, {papers:{$slice: [ start, length]}});
-			//query = DomainModel.findOne({id:areaid});
-			//query.populate('papers');
 			query.exec(function(err, domain){
 				if(err) sendInternalServerError(res);
 				else if(domain) {
@@ -490,24 +488,48 @@ exports.findPapersForDomainPaginated = function(draw, start, length, areaid, res
 		}	
 	});
 }
-exports.search = function (text, res) {
-	var query = PaperModel.find(
+exports.search = function (text, draw, start, length, res) {
+
+	var countQuery = PaperModel.find(
 		{ $text: { $search: text } },
 		{ score: { $meta: "textScore" } }
-	).sort({ score: { $meta: 'textScore' } });
+	).sort({ score: { $meta: 'textScore' } }).count();
+
+	var paginatedQuery = PaperModel.find(
+		{ $text: { $search: text } },
+		{ score: { $meta: "textScore" } }
+	).sort({ score: { $meta: 'textScore' } }).skip(start).limit(length);
 	
-	query.exec(function (err, papers) {
-		if (err) sendInternalServerError(res);
-		else if (papers) {
-			var paperList = [];
-			for (var i = 0; i < papers.length; i++) {
-				var paper = { 'id': papers[i].paperId, 'title': papers[i].title, 'authors': papers[i].author, 'date': papers[i].date, 'url': papers[i].url };
-				paperList.push(paper);
+	
+	countQuery.exec(function(err, count){
+		var totalRecords = count;
+		paginatedQuery.exec(function (err, papers) {
+			if (err) sendInternalServerError(res);
+			else if (papers) {
+				var dttable = [];
+				for (var i = 0; i < papers.length; i++) {
+					var object = [];
+					object.push(papers[i].id);
+					object.push(papers[i].title);
+					object.push(papers[i].authors.toString().slice(0,-1)); 
+					object.push(papers[i].publicationYear);
+					object.push(papers[i].domainId);
+					object.push(papers[i].stream);
+					dttable.push(object);
+				}
+				
+				res.send({"draw": draw, "recordsTotal": totalRecords, "recordsFiltered":totalRecords, "data":dttable});
+				
 			}
-			res.send({ 'total': paperList.length, 'papers': paperList });
-		}
-		else {
-			res.send({ 'total': 0, 'papers': [] });
-		}
-	});
+			else {
+				res.send({"draw": draw, "recordsTotal": 0, "recordsFiltered":0, "data":[]});
+			}
+		});	
+	});		
+
+	
+
+
 }
+
+

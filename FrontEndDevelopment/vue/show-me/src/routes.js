@@ -8,6 +8,7 @@ import SearchBox from './components/SearchBox.vue'
 import Datatable from './components/Datatable.vue'
 import AboutUs from './components/AboutUs.vue'
 import ContactUs from './components/ContactUs.vue'
+import SearchPaginatedTable from './components/SearchPaginatedTable.vue'
 
 //Lazy routing
 const PapersTable = resolve => {
@@ -55,6 +56,15 @@ export const routes = [{
     'search-box': SearchBox,
     'table-box': Datatable
   },
+},
+{
+  path:'/search',
+  name:'searchPapers',
+  components:{
+    'area-box': ListBox,
+    'search-box':SearchBox,
+    'table-box':SearchPaginatedTable
+  }
 },
 {
   path: '/areas/:areaid/paper/:paperid',
