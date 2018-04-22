@@ -80,14 +80,14 @@ export default {
 </script>
 <style>
   .sidenav {
-	    height: 50%; 
+	    height: 100%; 
       width: 0;
 	    position: fixed; 
       z-index: 1;
       top: 0;      
       right: 0;
-	  display: flex;
-      background-color: #283e4a;      
+	    display: flex;
+      background-color: #35342f;      
       overflow-x: hidden;
       transition: 0.5s;
       padding-top: 60px;

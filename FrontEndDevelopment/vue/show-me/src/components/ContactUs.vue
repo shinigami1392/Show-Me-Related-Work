@@ -3,7 +3,7 @@
 	<div id="page-content">
 		
 		<div id="contact-us">
-		
+			
 			<h1>Contact Us</h1>
 			<div class="envelop-icon"><i class="far fa-envelope fa-2x"></i></div>
 			<h2>Don't hesitate to contact us</h2>
@@ -17,9 +17,9 @@
 			<br/>
 			
 			<form action="https://formspree.io/rajatsjc@gmail.com" method="POST">
-			  <input name="email" type="email" placeholder="Your email">
+			  <input required name="email" type="email" placeholder="Your email">
 			  <br/>
-			  <textarea name="message"  placeholder="Your message"></textarea>
+			  <textarea required name="message"  placeholder="Your message"></textarea>
 			  <br/>
 			  <button class="submit-button" type="submit">Send Message</button>
 			</form>
@@ -47,16 +47,18 @@
 		#contact-us {
 			padding-left: 40px;
 			float:left;
+			color: #000;
 		}
 		
 		#contact-info {
 			padding: 0;
 			margin: 0;
+			color: #000;
 		}
 		
 		#contact-info p { 
 			margin:0;
-			color: #787878;
+			
 		}
 		
 		input[type=email], select {
@@ -64,7 +66,7 @@
 			padding: 12px 20px;
 			margin: 8px 0;
 			display: inline-block;
-			border: 1px solid #ccc;
+			border: 1px solid #35342f;
 			border-radius: 4px;
 			box-sizing: border-box;
 		}
@@ -74,7 +76,7 @@
 			padding: 12px 20px;
 			margin: 8px 0;
 			display: inline-block;
-			border: 1px solid #ccc;
+			border: 1px solid #35342f;
 			border-radius: 4px;
 			box-sizing: border-box;
 			max-width:400px;
@@ -86,7 +88,7 @@
 		.submit-button {
 			background-color: white; 
 			color: black; 
-			border: 2px solid #008CBA;
+			border: 2px solid #35342f;
 			border-radius: 20px;
 			padding-top: 10px;
 			padding-bottom: 10px;
@@ -95,16 +97,16 @@
 		}
 		
 		.submit-button:hover {
-			background-color: #008CBA;
+			background-color: #35342f;
 			color: white;
 		}
 		
 		#contact-us h1 {
-			font-size: 39px;
+			font-size: 41px;
 			font-style: normal;
 			font-variant: normal;
 			font-weight: 200;
-			line-height: 26.4px;
+			line-height: 46.4px;
 		}
 		
 		#contact-us h2 {

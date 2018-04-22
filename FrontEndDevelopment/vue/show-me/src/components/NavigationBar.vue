@@ -1,41 +1,43 @@
 <template>
-  <div id="navigation" class="navbar navbar-default customNav">
+<div id="navigation" class="navbar navbar-default customNav">
     <div class="header">
-      <a href="/"><img width="60" height="60" hspace="20" src="./LogoMakr_9i2uuu.png" /></a>
-	  <!--  <md-icon class="md-size-2x">home</md-icon></a>  -->
-
-      <div id="login" >
-        <button type="button" v-if="!$store.state.userObjStore.authorized" class="btn btn-default btn-sm"  @click="login()">
-          <span class="glyphicon glyphicon-home"></span> Sign In <i class="fas fa-sign-in-alt"></i>
-        </button>
-        <md-menu md-align-trigger v-if="$store.state.userObjStore.authorized">
-          <img :src="$store.state.userObjStore.picture" class="md-icon-button" md-menu-trigger >
-          <md-tooltip md-direction="bottom">{{$store.state.userObjStore.given_name}}</md-tooltip>
-
-          <md-menu-content>
-            <md-menu-item>
-              <span><b>Hi, {{$store.state.userObjStore.given_name}}</b></span>
-            </md-menu-item>
-            <a href="#" @click="ProfileDialogue = true">
-            <md-menu-item>
-              <span><b>Profile</b></span>
-            </md-menu-item>
-            </a>
-
-            <a href="/" @click="logout()"><md-menu-item>
-              <span><b>Sign Out</b></span>
-            </md-menu-item></a>
-          </md-menu-content>
-        </md-menu>
-        <md-dialog-alert
-          :md-active.sync="ProfileDialogue"
-          :md-title="userName"
-          md-content="<h6>First Name:</h6> </br><h6>Last Name:</h6></br><h6>Email:</h6>" />
-
+        <a href="/">
+            <img width="50" height="40" hspace="20" src="../assets/images/logoHeader.png" />
+        </a>
+        <div id="login">
+            <button type="button" v-if="!userObjTemp.authorized" class="btn btn-default btn-sm" @click="login()">
+                <span class="glyphicon glyphicon-home"></span> Sign In
+                <i class="fas fa-sign-in-alt"></i>
+            </button>
+            <md-menu md-align-trigger v-if="userObjTemp.authorized">
+                <span>
+                    <b>Hi, {{userObjTemp.given_name}} {{userObjTemp.family_name}}</b>
+                </span>
+                <img :src="userObjTemp.picture" class="md-icon-button" md-menu-trigger>
+                <md-tooltip md-direction="bottom">{{userObjTemp.given_name}}</md-tooltip>
+                <md-menu-content>
+                    
+                    <a href="#" @click="ProfileDialogue = true">
+                        <md-menu-item>
+                            <span>
+                                <b>Profile</b>
+                            </span>
+                        </md-menu-item>
+                    </a>
+                    <a href="/" @click="logout()">
+                        <md-menu-item>
+                            <span>
+                                <b>Sign Out</b>
+                            </span>
+                        </md-menu-item>
+                    </a>
+                </md-menu-content>
+            </md-menu>
+            <md-dialog-alert :md-active.sync="ProfileDialogue" :md-title="userName" md-content="<h6>First Name:</h6> </br><h6>Last Name:</h6></br><h6>Email:</h6>"
+            />
         </div>
-      </div>
     </div>
-  </div>
+</div>
 </template>
 
 <script>
@@ -47,18 +49,15 @@ Vue.use(VueMaterial)
 
 
 const auth = new AuthenticationService()
-const {login, logout, isAuthenticated} = auth
+const {login, logout} = auth
 
 export default {
   data() {
     return {
       userName:'',
-      auth,
+      userObjTemp: this.$store.state.userObjStore,
       ProfileDialogue: false,
     }
-  },
-  mounted(){
-    checkLoggedIn();
   },
   methods: {
     login,
@@ -77,36 +76,22 @@ export default {
   padding-left: 0px;
   padding-right: 0px;
   padding-top: 0px;
+  color: #fff;
 }
 .header{
       border-radius: 0px;
       width: 100%;
-      height: 60px;
-      background-color: #0E6390;
-
-    }
+      height: 50px;
+      background-color: #35342f
+}
 
 #login{
-      padding-top: 10px;
+      padding-top: 5px;
       padding-right: 20px;
       padding-left: 10px;
       text-align: right;
       float: right;
     }
-
-#logoDiv{
-  width: 100%;
-  padding-bottom: 5px;
-}
-
-#logo{
-
-  width: 8%;
-  padding-top: 3px;
-  padding-right: 10px;
-  padding-left: 10px;
-  float: left;
-}
 
 .topnav {
   width: 50%;
@@ -116,22 +101,8 @@ export default {
   padding-top: 9px;
 }
 
-input[type=text] {
-    width: 150px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-}
-
-input[type=text]:focus {
-    width: 30%;
-}
-
-  .md-size-2x{
+.md-size-2x{
     margin-top: 0.3%;
     margin-left: 1%;
-  }
+}
 </style>
