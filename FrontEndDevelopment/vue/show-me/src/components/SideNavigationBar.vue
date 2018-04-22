@@ -2,7 +2,7 @@
 	<div>
     <div style="overflow-X: auto;">
       <div id="sideBar" class="sidenav ">
-        <a href="javascript:void(0)" class="closebtn" @click="closeNav"> Close &times;</a>        
+        <a href="javascript:void(0)" class="closebtn btn btn-light btn-sm" @click="closeNav"> Close &times;</a>        
         <ul class="list-group" v-if="categories && categories.length" >
           <li v-for="category in categories" class="list-group-item">
             <router-link :to="{ name:'allPapers',params:{areaid:category.id}}">{{ category.name }}</router-link>
