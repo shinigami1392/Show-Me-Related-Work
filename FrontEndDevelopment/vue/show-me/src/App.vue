@@ -62,7 +62,7 @@ import axios from "axios";
 function getUserData(vm,token) {
     if(localStorage.getItem('userData') !="" && localStorage.getItem('userData') != undefined && localStorage.getItem('userData') != null){
         let userObjTemp = JSON.parse(localStorage.getItem('userData'));
-    vm.createPayloadAndCommit(userObjTemp);
+        vm.createPayloadAndCommit(userObjTemp);
   }
   else{
     axios

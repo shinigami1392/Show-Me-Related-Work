@@ -38,7 +38,7 @@ export default {
         position: fixed;
         left: 0;
         bottom: 0;
-        border-radius: 3px;
+        border-radius: 0px;
         width: 100%;
         height: 50px;
         background-color: #35342f;
