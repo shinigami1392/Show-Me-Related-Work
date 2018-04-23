@@ -7,7 +7,9 @@
         <div style="float: right;color:white; padding-top:15px; padding-left :40px;" class="link-icons">
             <router-link :to="{ name:'aboutus'}" style="color:#fff">About Us</router-link>
             <router-link :to="{ name:'contactus'}" style="color:#fff">Contact Us</router-link>
-            <span style="font-family: Arial;">Made with ❤ at ASU</span>
+            <span style="font-family: Arial; color:#FFC627;">Made with</span>
+            <span style="font-family: Arial; color:#a32049; font-size: 16px;">❤</span>
+            <span style="font-family: Arial; color:#FFC627;">at ASU</span>
         </div>
     </div>
     </div>
