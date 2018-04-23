@@ -11,7 +11,9 @@ import PaginatedTable from './components/PaginatedTable.vue'
 import Grid from './components/Grid.vue'
 import SearchBox from './components/SearchBox.vue'
 import Datatable from './components/Datatable.vue'
-
+import Footer from './components/Footer.vue'
+import VueToastr from '@deveodk/vue-toastr'
+import '@deveodk/vue-toastr/dist/@deveodk/vue-toastr.css'
 import { routes } from './routes';
 import { store } from './store';
 
@@ -19,7 +21,11 @@ import './assets/css/fontawesome-all.css';
 
 
 Vue.use(VueRouter);
-
+Vue.use(VueToastr, {
+  defaultPosition: 'toast-bottom-center',
+  defaultType: 'info',
+  defaultTimeout: 50000
+})
 Vue.component('app-box', Box);
 Vue.component('app-listbox', ListBox);
 Vue.component('app-navbar', NavigationBar);
@@ -29,6 +35,7 @@ Vue.component('app-link-infobox', LinkInfoBox);
 Vue.component('app-paginated-table', PaginatedTable);
 Vue.component('grid', Grid);
 Vue.component('app-searchbox', SearchBox);
+Vue.component('app-footer', Footer);
 
 Vue.component('datatable', Datatable);
 
@@ -60,6 +67,7 @@ const maxVisitHistory = 5;
 
 router.beforeEach(function (to, from, next) {
   if (to.name === 'paperInfo') {
+    
     if(visitedPapers.length < maxVisitHistory){
       visitedPapers.push({'id':to.params.paperid,'name':''})
     }
@@ -89,7 +97,6 @@ router.beforeEach(function (to, from, next) {
       });
   }
   else if (to.name === 'linkInfo') {
-    
     var fetchLinkInfo = function () {
       var papers = to.params.linkid.split("_");
       axios
@@ -105,6 +112,16 @@ router.beforeEach(function (to, from, next) {
     }
 
     if (paperInfo == '') {
+      if(visitedPapers.length < maxVisitHistory){
+        visitedPapers.push({'id':to.params.paperid,'name':''})
+      }
+      else if(visitedPapers.length == maxVisitHistory){
+          for(let index = 1; index <= maxVisitHistory - 1; index++){
+              visitedPapers[index-1] =visitedPapers[index];
+          }
+          visitedPapers[maxVisitHistory - 1] = {'id':to.params.paperid, 'name':''};
+      }
+  
       axios
         .get(`http://54.201.123.246:8081/graphNode/graphNode/` + to.params.paperid)
         .then(response => {

@@ -7,8 +7,10 @@
                     <th v-for="column in columns">{{column}}</th>
                 <tr> 
                  <tr v-for="paper in papers">
-                    <td><router-link :to="{ name:'paperInfo', params:{ areaid:$route.params.areaid, paperid:paper.id }}">{{ paper.title }}</router-link></td>
+                    <td><router-link :to="{ name:'paperInfo', params:{ areaid:paper.domainId, paperid:paper.id }}">{{ paper.title }}</router-link></td>
                     <td>{{paper.authors}}</td>
+                    <td>{{paper.year}}</td>
+                    <td>{{paper.stream}}</td>
                  </tr>
             </thead>
             <tbody>
@@ -29,18 +31,10 @@
                 columns: []
             };
         },
-        created(){
-            var domains = this.$store.state.domains;
-            for(var i = 0 ; i < domains.length; i++){
-                if(domains[i].id !== undefined && domains[i].id == this.$route.params.areaid){
-                    this.researchPapersBoxHeader = "Research Papers ["+domains[i].name+"]";
-                    break;
-                }
-            }
-        },
         mounted(){
-           var vm = this;
-           $('#dtable').DataTable({
+            var vm = this;
+            vm.researchPapersBoxHeader = "Research Papers [Search Results for \""+vm.$route.query.q+"\"]"
+            $('#dtable').DataTable({
                 "processing" : true,
                 "serverSide" : true,
                 "deferRender": true,
@@ -48,23 +42,26 @@
                 "searching": false,
                 "ordering": false,
 				"ajax" : {
-					"url": "http://54.201.123.246:8081/domains/papers",
+					"url": "http://localhost:8081/search/papers",
                     "contentType":"application/json",
                     "type": "POST",
                     "data": function ( d ) {
-                        d.areaid = vm.$route.params.areaid
+                        d.text = vm.$route.query.q
                         return JSON.stringify(d);
                     },
                    "dataSrc": function ( json ) {
                         vm.papers = [];
                         if(json.data && json.data.length > 0){
-                            vm.columns = ["Title","Authors"];
+                            vm.columns = ["Title","Authors","Year","Stream"];
                         }
                         for ( var i=0, len=json.data.length ; i<len ; i++ ) {
                             var obj = {};
                             obj.id = json.data[i][0];
                             obj.title = json.data[i][1];
                             obj.authors = json.data[i][2];
+                            obj.year = json.data[i][3];
+                            obj.domainId = json.data[i][4];
+                            obj.stream = json.data[i][5];
                             vm.papers.push(obj);
                         }
                       return json.data;
@@ -81,6 +78,16 @@
                           "visible": false  
                         },
                         { "targets": [ 2 ],
+                          "visible": false  
+                        },
+                        {                        
+                          "targets": [ 3 ],
+                          "visible": false
+                        },
+                        { "targets": [ 4 ],
+                          "visible": false  
+                        },
+                        { "targets": [ 5 ],
                           "visible": false  
                         }
                 ] 

@@ -1,58 +1,58 @@
 <template>
-  <div id="app" style="min-height:100vh;">
+<div id="app" style="min-height:100vh;">
     <div id="foreground" style="min-height:100vh;">
-    <!-- Fixed navbar -->
-    <div>
-      <app-navbar :userData="userObj">
-      </app-navbar>
-    </div>
-
-    <!--  Main -->
-    <div id="main">
-      <div class="container-fluid" style="">
-        <router-view class="col-md-12" name="aboutus"></router-view>
-        <router-view class="col-md-12" name="contactus"></router-view>
-        <div class="row content">
-          <div class="col-md-12">
-            <router-view name="search-box"></router-view>
-          </div>
-          <div class="col-md-11" style="height:100%;">
-            <transition name="slide" mode="out-in">
-              <router-view name="animation-box"></router-view>
-            </transition>
-
-            <transition name="slide" mode="out-in">
-              <router-view name="table-box" :key="$route.fullPath"></router-view>
-            </transition>
-          </div>
-          <div class="col-md-1" style="height:100%;">
-            <router-view name="area-box"></router-view>
-          </div>
-
-        </div>
-          
-
-        <div class="row" style="margin-top:70px;">
-          <div class="col-md-6" style="">
-          <!--<app-box v-bind:boxHeaderProp = "userFeedbackBoxHeader">
-																		  </app-box> -->
-            <transition name="slide" mode="out-in">
-			  <router-view name="info-box" :key="$route.fullPath"></router-view>
-              <router-view name="feedback-box" :key="$route.fullPath" :userData="userObj"></router-view>
-            </transition>
-          </div>
-		  <div class="col-md-6" style="">
-            <transition name="slide" mode="out-in">
-			  <router-view name="link-info-box" :key="$route.fullPath"></router-view>
-            </transition>
-          </div>
+        <!-- Fixed navbar -->
+        <div>
+            <app-navbar>
+            </app-navbar>
         </div>
 
+        <!--  Main -->
+        <div id="main">
+            <div class="container-fluid">
+                <router-view class="col-md-12" name="aboutus"></router-view>
+                <router-view class="col-md-12" name="contactus"></router-view>
+                <div class="row content">
+                    <div class="col-sm-6 col-sm-offset-2">
+                        <router-view name="search-box"></router-view>
+                    </div>
+                    <div class="col-md-11" style="height:100%;">
+                        <transition name="slide" mode="out-in">
+                            <router-view name="animation-box"></router-view>
+                        </transition>
+                        <transition name="slide" mode="out-in">
+                            <router-view name="table-box" :key="$route.fullPath"></router-view>
+                        </transition>
+                    </div>
+                    <div class="col-md-1" style="height:100%;">
+                        <router-view name="area-box"></router-view>
+                    </div>
+                </div>
 
-      </div>
+
+                <div class="row" style="margin-top:70px; margin-bottom:100px">
+                    <div class="col-md-6">
+                        <transition name="slide" mode="out-in">
+                            <router-view name="info-box" :key="$route.fullPath"></router-view>
+                            <router-view name="feedback-box" :key="$route.fullPath"></router-view>
+                        </transition>
+                    </div>
+                    <div class="col-md-6">
+                        <transition name="slide" mode="out-in">
+                            <router-view name="link-info-box" :key="$route.fullPath"></router-view>
+                        </transition>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Footer-->
+        <footer>
+            <app-footer></app-footer>
+        </footer>
+
     </div>
-    </div>
-  </div>
+</div>
 </template>
 
 <script>
@@ -60,38 +60,66 @@
 import axios from "axios";
 
 function getUserData(vm,token) {
-  axios
-    .get(`https://pushkar-showme.auth0.com/userinfo`,{headers: { Authorization: "Bearer " + token }})
-    .then(response => {
-      vm.userData = JSON.stringify(response.data);
-      if (localStorage.getItem('userData')!="" || localStorage.getItem('userData')!= undefined){
-        //TODO: an API call to user API of ShowMe backend Server
-        //TODO: check if the user exist, if yes populate the user data else populate the user data and also store it at backend
-        localStorage.setItem('userData', vm.userData)
-        localStorage.setItem('authorized', true)
-        vm.userObj.userImage = JSON.parse(localStorage.getItem('userData')).picture
-        vm.userObj.userName = JSON.parse(localStorage.getItem('userData')).given_name
-        vm.userObj.authenticated = localStorage.getItem('authorized')
-      }
-      vm.$router.push('home');
-    })
-    .catch(err => {
-      vm.errors.push(err);
-    });
+    if(localStorage.getItem('userData') !="" && localStorage.getItem('userData') != undefined && localStorage.getItem('userData') != null){
+        let userObjTemp = JSON.parse(localStorage.getItem('userData'));
+    vm.createPayloadAndCommit(userObjTemp);
+  }
+  else{
+    axios
+      .get(`https://pushkar-showme.auth0.com/userinfo`,{headers: { Authorization: "Bearer " + token }})
+      .then(response => {
+          let userData = JSON.stringify(response.data);
+          //console.log(JSON.stringify(response.data));
+          localStorage.setItem('userData', userData);
+          let userObjTemp = JSON.parse(localStorage.getItem('userData'));
+          axios.post('http://localhost:8081/users/user', {
+              userId: response.data.sub,
+              first_name: response.data.given_name,
+              last_name: response.data.family_name,
+              email: response.data.email
+            }).then(function (response) {
+                //console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+          vm.createPayloadAndCommit(userObjTemp);
+          vm.$router.push('home');
+      })
+      .catch(err => {
+        console.log(err);
+        vm.errors.push(err);
+      });
+  }
+
+
 }
+
+  
+
 
 
 export default {
   name: "app",
   data() {
     return {
-      userObj:{
-        userImage : "",
-        userName : "",
-        authenticated: false,
-      },
+      errors : [],
       userFeedbackBoxHeader: "Comment and Vote"
     };
+  },
+  methods: {
+
+    createPayloadAndCommit : function(userObjTemp){
+        let payload = {};
+        payload.given_name= userObjTemp.given_name;
+        payload.family_name= userObjTemp.family_name;
+        payload.email= userObjTemp.email;
+        payload.userid= userObjTemp.sub;
+        payload.picture= userObjTemp.picture;
+        payload.authorized= true;
+        this.$store.commit('setAuthorization',  payload);
+    }
+
   },
   mounted() {
       var path = JSON.stringify(this.$route.fullPath);
@@ -99,6 +127,13 @@ export default {
         var token =   path.split("&")[0].split("=")[1];
         getUserData(this, token)
       }
+  },
+  created(){
+
+    if (localStorage.getItem('userData')!="" && localStorage.getItem('userData')!= undefined && localStorage.getItem('userData')!= null){
+          let userObjTemp = JSON.parse(localStorage.getItem("userData"));
+          this.createPayloadAndCommit(userObjTemp);
+    }
   }
 };
 </script>
@@ -106,12 +141,9 @@ export default {
 <style>
 body{
   width: 100%;
-  background-image: url(circuits2.jpg);
-}
+  background-color: #dddddd
+} 
 
-#foreground{
-  background-color:rgba(0, 0, 0, 0.5);
-}
 .slide-leave-active {
   transition: opacity 0.2s ease;
   opacity: 0;

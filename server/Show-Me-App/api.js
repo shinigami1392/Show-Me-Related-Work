@@ -24,7 +24,9 @@ exports.findUser = function (id, res) {
 		else if (user) {
 			res.send({
 				'found': true, 'user': {
-					'first_name': user.first_name, 'last_name': user.last_name,
+					'userId' : user.userId,
+					'first_name': user.first_name, 
+					'last_name': user.last_name,
 					'email': user.email
 				}
 			});
@@ -87,12 +89,17 @@ exports.findRelationFromId = function(domain, source, destination, userId, res){
 			for(var i=0; i < papers.length; i++){
 				if(papers[i].id == source){
 					sourcePaper = papers[i];
-					break;
+				}
+				if(papers[i].id == destination){
+					destinationPaper = papers[i];
 				}
 			}
 			if(sourcePaper == null) invalidInput('Source paper not found', res);
+			else if(destinationPaper == null) invalidInput('Destination paper not found', res);
 			else{
 				var relations = sourcePaper.references;
+				var sourceTitle = sourcePaper.title;
+				var destinationTitle = destinationPaper.title;
 				var foundFlag = false;
 				var keys = Object.keys(relations);
 				if(keys.indexOf(destination) != -1){
@@ -106,7 +113,17 @@ exports.findRelationFromId = function(domain, source, destination, userId, res){
 					var down = relations[destination].downvotes.indexOf(userId);
 					if(down != -1) downvoted = true;
 
-					var result = {'relation':relations[destination], 'upvotedByUser':upvoted, 'downvotedByUser':downvoted};
+					// var result = {'relation':relations[destination], 'upvotedByUser':upvoted, 'downvotedByUser':downvoted};
+					var result = {'relation':{
+										'upvotes':relations[destination].upvotes.length,
+										'downvotes': relations[destination].downvotes.length,
+										'comments': relations[destination].comments
+									},
+									'destinationTitle': destinationTitle,
+									'sourceTitle': sourceTitle,
+								 	'upvotedByUser':upvoted,
+								 	'downvotedByUser':downvoted
+								 };
 					res.send(result);
 				}
 				else{
@@ -433,6 +450,30 @@ var getGraphNode = function (paperId, res) {
 	});
 }
 
+exports.findOrCreateUser = function(id, first_name, last_name, email, res){
+	var query = UserModel.findOne({ userId: id });
+	query.exec(function (err, user) {
+		if (err) sendInternalServerError(res);
+		else if (user) {
+			res.send({
+				'found': true, 'user': {
+					'first_name': user.first_name, 'last_name': user.last_name,
+					'email': user.email, 'userId' : user.userId
+				}
+			});
+		}
+		else {
+			console.log('not found trying to create...');
+			var newUser = {'userId' : id, 'first_name' : first_name, 'last_name' : last_name, 'email' : email};
+			var data = new UserModel(newUser);
+			data.save();
+			res.send({ 'found': false , 'user': {
+				'first_name': first_name, 'last_name': last_name,
+				'email': email, 'userId' : id
+			}});
+		}
+	});
+}
 
 exports.findPapersForDomainPaginated = function(draw, start, length, areaid, res){
 	var totalPapersForDomainQuery =  DomainModel.aggregate([
@@ -452,8 +493,6 @@ exports.findPapersForDomainPaginated = function(draw, start, length, areaid, res
 		else{
 			totalRecords = result[0].paperCount;
 			query = DomainModel.findOne({id:areaid}, {papers:{$slice: [ start, length]}});
-			//query = DomainModel.findOne({id:areaid});
-			//query.populate('papers');
 			query.exec(function(err, domain){
 				if(err) sendInternalServerError(res);
 				else if(domain) {
@@ -475,24 +514,48 @@ exports.findPapersForDomainPaginated = function(draw, start, length, areaid, res
 		}	
 	});
 }
-exports.search = function (text, res) {
-	var query = PaperModel.find(
+exports.search = function (text, draw, start, length, res) {
+
+	var countQuery = PaperModel.find(
 		{ $text: { $search: text } },
 		{ score: { $meta: "textScore" } }
-	).sort({ score: { $meta: 'textScore' } });
+	).sort({ score: { $meta: 'textScore' } }).count();
+
+	var paginatedQuery = PaperModel.find(
+		{ $text: { $search: text } },
+		{ score: { $meta: "textScore" } }
+	).sort({ score: { $meta: 'textScore' } }).skip(start).limit(length);
 	
-	query.exec(function (err, papers) {
-		if (err) sendInternalServerError(res);
-		else if (papers) {
-			var paperList = [];
-			for (var i = 0; i < papers.length; i++) {
-				var paper = { 'id': papers[i].paperId, 'title': papers[i].title, 'authors': papers[i].author, 'date': papers[i].date, 'url': papers[i].url };
-				paperList.push(paper);
+	
+	countQuery.exec(function(err, count){
+		var totalRecords = count;
+		paginatedQuery.exec(function (err, papers) {
+			if (err) sendInternalServerError(res);
+			else if (papers) {
+				var dttable = [];
+				for (var i = 0; i < papers.length; i++) {
+					var object = [];
+					object.push(papers[i].id);
+					object.push(papers[i].title);
+					object.push(papers[i].authors.toString().slice(0,-1)); 
+					object.push(papers[i].publicationYear);
+					object.push(papers[i].domainId);
+					object.push(papers[i].stream);
+					dttable.push(object);
+				}
+				
+				res.send({"draw": draw, "recordsTotal": totalRecords, "recordsFiltered":totalRecords, "data":dttable});
+				
 			}
-			res.send({ 'total': paperList.length, 'papers': paperList });
-		}
-		else {
-			res.send({ 'total': 0, 'papers': [] });
-		}
-	});
+			else {
+				res.send({"draw": draw, "recordsTotal": 0, "recordsFiltered":0, "data":[]});
+			}
+		});	
+	});		
+
+	
+
+
 }
+
+

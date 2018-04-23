@@ -5,28 +5,37 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state:{
-        registrations:[],
-        users:[
-            {id:1, name:'Dummy1',registered:true},
-            {id:2, name:'Dummy2',registered:true},
-            {id:3, name:'Dummy3',registered:true},
-            {id:4, name:'Dummy4',registered:true},
-        ],
-        comments:[
-            {linkid:1, text:"good relation"},
-            {linkid:2, text:"bad relation"},
-            {linkid:3, text:"ok relation"}
-        ]
-    },
-    getters:{
-        userGetter: state => {
-            return state.users;
+        userObjStore:{
+            given_name:'',
+            family_name:'',
+            email:'',
+            userid:'',
+            picture:'',
+            authorized: false 
         },
-        commentGetter: state => {
-            return state.comments;
+        domains:{},
+        voting:{
+            weight:0,
+            upvotesCount:0,
+            downvotesCount:0   
         }
     },
     mutations:{
-
+        setAuthorization(state, payload){
+            state.userObjStore.given_name  = payload.given_name
+            state.userObjStore.family_name  = payload.family_name
+            state.userObjStore.email  = payload.email
+            state.userObjStore.userid  = payload.userid
+            state.userObjStore.picture  = payload.picture
+            state.userObjStore.authorized  = payload.authorized
+        },
+        setDomains(state, value){
+            state.domains = value;
+        },
+        setVoting(state, payload){
+            state.voting.weight = payload.weight
+            state.voting.upvotesCount = payload.upvotesCount
+            state.voting.downvotesCount = payload.downvotesCount
+        }
     }
 });

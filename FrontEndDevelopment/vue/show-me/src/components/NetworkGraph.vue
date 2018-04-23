@@ -111,8 +111,8 @@ function plotGraph(vm, paperInfo) {
         nodes.push(nodeObj);
         edges.push(edgeObj);
     }
-    console.log(JSON.stringify(nodes));
-    console.log(JSON.stringify(edges));
+    //console.log(JSON.stringify(nodes));
+    //console.log(JSON.stringify(edges));
     graph_elements.push.apply(graph_elements, nodes);
     graph_elements.push.apply(graph_elements, edges);
 
@@ -125,7 +125,7 @@ function plotGraph(vm, paperInfo) {
             {
                 selector: 'node',
                 style: {
-                    'background-color': '#ff0000',
+                    'background-color': '#bebebe',
                     'label': 'data(id)',
                     'width': '30px',
                     'height': '30px'
@@ -135,9 +135,9 @@ function plotGraph(vm, paperInfo) {
                 selector: 'edge',
                 style: {
                     'width': 1,
-                    'line-color': '#ff0000',
+                    'line-color': '#cccc99',
                     'curve-style': 'bezier',
-                    'target-arrow-color': '#ff0000',
+                    'target-arrow-color': '#cccc99',
                     'target-arrow-shape': 'triangle'
                 }
             }
@@ -151,7 +151,7 @@ function plotGraph(vm, paperInfo) {
         }
     });
 
-    cy.getElementById(paperInfo.id).style('background-color', 'yellow');
+    cy.getElementById(paperInfo.id).style('background-color', '#000000');
     return cy;
 }
 
@@ -177,13 +177,18 @@ export default {
         this.cardBlockContentStyle = "height:100%;"
     },
     mounted() {
-
         var paperInfo = this.$route.matched[0].props.paperInfo;
         this.visitedPapers = this.$route.matched[0].props.visitedPapers;
         var router = this.$router;
         var route = this.$route;
 
         var cy = plotGraph(this, paperInfo);
+
+        if(route.params.linkid !== undefined){
+            cy.getElementById('e'+route.params.linkid).style('line-color', '#400000');
+            cy.getElementById('e'+route.params.linkid).style('target-arrow-color', '#400000');
+        }
+
         cy.on('tap', 'node', function(evt) {
             var selectedNodeId = evt.target.id();
             router.replace('/areas/' + route.params.areaid + '/paper/' + selectedNodeId);

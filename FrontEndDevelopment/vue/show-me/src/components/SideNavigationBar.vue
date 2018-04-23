@@ -2,7 +2,7 @@
 	<div>
     <div style="overflow-X: auto;">
       <div id="sideBar" class="sidenav ">
-        <a href="javascript:void(0)" class="closebtn" @click="closeNav"> Close &times;</a>        
+        <a href="javascript:void(0)" class="closebtn btn btn-light btn-sm" @click="closeNav"> Close &times;</a>        
         <ul class="list-group" v-if="categories && categories.length" >
           <li v-for="category in categories" class="list-group-item">
             <router-link :to="{ name:'allPapers',params:{areaid:category.id}}">{{ category.name }}</router-link>
@@ -11,8 +11,8 @@
         </ul>        
       </div>
     </div>
-    <div style="overflow-X: auto;">
-		  <app-box v-bind:boxHeaderProp="researchAreasBoxHeader"  style="height:100; width:30;" v-bind:cardStyle ="cardStyle"  v-on:click.native="openNav">
+    <div id="rArea" style="overflow-X: auto;">
+		  <app-box  v-bind:boxHeaderProp="researchAreasBoxHeader"  style="height:100; width:30;" v-bind:cardStyle ="cardStyle"  v-on:click.native="openNav">
 		  </app-box>
     </div>
     	
@@ -20,12 +20,25 @@
 </template>
 
 <script>
+var navBarOpen = false;
+$(window).click(function() {
+  if (navBarOpen) {
+      let sideBarElement = "sideBar";
+      let close = document.getElementById(sideBarElement); 
+      close.style.width = "0px";
+      navBarOpen = false;
+  }   
+});
+
+
 import axios from "axios";
 function getPaperCatagories(vm) {
   axios
     .get(`http://54.201.123.246:8081/domains/all`)
     .then(response => {
       vm.categories = response.data.domains;
+      console.log(JSON.stringify(vm.categories));
+      vm.$store.commit('setDomains',  vm.categories);
     })
     .catch(err => {
       vm.errors.push(err);
@@ -46,11 +59,14 @@ export default {
         let sideBarElement = "sideBar";
         let close = document.getElementById(sideBarElement); 
         close.style.width = "0px";
+        navBarOpen = false;
     },
     openNav: function(event){
       let sideBarElement = "sideBar";
       open = document.getElementById(sideBarElement);
       open.style.width = "250px";
+      navBarOpen = true;
+      event.stopPropagation();
     }   
 
   },
@@ -63,15 +79,15 @@ export default {
 };
 </script>
 <style>
-  .sidenav { 
-      height: 100%;
-	  width: 0;
-	  position: fixed; 
+  .sidenav {
+	    height: 100%; 
+      width: 0;
+	    position: fixed; 
       z-index: 1;
       top: 0;      
       right: 0;
-	  display: flex;
-      background-color: #283e4a;      
+	    display: flex;
+      background-color: #35342f;      
       overflow-x: hidden;
       transition: 0.5s;
       padding-top: 60px;
