@@ -102,11 +102,13 @@ router.beforeEach(function (to, from, next) {
       axios
         .get(`http://54.201.123.246:8081/relations/get?domain=` + to.params.areaid + `&source=`+papers[0]+`&destination=`+papers[1]+`&user=user0`)
         .then(response => {
+         
           to.matched[0].props.linkInfo = response.data;
           to.matched[0].props.visitedPapers = visitedPapers;
           next();
         })
         .catch(err => {
+          console.log(err);
           next();
         });
     }

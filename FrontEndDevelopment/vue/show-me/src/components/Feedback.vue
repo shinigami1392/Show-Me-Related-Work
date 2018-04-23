@@ -55,10 +55,10 @@ export default {
     },
     mounted() {
         var linkInfo = this.$route.matched[0].props.linkInfo;
-        this.upvotesCount = linkInfo.relation.upvotes.length;
-        this.downvotesCount = linkInfo.relation.downvotes.length;        
+        this.upvotesCount = linkInfo.relation.upvotes;
+        this.downvotesCount = linkInfo.relation.downvotes;        
         this.comments = linkInfo.relation.comments;
-        console.log(JSON.stringify(this.comments));
+        //console.log(JSON.stringify(this.comments));
         if (linkInfo.upvotes == undefined){
             this.weight = 0;
         } 
@@ -81,7 +81,7 @@ export default {
 		    }
 		    return val;
         },
-        addRemoveUpvote : function(){        
+        addRemoveUpvote : function(){     
             this.weight = this.weight + 1;
             if(this.upvoteButtonClass === 'btn btn-primary btn-sm'){
                 this.upvoteButtonClass = 'btn btn-default'
@@ -89,6 +89,7 @@ export default {
                     .put(`http://54.201.123.246:8081/relations/upvote/add?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
                          `&user=` + this.userObjTemp.userid)
                     .then(response => {
+                            console.log(response.data);
                             if (response.status == 200) {
                                 this.upvotesCount = this.upvotesCount + 1;
                             }  
@@ -103,7 +104,7 @@ export default {
                 this.upvoteButtonClass = 'btn btn-primary btn-sm'
                 axios
                     .put(`http://54.201.123.246:8081/relations/upvote/remove?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
-                        `&user=` + this.givenname)
+                        `&user=` + this.userObjTemp.userid)
                     .then(response => {
                             if (response.status == 200) {                               
                                this.upvotesCount = this.upvotesCount - 1;

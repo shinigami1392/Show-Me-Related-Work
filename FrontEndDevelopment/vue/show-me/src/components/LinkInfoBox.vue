@@ -5,15 +5,15 @@
         <tbody>
           <tr>
             <td>Source Paper</td>
-            <td>{{linkInfo.relation.source_name}}</td>
+            <td>{{linkInfo.sourceTitle}}</td>
           </tr>
           <tr>
             <td>Destination Paper</td>
-            <td>{{linkInfo.relation.destination_name}}</td>
+            <td>{{linkInfo.destinationTitle}}</td>
           </tr>
           <tr>
             <td>Weight</td>
-            <td>{{linkInfo.relation.upvotes.length - linkInfo.relation.downvotes.length}}</td>
+            <td>{{linkInfo.relation.upvotes - linkInfo.relation.downvotes}}</td>
           </tr>
         </tbody>
       </table>
