@@ -1,9 +1,8 @@
 <template>
 <div id="navigation" class="navbar navbar-default customNav">
     <div class="header">
-        <a href="/">
-            <img width="50" height="40" hspace="20" src="../assets/images/logoHeader.png" />
-        </a>
+        <router-link :to="{ name:'home'}"><img width="50" height="40" hspace="20" src="../assets/images/logoHeader.png" /></router-link>
+        
         <div id="login">
             <button type="button" v-if="!userObjTemp.authorized" class="btn btn-default btn-sm" @click="login()">
                 <span class="glyphicon glyphicon-home"></span> Sign In
