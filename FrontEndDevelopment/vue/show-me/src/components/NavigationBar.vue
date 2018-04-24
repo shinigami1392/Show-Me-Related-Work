@@ -33,7 +33,7 @@
                     </a>
                 </md-menu-content>
             </md-menu>
-            <md-dialog-alert :md-active.sync="ProfileDialogue" :md-title="userName" md-content="userName"/>
+            <md-dialog-alert :md-active.sync="ProfileDialogue" :md-title="userName" md-content="<h1></h1>"/>
         </div>
     </div>
 </div>

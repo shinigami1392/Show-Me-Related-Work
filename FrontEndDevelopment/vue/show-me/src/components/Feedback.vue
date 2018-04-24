@@ -1,15 +1,17 @@
 <template>
-    <app-box v-bind:boxHeaderProp="feedbackBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
+    <app-box class="md-elevation-5" v-bind:boxHeaderProp="feedbackBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
             <ul class="list-group" style="max-height:300px; overflow-y:auto;">
                 <li style="padding-left:5px; " v-for="com in comments">
                    <span style="color:green; font-weight:bold;"> {{com.username}}</span>&ensp;<br/><span style="color:#696969;font-weight:bold;">{{ getTimeStamp(com.timestamp) }}</span>&ensp;&ensp; {{com.comment}} <hr />
                 </li>
             </ul>
-        <div  style="width:100%;">
-            <div style="width:90%; margin-right:25px;float:left;padding:10px">
-                <textarea v-model="user_comment" class="form-control" type="text" rows="1" style="height:90%; " placeholder="Your comments" />
-                <button type="button" v-on:click="userObjTemp.authorized ?(user_comment!=''?addComment():showTextErrMsg()):showErrMsg()" style="margin-top:10px;" class="btn btn-success btn-md">Comment</button> &nbsp;
-            </div>
+        <div style="width:80%; padding:10px">
+            <md-field>
+                <label>Your comments</label>
+                <md-textarea v-model="user_comment"></md-textarea>
+                <md-button style="color:white;background-color:green" v-on:click="userObjTemp.authorized ?(user_comment!=''?addComment():showTextErrMsg()):showErrMsg()">Comment</md-button> &nbsp;
+            </md-field>
+
             <div style="width:25%; margin-top:5px; float:left;">
                 <i class="fa fa-thumbs-up upvoteButtonClass"  v-on:click="userObjTemp.authorized ? addRemoveUpvote:showErrMsg()"></i>                
                 <span><b>{{this.upvotesCount}}</b></span>                
@@ -58,7 +60,7 @@ export default {
         this.upvotesCount = linkInfo.relation.upvotes.length;
         this.downvotesCount = linkInfo.relation.downvotes.length;        
         this.comments = linkInfo.relation.comments;
-        console.log(JSON.stringify(this.comments));
+        //console.log(JSON.stringify(this.comments));
         if (linkInfo.upvotes == undefined){
             this.weight = 0;
         } 

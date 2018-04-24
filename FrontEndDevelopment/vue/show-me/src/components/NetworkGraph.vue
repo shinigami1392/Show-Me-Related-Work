@@ -1,5 +1,5 @@
 <template>
-    <app-box v-bind:boxHeaderProp="graphBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
+    <app-box class="md-elevation-5" v-bind:boxHeaderProp="graphBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
         <div class="container" style="height:100%;">
             <div class="row" style="height:100%;">
                 <div class="col-md-8" style="height:100%;">
