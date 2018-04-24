@@ -227,11 +227,8 @@
                         </div>
                     </div>
                 </div>
-
+    </div> 
     </div>
-      
-    </div>
-
   </div>
 
 </div>
@@ -329,10 +326,10 @@ h1 {
 	padding-bottom:10px;
 }
 .linkedin-github a {
-	color:black !important;
+	color:black;
 	text-decoration: none;
 }
 .linkedin-github a:hover {
-    color: #8B2252 !important;
+    color: #8B2252;
 }
 </style>

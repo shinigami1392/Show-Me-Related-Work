@@ -1,7 +1,7 @@
 <template>
 
   <div class="card" v-bind:style="cardStyle">
-    <div class="card-header card-outline-info h6 customBox testBox">
+    <div class="md-subheading card-header card-outline-info h6 customBox testBox">
         {{boxHeaderProp}}
     </div>
 

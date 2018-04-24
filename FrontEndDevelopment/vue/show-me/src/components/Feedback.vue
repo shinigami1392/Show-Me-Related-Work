@@ -9,7 +9,7 @@
             <md-field>
                 <label>Your comments</label>
                 <md-textarea v-model="user_comment"></md-textarea>
-                <md-button style="color:white;background-color:green" v-on:click="userObjTemp.authorized ?(user_comment!=''?addComment():showTextErrMsg()):showErrMsg()">Comment</md-button> &nbsp;
+                <md-button style="color:#fff;background-color:#3dbd5d" v-on:click="userObjTemp.authorized ?(user_comment!=''?addComment():showTextErrMsg()):showErrMsg()">Comment</md-button> &nbsp;
             </md-field>
 
             <div style="width:25%; margin-top:5px; float:left;">
