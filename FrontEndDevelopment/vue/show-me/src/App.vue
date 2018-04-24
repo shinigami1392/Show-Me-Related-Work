@@ -14,7 +14,7 @@
 
             <div class="md-toolbar-section-end">
                 <md-button v-if="!userObjTemp.authorized" class="md-button" style="background-color:#35342f" @click="login()">
-                    <span style="color:white">Sign In</span>&ensp;<md-icon style="color:white">touch_app</md-icon>
+                    <span style="background-color:#35342f;color:#fff">Sign In</span>&ensp;<md-icon style="background-color:#35342f;color:#fff">touch_app</md-icon>
                 </md-button >
                 <md-menu md-align-trigger v-if="userObjTemp.authorized">
                     <span class="md-subheading">
