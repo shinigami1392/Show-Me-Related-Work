@@ -6,12 +6,10 @@
                 </li>
             </ul>
         <div style="width:80%; padding:10px">
-            <md-field>
-                <label>Your comments</label>
-                <md-textarea v-model="user_comment"></md-textarea>
+            <div style="width:90%; margin-right:25px;float:left;padding:10px">
+                <textarea v-model="user_comment" class="form-control" type="text" rows="1" style="height:90%; " placeholder="Your comments" />
                 <md-button style="color:#fff;background-color:#3dbd5d" v-on:click="userObjTemp.authorized ?(user_comment!=''?addComment():showTextErrMsg()):showErrMsg()">Comment</md-button> &nbsp;
-            </md-field>
-
+            </div>
             <div style="width:25%; margin-top:5px; float:left;">
                 <i class="fa fa-thumbs-up upvoteButtonClass"  v-on:click="userObjTemp.authorized ? addRemoveUpvote:showErrMsg()"></i>                
                 <span><b>{{this.upvotesCount}}</b></span>                
