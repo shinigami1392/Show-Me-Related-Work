@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for Show-Me-App\spec\removeUpvotesSpec.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">Show-Me-App/spec/</a> removeUpvotesSpec.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">92.31% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>60/65</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">90.91% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>20/22</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">92.31% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>60/65</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line high'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var request = require("request");
+var base_url = "http://54.201.123.246:8081/relations/upvote/remove?"
+&nbsp;
+describe("Remove upvote for a relation", function(){
+    describe("PUT /", function() {	  
+        var query_string = "domain=0&amp;source=8248098&amp;destination=6465053&amp;user=Abc";
+        var url = base_url + query_string;
+		it("Check status code for correct request", function(done) {            
+            request({
+                method: 'PUT',
+                uri: url,
+&nbsp;
+             }, function(request, response,body){                
+                expect(response.statusCode).toBe(200);
+                done();
+             });
+&nbsp;
+        });
+        
+        // Check if API if returning correct output
+        it("Check updated flag for correct request", function(done) {            
+            request({
+                method: 'PUT',
+                uri: url,
+             }, function(request, response,body){
+                var parsed_body = JSON.parse(body);                
+                expect(parsed_body['updated']).toBe(true);
+                done();
+             });
+        });
+        
+        // Check if API returns 404 for POST
+        it("Check status code for POST method", function(done) {            
+            request({
+                method: 'POST',
+                uri: url,
+                }, function(request, response,body){
+                    expect(response.statusCode).toBe(404);
+                    done();
+                });
+        });
+        
+        // Check if API returns 404 for GET
+        it("Check status code for GET method", function(done) {            
+            request({
+                method: 'GET',
+                uri: url,
+                }, function(request, response,body){
+                    expect(response.statusCode).toBe(404);
+                    done();
+                });
+        });
+&nbsp;
+        //  Check for non existent Paper IDs
+        var query_string1 = "domain=0&amp;source=000000000&amp;destination=6465053&amp;user=Abc";
+        var bad_url1 = base_url + query_string1;
+        it("Check status code and text for non existing paper", function(done) {            
+            request({
+                method: 'PUT',
+                uri: bad_url1,
+                }, function(request, response,body){                   
+                    expect(body).toBe('Source paper not found')                    
+                    expect(response.statusCode).toBe(400);
+                    done();
+                });
+        });
+&nbsp;
+&nbsp;
+        // Check for incorrect query parameter domain
+        var query_string2 = "do=0&amp;source=8248098&amp;destination=6465053&amp;users=Abc";
+        var bad_url2 = base_url + query_string2;
+        it("Check status code and message for incorrect domain", function(done) {            
+            request({
+                method: 'PUT',
+                uri: bad_url2,
+                }, function(request, response,body){                   
+                    expect(body).toBe('Please enter domain')                    
+                    expect(response.statusCode).toBe(400);
+                    done();
+                });
+        });
+&nbsp;
+&nbsp;
+        //Check for incorrect query parameter source
+        var query_string3 = "domain=0&amp;sourc=8248098&amp;destination=6465053&amp;users=Abc";
+        var bad_url3 = base_url + query_string3;
+        it("Check status code for incorrect method", function(done) {            
+            request({
+                method: 'PUT',
+                uri: bad_url3,
+                }, function(request, response,body){                   
+                    expect(body).toBe('Please enter source')                    
+                    expect(response.statusCode).toBe(400);
+                    done();
+                });
+        });
+&nbsp;
+&nbsp;
+        // Check for incorrect query parameter destination
+        var query_string4 = "domain=0&amp;source=8248098&amp;destin=6465053&amp;user=Abc";
+        var bad_url4 = base_url + query_string4;
+        it("Check status code and text for incorrect destination", function(done) {            
+            request({
+                method: 'PUT',
+                uri: bad_url4,
+                }, function(request, response,body){                   
+                    expect(body).toBe('Please enter destination') ;                   
+                    expect(response.statusCode).toBe(400);
+                    done();
+                });
+        });
+&nbsp;
+        // Check for incorrect query parameter user
+        var query_string5 = "domain=0&amp;source=8248098&amp;destination=6465053&amp;usersss=Abc";
+        var bad_url5 = base_url + query_string5;
+        it("Check status code and text for incorrect user", function(done) {            
+            request({
+                method: 'PUT',
+                uri: bad_url5,
+                }, function(request, response,body){                   
+                    expect(body).toBe('Please enter user') ;                   
+                    expect(response.statusCode).toBe(400);
+<span class="cstat-no" title="statement not covered" >                    done();</span>
+                });
+        });
+&nbsp;
+        // Check for case where a relation does not exist between papers
+        var query_string6 = "domain=0&amp;source=8248098&amp;destination=8336572&amp;user=Abc";
+        var bad_url6 = base_url + query_string6;
+        it("When no relation exists between papers", <span class="fstat-no" title="function not covered" >function(done) {            </span>
+<span class="cstat-no" title="statement not covered" >            request({</span>
+                method: 'PUT',
+                uri: bad_url6,
+                }, <span class="fstat-no" title="function not covered" >function(request, response,body){                   </span>
+<span class="cstat-no" title="statement not covered" >                    expect(body).toBe('There is no relation exists between papers!') ;                   </span>
+<span class="cstat-no" title="statement not covered" >                    expect(response.statusCode).toBe(400);</span>
+<span class="cstat-no" title="statement not covered" >                    done();</span>
+                });
+        });
+	});
+});</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Apr 23 2018 23:41:14 GMT-0700 (US Mountain Standard Time)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

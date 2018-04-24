@@ -27,13 +27,13 @@ describe(" SHowMe Relations", function() {
 	  var rel_url = base_url + "domain=0&source=399838&destination=404723&user=user0";
       request.get(rel_url, function(error, response, body) {
 		var body_res = JSON.parse(body);
-		expect(body_res.relation.id).toBe('404723');
+		//expect(body_res.relation.id).toBe('404723');
 		//expect(body_res.relation.source_id).toBe();
-		//expect(body_res.relation.source_name).toBe();
+		expect(body_res.sourceTitle).toBe("Building simulation models without data");
 		//expect(body_res.relation.destination_id).toBe();
-		//expect(body_res.relation.destination_name).toBe();
-		//expect(body_res.relation.upvotes).toBe(None);
-		//expect(body_res.relation.downvotes).toBe();
+		expect(body_res.destinationTitle).toBe("Applying SEMI E10 guidelines to manufacturing");
+		expect(body_res.relation.upvotes).toBe(1);
+		expect(body_res.relation.downvotes).toBe(1);
 		//expect(body_res.relation.comments.text).toBe("");
 		//expect(body_res.relation.comments.timestamp).toBe("");
 		//expect(body_res.relation.comments).toBe();
