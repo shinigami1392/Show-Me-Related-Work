@@ -1,9 +1,9 @@
 <template>
 <div style="font-family: Arial;">
 
-  <div class="row">
+  <div class="AboutUsRow row">
 
-    <h1>About ShowMe</h1>
+    <h1 class="AboutUsSectionHeader">About ShowMe</h1>
 
     <p class="AboutProj">
       Show Me is proposed to be a community driven application with the goal to enable researchers find related work (citations
@@ -28,13 +28,13 @@
     <br>
 
 
-    <h1>Meet The Team</h1>
+    <h1 class="AboutUsSectionHeader">Meet The Team</h1>
 
     <div>
 
             <div class="container">
             
-                <div class="row">
+                <div class="AboutUsRow row">
 
                     <div class="col-md-4">
                         <div class="card">
@@ -42,7 +42,7 @@
                                 alt="Abhishek Dutta" style="width:100%">
                             <div class="container">
                                 <h2>Abhishek Dutta</h2>
-                                <p class="title">DevOps & Infra</p>
+                                <p class="devTitle">DevOps & Infra</p>
                                 <p>
                                     Areas of interest - Cloud, AWS, Software security, and DevOps.
                                 </p>
@@ -69,7 +69,7 @@
                                 alt="Apoorv Khairnar" style="width:100%">
                             <div class="container">
                                 <h2>Apoorv Khairnar</h2>
-                                <p class="title">Backend Developer- Crawler</p>
+                                <p class="devTitle">Backend Developer- Crawler</p>
                                 <p>
                                     Areas of interest - AWS, Software security, and DevOps.
                                 </p>
@@ -96,7 +96,7 @@
                                 alt="Chiraag Subramanian" style="width:100%">
                             <div class="container">
                                 <h2>Chiraag Subramanian</h2>
-                                <p class="title">Fullstack Developer</p>
+                                <p class="devTitle">Fullstack Developer</p>
                                 <p>
                                     Areas of interest - Big Data Engineering and Machine Learning.
                                 </p>
@@ -118,14 +118,14 @@
 
                 </div>
 
-                <div class="row">
+                <div class="AboutUsRow row">
                     <div class="col-md-4">
                         <div class="card">
                             <img src="https://media.licdn.com/dms/image/C5603AQHVnSzozphxAg/profile-displayphoto-shrink_800_800/0?e=1527487200&v=alpha&t=AGFtUPHrpUkg-PGYH3NO3o03YwRyRC9bS9DgGjC8qM4"
                                 alt="Pushkar Ladhe" style="width:100%">
                             <div class="container">
                                 <h2>Pushkar Ladhe</h2>
-                                <p class="title">Fullstack Developer</p>
+                                <p class="devTitle">Fullstack Developer</p>
                                 <p>
                                     Areas of interest - Big Data, Distributed Systems, Cloud First, Microservices and Web Development.
                                 </p>
@@ -152,7 +152,7 @@
                                 alt="Pranjal Karankar" style="width:100%">
                             <div class="container">
                                 <h2>Pranjal Karankar</h2>
-                                <p class="title">Frontend Developer</p>
+                                <p class="devTitle">Frontend Developer</p>
                                 <p>
                                     Areas of interest - Full stack web development and distributed systems.
                                 </p>
@@ -179,7 +179,7 @@
                                 alt="Sachin Magar" style="width:100%">
                             <div class="container">
                                 <h2>Sachin Magar</h2>
-                                <p class="title">Frontend Developer & Unit Test</p>
+                                <p class="devTitle">Frontend Developer & Unit Test</p>
                                 <p>
                                     Areas of interest - Distributed computing and Cloud computing.
                                 </p>
@@ -200,14 +200,14 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="AboutUsRow row">
                     <div class="col-md-4">
                         <div class="card">
                             <img src="https://media.licdn.com/dms/image/C4E03AQEz-hwy5edSBA/profile-displayphoto-shrink_200_200/0?e=1527487200&v=alpha&t=lp2eN47TtG9a6IRr_lzbkdc_-WKrfdy3qdJ4Q-5yzdY"
                                 alt="Rajat Sinha" style="width:100%">
                             <div class="container">
                                 <h2>Rajat Sinha</h2>
-                                <p class="title">Frontend Developer</p>
+                                <p class="devTitle">Frontend Developer</p>
                                 <p>
                                     Areas of interest - Computer vision, Image processing, Machine learning.
                                 </p>
@@ -243,15 +243,8 @@ export default {};
 
 
 <style>
-h2 {
-	font-size: 23px;
-	font-style: normal;
-	font-variant: normal;
-	font-weight: 200;
-  line-height: 26.4px;
-  color: #35342f
-}
-h1 {
+
+.AboutUsSectionHeader h1 {
 	font-size: 32px;
 	font-style: normal;
 	font-variant: normal;
@@ -278,35 +271,28 @@ h1 {
 .container {
   padding: 0 16px;
 }
-.container::after, .row::after {
+.container::after, .AboutUsRow::after {
   content: "";
   clear: both;
   display: table;
 }
 
 .container h2 {
+	font-size: 23px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 200;
+    line-height: 26.4px;
+    color: #35342f;
     padding-top: 5px;
     color: black;
 }
 
-.title {
+.devTitle {
   color: grey;
 }
-.button {
-  border: none;
-  outline: 0;
-  display: inline-block;
-  padding: 8px;
-  color: white;
-  background-color: #000;
-  text-align: center;
-  cursor: pointer;
-  width: 100%;
-}
-.button:hover {
-  background-color: #555;
-}
-.row {
+
+.AboutUsRow {
     margin: auto;
     width: 80%;
     padding: 10px;
@@ -326,10 +312,10 @@ h1 {
 	padding-bottom:10px;
 }
 .linkedin-github a {
-	color:black;
+	color:black !important;
 	text-decoration: none;
 }
 .linkedin-github a:hover {
-    color: #8B2252;
+    color: #8B2252 !important;
 }
 </style>
