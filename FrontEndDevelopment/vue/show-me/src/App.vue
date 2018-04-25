@@ -69,10 +69,10 @@ function getUserData(vm,token) {
       .get(`https://pushkar-showme.auth0.com/userinfo`,{headers: { Authorization: "Bearer " + token }})
       .then(response => {
           let userData = JSON.stringify(response.data);
-          //console.log(JSON.stringify(response.data));
+          console.log(JSON.stringify(response.data));
           localStorage.setItem('userData', userData);
           let userObjTemp = JSON.parse(localStorage.getItem('userData'));
-          axios.post('http://localhost:8081/users/user', {
+          axios.post('http://54.201.123.246:8081/users/user', {
               userId: response.data.sub,
               first_name: response.data.given_name,
               last_name: response.data.family_name,
