@@ -18,7 +18,8 @@ import { routes } from './routes';
 import { store } from './store';
 
 import './assets/css/fontawesome-all.css';
-
+import VueMaterial from 'vue-material';
+Vue.use(VueMaterial)
 
 Vue.use(VueRouter);
 Vue.use(VueToastr, {

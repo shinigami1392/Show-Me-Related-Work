@@ -2,7 +2,6 @@
     <app-box v-bind:boxHeaderProp="researchPapersBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
         <table id ='dtable' style="width:100%;">
             <thead>
-                  
                 <tr>
                     <th v-for="column in columns">{{column}}</th>
                 <tr> 
@@ -33,7 +32,7 @@
             var domains = this.$store.state.domains;
             for(var i = 0 ; i < domains.length; i++){
                 if(domains[i].id !== undefined && domains[i].id == this.$route.params.areaid){
-                    this.researchPapersBoxHeader = "Research Papers ["+domains[i].name+"]";
+                    this.researchPapersBoxHeader = "Research Papers in "+domains[i].name;
                     break;
                 }
             }

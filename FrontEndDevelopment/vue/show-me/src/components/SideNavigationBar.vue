@@ -2,7 +2,7 @@
 	<div>
     <div style="overflow-X: auto;">
       <div id="sideBar" class="sidenav ">
-        <a href="javascript:void(0)" class="closebtn btn btn-light btn-sm" @click="closeNav"> Close &times;</a>        
+        <a href="javascript:void(0)" class="closebtn md-dense md-raised md-primary" @click="closeNav"><md-icon>add</md-icon></a>   
         <ul class="list-group" v-if="categories && categories.length" >
           <li v-for="category in categories" class="list-group-item">
             <router-link :to="{ name:'allPapers',params:{areaid:category.id}}">{{ category.name }}</router-link>
@@ -111,7 +111,8 @@ export default {
       top: 0;
       right: 25px;
       font-size: 20px;
-	    color: grey;
+	    color: white;
+      background-color:white;
       margin-left: 30px;
   }
 
