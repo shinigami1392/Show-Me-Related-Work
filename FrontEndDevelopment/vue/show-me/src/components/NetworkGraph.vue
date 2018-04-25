@@ -1,6 +1,6 @@
 <template>
     <app-box v-bind:boxHeaderProp="graphBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
-        <div class="container" style="height:100%;">
+        <div class="container-fluid" style="height:100%;">
             <div class="row" style="height:100%;">
                 <div class="col-md-8" style="height:100%;">
                     <div id="visited_papers" style="height:10%;">
@@ -10,13 +10,13 @@
                             <small v-if="index != visitedPapers.length - 1"> > </small>
                         </span>
                     </div>
-                    <div id="details">
+                    <div id="details" style="width:100%;">
                     </div>
                 </div>
 
                 <div class="col-md-4" style="padding: 0px 0px; height:100%;">
                     <div style="height:100%; width:inherit;">
-                        <div style="height:7%;">
+                        <div>
                         <input type="checkbox"  id="l1" value="incoming"  
                         v-model="linkType" v-on:change="filterLinks()">Incoming Links</input>
                         <input type="checkbox"  id="l2" value="outgoing"  
@@ -148,7 +148,8 @@ function plotGraph(vm, paperInfo) {
   
             animate: true,
             animationDuration: 500
-        }
+        },
+        zoom: 1
     });
 
     cy.getElementById(paperInfo.id).style('background-color', '#000000');
@@ -224,13 +225,33 @@ export default {
         cy.maxZoom(2.0);
 
         this.graph = cy;
+        var vm = this;
         $(document).ready(function() {
-           this.datatable = $('#legend').DataTable({
+           vm.datatable = $('#legend').DataTable({
                  "paging":   false,
                  "info": false
             });
             $('#legend_wrapper').css('height','92%');
             $('#legend_filter').css('height','10%');
+             $(window).resize(function() {
+                 cy.fit(cy.elements);
+             });
+
+              $('#legend tbody').on('click', 'tr', function () {
+                    var data = vm.datatable.row( this ).data();
+                    var id = data[0];
+                    var color = vm.graph.$('#'+id).css('background-color');
+                    var jAni = vm.graph.$('#'+id).animation({
+                        style: {
+                                'background-color': 'red'
+                        },
+                        duration: 1000
+                    });
+                    jAni.play().promise().then(function(){ // on completion
+                                jAni.stop(); // stop animation
+                                vm.graph.$('#'+id).css('background-color',color); 
+                    });
+            } );
         });
     },
     methods: {
@@ -264,12 +285,12 @@ export default {
                             else{
                                 row.push(element.weight);
                             }
-                            dtRecords.push(row);
+                            dtRecords.push(row); 
                             return true;
                         }
                         return false;
             });
-            vm.graphLegendElements = [];
+    
             $('#legend').DataTable().clear();
             $('#legend').DataTable().rows.add(dtRecords).draw();
         }
@@ -318,5 +339,11 @@ export default {
     /*fix for  buggy browsers*/
     display: table-column;
     border: 1px solid #666666;
+}
+.dataTables_filter {
+  float: left !important;
+}
+table > tbody{
+  cursor: pointer;
 }
 </style>
