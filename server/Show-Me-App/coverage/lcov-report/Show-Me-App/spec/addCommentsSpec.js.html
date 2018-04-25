@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">88.89% </span>
+        <span class="strong">81.94% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>64/72</span>
+        <span class='fraction'>59/72</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -30,14 +30,14 @@
         <span class='fraction'>0/0</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">87.5% </span>
+        <span class="strong">75% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>21/24</span>
+        <span class='fraction'>18/24</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">88.89% </span>
+        <span class="strong">81.94% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>64/72</span>
+        <span class='fraction'>59/72</span>
       </div>
     </div>
   </div>
@@ -304,6 +304,20 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -311,30 +325,16 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -458,9 +458,9 @@ describe("Add comment for a relation", function(){
             request({
                 method: 'PUT',
                 uri: bad_url4,
-                }, <span class="fstat-no" title="function not covered" >function(request, response,body){                   </span>
-<span class="cstat-no" title="statement not covered" >                    expect(body).toBe('Please enter destination') ;                   </span>
-<span class="cstat-no" title="statement not covered" >                    expect(response.statusCode).toBe(400);</span>
+                }, function(request, response,body){                   
+                    expect(body).toBe('Please enter destination') ;                   
+                    expect(response.statusCode).toBe(400);
 <span class="cstat-no" title="statement not covered" >                    done();</span>
                 });
         });
@@ -468,14 +468,14 @@ describe("Add comment for a relation", function(){
         // Check for incorrect query parameter user
         var query_string5 = "domain=0&amp;source=8248098&amp;destination=6465053&amp;us=user1&amp;text=Test_Message";
         var bad_url5 = base_url + query_string5;
-        it("Check status code and text for incorrect user", function(done) {            
-            request({
+        it("Check status code and text for incorrect user", <span class="fstat-no" title="function not covered" >function(done) {            </span>
+<span class="cstat-no" title="statement not covered" >            request({</span>
                 method: 'PUT',
                 uri: bad_url5,
-                }, function(request, response,body){                   
-                    expect(body).toBe('Please enter user') ;                   
-                    expect(response.statusCode).toBe(400);
-                    done();
+                }, <span class="fstat-no" title="function not covered" >function(request, response,body){                   </span>
+<span class="cstat-no" title="statement not covered" >                    expect(body).toBe('Please enter user') ;                   </span>
+<span class="cstat-no" title="statement not covered" >                    expect(response.statusCode).toBe(400);</span>
+<span class="cstat-no" title="statement not covered" >                    done();</span>
                 });
         });
 &nbsp;
@@ -483,13 +483,13 @@ describe("Add comment for a relation", function(){
         // Check for case where a relation does not exist between papers
         var query_string6 = "domain=0&amp;source=8248098&amp;destination=8336572&amp;user=Abc&amp;text=testMessage";
         var bad_url6 = base_url + query_string6;
-        it("When no relation exists between papers", function(done) {            
-            request({
+        it("When no relation exists between papers", <span class="fstat-no" title="function not covered" >function(done) {            </span>
+<span class="cstat-no" title="statement not covered" >            request({</span>
                 method: 'PUT',
                 uri: bad_url6,
-                }, function(request, response,body){                   
-                    expect(body).toBe('There is no relation exists between papers!') ;                   
-                    expect(response.statusCode).toBe(400);
+                }, <span class="fstat-no" title="function not covered" >function(request, response,body){                   </span>
+<span class="cstat-no" title="statement not covered" >                    expect(body).toBe('There is no relation exists between papers!') ;                   </span>
+<span class="cstat-no" title="statement not covered" >                    expect(response.statusCode).toBe(400);</span>
 <span class="cstat-no" title="statement not covered" >                    done();</span>
                 });
         });
@@ -514,7 +514,7 @@ describe("Add comment for a relation", function(){
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Mon Apr 23 2018 23:39:46 GMT-0700 (US Mountain Standard Time)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue Apr 24 2018 17:11:47 GMT-0700 (US Mountain Standard Time)
 </div>
 </div>
 <script src="../../prettify.js"></script>

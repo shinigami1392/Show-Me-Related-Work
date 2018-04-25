@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for Show-Me-App\spec\addDownvotesSpec.js</title>
+    <title>Code coverage report for Show-Me-App\spec\findorcreateUserSpec.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -16,13 +16,13 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../../index.html">all files</a> / <a href="index.html">Show-Me-App/spec/</a> addDownvotesSpec.js
+      <a href="../../index.html">all files</a> / <a href="index.html">Show-Me-App/spec/</a> findorcreateUserSpec.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>23/23</span>
+        <span class='fraction'>31/31</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -37,7 +37,7 @@
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>23/23</span>
+        <span class='fraction'>31/31</span>
       </div>
     </div>
   </div>
@@ -88,10 +88,7 @@
 43
 44
 45
-46
-47
-48
-49</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+46</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
@@ -102,22 +99,9 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -128,66 +112,73 @@
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var request = require("request");
-var base_url = "http://54.201.123.246:8081/relations/downvote/add?"
+var base_url = "http://54.201.123.246:8081/users/user";
 &nbsp;
-describe("Add downvote for a relation", function(){
-   describe("PUT /", function() {      
+describe(" checks the user management functionality of the application", function() {
+  describe("POST /", function() {    
        	   
-	   //test to check if 200 status code is returned or not.
-        it("returns status code 200", function(done) { 
-		   var query_string = "domain=0&amp;source=399838&amp;destination=404723&amp;user=user0";
-           var url = base_url + query_string;
-           request({
-               method: 'PUT',
-               uri: url
-            },function(request, response,body){                
+	    //test to check if the  API is able to fetch the user details of an existing user or not using facebook provider.
+        it("fetch the user details of an existing user using facebook provider", function(done) { 
+           request.post(base_url,{json:true,body:{userId:"facebook|1719071618152739", first_name:"Sachin",last_name:"Magar",email:"sac.magar@gmail.com"}},function(request, response,body){ 
                expect(response.statusCode).toBe(200);
+			   expect(body.found).toBe(true);
+			   expect(body.user.first_name).toBe("Sachin");
+			   expect(body.user.last_name).toBe("Magar");
+			   expect(body.user.email).toBe("sac.magar@gmail.com");
+			   expect(body.user.userId).toBe("facebook|1719071618152739");
                done();
             });
        });
-	
-	//test to check if invalid user Id is properly handled by the application.
-    it("returns status code 404", function(done) { 
-		   var query_string = "domain=1&amp;source=399838&amp;destination=404723&amp;user=user10";
-           var url = base_url + query_string;
-           request({
-               method: 'PUT',
-               uri: url
-            },function(request, response,body){                
-               expect(response.statusCode).not.toBe(200);
-               done();
-            });
-       });
-	  
-	//test to see if the downvote entry is updated to the DB properly or not.
-    it("returns the value of updated field as true r false", function(done) { 
-		   var query_string = "domain=0&amp;source=399838&amp;destination=404723&amp;user=user0";
-           var url = base_url + query_string;
-           request({
-               method: 'PUT',
-               uri: url
-            },function(request, response,body){ 
-			   var body_res = JSON.parse(body);
-               expect(body_res.updated).toBe(true);
-               done();
-            });
-       });
-  });
-});
 &nbsp;
-&nbsp;</pre></td></tr>
+		//test to check if the  API is able to fetch the user details of an existing user or not using linkedIn provider.
+        it("fetch the user details of an existing user using linkedIn provider", function(done) { 
+           request.post(base_url,{json:true,body:{userId:"linkedin|M3eM6yF1Kr", first_name:"Pranjal",last_name:"Karankar",email:"pranjal_karankar@hotmail.com"}},function(request, response,body){ 
+               expect(response.statusCode).toBe(200);
+			   expect(body.found).toBe(true);
+			   expect(body.user.first_name).toBe("Pranjal");
+			   expect(body.user.last_name).toBe("Karankar");
+			   expect(body.user.email).toBe("pranjal_karankar@hotmail.com");
+			   expect(body.user.userId).toBe("linkedin|M3eM6yF1Kr");
+               done();
+            });
+       });	
+&nbsp;
+		//test to check if the  API is able to create a new user if the user doesn't exist in the DB and return its details
+        it("create a new user and return back its details", function(done) { 
+           request.post(base_url,{json:true,body:{userId:"facebook|1870629992947416", first_name:"Abhishek",last_name:"Dutta",email:"adutta14@asu.edu"}},function(request, response,body){ 
+               expect(response.statusCode).toBe(200);
+			   expect(body.found).toBe(false);
+			   expect(body.user.first_name).toBe("Abhishek");
+			   expect(body.user.last_name).toBe("Dutta");
+			   expect(body.user.email).toBe("adutta14@asu.edu");
+			   expect(body.user.userId).toBe("facebook|1870629992947416");
+               done();
+            });
+       });	   
+	});
+});</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
