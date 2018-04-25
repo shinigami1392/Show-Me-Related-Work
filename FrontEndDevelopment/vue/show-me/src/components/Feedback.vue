@@ -10,12 +10,6 @@
                 <textarea v-model="user_comment" class="form-control" type="text" rows="1" style="height:90%; " placeholder="Your comments" />
                 <md-button style="color:#fff;background-color:#3dbd5d" v-on:click="userObjTemp.authorized ?(user_comment!=''?addComment():showTextErrMsg()):showErrMsg()">Comment</md-button> &nbsp;
             </div>
-            <div style="width:25%; margin-top:5px; float:left;">
-                <i class="fa fa-thumbs-up upvoteButtonClass"  v-on:click="userObjTemp.authorized ? addRemoveUpvote:showErrMsg()"></i>                
-                <span><b>{{this.upvotesCount}}</b></span>                
-                <i class="fa fa-thumbs-down downvoteButtonClass" v-on:click="userObjTemp.authorized ?addRemoveDownvote:showErrMsg()"></i>
-                <span><b>{{this.downvotesCount}}</b></span>
-            </div>
         </div>
     </app-box>
 </template>
@@ -30,14 +24,9 @@ export default {
             feedbackBoxHeader: "Feedback",
             comments: [],
             user_comment:'',
-            weight: 0,
-            upvoteButtonClass : "btn btn-primary btn-sm",
-            downvoteButtonClass :"btn btn-primary btn-sm",
             domain :'',
             source :'',
             destination :'',
-            upvotesCount : 0,
-            downvotesCount : 0,
             userObjTemp: this.$store.state.userObjStore
         }
     },
@@ -54,18 +43,9 @@ export default {
         this.destination = nodes.split("_")[1];    
     },
     mounted() {
-        var linkInfo = this.$route.matched[0].props.linkInfo;
-        this.upvotesCount = linkInfo.relation.upvotes.length;
-        this.downvotesCount = linkInfo.relation.downvotes.length;        
+        var linkInfo = this.$route.matched[0].props.linkInfo;       
         this.comments = linkInfo.relation.comments;
-        //console.log(JSON.stringify(this.comments));
-        if (linkInfo.upvotes == undefined){
-            this.weight = 0;
-        } 
-        else {
-            this.weight = linkInfo.upvotes;
-        }   
-             
+        //console.log(JSON.stringify(this.comments));          
     },
     methods: {
 
@@ -80,76 +60,6 @@ export default {
 			    val = "0" + val;
 		    }
 		    return val;
-        },
-        addRemoveUpvote : function(){        
-            this.weight = this.weight + 1;
-            if(this.upvoteButtonClass === 'btn btn-primary btn-sm'){
-                this.upvoteButtonClass = 'btn btn-default'
-                axios
-                    .put(`http://54.201.123.246:8081/relations/upvote/add?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
-                         `&user=` + this.userObjTemp.userid)
-                    .then(response => {
-                            if (response.status == 200) {
-                                this.upvotesCount = this.upvotesCount + 1;
-                            }  
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    }
-                );           
-
-            }    
-            else if(this.upvoteButtonClass === 'btn btn-default') {
-                this.upvoteButtonClass = 'btn btn-primary btn-sm'
-                axios
-                    .put(`http://54.201.123.246:8081/relations/upvote/remove?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
-                        `&user=` + this.givenname)
-                    .then(response => {
-                            if (response.status == 200) {                               
-                               this.upvotesCount = this.upvotesCount - 1;
-                            }
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    }
-                );
-            }   
-        },
-        addRemoveDownvote : function(){         
-            
-            this.weight = this.weight + 1;                     
-
-            if(this.downvoteButtonClass === 'btn btn-primary btn-sm'){
-                this.downvoteButtonClass = 'btn btn-default'
-                axios
-                    .put(`http://54.201.123.246:8081/relations/downvote/add?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
-                        `&user=` + this.userObjTemp.userid)
-                    .then(response => {
-                            if (response.status == 200) {                               
-                               this.downvotesCount = this.downvotesCount + 1;
-                            }
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    }
-                );           
-            }    
-            else if(this.downvoteButtonClass === 'btn btn-default') {
-                this.downvoteButtonClass = 'btn btn-primary btn-sm'
-                axios
-                    .put(`http://54.201.123.246:8081/relations/downvote/remove?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
-                        `&user=` + this.userObjTemp.userid)
-                    .then(response => {
-                            if (response.status == 200) {                                
-                                this.downvotesCount = this.downvotesCount - 1;
-                            }
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    }
-                );
-
-            }   
         },
         addComment: function() {
                 let requestUrl = `http://54.201.123.246:8081/relations/comment/add?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination + `&user=` +this.userObjTemp.userid+`&text=` + this.user_comment; 
