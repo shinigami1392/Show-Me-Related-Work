@@ -9,7 +9,7 @@
 			  <img src="../assets/images/frontlogo.png" />
 		</div>
 		<div id="animated-back">
-			  <h3> A better way to find relations between scholarly articles</h3>    
+			  <h3 id="frontLine"> A better way to find relations between scholarly articles</h3>    
 		</div>
 	</div>
     
@@ -30,7 +30,7 @@
   justify-content: space-around;
 }
 
-h3 {
+#frontLine {
   font-family: 'Russo one', sans-serif;
   text-align: center;
   color: #35342f;

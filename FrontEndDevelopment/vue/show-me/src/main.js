@@ -100,7 +100,12 @@ router.beforeEach(function (to, from, next) {
   else if (to.name === 'linkInfo') {    
     var fetchLinkInfo = function () {
       var papers = to.params.linkid.split("_");      
-      var userid = store.state.userObjStore.userid;    
+      var userid = store.state.userObjStore.userid;
+      
+      if(userid == "" || userid == null){
+          userid = 'user0';
+      }
+
       axios
         .get(`http://54.201.123.246:8081/relations/get?domain=` + to.params.areaid + `&source=`+papers[0]+`&destination=`+papers[1]+`&user=` + userid)
         .then(response => {

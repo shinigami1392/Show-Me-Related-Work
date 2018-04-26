@@ -38,21 +38,21 @@
           </tbody>
         </table>
     <md-toolbar class="md-dense" style="margin-top:10px;margin-bottom:15px;">
-      <h3 class="md-title" style="text-align: center;">Comments on Relationship</h3>
+      <h3 class="md-title">Comments on Relationship</h3>
     </md-toolbar>
     <ul class="list-group" style="max-height:300px; overflow-y:auto;">
       <li style="padding-left:5px; " v-for="com in comments">
         <span style="color:green; font-weight:bold;"> {{com.username}}</span>&ensp;
         <br/>
         <span style="color:#696969;font-weight:bold;">{{ getTimeStamp(com.timestamp) }}</span>&ensp;&ensp; {{com.comment}}
-        <hr />
+        <hr/>
       </li>
     </ul>
     <div style="width:80%; padding:10px">
       <div style="width:90%; margin-right:25px;float:left;padding:10px">
         <textarea v-model="user_comment" class="form-control" type="text" rows="1" style="height:90%; " placeholder="Your comments"
         />
-        <md-button style="color:#fff;background-color:#3dbd5d" v-on:click="userObjTemp.authorized ?(user_comment!=''?addComment():showTextErrMsg()):showErrMsg()">Comment</md-button> &nbsp;
+        <md-button style="color:#fff;background-color:#3dbd5d" v-on:click="userObject.authorized ?(user_comment!=''?addComment():showTextErrMsg()):showErrMsg()">Comment</md-button> &nbsp;
       </div>
     </div>
   </app-box>
@@ -69,15 +69,8 @@ export default {
             feedbackBoxHeader: "Feedback on Relationship",
             comments: [],
             user_comment:'',
-            domain :'',
-            source :'',
-            destination :'',
-            userObjTemp: this.$store.state.userObjStore,
-
-
             infoBoxHeader: "Link Information",
             errors: [],
-            linkInfo: {},
             domain:'',
             upvotesCount :0,
             downvotesCount: 0,
@@ -85,9 +78,9 @@ export default {
             sourceId:0,
             destinationName:'',
             destinationId:0,
-            userObject: '',
             upvoteButtonClicked : false,
-            downvoteButtonClicked :false
+            downvoteButtonClicked :false,
+            userObject : this.$store.state.userObjStore,
         }
     },
     watch: {
@@ -103,24 +96,17 @@ export default {
         this.cardBlockStyle = "height:80%;";
         this.cardBlockContentStyle = "height:100%;";
 
-        this.userObject = this.$store.state.userObjStore;
         var linkdata =  this.$route.matched[0].props.linkInfo;
+
         this.upvotesCount = linkdata.relation.upvotes;
         this.downvotesCount = linkdata.relation.downvotes;
         this.sourceName = linkdata.sourceTitle;
         this.destinationName = linkdata.destinationTitle;
+
         var params = this.$route.params;    
         this.domain = params.areaid;
         this.sourceId = params.linkid.split('_')[0];
         this.destinationId = params.linkid.split('_')[1];
-        
-        this.upvoteButtonClicked = linkdata.upvotedByUser;
-        this.downvoteButtonClicked = linkdata.downvotedByUser;
-
-        this.domain = this.$route.params.areaid;    
-        var nodes = this.$route.params.linkid
-        this.source = nodes.split("_")[0];
-        this.destination = nodes.split("_")[1];    
     },
     mounted() {
         var linkInfo = this.$route.matched[0].props.linkInfo;       
@@ -151,7 +137,7 @@ export default {
 		    return val;
         },
         addComment: function() {
-                let requestUrl = `http://54.201.123.246:8081/relations/comment/add?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination + `&user=` +this.userObjTemp.userid+`&text=` + this.user_comment; 
+                let requestUrl = `http://54.201.123.246:8081/relations/comment/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId + `&user=` +this.userObject.userid+`&text=` + this.user_comment; 
                 console.log(requestUrl);
             axios
                 .put(requestUrl)
@@ -163,8 +149,9 @@ export default {
                         let text = this.user_comment;
                         let userCom = {};
                         userCom.comment = this.user_comment;
-                        userCom.userId = this.userObjTemp.userid;
-                        userCom.username = this.userObjTemp.given_name + " "+ this.userObjTemp.family_name;
+                        userCom.userId = this.userObject.userid;
+                        userCom.username = this.userObject.given_name + " "+ this.userObject.family_name;
+                        
                         var d = new Date();
                         userCom.timestamp = d.toISOString();
                         this.comments.push(userCom);
@@ -223,7 +210,7 @@ export default {
                         `&user=` + this.userObject.userid)
                 .then(response => {
                         if (response.status == 200) {
-                            console.log(response.status)
+                         //   console.log(response.status)
                             this.upvotesCount = this.upvotesCount + 1;
                         }  
                 })
@@ -241,7 +228,7 @@ export default {
                         `&user=` + this.userObject.userid)
                 .then(response => {
                         if (response.status == 200) {
-                            console.log(response.status)                               
+                         //   console.log(response.status)                               
                             this.upvotesCount = this.upvotesCount - 1;
                         }
                 })
@@ -261,7 +248,7 @@ export default {
                         `&user=` + this.userObject.userid)
                 .then(response => {
                         if (response.status == 200) { 
-                            console.log(response.status)                              
+                          //  console.log(response.status)                              
                             this.downvotesCount = this.downvotesCount + 1;
                         }
                 })
@@ -278,7 +265,7 @@ export default {
                         `&user=` + this.userObject.userid)
                 .then(response => {
                         if (response.status == 200) {   
-                            console.log(response.status)                             
+                          //  console.log(response.status)                             
                             this.downvotesCount = this.downvotesCount - 1;
                         }
                 })
