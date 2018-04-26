@@ -64,35 +64,33 @@ export default {
     this.cardBlockStyle = "height:80%;"
     this.cardBlockContentStyle = "height:100%; overflow-y:auto; overflow-x: hidden"
     this.userObject = this.$store.state.userObjStore;
-    //console.log(this.userObject.authorized)
     var linkdata =  this.$route.matched[0].props.linkInfo;
     this.upvotesCount = linkdata.relation.upvotes;
     this.downvotesCount = linkdata.relation.downvotes;
     this.sourceName = linkdata.sourceTitle;
     this.destinationName = linkdata.destinationTitle;
     var params = this.$route.params;    
-    //console.log(params);
     this.domain = params.areaid;
     this.sourceId = params.linkid.split('_')[0];
     this.destinationId = params.linkid.split('_')[1];
-    
-    this.upvoteButtonClicked = linkdata.upvotedByUser;
-    this.downvoteButtonClicked = linkdata.downvotedByUser;
+   
+  },
+  mounted () {
+      var linkdata =  this.$route.matched[0].props.linkInfo;
+      this.upvoteButtonClicked = linkdata.upvotedByUser;
+      this.downvoteButtonClicked = linkdata.downvotedByUser;
 
-    console.log("data: " + (linkdata.upvotedByUser));
-    /*this.upvotesCount = this.$route.matched[0].props.linkInfo.relation.upvotes;
-    this.downvotesCount = this.$route.matched[0].props.linkInfo.relation.downvotes;
-    this.source = this.$route.matched[0].props.linkInfo.sourceTitle;
-    this.destination = this.$route.matched[0].props.linkInfo.destinationTitle;
-    console.log(this.upvotesCount); */
-     
-    //this.linkInfo = this.$route.matched[0].props.linkInfo;    
+      if (this.upvoteButtonClicked === true) {        
+        Object.assign(document.getElementById('upvoteButton').style,{'font-size':"30px",color:"blue"});
+      }
+      if (this.downvoteButtonClicked === true) {
+         Object.assign(document.getElementById('downvoteButton').style,{'font-size':"30px",color:"blue"});
+      }
   },
   methods:{
-    addRemoveUpvote : function() {     
+    addRemoveUpvote : function() {          
       if(this.upvoteButtonClicked === false){
           this.upvoteButtonClicked = true
-          //document.getElementById('upvoteButton').style.color = 'blue'&& font-size ='24px';
           Object.assign(document.getElementById('upvoteButton').style,{'font-size':"30px",color:"blue"});
           axios
               .put(`http://54.201.123.246:8081/relations/upvote/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
@@ -130,7 +128,7 @@ export default {
     addRemoveDownvote : function(){  
 
       if(this.downvoteButtonClicked === false){
-        Object.assign(document.getElementById('downvoteButton').style,{'font-size':"30px",color:"blue"});
+          Object.assign(document.getElementById('downvoteButton').style,{'font-size':"30px",color:"blue"});
           this.downvoteButtonClicked = true;
           axios
               .put(`http://54.201.123.246:8081/relations/downvote/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
