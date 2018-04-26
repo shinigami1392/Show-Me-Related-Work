@@ -63,17 +63,17 @@
                     </div>
                 </div>
                 <div class="row" style="margin-top:30px;margin-bottom:100px">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <transition name="slide" mode="out-in">
                             <router-view name="info-box" :key="$route.fullPath"></router-view>
                             <router-view name="feedback-box" :key="$route.fullPath"></router-view>
                         </transition>
                     </div>
-                    <div class="col-md-6">
+                    <!--<div class="col-md-6">
                         <transition name="slide" mode="out-in">
                             <router-view name="link-info-box" :key="$route.fullPath"></router-view>
                         </transition>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
@@ -244,10 +244,10 @@
         }
     }
 
-    /*.container-fluid {
-        padding-left: 150px;
-        padding-right: 150px;
-    }*/
+    .container-fluid {
+        padding-left: 200px;
+        padding-right: 200px;
+    }
 
     .md-drawer {
         width: 267px;
