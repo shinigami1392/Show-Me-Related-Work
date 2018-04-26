@@ -38,13 +38,13 @@
           </tbody>
         </table>
     <md-toolbar class="md-dense" style="margin-top:10px;margin-bottom:15px;">
-      <h3 class="md-title">Comments on Relationship</h3>
+      <h3 class="md-title">Comments</h3>
     </md-toolbar>
-    <ul class="list-group" style="max-height:300px; overflow-y:auto;">
+    <ul class="list-group" style="max-height:600px; overflow-y:auto;">
       <li style="padding-left:5px; " v-for="com in comments">
-        <span style="color:green; font-weight:bold;"> {{com.username}}</span>&ensp;
+        <span style="color:#f45844; font-weight:bold;"> {{com.username}}</span>&ensp;
         <br/>
-        <span style="color:#696969;font-weight:bold;">{{ getTimeStamp(com.timestamp) }}</span>&ensp;&ensp; {{com.comment}}
+        <span style="color:#35342f;font-weight:bold;">{{ getTimeStamp(com.timestamp) }}</span>&ensp;&ensp; {{com.comment}}
         <hr/>
       </li>
     </ul>
@@ -116,10 +116,10 @@ export default {
         this.downvoteButtonClicked = linkInfo.downvotedByUser;
 
         if (this.upvoteButtonClicked === true) {        
-            Object.assign(document.getElementById('upvoteButton').style,{'font-size':"30px",color:"blue"});
+            Object.assign(document.getElementById('upvoteButton').style,{'font-size':"30px",color:"#2677bb"});
         }
         if (this.downvoteButtonClicked === true) {
-            Object.assign(document.getElementById('downvoteButton').style,{'font-size':"30px",color:"blue"});
+            Object.assign(document.getElementById('downvoteButton').style,{'font-size':"30px",color:"#2677bb"});
         }
     },
     methods: {
@@ -184,7 +184,7 @@ export default {
             this.$toastr('add', {
                     title: 'Want to get involved?', // Toast Title
                     msg: 'Please sign in', // Message
-                    timeout: 5000, // Timeout in ms
+                    timeout: 2000, // Timeout in ms
                     position: 'toast-top-full-width', // Toastr position
                     type: 'info' // Toastr type
             });
@@ -193,7 +193,7 @@ export default {
             this.$toastr('add', {
                     title: 'Please enter text', // Toast Title
                     msg: '', // Message
-                    timeout: 2000, // Timeout in ms
+                    timeout: 1500, // Timeout in ms
                     position: 'toast-bottom-left', // Toastr position
                     type: 'error' // Toastr type
             });
@@ -203,8 +203,7 @@ export default {
         addRemoveUpvote : function() {     
         if(this.upvoteButtonClicked === false){
             this.upvoteButtonClicked = true
-            //document.getElementById('upvoteButton').style.color = 'blue'&& font-size ='24px';
-            Object.assign(document.getElementById('upvoteButton').style,{'font-size':"30px",color:"blue"});
+           Object.assign(document.getElementById('upvoteButton').style,{'font-size':"30px",color:"#2677bb"});
             axios
                 .put(`http://54.201.123.246:8081/relations/upvote/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
                         `&user=` + this.userObject.userid)
@@ -241,7 +240,7 @@ export default {
 
         addRemoveDownvote : function(){  
         if(this.downvoteButtonClicked === false){
-            Object.assign(document.getElementById('downvoteButton').style,{'font-size':"30px",color:"blue"});
+            Object.assign(document.getElementById('downvoteButton').style,{'font-size':"30px",color:"#2677bb"});
             this.downvoteButtonClicked = true;
             axios
                 .put(`http://54.201.123.246:8081/relations/downvote/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
@@ -278,9 +277,9 @@ export default {
         },
         showErrMsg : function() {
         this.$toastr('add', {
-                title: 'Want to get involved?', // Toast Title
+                title: 'We value your feedback?', // Toast Title
                 msg: 'Please sign in', // Message
-                timeout: 5000, // Timeout in ms
+                timeout: 2000, // Timeout in ms
                 position: 'toast-top-full-width', // Toastr position
                 type: 'info' // Toastr type
         });

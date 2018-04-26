@@ -1,14 +1,14 @@
 <template>
 
-<div id="app" style="min-height:100vh;">
-    <div id="foreground" style="min-height:100vh;">
+<div id="app">
+    <div id="foreground">
         <!-- Fixed navbar -->
-        <md-toolbar style="background-color:#35342f;color:white">
+        <md-toolbar style="background-color:#35342f;color:#fff">
             <span><md-button class="md-icon-button md-plain" @click="goToHome">
-                <md-icon style="color:white">home</md-icon>
+                <md-icon style="color:#fff">home</md-icon>
             </md-button></span>&emsp; 
             <span><md-button class="md-icon-button" @click="showNavigation = true">
-                <md-icon style="color:white">subject</md-icon>
+                <md-icon style="color:#fff">subject</md-icon>
             </md-button></span>  
             <span id="researchPtr" class="md-title" @click="showNavigation = true">Research Domains</span>
 
@@ -62,7 +62,7 @@
                         </transition>
                     </div>
                 </div>
-                <div class="row" style="margin-top:30px;margin-bottom:100px">
+                <div class="row" style="margin-top:60px;margin-bottom:100px">
                     <div class="col-md-12">
                         <transition name="slide" mode="out-in">
                             <router-view name="info-box" :key="$route.fullPath"></router-view>
@@ -77,11 +77,10 @@
                 </div>
             </div>
         </div>
-        <div style="margin-top:30px;"></div>
 
         <!--Footer-->
-        <footer>
-            <app-footer></app-footer>
+        <footer id="footer">
+            <app-footer style="bottom:0;"></app-footer>
         </footer>
     </div>
 </div>
@@ -207,8 +206,16 @@
 
 
 <style>
+    html,
     body {
-        background-color: #dddddd
+        margin:0;
+        padding:0;
+        height:100%;
+    }
+
+    #main{
+        height:auto !important;
+        min-height:100%;
     }
 
     .slide-leave-active {
@@ -244,13 +251,14 @@
         }
     }
 
-    .container-fluid {
+    /*.container-fluid {
+        min-height:100%;;
         padding-left: 200px;
         padding-right: 200px;
-    }
+    }*/
 
     .md-drawer {
-        width: 267px;
+        width: 300px;
     }
 
     #researchPtr{
