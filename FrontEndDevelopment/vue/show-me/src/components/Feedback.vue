@@ -104,26 +104,18 @@ export default {
         this.cardBlockContentStyle = "height:100%;";
 
         this.userObject = this.$store.state.userObjStore;
-        //console.log(this.userObject.authorized)
         var linkdata =  this.$route.matched[0].props.linkInfo;
         this.upvotesCount = linkdata.relation.upvotes;
         this.downvotesCount = linkdata.relation.downvotes;
         this.sourceName = linkdata.sourceTitle;
         this.destinationName = linkdata.destinationTitle;
         var params = this.$route.params;    
-        //console.log(params);
         this.domain = params.areaid;
         this.sourceId = params.linkid.split('_')[0];
         this.destinationId = params.linkid.split('_')[1];
         
         this.upvoteButtonClicked = linkdata.upvotedByUser;
         this.downvoteButtonClicked = linkdata.downvotedByUser;
-
-        console.log("data: " + (linkdata.upvotedByUser));
-
-
-
-
 
         this.domain = this.$route.params.areaid;    
         var nodes = this.$route.params.linkid
@@ -133,7 +125,16 @@ export default {
     mounted() {
         var linkInfo = this.$route.matched[0].props.linkInfo;       
         this.comments = linkInfo.relation.comments;
-        //console.log(JSON.stringify(this.comments));          
+
+        this.upvoteButtonClicked = linkInfo.upvotedByUser;
+        this.downvoteButtonClicked = linkInfo.downvotedByUser;
+
+        if (this.upvoteButtonClicked === true) {        
+            Object.assign(document.getElementById('upvoteButton').style,{'font-size':"30px",color:"blue"});
+        }
+        if (this.downvoteButtonClicked === true) {
+            Object.assign(document.getElementById('downvoteButton').style,{'font-size':"30px",color:"blue"});
+        }
     },
     methods: {
 
