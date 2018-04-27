@@ -19,7 +19,7 @@
 			<form action="https://formspree.io/rajatsjc@gmail.com" method="POST">
 			  <input required name="email" type="email" placeholder="Your email">
 			  <br/>
-			  <textarea required name="message"  placeholder="Your message"></textarea>
+			  <textarea class="ContactUs-Message" required name="message"  placeholder="Your message"></textarea>
 			  <br/>
 			  <button class="submit-button" type="submit">Send Message</button>
 			</form>
@@ -34,9 +34,6 @@
    
 		
 <style>
- body {
-			font-family: Arial;
-		}
 	
     	#page-content {
 			padding-top: 60px;
@@ -71,7 +68,7 @@
 			box-sizing: border-box;
 		}
 		
-		textarea {
+		.ContactUs-Message {
 			width: 400px;
 			padding: 12px 20px;
 			margin: 8px 0;

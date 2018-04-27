@@ -1,40 +1,58 @@
-<div id="navigation" class="navbar navbar-default customNav">
-    <div class="header">
-        <a href="/">
-            <img width="60" height="60" hspace="20" src="./LogoMakr_9i2uuu.png" />
-        </a>
-        <div id="login">
-            <button type="button" v-if="!userObjTemp.authorized" class="btn btn-default btn-sm" @click="login()">
-                <span class="glyphicon glyphicon-home"></span> Sign In
-                <i class="fas fa-sign-in-alt"></i>
-            </button>
-            <md-menu md-align-trigger v-if="userObjTemp.authorized">
-                <img :src="userObjTemp.picture" class="md-icon-button" md-menu-trigger>
-                <md-tooltip md-direction="bottom">{{userObjTemp.given_name}}</md-tooltip>
-                <md-menu-content>
-                    <md-menu-item>
-                        <span>
-                            <b>Hi, {{userObjTemp.given_name}}</b>
-                        </span>
-                    </md-menu-item>
-                    <a href="#" @click="ProfileDialogue = true">
-                        <md-menu-item>
-                            <span>
-                                <b>Profile</b>
-                            </span>
-                        </md-menu-item>
-                    </a>
-                    <a href="/" @click="logout()">
-                        <md-menu-item>
-                            <span>
-                                <b>Sign Out</b>
-                            </span>
-                        </md-menu-item>
-                    </a>
-                </md-menu-content>
-            </md-menu>
-            <md-dialog-alert :md-active.sync="ProfileDialogue" :md-title="userName" md-content="<h6>First Name:</h6> </br><h6>Last Name:</h6></br><h6>Email:</h6>"
-            />
-        </div>
+<template>
+  <app-box class="md-elevation-5" v-bind:boxHeaderProp="feedbackBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle"
+    v-bind:cardBlockContentStyle="cardBlockContentStyle">
+        <table class="table">
+          <tbody>
+            <tr>
+              <div style="width:25%; margin-top:5px; float:left;">
+                <td>
+                  <i class="fa fa-thumbs-up" id="upvoteButton" style="font-size:24px; color:gray" v-on:click="userObject.authorized ? addRemoveUpvote():showErrMsg()"></i>
+                </td>
+                <td>
+                  <span>
+                    <b>{{this.upvotesCount}}</b>
+                  </span>
+                </td>
+                <td>
+                  <i class="fa fa-thumbs-down" id="downvoteButton" style="font-size:24px; color:gray" v-on:click="userObject.authorized ?addRemoveDownvote():showErrMsg()"></i>
+                </td>
+                <td>
+                  <span>
+                    <b>{{this.downvotesCount}}</b>
+                  </span>
+                </td>
+              </div>
+            </tr>
+            <tr>
+              <td>Source Paper</td>
+              <td>{{this.sourceName}}</td>
+            </tr>
+            <tr>
+              <td>Destination Paper</td>
+              <td>{{this.destinationName}}</td>
+            </tr>
+            <tr>
+              <td>Weight</td>
+              <td>{{this.upvotesCount - this.downvotesCount}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+
+    <ul class="list-group" style="max-height:300px; overflow-y:auto;">
+      <li style="padding-left:5px; " v-for="com in comments">
+        <span style="color:green; font-weight:bold;"> {{com.username}}</span>&ensp;
+        <br/>
+        <span style="color:#696969;font-weight:bold;">{{ getTimeStamp(com.timestamp) }}</span>&ensp;&ensp; {{com.comment}}
+        <hr />
+      </li>
+    </ul>
+    <div style="width:80%; padding:10px">
+      <div style="width:90%; margin-right:25px;float:left;padding:10px">
+        <textarea v-model="user_comment" class="form-control" type="text" rows="1" style="height:90%; " placeholder="Your comments"
+        />
+        <md-button style="color:#fff;background-color:#3dbd5d" v-on:click="userObjTemp.authorized ?(user_comment!=''?addComment():showTextErrMsg()):showErrMsg()">Comment</md-button> &nbsp;
+      </div>
     </div>
-</div>
+  </app-box>
+</template>

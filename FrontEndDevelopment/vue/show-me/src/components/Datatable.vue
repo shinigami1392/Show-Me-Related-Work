@@ -1,8 +1,7 @@
 <template>
     <app-box v-bind:boxHeaderProp="researchPapersBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
-        <table id ='dtable' style="width:100%;">
-            <thead>
-                  
+        <table id ='dtable' style="width:100%;" class="table table-striped md-subheading">
+            <thead class="thead-light">
                 <tr>
                     <th v-for="column in columns">{{column}}</th>
                 <tr> 
@@ -23,7 +22,7 @@
             return {
                 researchPapersBoxHeader: "Research Papers",
                 cardStyle: "height:100%;",
-                cardBlockStyle: "height:90%; overflow-y:scroll;",
+                cardBlockStyle: "height:90%;",
                 cardBlockContentStyle: "height:100%;",
                 papers:[],
                 columns: []
@@ -33,7 +32,7 @@
             var domains = this.$store.state.domains;
             for(var i = 0 ; i < domains.length; i++){
                 if(domains[i].id !== undefined && domains[i].id == this.$route.params.areaid){
-                    this.researchPapersBoxHeader = "Research Papers ["+domains[i].name+"]";
+                    this.researchPapersBoxHeader = "Research Papers in "+domains[i].name;
                     break;
                 }
             }
@@ -48,7 +47,7 @@
                 "searching": false,
                 "ordering": false,
 				"ajax" : {
-					"url": "http://54.201.123.246:8081/domains/papers",
+					"url": this.$store.state.IP_Config +"/domains/papers",
                     "contentType":"application/json",
                     "type": "POST",
                     "data": function ( d ) {

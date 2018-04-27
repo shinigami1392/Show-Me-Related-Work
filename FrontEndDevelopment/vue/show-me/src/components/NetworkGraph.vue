@@ -1,31 +1,31 @@
 <template>
-    <app-box v-bind:boxHeaderProp="graphBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
-        <div class="container" style="height:100%;">
+    <app-box class="md-elevation-5" v-bind:boxHeaderProp="graphBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
+        <div class="container-fluid" style="height:100%;">
             <div class="row" style="height:100%;">
                 <div class="col-md-8" style="height:100%;">
-                    <div id="visited_papers" style="height:10%;">
+                    <div id="visited_papers" style="height:10%;" class="md-title">
                         Recently Viewed Papers: 
                         <span v-for="(visitedPaper, index) in visitedPapers">
                             <router-link :to="{ name:'paperInfo', params:{ areaid:$route.params.areaid, paperid:visitedPaper.id}}" :title="visitedPaper.name">{{visitedPaper.id}}</router-link>
-                            <small v-if="index != visitedPapers.length - 1"> > </small>
+                            <small v-if="index != visitedPapers.length - 1"><md-icon>forward</md-icon></small>
                         </span>
                     </div>
-                    <div id="details">
+                    <div id="details" style="width:100%;">
                     </div>
                 </div>
 
-                <div class="col-md-4" style="padding: 0px 0px; height:100%;">
+                <div class="col-md-4" style="padding: 0px 0px;">
                     <div style="height:100%; width:inherit;">
-                        <div style="height:7%;">
-                        <input type="checkbox"  id="l1" value="incoming"  
-                        v-model="linkType" v-on:change="filterLinks()">Incoming Links</input>
-                        <input type="checkbox"  id="l2" value="outgoing"  
-                        v-model="linkType" v-on:change="filterLinks()" checked>Outgoing Links</input>
+                        <div>
+                        <md-checkbox type="checkbox"  class="md-primary"  id="l1" value="incoming"   
+                        v-model="linkType" v-on:change="filterLinks()">Incoming Links</md-checkbox>
+                        <md-checkbox type="checkbox" class="md-primary" id="l2" value="outgoing"  
+                        v-model="linkType" v-on:change="filterLinks()" checked>Outgoing Links</md-checkbox>
                         </div>
-                        <table id="legend" class="table table-condensed" style="display: block; height: 90%; overflow-y:scroll; table-layout:fixed;">
-                            <thead>
+                        <table id="legend" class="table table-condensed table-striped" style="">
+                            <thead class="table-head-legend">
                                 <tr>
-                                    <th>Id</th>
+                                    <th>ID</th>
                                     <th>Title</th>
                                     <th>Weight</th>
                                 </tr>
@@ -60,7 +60,7 @@ function plotGraph(vm, paperInfo) {
     var legend_elements = [];
     var incoming_citations = [];
     nodes.push({ data: { id: paperInfo.id , type: 'root'} });
-    legend_elements.push({ id: paperInfo.id, name: paperInfo.name, type: 'root'});
+    //legend_elements.push({ id: paperInfo.id, name: paperInfo.name, type: 'root'});
     for (var i = 0; i < paperInfo.incoming_relations.length; i++) {
         var nodeObj = {
             data: { id: '' , type: 'incoming'}
@@ -125,7 +125,7 @@ function plotGraph(vm, paperInfo) {
             {
                 selector: 'node',
                 style: {
-                    'background-color': '#bebebe',
+                    'background-color': '#78bbe6',
                     'label': 'data(id)',
                     'width': '30px',
                     'height': '30px'
@@ -135,9 +135,9 @@ function plotGraph(vm, paperInfo) {
                 selector: 'edge',
                 style: {
                     'width': 1,
-                    'line-color': '#cccc99',
+                    'line-color': '#35342f',
                     'curve-style': 'bezier',
-                    'target-arrow-color': '#cccc99',
+                    'target-arrow-color': '#35342f',
                     'target-arrow-shape': 'triangle'
                 }
             }
@@ -148,10 +148,11 @@ function plotGraph(vm, paperInfo) {
   
             animate: true,
             animationDuration: 500
-        }
+        },
+        zoom: 1
     });
 
-    cy.getElementById(paperInfo.id).style('background-color', '#000000');
+    cy.getElementById(paperInfo.id).style('background-color', '#3dbd5d');
     return cy;
 }
 
@@ -185,8 +186,8 @@ export default {
         var cy = plotGraph(this, paperInfo);
 
         if(route.params.linkid !== undefined){
-            cy.getElementById('e'+route.params.linkid).style('line-color', '#400000');
-            cy.getElementById('e'+route.params.linkid).style('target-arrow-color', '#400000');
+            cy.getElementById('e'+route.params.linkid).style('line-color', '#f45844');
+            cy.getElementById('e'+route.params.linkid).style('target-arrow-color', '#f45844');
         }
 
         cy.on('tap', 'node', function(evt) {
@@ -222,15 +223,36 @@ export default {
         });
 
         cy.maxZoom(2.0);
+        cy.minZoom(0.6);
 
         this.graph = cy;
+        var vm = this;
         $(document).ready(function() {
-           this.datatable = $('#legend').DataTable({
+           vm.datatable = $('#legend').DataTable({
                  "paging":   false,
                  "info": false
             });
             $('#legend_wrapper').css('height','92%');
             $('#legend_filter').css('height','10%');
+             $(window).resize(function() {
+                 cy.fit(cy.elements);
+             });
+
+              $('#legend tbody').on('click', 'tr', function () {
+                    var data = vm.datatable.row( this ).data();
+                    var id = data[0];
+                    var color = vm.graph.$('#'+id).css('background-color');
+                    var jAni = vm.graph.$('#'+id).animation({
+                        style: {
+                                'background-color': '#fadc6d'
+                        },
+                        duration: 1000
+                    });
+                    jAni.play().promise().then(function(){ // on completion
+                                jAni.stop(); // stop animation
+                                vm.graph.$('#'+id).css('background-color',color); 
+                    });
+            } );
         });
     },
     methods: {
@@ -264,12 +286,12 @@ export default {
                             else{
                                 row.push(element.weight);
                             }
-                            dtRecords.push(row);
+                            dtRecords.push(row); 
                             return true;
                         }
                         return false;
             });
-            vm.graphLegendElements = [];
+    
             $('#legend').DataTable().clear();
             $('#legend').DataTable().rows.add(dtRecords).draw();
         }
@@ -282,14 +304,9 @@ export default {
 
 <style>
 #details {
-
-    height: 350px;
-    width: 600px;
+    height: 100vh;
+    width: 100vw;
     display: block;
-}
-
-#legend {
-    border: 1px solid #999
 }
 
 #legend_elements_list {
@@ -318,5 +335,14 @@ export default {
     /*fix for  buggy browsers*/
     display: table-column;
     border: 1px solid #666666;
+}
+.dataTables_filter {
+  float: left !important;
+}
+table > tbody{
+  cursor: pointer;
+}
+
+.table-head-legend{
 }
 </style>
