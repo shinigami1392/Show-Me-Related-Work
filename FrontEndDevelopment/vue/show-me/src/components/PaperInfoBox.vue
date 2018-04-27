@@ -17,7 +17,7 @@
           </tr>
           <tr>
             <td class="table-success table-back md-subheading"> URL </td>
-            <td class="table-success table-back-text md-subheading">{{paperInfo.url}}</td>
+            <td class="table-success table-back-text md-subheading"><a target="_blank" :href="paperInfo.url">{{paperInfo.url}}</a></td>
           </tr>
         </tbody>
       </table>

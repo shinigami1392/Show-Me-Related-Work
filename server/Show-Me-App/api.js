@@ -428,6 +428,10 @@ var getGraphNode = function (paperId, res) {
 			}
 
 			driver.close();
+			var uniqueResultSet = {};
+			let filtered = resultSet['outgoing_relations'].filter(obj => !uniqueResultSet[obj.destination_id] && (uniqueResultSet[obj.destination_id] = true));
+			console.log(filtered);
+			resultSet['outgoing_relations'] = filtered;
 			driver = GraphNodeModel.getDriver();
 			session = driver.session();
 			var resultPromise2 = session.run('MATCH p=(p1:ResearchPaper)<-[r:HAS_REFERRED]-(p2:ResearchPaper) where p1.Id="' + paperId + '"RETURN r, p2');
@@ -443,6 +447,11 @@ var getGraphNode = function (paperId, res) {
 					resultSet['incoming_relations'].push(data);
 				}
 				driver.close();
+				uniqueResultSet = {};
+				filtered = []
+				filtered = resultSet['incoming_relations'].filter(obj => !uniqueResultSet[obj.source_id] && (uniqueResultSet[obj.source_id] = true));
+				console.log(filtered);
+				resultSet['incoming_relations'] = filtered;
 				res.send(resultSet);
 			});
 		});
