@@ -215,7 +215,7 @@
 
     #main{
         height:auto !important;
-        min-height:100%;
+        min-height:100% ;
     }
 
     .slide-leave-active {

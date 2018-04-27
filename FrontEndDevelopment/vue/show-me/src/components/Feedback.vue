@@ -1,7 +1,7 @@
 <template>
   <app-box class="md-elevation-5" v-bind:boxHeaderProp="feedbackBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle"
     v-bind:cardBlockContentStyle="cardBlockContentStyle">
-        <table class="table">
+        <table class="table table-bordered">
           <tbody>
             <tr>
               <div style="width:25%; margin-top:5px; float:left;">
@@ -24,23 +24,21 @@
               </div>
             </tr>
             <tr>
-              <td>Source Paper</td>
-              <td>{{this.sourceName}}</td>
+              <td class="table-success table-back md-subheading">Source Paper</td>
+              <td  class="table-success table-back-text md-subheading">{{this.sourceName}}</td>
             </tr>
             <tr>
-              <td>Destination Paper</td>
-              <td>{{this.destinationName}}</td>
+              <td class="table-success table-back md-subheading">Destination Paper</td>
+              <td  class="table-success table-back-text md-subheading">{{this.destinationName}}</td>
             </tr>
             <tr>
-              <td>Weight</td>
-              <td>{{this.upvotesCount - this.downvotesCount}}</td>
+              <td class="table-success table-back md-subheading">Weight</td>
+              <td class="table-success table-back-text md-subheading">{{this.upvotesCount - this.downvotesCount}}</td>
             </tr>
           </tbody>
         </table>
-    <md-toolbar class="md-dense" style="margin-top:10px;margin-bottom:15px;">
-      <h3 class="md-title">Comments</h3>
-    </md-toolbar>
-    <ul class="list-group" style="max-height:600px; overflow-y:auto;">
+    <div class="card-header" style="margin-top:10px;margin-bottom:15px;"><h3 class="md-title">Comments</h3></div>
+    <ul class="list-group" style="max-height:500px; overflow-y:auto;">
       <li style="padding-left:5px; " v-for="com in comments">
         <span style="color:#f45844; font-weight:bold;"> {{com.username}}</span>&ensp;
         <br/>
@@ -52,7 +50,7 @@
       <div style="width:90%; margin-right:25px;float:left;padding:10px">
         <textarea v-model="user_comment" class="form-control" type="text" rows="1" style="height:90%; " placeholder="Your comments"
         />
-        <md-button style="color:#fff;background-color:#3dbd5d" v-on:click="userObject.authorized ?(user_comment!=''?addComment():showTextErrMsg()):showErrMsg()">Comment</md-button> &nbsp;
+        <button type="button" class="btn btn-success" style="color:#fff;background-color:#3dbd5d;margin:5px;" v-on:click="userObject.authorized ?(user_comment!=''?addComment():showTextErrMsg()):showErrMsg()">Comment</button> &nbsp;
       </div>
     </div>
   </app-box>
@@ -116,10 +114,10 @@ export default {
         this.downvoteButtonClicked = linkInfo.downvotedByUser;
 
         if (this.upvoteButtonClicked === true) {        
-            Object.assign(document.getElementById('upvoteButton').style,{'font-size':"30px",color:"#2677bb"});
+            Object.assign(document.getElementById('upvoteButton').style,{'font-size':"30px",color:"#0081c6"});
         }
         if (this.downvoteButtonClicked === true) {
-            Object.assign(document.getElementById('downvoteButton').style,{'font-size':"30px",color:"#2677bb"});
+            Object.assign(document.getElementById('downvoteButton').style,{'font-size':"30px",color:"#0081c6"});
         }
     },
     methods: {
@@ -203,7 +201,7 @@ export default {
         addRemoveUpvote : function() {     
         if(this.upvoteButtonClicked === false){
             this.upvoteButtonClicked = true
-           Object.assign(document.getElementById('upvoteButton').style,{'font-size':"30px",color:"#2677bb"});
+           Object.assign(document.getElementById('upvoteButton').style,{'font-size':"30px",color:"#0081c6"});
             axios
                 .put(`http://54.201.123.246:8081/relations/upvote/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
                         `&user=` + this.userObject.userid)
@@ -240,7 +238,7 @@ export default {
 
         addRemoveDownvote : function(){  
         if(this.downvoteButtonClicked === false){
-            Object.assign(document.getElementById('downvoteButton').style,{'font-size':"30px",color:"#2677bb"});
+            Object.assign(document.getElementById('downvoteButton').style,{'font-size':"30px",color:"#0081c6"});
             this.downvoteButtonClicked = true;
             axios
                 .put(`http://54.201.123.246:8081/relations/downvote/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
@@ -289,5 +287,13 @@ export default {
 </script>
 
 <style>
+
+.table-back{
+    background-color:#ececec;
+    color:#000
+}
+.table-back-text{
+    background-color:#f5f5f5;
+}
 
 </style>
