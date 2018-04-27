@@ -151,7 +151,8 @@ export default {
                         userCom.username = this.userObject.given_name + " "+ this.userObject.family_name;
                         
                         var d = new Date();
-                        userCom.timestamp = d.toISOString();
+                        let curr = d.toISOString();
+                        userCom.timestamp = curr;
                         this.comments.push(userCom);
                         this.user_comment='';
                         this.$toastr('add', {

@@ -1,15 +1,13 @@
 <template>
     <div class="footerheader">
     <div id="footerSection">
-        <div style="float: left;color:white; padding-top:15px; padding-left :40px;">
+        <div style="float:left;color:white; padding-top:15px; padding-left :20px;">
             <i class="far fa-copyright"></i><span style="font-family: Arial;"> ShowMe Related Work 2018</span>
         </div>
-        <div style="float: right;color:white; padding-top:15px; padding-left :40px;" class="link-icons">
-            <router-link :to="{ name:'aboutus'}" style="color:#fff">About Us</router-link>
-            <router-link :to="{ name:'contactus'}" style="color:#fff">Contact Us</router-link>
-            <span style="font-family: Arial; color:#FFC627;">Made with</span>
-            <span style="font-family: Arial; color:#a32049; font-size: 16px;">❤</span>
-            <span style="font-family: Arial; color:#FFC627;">at ASU</span>
+        <div style="float:right;color:white; padding-top:15px; padding-left :20px;" class="link-icons">
+            <router-link :to="{ name:'aboutus'}" style="color:#fff">About Us</router-link>&ensp;
+            <router-link :to="{ name:'contactus'}" style="color:#fff">Contact Us</router-link>&ensp;
+            <span style="color:#FFC627; margin-right:10px">Made with ❤ at ASU</span>
         </div>
     </div>
     </div>
@@ -48,23 +46,8 @@ export default {
 
     .footerSection {
         width: 100%;
-        padding-left: 3%;
         float: right;
         text-align: left;
-    }
-
-    .link-icons {
-        padding-top: 20px;
-        padding-bottom: 10px;
-        color: white !important;
-        float: right;
-        width: 25%;
-    }
-
-    .link-icons a {
-        color: white;
-        text-decoration: none;
-        padding-right: 20px;
     }
 
 </style>
