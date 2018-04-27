@@ -10,8 +10,8 @@
 			
 			<div id="contact-info">
 				<b>Show Me Related Work</b>
-				<p>Phone: +1 (0) 000 0000 001 </p>
-				<p>Email: customer_support@showme.com</p>
+				<p>Phone: +1 (480) 336 0422 </p>
+				<p>Email: showme.developers@gmail.com</p>
 			</div>
 			
 			<br/>
