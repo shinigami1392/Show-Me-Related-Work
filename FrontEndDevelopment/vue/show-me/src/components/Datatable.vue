@@ -1,7 +1,7 @@
 <template>
     <app-box v-bind:boxHeaderProp="researchPapersBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
-        <table id ='dtable' style="width:100%;">
-            <thead>
+        <table id ='dtable' style="width:100%;" class="table table-striped md-subheading">
+            <thead class="thead-light">
                 <tr>
                     <th v-for="column in columns">{{column}}</th>
                 <tr> 

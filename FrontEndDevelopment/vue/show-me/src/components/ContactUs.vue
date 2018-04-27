@@ -34,9 +34,6 @@
    
 		
 <style>
- body {
-			font-family: Arial;
-		}
 	
     	#page-content {
 			padding-top: 60px;

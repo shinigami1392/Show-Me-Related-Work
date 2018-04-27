@@ -30,13 +30,13 @@
 
         <!-- SideBar-->
         <md-drawer :md-active.sync="showNavigation">
-            <md-toolbar class="md-transparent" md-elevation="0">
+            <md-toolbar md-elevation="2">
                 <span class="md-title">Research Domains</span>
             </md-toolbar>
 
             <md-list v-if="categories && categories.length">
                 <md-list-item v-for="category in categories" :key="category.id">
-                    <span class="md-list-item-text">
+                    <span class="md-list-item-text md-subheading">
                         <router-link :to="{ name:'allPapers',params:{areaid:category.id}}">{{ category.name }}</router-link>
                     </span>
                     <span class="badge badge-primary badge-pill">{{ category.count }}</span>
@@ -79,7 +79,7 @@
         </div>
 
         <!--Footer-->
-        <footer id="footer">
+        <footer class="md-subheading">
             <app-footer style="bottom:0;"></app-footer>
         </footer>
     </div>
@@ -217,11 +217,14 @@
         margin:0;
         padding:0;
         height:100%;
+        background-color:#e1e0dd !important;
     }
 
     #main{
         height:auto !important;
-        min-height:100% ;
+        min-height:100%;
+        margin-left:200px;
+        margin-right:200px;
     }
 
     .slide-leave-active {
