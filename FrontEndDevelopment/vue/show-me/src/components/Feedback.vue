@@ -123,10 +123,10 @@ export default {
     methods: {
 
         getTimeStamp: function(timeInMilliseconds){
-            let d  = new Date(timeInMilliseconds)
-            var date = new Date(timeInMilliseconds); 
-            var timestamp =  date.getFullYear() +"/"+ this.monthFormat(date.getMonth()+1) +"/"+  date.getDate()+" at "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds(); 
-            return timestamp;
+            // let d  = new Date(timeInMilliseconds)
+            // var date = new Date(timeInMilliseconds); 
+            // var timestamp =  date.getFullYear() +"/"+ this.monthFormat(date.getMonth()+1) +"/"+  date.getDate()+" at "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds(); 
+            return this.$moment(timeInMilliseconds).format('YYYY-MM-DD h:mm:ss a');
         },
         monthFormat : function(val){
 		    if(val < 10){

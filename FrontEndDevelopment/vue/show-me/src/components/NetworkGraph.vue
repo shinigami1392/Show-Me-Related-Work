@@ -22,7 +22,7 @@
                         <md-checkbox type="checkbox" class="md-primary" id="l2" value="outgoing"  
                         v-model="linkType" v-on:change="filterLinks()" checked>Outgoing Links</md-checkbox>
                         </div>
-                        <table id="legend" class="table table-condensed md-subheading table-striped" style="display: block; height: 90%;table-layout:fixed;">
+                        <table id="legend" class="table table-condensed md-subheading table-striped" style="">
                             <thead class="table-head-legend">
                                 <tr>
                                     <th>ID</th>
@@ -223,6 +223,7 @@ export default {
         });
 
         cy.maxZoom(2.0);
+        cy.minZoom(0.6);
 
         this.graph = cy;
         var vm = this;
@@ -303,14 +304,9 @@ export default {
 
 <style>
 #details {
-
     height: 350px;
     width: 600px;
     display: block;
-}
-
-#legend {
-    border: 1px solid #999
 }
 
 #legend_elements_list {
