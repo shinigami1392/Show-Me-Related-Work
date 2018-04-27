@@ -129,7 +129,7 @@
         })
         .then(response => {
           let userData = JSON.stringify(response.data);
-          //console.log(JSON.stringify(response.data));
+          console.log(JSON.stringify(response.data));
           localStorage.setItem('userData', userData);
           let userObjTemp = JSON.parse(localStorage.getItem('userData'));
           axios.post(vm.$store.state.IP_Config +'/users/user', {

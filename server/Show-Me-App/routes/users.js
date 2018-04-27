@@ -10,6 +10,7 @@ router.get('/userId/:id', function(req, res, next) {
 
 router.post('/user', function(req, res, next){
 	console.log('post user');
+	console.log(req.body);
 	apis.findOrCreateUser(req.body.userId, req.body.first_name, req.body.last_name, req.body.email, res);
 });
 

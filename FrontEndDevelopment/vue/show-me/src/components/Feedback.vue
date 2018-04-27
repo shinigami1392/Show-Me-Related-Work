@@ -134,6 +134,77 @@ export default {
 		    }
 		    return val;
         },
+        addRemoveUpvote : function(){     
+            this.weight = this.weight + 1;
+            if(this.upvoteButtonClass === 'btn btn-primary btn-sm'){
+                this.upvoteButtonClass = 'btn btn-default'
+                axios
+                    .put(`http://54.201.123.246:8081/relations/upvote/add?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
+                         `&user=` + this.userObjTemp.userid)
+                    .then(response => {
+                            console.log(response.data);
+                            if (response.status == 200) {
+                                this.upvotesCount = this.upvotesCount + 1;
+                            }  
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    }
+                );           
+
+            }    
+            else if(this.upvoteButtonClass === 'btn btn-default') {
+                this.upvoteButtonClass = 'btn btn-primary btn-sm'
+                axios
+                    .put(`http://54.201.123.246:8081/relations/upvote/remove?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
+                        `&user=` + this.userObjTemp.userid)
+                    .then(response => {
+                            if (response.status == 200) {                               
+                               this.upvotesCount = this.upvotesCount - 1;
+                            }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    }
+                );
+            }   
+        },
+        addRemoveDownvote : function(){         
+            
+            this.weight = this.weight + 1;                     
+
+            if(this.downvoteButtonClass === 'btn btn-primary btn-sm'){
+                this.downvoteButtonClass = 'btn btn-default'
+                axios
+                    .put(`http://54.201.123.246:8081/relations/downvote/add?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
+                        `&user=` + this.userObjTemp.userid)
+                    .then(response => {
+                            if (response.status == 200) {                               
+                               this.downvotesCount = this.downvotesCount + 1;
+                            }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    }
+                );           
+            }    
+            else if(this.downvoteButtonClass === 'btn btn-default') {
+                this.downvoteButtonClass = 'btn btn-primary btn-sm'
+                axios
+                    .put(`http://54.201.123.246:8081/relations/downvote/remove?domain=` + this.domain + `&source=` + this.source + `&destination=` + this.destination +
+                        `&user=` + this.userObjTemp.userid)
+                    .then(response => {
+                            if (response.status == 200) {                                
+                                this.downvotesCount = this.downvotesCount - 1;
+                            }
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    }
+                );
+
+            }   
+        },
         addComment: function() {
                 let requestUrl = this.$store.state.IP_Config + `/relations/comment/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId + `&user=` +this.userObject.userid+`&text=` + this.user_comment; 
                 console.log(requestUrl);

@@ -37,7 +37,7 @@ function getPaperCatagories(vm) {
     .get(this.$store.state.IP_Config +`/domains/all`)
     .then(response => {
       vm.categories = response.data.domains;
-      console.log(JSON.stringify(vm.categories));
+      //console.log(JSON.stringify(vm.categories));
       vm.$store.commit('setDomains',  vm.categories);
     })
     .catch(err => {

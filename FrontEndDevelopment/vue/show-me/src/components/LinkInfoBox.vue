@@ -13,15 +13,15 @@
           </tr>
           <tr>
             <td>Source Paper</td>
-            <td>{{this.sourceName}}</td>
+            <td>{{linkInfo.sourceTitle}}</td>
           </tr>
           <tr>
             <td>Destination Paper</td>
-            <td>{{this.destinationName}}</td>
+            <td>{{linkInfo.destinationTitle}}</td>
           </tr>
           <tr>
             <td>Weight</td>
-            <td>{{this.upvotesCount - this.downvotesCount}}</td>
+            <td>{{linkInfo.relation.upvotes - linkInfo.relation.downvotes}}</td>
           </tr>
         </tbody>
       </table>
