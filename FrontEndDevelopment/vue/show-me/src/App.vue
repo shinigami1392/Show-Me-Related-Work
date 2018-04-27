@@ -1,7 +1,7 @@
 <template>
 
-<div id="app">
-    <div id="foreground">
+<div id="app"  style="min-height:100vh;">
+    <div id="foreground"  style="min-height:100vh;">
         <!-- Fixed navbar -->
         <md-toolbar style="background-color:#35342f;color:#fff">
             <span><md-button class="md-icon-button md-plain" @click="goToHome">

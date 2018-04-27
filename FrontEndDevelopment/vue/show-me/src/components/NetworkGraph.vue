@@ -14,7 +14,7 @@
                     </div>
                 </div>
 
-                <div class="col-md-4" style="padding: 0px 0px; height:100%;">
+                <div class="col-md-4" style="padding: 0px 0px;">
                     <div style="height:100%; width:inherit;">
                         <div>
                         <md-checkbox type="checkbox"  class="md-primary"  id="l1" value="incoming"   
@@ -22,7 +22,7 @@
                         <md-checkbox type="checkbox" class="md-primary" id="l2" value="outgoing"  
                         v-model="linkType" v-on:change="filterLinks()" checked>Outgoing Links</md-checkbox>
                         </div>
-                        <table id="legend" class="table table-condensed md-subheading table-striped" style="">
+                        <table id="legend" class="table table-condensed table-striped" style="">
                             <thead class="table-head-legend">
                                 <tr>
                                     <th>ID</th>
@@ -60,7 +60,7 @@ function plotGraph(vm, paperInfo) {
     var legend_elements = [];
     var incoming_citations = [];
     nodes.push({ data: { id: paperInfo.id , type: 'root'} });
-    legend_elements.push({ id: paperInfo.id, name: paperInfo.name, type: 'root'});
+    //legend_elements.push({ id: paperInfo.id, name: paperInfo.name, type: 'root'});
     for (var i = 0; i < paperInfo.incoming_relations.length; i++) {
         var nodeObj = {
             data: { id: '' , type: 'incoming'}
@@ -304,8 +304,8 @@ export default {
 
 <style>
 #details {
-    height: 350px;
-    width: 600px;
+    height: 100vh;
+    width: 100vw;
     display: block;
 }
 

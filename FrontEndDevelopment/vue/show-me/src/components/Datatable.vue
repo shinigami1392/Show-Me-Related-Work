@@ -22,7 +22,7 @@
             return {
                 researchPapersBoxHeader: "Research Papers",
                 cardStyle: "height:100%;",
-                cardBlockStyle: "height:90%; overflow-y:scroll;",
+                cardBlockStyle: "height:90%;",
                 cardBlockContentStyle: "height:100%;",
                 papers:[],
                 columns: []
