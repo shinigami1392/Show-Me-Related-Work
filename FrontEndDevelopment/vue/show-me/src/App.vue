@@ -13,7 +13,7 @@
             <span id="researchPtr" class="md-title" @click="showNavigation = true">Research Domains</span>
 
             <div class="md-toolbar-section-end">
-                <md-button v-if="!userObjTemp.authorized" class="md-button" style="background-color:#35342f" @click="login()">
+                <md-button v-if="!userObjTemp.authorized" class="md-button" style="background-color:#35342f" @click="getLastURlBeforeLogin()">
                     <span style="background-color:#35342f;color:#fff">Sign In</span>&ensp;<md-icon style="background-color:#35342f;color:#fff">touch_app</md-icon>
                 </md-button >
                 <md-menu md-align-trigger v-if="userObjTemp.authorized">
@@ -144,7 +144,8 @@
               console.log(error);
             });
           vm.createPayloadAndCommit(userObjTemp);
-          vm.$router.push('home');
+          var lastURL = sessionStorage.getItem('lastVisitedURL');
+          vm.$router.push(lastURL);
         })
         .catch(err => {
           console.log(err);
@@ -172,6 +173,11 @@
         this.$router.push({
           name: 'home'
         });
+      },
+      getLastURlBeforeLogin: function() {
+          var lastURL = this.$route.fullPath;                   
+          sessionStorage.setItem('lastVisitedURL', lastURL);
+          login();
       },
       createPayloadAndCommit: function (userObjTemp) {
         let payload = {};
