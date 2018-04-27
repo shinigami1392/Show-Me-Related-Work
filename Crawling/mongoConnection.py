@@ -6,7 +6,7 @@ class mongoClient:
 		self.port = "27017"
 		self.client = None
 		self.dbName = "showMe"
-		self.totalDomains = 5
+		self.totalDomains = 14
 
 	def formMongoURL(self):
 		# return "mongodb://" + self.host + ":" + self.port
@@ -36,13 +36,13 @@ class mongoClient:
 		db = self.client
 		print 'saving papers', len(objects)
 		errors = []
-		document = db.newdomainmodels.find_one({'domainName':stream})
+		document = db.domainmodels.find_one({'domainName':stream})
 		if document:
 			print 'domain name is present'
 			try:
 				papers = document['papers']
 				papers += objects
-				db.newdomainmodels.update_one(
+				db.domainmodels.update_one(
 					{"id":document['id']}, 
 					{"$set":{"papers":papers}
 					})
@@ -50,7 +50,7 @@ class mongoClient:
 				print e.message
 			
 		else:
-			db.newdomainmodels.insert_one({
+			db.domainmodels.insert_one({
 				'id': str(self.totalDomains),
 				'domainName': stream,
 				'papers': objects
