@@ -102,7 +102,7 @@
 
   function getPaperCatagories(vm) {
     axios
-      .get(`http://54.201.123.246:8081/domains/all`)
+      .get(vm.$store.state.IP_Config +`/domains/all`)
       .then(response => {
         vm.categories = response.data.domains;
        // console.log(JSON.stringify(vm.categories));
@@ -132,7 +132,7 @@
           //console.log(JSON.stringify(response.data));
           localStorage.setItem('userData', userData);
           let userObjTemp = JSON.parse(localStorage.getItem('userData'));
-          axios.post('http://localhost:8081/users/user', {
+          axios.post(vm.$store.state.IP_Config +'/users/user', {
               userId: response.data.sub,
               first_name: response.data.given_name,
               last_name: response.data.family_name,

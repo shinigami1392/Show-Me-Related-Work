@@ -135,7 +135,7 @@ export default {
 		    return val;
         },
         addComment: function() {
-                let requestUrl = `http://54.201.123.246:8081/relations/comment/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId + `&user=` +this.userObject.userid+`&text=` + this.user_comment; 
+                let requestUrl = this.$store.state.IP_Config + `/relations/comment/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId + `&user=` +this.userObject.userid+`&text=` + this.user_comment; 
                 console.log(requestUrl);
             axios
                 .put(requestUrl)
@@ -151,7 +151,8 @@ export default {
                         userCom.username = this.userObject.given_name + " "+ this.userObject.family_name;
                         
                         var d = new Date();
-                        userCom.timestamp = d.toISOString();
+                        let curr = d.toISOString();
+                        userCom.timestamp = curr;
                         this.comments.push(userCom);
                         this.user_comment='';
                         this.$toastr('add', {
@@ -203,7 +204,7 @@ export default {
             this.upvoteButtonClicked = true
            Object.assign(document.getElementById('upvoteButton').style,{'font-size':"30px",color:"#0081c6"});
             axios
-                .put(`http://54.201.123.246:8081/relations/upvote/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
+                .put(this.$store.state.IP_Config +`/relations/upvote/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
                         `&user=` + this.userObject.userid)
                 .then(response => {
                         if (response.status == 200) {
@@ -221,7 +222,7 @@ export default {
             Object.assign(document.getElementById('upvoteButton').style,{'font-size':"24px",color:"gray"});
             this.upvoteButtonClicked = false;
             axios
-                .put(`http://54.201.123.246:8081/relations/upvote/remove?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
+                .put(this.$store.state.IP_Config +`/relations/upvote/remove?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
                         `&user=` + this.userObject.userid)
                 .then(response => {
                         if (response.status == 200) {
@@ -241,7 +242,7 @@ export default {
             Object.assign(document.getElementById('downvoteButton').style,{'font-size':"30px",color:"#0081c6"});
             this.downvoteButtonClicked = true;
             axios
-                .put(`http://54.201.123.246:8081/relations/downvote/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
+                .put(this.$store.state.IP_Config +`/relations/downvote/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
                         `&user=` + this.userObject.userid)
                 .then(response => {
                         if (response.status == 200) { 
@@ -258,7 +259,7 @@ export default {
             Object.assign(document.getElementById('downvoteButton').style,{'font-size':"24px",color:"gray"});
             this.downvoteButtonClicked = false
             axios
-                .put(`http://54.201.123.246:8081/relations/downvote/remove?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
+                .put(this.$store.state.IP_Config +`/relations/downvote/remove?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
                         `&user=` + this.userObject.userid)
                 .then(response => {
                         if (response.status == 200) {   

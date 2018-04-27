@@ -162,12 +162,16 @@ exports.addUpvotes = function(domain, source, destination, userId, res){
 				if(keys.indexOf(destination) != -1){
 					
 					var index = relations[destination].upvotes.indexOf(userId);
-					if (index == -1)
-						relations[destination].upvotes.push(userId);
-
-					var index = relations[destination].downvotes.indexOf(userId);
-					if(index > -1)
-						relations[destination].downvotes.splice(index,1);
+					if (index == -1) {
+						relations[destination].upvotes.push(userId);	
+						updateNeo4j( 'add' ,'upvotes', sourcePaper.id, destination );
+					}
+					
+					// var index = relations[destination].downvotes.indexOf(userId);
+					// if(index > -1) {						
+					// 	relations[destination].downvotes.splice(index,1);
+					// }
+						
   	
 					currentdomain.papers[sourceIndex].references = relations;
 	
@@ -185,6 +189,9 @@ exports.addUpvotes = function(domain, source, destination, userId, res){
 		}
 	});
 }
+
+
+
 
 exports.removeUpvotes = function(domain, source, destination, userId, res){
 	if(!domain) invalidInput('Please enter domain', res);
@@ -214,8 +221,10 @@ exports.removeUpvotes = function(domain, source, destination, userId, res){
 				if(keys.indexOf(destination) != -1){
 					
 					var index = relations[destination].upvotes.indexOf(userId);
-					if (index > -1)
-						relations[destination].upvotes.splice(index, 1);
+					if (index > -1) {
+						relations[destination].upvotes.splice(index, 1);						
+						updateNeo4j( 'remove' ,'upvotes', sourcePaper.id, destination );
+					}					
   	
 					currentdomain.papers[sourceIndex].references = relations;
 					
@@ -262,12 +271,17 @@ exports.addDownvotes = function(domain, source, destination, userId, res){
 				if(keys.indexOf(destination) != -1){
 					
 					var index = relations[destination].downvotes.indexOf(userId);
-					if (index == -1)
-						relations[destination].downvotes.push(userId);
+					if (index == -1) {
+						relations[destination].downvotes.push(userId);					
+						updateNeo4j( 'add' ,'downvotes', sourcePaper.id, destination );
+					}
+						
 
-					var index = relations[destination].upvotes.indexOf(userId);
-					if(index > -1)
-						relations[destination].upvotes.splice(index,1);
+					// var index = relations[destination].upvotes.indexOf(userId);
+					// if(index > -1) {
+					// 	relations[destination].upvotes.splice(index,1);
+					// }
+						
   	
 					currentdomain.papers[sourceIndex].references = relations;
 	
@@ -314,8 +328,11 @@ exports.removeDownvotes = function(domain, source, destination, userId, res){
 				if(keys.indexOf(destination) != -1){
 					
 					var index = relations[destination].downvotes.indexOf(userId);
-					if (index > -1)
-						relations[destination].downvotes.splice(index, 1);
+					if (index > -1) {
+						relations[destination].downvotes.splice(index, 1);						
+						updateNeo4j( 'remove' ,'downvotes', sourcePaper.id, destination );
+					}
+						
   	
 					currentdomain.papers[sourceIndex].references = relations;
 					
@@ -333,6 +350,66 @@ exports.removeDownvotes = function(domain, source, destination, userId, res){
 		}
 	});
 }
+
+var updateNeo4j = function( action, choice, source, destination  ) {
+	driver = GraphNodeModel.getDriver();
+	session = driver.session();
+	var upvotesCount = 0, downvotesCount = 0;	
+	var relation = session.run('MATCH p=(p1:ResearchPaper)-[r:HAS_REFERRED]->(p2:ResearchPaper) where p1.Id="' + source + '" AND p2.Id="'+ destination  +'" RETURN r');
+	relation.then(result => {
+		session.close();
+		upvotesCount = result.records[0].get(0).properties.upvotes
+		downvotesCount = result.records[0].get(0).properties.downvotes							
+		driver.close();		
+
+		if (action === 'add') {
+			if (choice === 'upvotes') {
+				upvotesCount = (Number(upvotesCount) + 1).toString();					
+				updateUpvoteDownvote(upvotesCount, choice , source, destination );
+			}
+			else if (choice === 'downvotes') {
+				downvotesCount = (Number(downvotesCount) + 1).toString();	
+				updateUpvoteDownvote(downvotesCount, choice , source, destination );
+			}
+		}
+		else if (action === 'remove') {			
+			if (choice === 'upvotes') {
+				upvotesCount = (Number(upvotesCount) - 1).toString();					
+				updateUpvoteDownvote(upvotesCount, choice , source, destination );
+			}
+			else if (choice === 'downvotes') {
+				downvotesCount = (Number(downvotesCount) - 1).toString();	
+				updateUpvoteDownvote(downvotesCount, choice, source, destination );
+			}
+		}									
+	  });
+
+}
+
+var updateUpvoteDownvote = function(value, property, sourceid, destination){
+		driver = GraphNodeModel.getDriver();
+		session = driver.session();			
+		if (property === 'upvotes') {			
+			var update = session.run('MATCH p=(p1:ResearchPaper)-[r:HAS_REFERRED]->(p2:ResearchPaper) where p1.Id= "' + sourceid +'" AND p2.Id= "'+ destination +'" SET r.upvotes = "'+  value +'"')
+			update.then(result => {
+				session.close();
+				//console.log(result)		
+				driver.close();
+			  }).catch(err => {			  
+			  })
+		}
+		else {			
+			var update = session.run('MATCH p=(p1:ResearchPaper)-[r:HAS_REFERRED]->(p2:ResearchPaper) where p1.Id= "' + sourceid +'" AND p2.Id= "'+ destination +'" SET r.downvotes = "'+  value +'"')
+			update.then(result => {
+				session.close();
+				//console.log(result)		
+				driver.close();
+			  }).catch(err => {			  
+			  })	
+		}
+		
+}
+
 
 exports.addComments = function(domain, source, destination, userId, text, res){
 	if(!domain) invalidInput('Please enter domain', res);
@@ -432,6 +509,10 @@ var getGraphNode = function (paperId, res) {
 			}
 
 			driver.close();
+			var uniqueResultSet = {};
+			let filtered = resultSet['outgoing_relations'].filter(obj => !uniqueResultSet[obj.destination_id] && (uniqueResultSet[obj.destination_id] = true));
+			console.log(filtered);
+			resultSet['outgoing_relations'] = filtered;
 			driver = GraphNodeModel.getDriver();
 			session = driver.session();
 			var resultPromise2 = session.run('MATCH p=(p1:ResearchPaper)<-[r:HAS_REFERRED]-(p2:ResearchPaper) where p1.Id="' + paperId + '"RETURN r, p2');
@@ -447,6 +528,11 @@ var getGraphNode = function (paperId, res) {
 					resultSet['incoming_relations'].push(data);
 				}
 				driver.close();
+				uniqueResultSet = {};
+				filtered = []
+				filtered = resultSet['incoming_relations'].filter(obj => !uniqueResultSet[obj.source_id] && (uniqueResultSet[obj.source_id] = true));
+				console.log(filtered);
+				resultSet['incoming_relations'] = filtered;
 				res.send(resultSet);
 			});
 		});

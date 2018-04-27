@@ -18,7 +18,8 @@ export const store = new Vuex.Store({
             weight:0,
             upvotesCount:0,
             downvotesCount:0   
-        }
+        },
+        IP_Config :'http://54.201.123.246:8081',
     },
     mutations:{
         setAuthorization(state, payload){
