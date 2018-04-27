@@ -160,25 +160,27 @@ exports.addUpvotes = function(domain, source, destination, userId, res){
 				var foundFlag = false;
 				var keys = Object.keys(relations);
 				if(keys.indexOf(destination) != -1){
-					
+					var isDownvotedByUser = false;
+
 					var index = relations[destination].upvotes.indexOf(userId);
 					if (index == -1) {
 						relations[destination].upvotes.push(userId);	
 						updateNeo4j( 'add' ,'upvotes', sourcePaper.id, destination );
 					}
 					
-					// var index = relations[destination].downvotes.indexOf(userId);
-					// if(index > -1) {						
-					// 	relations[destination].downvotes.splice(index,1);
-					// }
-						
-  	
+					var index = relations[destination].downvotes.indexOf(userId);
+					if(index > -1) {
+						isDownvotedByUser = true;						
+						relations[destination].downvotes.splice(index,1);
+						updateNeo4j( 'remove' ,'downvotes', sourcePaper.id, destination );
+					}
+					  	
 					currentdomain.papers[sourceIndex].references = relations;
 	
 					currentdomain.save(function(err){
 						if(err) sendInternalServerError(err, res);
 						else{ 
-							res.send({'updated':true});
+							res.send({'updated':true, "isDownvotedByUser":isDownvotedByUser });
 						}
 					});
 				}
@@ -269,18 +271,21 @@ exports.addDownvotes = function(domain, source, destination, userId, res){
 				var foundFlag = false;
 				var keys = Object.keys(relations);
 				if(keys.indexOf(destination) != -1){
+
+					var isUpvotedByUser = false;
 					
 					var index = relations[destination].downvotes.indexOf(userId);
-					if (index == -1) {
+					if (index == -1) {						
 						relations[destination].downvotes.push(userId);					
 						updateNeo4j( 'add' ,'downvotes', sourcePaper.id, destination );
 					}
 						
-
-					// var index = relations[destination].upvotes.indexOf(userId);
-					// if(index > -1) {
-					// 	relations[destination].upvotes.splice(index,1);
-					// }
+					var index = relations[destination].upvotes.indexOf(userId);
+					if(index > -1) {
+						isUpvotedByUser = true;
+						relations[destination].upvotes.splice(index,1);
+						updateNeo4j( 'remove' ,'upvotes', sourcePaper.id, destination );
+					}
 						
   	
 					currentdomain.papers[sourceIndex].references = relations;
@@ -288,7 +293,7 @@ exports.addDownvotes = function(domain, source, destination, userId, res){
 					currentdomain.save(function(err){
 						if(err) sendInternalServerError(err, res);
 						else{ 
-							res.send({'updated':true});
+							res.send({'updated':true, "isUpvotedByUser":isUpvotedByUser});
 						}
 					});
 				}

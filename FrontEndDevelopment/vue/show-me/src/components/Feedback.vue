@@ -198,40 +198,74 @@ export default {
             });
         },
 
+        toggleUpvoteButton : function (){
+            if(this.upvoteButtonClicked === false){
+                this.upvotesCount = this.upvotesCount + 1;
+                this.upvoteButtonClicked = true
+                Object.assign(document.getElementById('upvoteButton').style,{'font-size':"30px",color:"#0081c6"});
+            }
+            else {
+                this.upvotesCount = this.upvotesCount - 1;
+                this.upvoteButtonClicked = false
+                Object.assign(document.getElementById('upvoteButton').style,{'font-size':"24px",color:"gray"});
+            }
+        },
+
+        toggleDownvoteButton : function () {
+            if (this.downvoteButtonClicked === false) {
+                this.downvotesCount = this.downvotesCount + 1;
+                Object.assign(document.getElementById('downvoteButton').style,{'font-size':"30px",color:"#0081c6"});
+                this.downvoteButtonClicked = true;
+            }
+            else {
+                this.downvotesCount = this.downvotesCount - 1;
+                Object.assign(document.getElementById('downvoteButton').style,{'font-size':"24px",color:"gray"});
+                this.downvoteButtonClicked = false
+            }
+        },
+
         //---------
         addRemoveUpvote : function() {     
         if(this.upvoteButtonClicked === false){
-            this.upvoteButtonClicked = true
-           Object.assign(document.getElementById('upvoteButton').style,{'font-size':"30px",color:"#0081c6"});
+            //this.upvoteButtonClicked = true
+           //Object.assign(document.getElementById('upvoteButton').style,{'font-size':"30px",color:"#0081c6"});
+            this.toggleUpvoteButton();
             axios
                 .put(this.$store.state.IP_Config +`/relations/upvote/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
                         `&user=` + this.userObject.userid)
                 .then(response => {
-                        if (response.status == 200) {
-                         //   console.log(response.status)
-                            this.upvotesCount = this.upvotesCount + 1;
+                        if (response.status == 200) {                                                          
+                            //this.upvotesCount = this.upvotesCount + 1;
+                            if (response.data.isDownvotedByUser) {
+                                //this.downvotesCount = this.downvotesCount - 1;
+                                //Object.assign(document.getElementById('downvoteButton').style,{'font-size':"24px",color:"gray"});
+                                //this.downvoteButtonClicked = false;
+                                this.toggleDownvoteButton();
+                            }
                         }  
                 })
                 .catch(err => {
+                    this.upvotesCount = this.upvotesCount - 1;
                     console.log(err);
                 }
             );           
 
         }    
         else if(this.upvoteButtonClicked === true) {
-            Object.assign(document.getElementById('upvoteButton').style,{'font-size':"24px",color:"gray"});
-            this.upvoteButtonClicked = false;
+           // Object.assign(document.getElementById('upvoteButton').style,{'font-size':"24px",color:"gray"});
+           // this.upvoteButtonClicked = false;
+           this.toggleUpvoteButton();
             axios
                 .put(this.$store.state.IP_Config +`/relations/upvote/remove?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
                         `&user=` + this.userObject.userid)
                 .then(response => {
-                        if (response.status == 200) {
-                         //   console.log(response.status)                               
-                            this.upvotesCount = this.upvotesCount - 1;
+                        if (response.status == 200) {                                                           
+                            //this.upvotesCount = this.upvotesCount - 1;
                         }
                 })
                 .catch(err => {
-                    console.log(err);
+                    //console.log(err);
+                    this.upvotesCount = this.upvotesCount + 1;
                 }
             );
         }   
@@ -239,36 +273,43 @@ export default {
 
         addRemoveDownvote : function(){  
         if(this.downvoteButtonClicked === false){
-            Object.assign(document.getElementById('downvoteButton').style,{'font-size':"30px",color:"#0081c6"});
-            this.downvoteButtonClicked = true;
+            //Object.assign(document.getElementById('downvoteButton').style,{'font-size':"30px",color:"#0081c6"});
+            //this.downvoteButtonClicked = true;
+            this.toggleDownvoteButton();
             axios
                 .put(this.$store.state.IP_Config +`/relations/downvote/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
                         `&user=` + this.userObject.userid)
                 .then(response => {
-                        if (response.status == 200) { 
-                          //  console.log(response.status)                              
-                            this.downvotesCount = this.downvotesCount + 1;
+                        if (response.status == 200) {                                                           
+                           // this.downvotesCount = this.downvotesCount + 1;
+                            if (response.data.isUpvotedByUser) {
+                                //this.upvotesCount = this.upvotesCount - 1;
+                               // Object.assign(document.getElementById('upvoteButton').style,{'font-size':"24px",color:"gray"});
+                                //this.upvoteButtonClicked = false;
+                                this.toggleUpvoteButton();
+                            }
                         }
                 })
                 .catch(err => {
-                    console.log(err);
+                    //console.log(err);
+                    this.downvotesCount = this.downvotesCount - 1;
                 }
             );           
         }    
         else if(this.downvoteButtonClicked === true) {
-            Object.assign(document.getElementById('downvoteButton').style,{'font-size':"24px",color:"gray"});
-            this.downvoteButtonClicked = false
+            //Object.assign(document.getElementById('downvoteButton').style,{'font-size':"24px",color:"gray"});
+           // this.downvoteButtonClicked = false
+           this.toggleDownvoteButton();
             axios
                 .put(this.$store.state.IP_Config +`/relations/downvote/remove?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
                         `&user=` + this.userObject.userid)
                 .then(response => {
-                        if (response.status == 200) {   
-                          //  console.log(response.status)                             
-                            this.downvotesCount = this.downvotesCount - 1;
+                        if (response.status == 200) {                                                         
+                           // this.downvotesCount = this.downvotesCount - 1;
                         }
                 })
                 .catch(err => {
-                    console.log(err);
+                    this.downvotesCount = this.downvotesCount + 1;
                 }
             );
 

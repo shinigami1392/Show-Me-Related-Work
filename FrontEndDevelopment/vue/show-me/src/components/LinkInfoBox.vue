@@ -97,7 +97,7 @@ export default {
                     `&user=` + this.userObject.userid)
               .then(response => {
                       if (response.status == 200) {
-                          console.log(response.status)
+                          console.log(response)
                           this.upvotesCount = this.upvotesCount + 1;
                       }  
               })
@@ -115,7 +115,7 @@ export default {
                     `&user=` + this.userObject.userid)
               .then(response => {
                       if (response.status == 200) {
-                          console.log(response.status)                               
+                          console.log(response)                               
                           this.upvotesCount = this.upvotesCount - 1;
                       }
               })
@@ -135,7 +135,7 @@ export default {
                     `&user=` + this.userObject.userid)
               .then(response => {
                       if (response.status == 200) { 
-                          console.log(response.status)                              
+                          console.log(response)                              
                           this.downvotesCount = this.downvotesCount + 1;
                       }
               })
@@ -152,7 +152,7 @@ export default {
                     `&user=` + this.userObject.userid)
               .then(response => {
                       if (response.status == 200) {   
-                          console.log(response.status)                             
+                          console.log(response)                             
                           this.downvotesCount = this.downvotesCount - 1;
                       }
               })

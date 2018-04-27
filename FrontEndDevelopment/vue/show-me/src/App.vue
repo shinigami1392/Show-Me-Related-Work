@@ -145,6 +145,9 @@
             });
           vm.createPayloadAndCommit(userObjTemp);
           var lastURL = sessionStorage.getItem('lastVisitedURL');
+          if (lastURL === undefined || lastURL === null || lastURL === '') {
+              lastURL = '/';
+          }
           vm.$router.push(lastURL);
         })
         .catch(err => {
