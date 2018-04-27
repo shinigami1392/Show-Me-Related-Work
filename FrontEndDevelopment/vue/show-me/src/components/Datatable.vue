@@ -47,7 +47,7 @@
                 "searching": false,
                 "ordering": false,
 				"ajax" : {
-					"url": "http://54.201.123.246:8081/domains/papers",
+					"url": this.$store.state.IP_Config +"/domains/papers",
                     "contentType":"application/json",
                     "type": "POST",
                     "data": function ( d ) {
