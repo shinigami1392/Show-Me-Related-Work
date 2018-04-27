@@ -1,14 +1,14 @@
 <template>
 
-<div id="app" style="min-height:100vh;">
-    <div id="foreground" style="min-height:100vh;">
+<div id="app">
+    <div id="foreground">
         <!-- Fixed navbar -->
-        <md-toolbar style="background-color:#35342f;color:white">
+        <md-toolbar style="background-color:#35342f;color:#fff">
             <span><md-button class="md-icon-button md-plain" @click="goToHome">
-                <md-icon style="color:white">home</md-icon>
+                <md-icon style="color:#fff">home</md-icon>
             </md-button></span>&emsp; 
             <span><md-button class="md-icon-button" @click="showNavigation = true">
-                <md-icon style="color:white">subject</md-icon>
+                <md-icon style="color:#fff">subject</md-icon>
             </md-button></span>  
             <span id="researchPtr" class="md-title" @click="showNavigation = true">Research Domains</span>
 
@@ -30,13 +30,13 @@
 
         <!-- SideBar-->
         <md-drawer :md-active.sync="showNavigation">
-            <md-toolbar class="md-transparent" md-elevation="0">
+            <md-toolbar md-elevation="2">
                 <span class="md-title">Research Domains</span>
             </md-toolbar>
 
             <md-list v-if="categories && categories.length">
                 <md-list-item v-for="category in categories" :key="category.id">
-                    <span class="md-list-item-text">
+                    <span class="md-list-item-text md-subheading">
                         <router-link :to="{ name:'allPapers',params:{areaid:category.id}}">{{ category.name }}</router-link>
                     </span>
                     <span class="badge badge-primary badge-pill">{{ category.count }}</span>
@@ -62,7 +62,7 @@
                         </transition>
                     </div>
                 </div>
-                <div class="row" style="margin-top:30px;margin-bottom:100px">
+                <div class="row" style="margin-top:60px;margin-bottom:100px">
                     <div class="col-md-12">
                         <transition name="slide" mode="out-in">
                             <router-view name="info-box" :key="$route.fullPath"></router-view>
@@ -77,11 +77,10 @@
                 </div>
             </div>
         </div>
-        <div style="margin-top:30px;"></div>
 
         <!--Footer-->
-        <footer>
-            <app-footer></app-footer>
+        <footer class="md-subheading">
+            <app-footer style="bottom:0;"></app-footer>
         </footer>
     </div>
 </div>
@@ -103,7 +102,7 @@
 
   function getPaperCatagories(vm) {
     axios
-      .get(`http://54.201.123.246:8081/domains/all`)
+      .get(vm.$store.state.IP_Config +`/domains/all`)
       .then(response => {
         vm.categories = response.data.domains;
        // console.log(JSON.stringify(vm.categories));
@@ -133,7 +132,7 @@
           //console.log(JSON.stringify(response.data));
           localStorage.setItem('userData', userData);
           let userObjTemp = JSON.parse(localStorage.getItem('userData'));
-          axios.post('http://localhost:8081/users/user', {
+          axios.post(vm.$store.state.IP_Config +'/users/user', {
               userId: response.data.sub,
               first_name: response.data.given_name,
               last_name: response.data.family_name,
@@ -213,8 +212,19 @@
 
 
 <style>
+    html,
     body {
-        background-color: #dddddd
+        margin:0;
+        padding:0;
+        height:100%;
+        background-color:#e1e0dd !important;
+    }
+
+    #main{
+        height:auto !important;
+        min-height:100%;
+        margin-left:200px;
+        margin-right:200px;
     }
 
     .slide-leave-active {
@@ -250,13 +260,14 @@
         }
     }
 
-    .container-fluid {
+    /*.container-fluid {
+        min-height:100%;;
         padding-left: 200px;
         padding-right: 200px;
-    }
+    }*/
 
     .md-drawer {
-        width: 267px;
+        width: 300px;
     }
 
     #researchPtr{

@@ -1,7 +1,7 @@
 <template>
   <app-box class="md-elevation-5" v-bind:boxHeaderProp="feedbackBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle"
     v-bind:cardBlockContentStyle="cardBlockContentStyle">
-        <table class="table">
+        <table class="table table-bordered">
           <tbody>
             <tr>
               <div style="width:25%; margin-top:5px; float:left;">
@@ -24,27 +24,25 @@
               </div>
             </tr>
             <tr>
-              <td>Source Paper</td>
-              <td>{{this.sourceName}}</td>
+              <td class="table-success table-back md-subheading">Source Paper</td>
+              <td  class="table-success table-back-text md-subheading">{{this.sourceName}}</td>
             </tr>
             <tr>
-              <td>Destination Paper</td>
-              <td>{{this.destinationName}}</td>
+              <td class="table-success table-back md-subheading">Destination Paper</td>
+              <td  class="table-success table-back-text md-subheading">{{this.destinationName}}</td>
             </tr>
             <tr>
-              <td>Weight</td>
-              <td>{{this.upvotesCount - this.downvotesCount}}</td>
+              <td class="table-success table-back md-subheading">Weight</td>
+              <td class="table-success table-back-text md-subheading">{{this.upvotesCount - this.downvotesCount}}</td>
             </tr>
           </tbody>
         </table>
-    <md-toolbar class="md-dense" style="margin-top:10px;margin-bottom:15px;">
-      <h3 class="md-title">Comments on Relationship</h3>
-    </md-toolbar>
-    <ul class="list-group" style="max-height:300px; overflow-y:auto;">
+    <div class="card-header" style="margin-top:10px;margin-bottom:15px;"><h3 class="md-title">Comments</h3></div>
+    <ul class="list-group" style="max-height:500px; overflow-y:auto;">
       <li style="padding-left:5px; " v-for="com in comments">
-        <span style="color:green; font-weight:bold;"> {{com.username}}</span>&ensp;
+        <span style="color:#f45844; font-weight:bold;"> {{com.username}}</span>&ensp;
         <br/>
-        <span style="color:#696969;font-weight:bold;">{{ getTimeStamp(com.timestamp) }}</span>&ensp;&ensp; {{com.comment}}
+        <span style="color:#35342f;font-weight:bold;">{{ getTimeStamp(com.timestamp) }}</span>&ensp;&ensp; {{com.comment}}
         <hr/>
       </li>
     </ul>
@@ -52,7 +50,7 @@
       <div style="width:90%; margin-right:25px;float:left;padding:10px">
         <textarea v-model="user_comment" class="form-control" type="text" rows="1" style="height:90%; " placeholder="Your comments"
         />
-        <md-button style="color:#fff;background-color:#3dbd5d" v-on:click="userObject.authorized ?(user_comment!=''?addComment():showTextErrMsg()):showErrMsg()">Comment</md-button> &nbsp;
+        <button type="button" class="btn btn-success" style="color:#fff;background-color:#3dbd5d;margin:5px;" v-on:click="userObject.authorized ?(user_comment!=''?addComment():showTextErrMsg()):showErrMsg()">Comment</button> &nbsp;
       </div>
     </div>
   </app-box>
@@ -116,19 +114,19 @@ export default {
         this.downvoteButtonClicked = linkInfo.downvotedByUser;
 
         if (this.upvoteButtonClicked === true) {        
-            Object.assign(document.getElementById('upvoteButton').style,{'font-size':"30px",color:"blue"});
+            Object.assign(document.getElementById('upvoteButton').style,{'font-size':"30px",color:"#0081c6"});
         }
         if (this.downvoteButtonClicked === true) {
-            Object.assign(document.getElementById('downvoteButton').style,{'font-size':"30px",color:"blue"});
+            Object.assign(document.getElementById('downvoteButton').style,{'font-size':"30px",color:"#0081c6"});
         }
     },
     methods: {
 
         getTimeStamp: function(timeInMilliseconds){
-            let d  = new Date(timeInMilliseconds)
-            var date = new Date(timeInMilliseconds); 
-            var timestamp =  date.getFullYear() +"/"+ this.monthFormat(date.getMonth()+1) +"/"+  date.getDate()+" at "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds(); 
-            return timestamp;
+            // let d  = new Date(timeInMilliseconds)
+            // var date = new Date(timeInMilliseconds); 
+            // var timestamp =  date.getFullYear() +"/"+ this.monthFormat(date.getMonth()+1) +"/"+  date.getDate()+" at "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds(); 
+            return this.$moment(timeInMilliseconds).format('YYYY-MM-DD h:mm:ss a');
         },
         monthFormat : function(val){
 		    if(val < 10){
@@ -137,7 +135,7 @@ export default {
 		    return val;
         },
         addComment: function() {
-                let requestUrl = `http://54.201.123.246:8081/relations/comment/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId + `&user=` +this.userObject.userid+`&text=` + this.user_comment; 
+                let requestUrl = this.$store.state.IP_Config + `/relations/comment/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId + `&user=` +this.userObject.userid+`&text=` + this.user_comment; 
                 console.log(requestUrl);
             axios
                 .put(requestUrl)
@@ -153,7 +151,8 @@ export default {
                         userCom.username = this.userObject.given_name + " "+ this.userObject.family_name;
                         
                         var d = new Date();
-                        userCom.timestamp = d.toISOString();
+                        let curr = d.toISOString();
+                        userCom.timestamp = curr;
                         this.comments.push(userCom);
                         this.user_comment='';
                         this.$toastr('add', {
@@ -184,7 +183,7 @@ export default {
             this.$toastr('add', {
                     title: 'Want to get involved?', // Toast Title
                     msg: 'Please sign in', // Message
-                    timeout: 5000, // Timeout in ms
+                    timeout: 2000, // Timeout in ms
                     position: 'toast-top-full-width', // Toastr position
                     type: 'info' // Toastr type
             });
@@ -193,7 +192,7 @@ export default {
             this.$toastr('add', {
                     title: 'Please enter text', // Toast Title
                     msg: '', // Message
-                    timeout: 2000, // Timeout in ms
+                    timeout: 1500, // Timeout in ms
                     position: 'toast-bottom-left', // Toastr position
                     type: 'error' // Toastr type
             });
@@ -203,10 +202,9 @@ export default {
         addRemoveUpvote : function() {     
         if(this.upvoteButtonClicked === false){
             this.upvoteButtonClicked = true
-            //document.getElementById('upvoteButton').style.color = 'blue'&& font-size ='24px';
-            Object.assign(document.getElementById('upvoteButton').style,{'font-size':"30px",color:"blue"});
+           Object.assign(document.getElementById('upvoteButton').style,{'font-size':"30px",color:"#0081c6"});
             axios
-                .put(`http://54.201.123.246:8081/relations/upvote/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
+                .put(this.$store.state.IP_Config +`/relations/upvote/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
                         `&user=` + this.userObject.userid)
                 .then(response => {
                         if (response.status == 200) {
@@ -224,7 +222,7 @@ export default {
             Object.assign(document.getElementById('upvoteButton').style,{'font-size':"24px",color:"gray"});
             this.upvoteButtonClicked = false;
             axios
-                .put(`http://54.201.123.246:8081/relations/upvote/remove?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
+                .put(this.$store.state.IP_Config +`/relations/upvote/remove?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
                         `&user=` + this.userObject.userid)
                 .then(response => {
                         if (response.status == 200) {
@@ -241,10 +239,10 @@ export default {
 
         addRemoveDownvote : function(){  
         if(this.downvoteButtonClicked === false){
-            Object.assign(document.getElementById('downvoteButton').style,{'font-size':"30px",color:"blue"});
+            Object.assign(document.getElementById('downvoteButton').style,{'font-size':"30px",color:"#0081c6"});
             this.downvoteButtonClicked = true;
             axios
-                .put(`http://54.201.123.246:8081/relations/downvote/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
+                .put(this.$store.state.IP_Config +`/relations/downvote/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
                         `&user=` + this.userObject.userid)
                 .then(response => {
                         if (response.status == 200) { 
@@ -261,7 +259,7 @@ export default {
             Object.assign(document.getElementById('downvoteButton').style,{'font-size':"24px",color:"gray"});
             this.downvoteButtonClicked = false
             axios
-                .put(`http://54.201.123.246:8081/relations/downvote/remove?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
+                .put(this.$store.state.IP_Config +`/relations/downvote/remove?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
                         `&user=` + this.userObject.userid)
                 .then(response => {
                         if (response.status == 200) {   
@@ -278,9 +276,9 @@ export default {
         },
         showErrMsg : function() {
         this.$toastr('add', {
-                title: 'Want to get involved?', // Toast Title
+                title: 'We value your feedback?', // Toast Title
                 msg: 'Please sign in', // Message
-                timeout: 5000, // Timeout in ms
+                timeout: 2000, // Timeout in ms
                 position: 'toast-top-full-width', // Toastr position
                 type: 'info' // Toastr type
         });
@@ -290,5 +288,13 @@ export default {
 </script>
 
 <style>
+
+.table-back{
+    background-color:#ececec;
+    color:#000
+}
+.table-back-text{
+    background-color:#f5f5f5;
+}
 
 </style>

@@ -4,46 +4,23 @@
       <table class="table">
         <tbody>
           <tr>
-            <td> <b> Title </b></td>
-            <td>{{paperInfo.name}}</td>
+            <td class="table-success table-back md-subheading"> Title </td>
+            <td class="table-success table-back-text md-subheading">{{paperInfo.name}}</td>
           </tr>
           <tr>
-            <td> <b>Authors </b></td>
-            <td>{{paperInfo.author}}</td>
+            <td class="table-success table-back md-subheading"> Authors </td>
+            <td class="table-success table-back-text md-subheading">{{paperInfo.author}}</td>
           </tr>
           <tr>
-            <td><b>Year </b></td>
-            <td>{{paperInfo.year}}</td>
+            <td class="table-success table-back md-subheading">Year </td>
+            <td class="table-success table-back-text md-subheading">{{paperInfo.year}}</td>
           </tr>
           <tr>
-            <td><b> URL </b></td>
-            <td>{{paperInfo.url}}</td>
+            <td class="table-success table-back md-subheading"> URL </td>
+            <td class="table-success table-back-text md-subheading"><a target="_blank" :href="paperInfo.url">{{paperInfo.url}}</a></td>
           </tr>
         </tbody>
       </table>
-
-      <!--test
-      <table class="table">
-      <tbody>
-          <tr>
-            <td>Title</td>
-            <td>{{testPaperInfo.name}}</td>
-          </tr>
-          <tr>
-            <td>Authors</td>
-            <td>{{testPaperInfo.author}}</td>
-          </tr>
-          <tr>
-            <td>Year</td>
-            <td>{{testPaperInfo.year}}</td>
-          </tr>
-          <tr>
-            <td>URL</td>
-            <td>{{testPaperInfo.url}}</td>
-          </tr>
-        </tbody>
-      </table>-->
-
     </app-box>
   </div>
 </template>
@@ -81,5 +58,12 @@ export default {
 </script>
 
 <style>
+.table-back{
+    background-color:#ececec;
+    color:#000
+}
+.table-back-text{
+    background-color:#f5f5f5;
+}
 
 </style>

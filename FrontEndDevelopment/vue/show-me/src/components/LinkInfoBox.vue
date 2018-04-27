@@ -93,7 +93,7 @@ export default {
           this.upvoteButtonClicked = true
           Object.assign(document.getElementById('upvoteButton').style,{'font-size':"30px",color:"blue"});
           axios
-              .put(`http://54.201.123.246:8081/relations/upvote/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
+              .put(this.$store.state.IP_Config +`/relations/upvote/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
                     `&user=` + this.userObject.userid)
               .then(response => {
                       if (response.status == 200) {
@@ -111,7 +111,7 @@ export default {
           Object.assign(document.getElementById('upvoteButton').style,{'font-size':"24px",color:"gray"});
           this.upvoteButtonClicked = false;
           axios
-              .put(`http://54.201.123.246:8081/relations/upvote/remove?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
+              .put(this.$store.state.IP_Config +`/relations/upvote/remove?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
                     `&user=` + this.userObject.userid)
               .then(response => {
                       if (response.status == 200) {
@@ -131,7 +131,7 @@ export default {
           Object.assign(document.getElementById('downvoteButton').style,{'font-size':"30px",color:"blue"});
           this.downvoteButtonClicked = true;
           axios
-              .put(`http://54.201.123.246:8081/relations/downvote/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
+              .put(this.$store.state.IP_Config +`/relations/downvote/add?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
                     `&user=` + this.userObject.userid)
               .then(response => {
                       if (response.status == 200) { 
@@ -148,7 +148,7 @@ export default {
          Object.assign(document.getElementById('downvoteButton').style,{'font-size':"24px",color:"gray"});
           this.downvoteButtonClicked = false
           axios
-              .put(`http://54.201.123.246:8081/relations/downvote/remove?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
+              .put(this.$store.state.IP_Config +`/relations/downvote/remove?domain=` + this.domain + `&source=` + this.sourceId + `&destination=` + this.destinationId +
                     `&user=` + this.userObject.userid)
               .then(response => {
                       if (response.status == 200) {   

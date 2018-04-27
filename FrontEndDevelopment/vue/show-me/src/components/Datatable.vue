@@ -1,7 +1,7 @@
 <template>
     <app-box v-bind:boxHeaderProp="researchPapersBoxHeader" v-bind:cardStyle="cardStyle" v-bind:cardBlockStyle="cardBlockStyle" v-bind:cardBlockContentStyle="cardBlockContentStyle">
-        <table id ='dtable' style="width:100%;">
-            <thead>
+        <table id ='dtable' style="width:100%;" class="table table-striped md-subheading">
+            <thead class="thead-light">
                 <tr>
                     <th v-for="column in columns">{{column}}</th>
                 <tr> 
@@ -47,7 +47,7 @@
                 "searching": false,
                 "ordering": false,
 				"ajax" : {
-					"url": "http://54.201.123.246:8081/domains/papers",
+					"url": this.$store.state.IP_Config +"/domains/papers",
                     "contentType":"application/json",
                     "type": "POST",
                     "data": function ( d ) {

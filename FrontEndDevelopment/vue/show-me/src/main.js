@@ -19,14 +19,19 @@ import { store } from './store';
 
 import './assets/css/fontawesome-all.css';
 import VueMaterial from 'vue-material';
-Vue.use(VueMaterial)
+import moment from 'moment';
+import VueMomentJS from 'vue-momentjs';
 
+Vue.use(VueMaterial)
+Vue.use(VueMomentJS,moment);
 Vue.use(VueRouter);
 Vue.use(VueToastr, {
   defaultPosition: 'toast-bottom-center',
   defaultType: 'info',
   defaultTimeout: 50000
 })
+
+
 Vue.component('app-box', Box);
 Vue.component('app-listbox', ListBox);
 Vue.component('app-navbar', NavigationBar);
@@ -47,9 +52,10 @@ const router = new VueRouter({
 });
 
 import axios from "axios";
+
 function fetchPaperInfo(paperid) {
   axios
-    .get(`http://54.201.123.246:8081/graphNode/graphNode/` + paperid)
+    .get(store.state.IP_Config +`/graphNode/graphNode/` + paperid)
     .then(response => {
       return response.data;
     })
@@ -80,7 +86,7 @@ router.beforeEach(function (to, from, next) {
     }
 
     axios
-      .get(`http://54.201.123.246:8081/graphNode/graphNode/` + to.params.paperid)
+      .get(store.state.IP_Config +`/graphNode/graphNode/` + to.params.paperid)
       .then(response => {
         paperInfo = response.data;
         if(paperInfo != null){
@@ -107,7 +113,7 @@ router.beforeEach(function (to, from, next) {
       }
 
       axios
-        .get(`http://54.201.123.246:8081/relations/get?domain=` + to.params.areaid + `&source=`+papers[0]+`&destination=`+papers[1]+`&user=` + userid)
+        .get(store.state.IP_Config +`/relations/get?domain=` + to.params.areaid + `&source=`+papers[0]+`&destination=`+papers[1]+`&user=` + userid)
         .then(response => {
           to.matched[0].props.linkInfo = response.data;
           to.matched[0].props.visitedPapers = visitedPapers;
@@ -130,7 +136,7 @@ router.beforeEach(function (to, from, next) {
       }
   
       axios
-        .get(`http://54.201.123.246:8081/graphNode/graphNode/` + to.params.paperid)
+        .get(store.state.IP_Config +`/graphNode/graphNode/` + to.params.paperid)
         .then(response => {
           paperInfo = response.data;
           to.matched[0].props.paperInfo = paperInfo;
