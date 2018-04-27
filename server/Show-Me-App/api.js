@@ -480,21 +480,25 @@ exports.getGraph = function (paperId, res) {
 var getGraphNode = function (paperId, res) {
 	var driver = GraphNodeModel.getDriver();
 	var session = driver.session();
-	var resultPromise = session.run('MATCH (p:ResearchPaper {Id:"' + paperId + '"}) return p');
-	resultSet = {};
+	var resultSet = {};
 	resultSet['incoming_relations'] = [];
 	resultSet['outgoing_relations'] = [];
-	resultPromise.then(result => {
-		session.close();
-		for (var i = 0; i< result.records.length; i++){
-			resultSet['id'] = result.records[i].get(0).properties.Id;
-			resultSet['name'] = result.records[i].get(0).properties.Title;
-			resultSet['author'] = result.records[i].get(0).properties.Author;
-			resultSet['url'] = result.records[i].get(0).properties.Link;
-			resultSet['year'] = result.records[i].get(0).properties.Link;
+
+	var paperQuery = PaperModel.find({id:paperId},{publicationYear:1, id:1, title:1, link:1, authors:1, domainId:1});
+	paperQuery.exec(function(err, paperRes){
+		if(err){
+			sendInternalServerError(err, res);
 		}
 
-		driver.close();
+		if(!err && paperRes !== undefined && paperRes != null && paperRes[0] != null){
+				resultSet['id'] = paperRes[0].id;
+				resultSet['name'] = paperRes[0].title;
+				resultSet['author'] = paperRes[0].authors.join();
+				resultSet['url'] = paperRes[0].link;
+				resultSet['year'] = paperRes[0].publicationYear;
+				resultSet['domainId'] = paperRes[0].domainId;
+		}
+			
 		driver = GraphNodeModel.getDriver();
 		session = driver.session();
 		var resultPromise1 = session.run('MATCH p=(p1:ResearchPaper)-[r:HAS_REFERRED]->(p2:ResearchPaper) where p1.Id="' + paperId + '"RETURN r, p2');
