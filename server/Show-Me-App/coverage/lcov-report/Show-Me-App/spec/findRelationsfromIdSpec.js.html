@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for Show-Me-App\spec\findRelationsfromIdSpec.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">Show-Me-App/spec/</a> findRelationsfromIdSpec.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">28% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>7/25</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">25% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>2/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">28% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>7/25</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var request = require("request");
+var base_url = "http://54.201.123.246:8081/relations/get?";
+&nbsp;
+describe(" SHowMe Relations", function() {
+  describe("GET /", function() {
+	  
+	//test to check if invalid relation Id is properly handled by the application.
+    it("returns status code 200", <span class="fstat-no" title="function not covered" >function(done) {</span>
+<span class="cstat-no" title="statement not covered" >	  var relation_url = base_url + "domain=0&amp;source=399838&amp;destination=404723&amp;user=user0";</span>
+<span class="cstat-no" title="statement not covered" >      request.get(relation_url, <span class="fstat-no" title="function not covered" >function(error, response, body) {</span></span>
+<span class="cstat-no" title="statement not covered" >        expect(response.statusCode).toBe(200);</span>
+<span class="cstat-no" title="statement not covered" >        done();</span>
+      });
+    });
+	
+	//test to check if invalid user Id is properly handled by the application.
+    it("returns status code 404", <span class="fstat-no" title="function not covered" >function(done) {</span>
+<span class="cstat-no" title="statement not covered" >	  var user_url = base_url + "domain=1&amp;source=399838&amp;destination=404723&amp;user=user0";</span>
+<span class="cstat-no" title="statement not covered" >      request.get(user_url, <span class="fstat-no" title="function not covered" >function(error, response, body) {</span></span>
+<span class="cstat-no" title="statement not covered" >        expect(response.statusCode).not.toBe(200);</span>
+<span class="cstat-no" title="statement not covered" >        done();</span>
+      });
+    });
+	  
+	//test to see if all relation properties can be fetched properly
+    it("returns realtions based on the Relation Id", <span class="fstat-no" title="function not covered" >function(done) {</span>
+<span class="cstat-no" title="statement not covered" >	  var rel_url = base_url + "domain=0&amp;source=399838&amp;destination=404723&amp;user=user0";</span>
+<span class="cstat-no" title="statement not covered" >      request.get(rel_url, <span class="fstat-no" title="function not covered" >function(error, response, body) {</span></span>
+<span class="cstat-no" title="statement not covered" >		var body_res = JSON.parse(body);</span>
+		//expect(body_res.relation.id).toBe('404723');
+		//expect(body_res.relation.source_id).toBe();
+<span class="cstat-no" title="statement not covered" >		expect(body_res.sourceTitle).toBe("Building simulation models without data");</span>
+		//expect(body_res.relation.destination_id).toBe();
+<span class="cstat-no" title="statement not covered" >		expect(body_res.destinationTitle).toBe("Applying SEMI E10 guidelines to manufacturing");</span>
+<span class="cstat-no" title="statement not covered" >		expect(body_res.relation.upvotes).toBe(2);</span>
+<span class="cstat-no" title="statement not covered" >		expect(body_res.relation.downvotes).toBe(1);</span>
+		//expect(body_res.relation.comments.text).toBe("");
+		//expect(body_res.relation.comments.timestamp).toBe("");
+		//expect(body_res.relation.comments).toBe();
+<span class="cstat-no" title="statement not covered" >		expect(body_res.upvotedByUser).toBe(false);</span>
+<span class="cstat-no" title="statement not covered" >		expect(body_res.downvotedByUser).toBe(true);	</span>
+<span class="cstat-no" title="statement not covered" >		done();</span>
+      });
+    });
+  });
+});
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue May 01 2018 15:41:33 GMT-0700 (US Mountain Standard Time)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

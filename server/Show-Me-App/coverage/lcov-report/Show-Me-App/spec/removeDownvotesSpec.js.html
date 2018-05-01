@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for Show-Me-App\spec\removeDownvotesSpec.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../index.html">all files</a> / <a href="index.html">Show-Me-App/spec/</a> removeDownvotesSpec.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">30.43% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>7/23</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/0</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">25% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>2/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">30.43% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>7/23</span>
+      </div>
+    </div>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49</td><td class="line-coverage quiet"><span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var request = require("request");
+var base_url = "http://54.201.123.246:8081/relations/downvote/remove?"
+&nbsp;
+describe("Remove downvote for a relation", function(){
+   describe("PUT /", function() {      
+       	   
+	   //test to check if 200 status code is returned or not.
+        it("returns status code 200", <span class="fstat-no" title="function not covered" >function(done) { </span>
+<span class="cstat-no" title="statement not covered" >		   var query_string = "domain=0&amp;source=399838&amp;destination=404723&amp;user=user0";</span>
+<span class="cstat-no" title="statement not covered" >           var url = base_url + query_string;</span>
+<span class="cstat-no" title="statement not covered" >           request({</span>
+               method: 'PUT',
+               uri: url
+            },<span class="fstat-no" title="function not covered" >function(request, response,body){                </span>
+<span class="cstat-no" title="statement not covered" >               expect(response.statusCode).toBe(200);</span>
+<span class="cstat-no" title="statement not covered" >               done();</span>
+            });
+       });
+	
+	//test to check if invalid user Id is properly handled by the application.
+    it("returns status code 404", <span class="fstat-no" title="function not covered" >function(done) { </span>
+<span class="cstat-no" title="statement not covered" >		   var query_string = "domain=1&amp;source=399838&amp;destination=404723&amp;user=user10";</span>
+<span class="cstat-no" title="statement not covered" >           var url = base_url + query_string;</span>
+<span class="cstat-no" title="statement not covered" >           request({</span>
+               method: 'PUT',
+               uri: url
+            },<span class="fstat-no" title="function not covered" >function(request, response,body){                </span>
+<span class="cstat-no" title="statement not covered" >               expect(response.statusCode).not.toBe(200);</span>
+<span class="cstat-no" title="statement not covered" >               done();</span>
+            });
+       });
+	  
+	//test to see if the downvote entry is updated to the DB properly or not.
+    it("returns the value of updated field as true r false", <span class="fstat-no" title="function not covered" >function(done) { </span>
+<span class="cstat-no" title="statement not covered" >		   var query_string = "domain=0&amp;source=399838&amp;destination=404723&amp;user=user0";</span>
+<span class="cstat-no" title="statement not covered" >           var url = base_url + query_string;</span>
+<span class="cstat-no" title="statement not covered" >           request({</span>
+               method: 'PUT',
+               uri: url
+            },<span class="fstat-no" title="function not covered" >function(request, response,body){ </span>
+<span class="cstat-no" title="statement not covered" >			   var body_res = JSON.parse(body);</span>
+<span class="cstat-no" title="statement not covered" >               expect(body_res.updated).toBe(true);</span>
+<span class="cstat-no" title="statement not covered" >               done();</span>
+            });
+       });
+  });
+});
+&nbsp;
+&nbsp;</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Tue May 01 2018 15:41:33 GMT-0700 (US Mountain Standard Time)
+</div>
+</div>
+<script src="../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../sorter.js"></script>
+</body>
+</html>

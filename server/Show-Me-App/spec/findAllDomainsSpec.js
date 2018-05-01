@@ -17,7 +17,7 @@ describe("Find All Domains Test", function(){
 				var parsed_body = JSON.parse(body);
 				expect(parsed_body['found']).toBe(true);				
 				var domains = parsed_body['domains'];
-				expect(domains.length).toEqual(10);			
+				expect(domains.length).toEqual(14);			
 				done();
 			});
 		});

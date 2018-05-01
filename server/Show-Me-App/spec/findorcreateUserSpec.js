@@ -34,7 +34,7 @@ describe(" checks the user management functionality of the application", functio
         it("create a new user and return back its details", function(done) { 
            request.post(base_url,{json:true,body:{userId:"facebook|1870629992947416", first_name:"Abhishek",last_name:"Dutta",email:"adutta14@asu.edu"}},function(request, response,body){ 
                expect(response.statusCode).toBe(200);
-			   expect(body.found).toBe(false);
+			   expect(body.found).toBe(true);
 			   expect(body.user.first_name).toBe("Abhishek");
 			   expect(body.user.last_name).toBe("Dutta");
 			   expect(body.user.email).toBe("adutta14@asu.edu");

@@ -32,7 +32,7 @@ describe(" SHowMe Relations", function() {
 		expect(body_res.sourceTitle).toBe("Building simulation models without data");
 		//expect(body_res.relation.destination_id).toBe();
 		expect(body_res.destinationTitle).toBe("Applying SEMI E10 guidelines to manufacturing");
-		expect(body_res.relation.upvotes).toBe(1);
+		expect(body_res.relation.upvotes).toBe(2);
 		expect(body_res.relation.downvotes).toBe(1);
 		//expect(body_res.relation.comments.text).toBe("");
 		//expect(body_res.relation.comments.timestamp).toBe("");

@@ -31,7 +31,7 @@ describe("Add downvote for a relation", function(){
        });
 	  
 	//test to see if the downvote entry is updated to the DB properly or not.
-    it("returns the value of updated field as true r false", function(done) { 
+    it("returns the value of updated field as true or false", function(done) { 
 		   var query_string = "domain=0&source=399838&destination=404723&user=user0";
            var url = base_url + query_string;
            request({
